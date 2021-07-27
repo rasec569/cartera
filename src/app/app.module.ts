@@ -7,12 +7,15 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { PrivadoComponent } from './components/privado/privado.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegistrarUserComponent } from './components/registrar-user/registrar-user.component';
 
 //Modulos
 import { FormsModule } from '@angular/forms';
-import{HttpClientModule}from '@angular/common/http';
+import{HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http';
 //Providers
 import{JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +23,8 @@ import{JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt';
     InicioComponent,
     PrivadoComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    RegistrarUserComponent
   ],
   imports: [
     BrowserModule,
@@ -29,8 +33,11 @@ import{JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt';
     HttpClientModule
   ],
   providers: [
+    //JWT
     {provide:JWT_OPTIONS, useValue:JWT_OPTIONS},
-    JwtHelperService
+    JwtHelperService,
+    //Token interceptor
+    {provide:HTTP_INTERCEPTORS, useClass:TokenInterceptorService, multi:true}
   ],
   bootstrap: [AppComponent]
 })
