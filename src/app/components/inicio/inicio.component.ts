@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-inicio',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userservice:UserService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.listarUsuario();
+  }
+  listarUsuario(){
+    this.userservice.getUsuarios().subscribe(
+      (res)=>{
+        console.log('Res', res);
+      });
   }
 
 }
