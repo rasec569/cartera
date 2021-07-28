@@ -11,7 +11,7 @@ import { RoleGuard } from './guards/role.guard';
 const routes: Routes = [
   { path:'inicio', component:InicioComponent},
   { path:'privado', component:PrivadoComponent, canActivate:[AutenticacionGuard]},
-  { path:'nuevo usuario', component:RegistrarUserComponent, canActivate:[AutenticacionGuard]},
+  { path:'nuevoUsuario', component:RegistrarUserComponent, canActivate:[AutenticacionGuard]},
   { path:'admin', component:AdminComponent, canActivate:[RoleGuard] ,data:{expecteRole:'0'}},
   { path: 'login', component: LoginComponent },
   { path:'**', pathMatch:'full', redirectTo:'inicio'}
