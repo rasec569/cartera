@@ -18,6 +18,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ProyectosComponent } from './components/proyectos/proyectos.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { FooterComponent } from './components/footer/footer.component';
     RegistrarUserComponent,
     UsuarioComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    ProyectosComponent
   ],
   imports: [
     BrowserModule,

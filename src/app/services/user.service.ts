@@ -18,3 +18,15 @@ export class UserService {
     return this.http.get<any>(`${this.URL}/user/ListarUser`);
   }
 }
+
+export interface User{
+
+  Nombres?:string; 
+  Apellidos?:string;
+  Usuario?:string;
+  password?:string;
+  Celular?:string;
+  email?:string;
+  Rol?:string;
+  Area?:string;
+}
