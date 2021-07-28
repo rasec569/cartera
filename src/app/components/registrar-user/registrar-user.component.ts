@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {User,UserService } from 'src/app/services/user.service';
+import { User, UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-registrar-user',
@@ -10,15 +11,20 @@ import {User,UserService } from 'src/app/services/user.service';
 export class RegistrarUserComponent implements OnInit {
 
   //crear el arreglo donde se van a almacenar los datos del formulario
+
+
+ 
+
+
   usuario: User = {
-    Nombres:"",
-    Apellidos:"",
-    Usuario:"",
-    password:"",
-    Celular:"",
-    email:"",
-    Rol:"",
-    Area:""
+    Nombres:"hgghhg",
+    Apellidos:"jjj",
+    Usuario:"jjj",
+    password:"123",
+    Celular:"123",
+    email:"76543",
+    Rol:"0",
+    Area:"0"
   };
 //invoca el servicio usuario
   constructor(private userservice:UserService,

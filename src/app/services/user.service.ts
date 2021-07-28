@@ -7,34 +7,21 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-   private URL='http://localhost:3000';
+  private URL='http://localhost:3000';
 
   constructor(private http:HttpClient) { }
-//listar usuarios
-  getUsuarios(): Observable<any>{
-    return this.http.get<any>(`${this.URL}/user/`);
-  }
-  //buscar usuario
-  getUsuario(id:string){
-    return  this.http.get(`${this.URL}/user/`+id)
-  }
-  //nuevo usuario
-  NewUser(user:User){
+  NewUser(user:any){
     /* console.log('por aqui paso',user); */
-    return this.http.post(`${this.URL}/user/`, user);
+    return this.http.post(`${this.URL}/user/NewUser`, user);
   }
-  //eliminar usuario
-  deltetUser(id:string){
-    return this.http.delete(`${this.URL}/user/`+id);
-  }
-  //actulizar usuario
-  editUser(id:string, user:User){
-    return this.http.put(`${this.URL}/user/`+id, user);
+  getUsuarios(): Observable<any>{
+    return this.http.get<any>(`${this.URL}/user/ListarUser`);
   }
 }
+
 export interface User{
-  id?:string;
-  Nombres?:string;
+
+  Nombres?:string; 
   Apellidos?:string;
   Usuario?:string;
   password?:string;

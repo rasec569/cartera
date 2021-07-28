@@ -71,12 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "cartera:build:production",
-              "proxyConfig": "proxy.conf.json"
+              "browserTarget": "cartera:build:production"              
             },
             "development": {
-              "browserTarget": "cartera:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "browserTarget": "cartera:build:development"
             }
           },
           "defaultConfiguration": "development"
