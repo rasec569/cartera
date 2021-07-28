@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import {User, UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.css']
+  styleUrls: ['./inicio.component.css'],
+  providers:[UserService],
+
+
 })
 export class InicioComponent implements OnInit {
 
+  usuario:User={}
   constructor(private userservice:UserService,
     private router: Router) { }
 
@@ -17,8 +21,9 @@ export class InicioComponent implements OnInit {
   }
   listarUsuario(){
     this.userservice.getUsuarios().subscribe(
-      (res)=>{
+      res=>{
         console.log('Res', res);
+        /* this.usuario=<any>res; */
       });
   }
 
