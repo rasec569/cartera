@@ -11,14 +11,14 @@ export class RegistrarUserComponent implements OnInit {
 
   //crear el arreglo donde se van a almacenar los datos del formulario
   Usuario={
-    Nombres:"cesar",
-    Apellidos:"valencia",
-    Usuario:"rasec",
-    password:"123",
-    Celular:"34567",
-    email:"456",
-    Rol:"0",
-    Area:"0"
+    Nombres:"",
+    Apellidos:"",
+    Usuario:"",
+    password:"",
+    Celular:"",
+    email:"",
+    Rol:"",
+    Area:""
   }
 //invoca el servicio usuario
   constructor(private userservice:UserService,
