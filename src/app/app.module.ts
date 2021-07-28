@@ -15,7 +15,6 @@ import{HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http';
 //Providers
 import{JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { UsuarioComponent } from './components/usuario/usuario.component';
 
 
 @NgModule({
@@ -25,8 +24,7 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
     PrivadoComponent,
     AdminComponent,
     LoginComponent,
-    RegistrarUserComponent,
-    UsuarioComponent
+    RegistrarUserComponent
   ],
   imports: [
     BrowserModule,
