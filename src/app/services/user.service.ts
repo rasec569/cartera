@@ -10,19 +10,28 @@ export class UserService {
   private URL='http://localhost:3000';
 
   constructor(private http:HttpClient) { }
-  NewUser(user:any){
+  NewUser(user:User){
     /* console.log('por aqui paso',user); */
-    return this.http.post(`${this.URL}/user/NewUser`, user);
+    return this.http.post(`${this.URL}/user/`, user);
   }
-  getUsuarios(): Observable<any>{
-    return this.http.get<any>(`${this.URL}/user/ListarUser`);
+  getUsuarios(){
+    return this.http.get(`${this.URL}/user/`);
+  }
+  getusuario(id:string){
+    return this.http.get(`${this.URL}/user/`+id);
+  }
+  deleteUsuario(id:string){
+  return this.http.delete(`${this.URL}/user/`+id);
+  }
+  editUsuario(id:string, user:User){
+  return this.http.put(`${this.URL}/user/`+id, user);
   }
 }
 
 export interface User{
-
-  Nombres?:string; 
-  Apellidos?:string;
+  Id_Usuario?:string;
+  Nombre_Usuario?:string;
+  Apellido_Usuario?:string;
   Usuario?:string;
   password?:string;
   Celular?:string;

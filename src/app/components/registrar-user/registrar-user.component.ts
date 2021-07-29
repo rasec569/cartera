@@ -11,20 +11,16 @@ import { User, UserService } from 'src/app/services/user.service';
 export class RegistrarUserComponent implements OnInit {
 
   //crear el arreglo donde se van a almacenar los datos del formulario
-
-
- 
-
-
   usuario: User = {
-    Nombres:"hgghhg",
-    Apellidos:"jjj",
-    Usuario:"jjj",
-    password:"123",
-    Celular:"123",
-    email:"76543",
-    Rol:"0",
-    Area:"0"
+    Id_Usuario:"",
+    Nombre_Usuario:"",
+    Apellido_Usuario:"",
+    Usuario:"",
+    password:"",
+    Celular:"",
+    email:"",
+    Rol:"",
+    Area:""
   };
 //invoca el servicio usuario
   constructor(private userservice:UserService,
@@ -34,9 +30,9 @@ export class RegistrarUserComponent implements OnInit {
   }
   //metodo Usuario Nuevo
   newuser(){
+    delete this.usuario.Id_Usuario;
     //le paso al servicio el arreglo
-    this.userservice.NewUser(this.usuario).subscribe((res:any)=>{
-      console.log('Los datos llegaron aqui',res);
-    })
+    this.userservice.NewUser(this.usuario).subscribe();
+    this.router.navigate(['/inicio']);
   }
 }

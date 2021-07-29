@@ -19,6 +19,8 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
+import { ModificarUserComponent } from './components/modificar-user/modificar-user.component';
+
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import { ProyectosComponent } from './components/proyectos/proyectos.component';
     UsuarioComponent,
     NavbarComponent,
     FooterComponent,
-    ProyectosComponent
+    ProyectosComponent,
+    ModificarUserComponent
   ],
   imports: [
     BrowserModule,
