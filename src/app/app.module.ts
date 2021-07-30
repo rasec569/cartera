@@ -7,7 +7,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { PrivadoComponent } from './components/privado/privado.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegistrarUserComponent } from './components/registrar-user/registrar-user.component';
+import { RegistrarUserComponent } from './components/VistaUsers/registrar-user/registrar-user.component';
 
 //Modulos
 import { FormsModule } from '@angular/forms';
@@ -15,12 +15,15 @@ import{HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http';
 //Providers
 import{JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { UsuarioComponent } from './components/usuario/usuario.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { UsuarioComponent } from './components/VistaUsers/usuario/usuario.component';
+import { NavbarComponent } from './components/Plantillas/navbar/navbar.component';
+import { FooterComponent } from './components/Plantillas/footer/footer.component';
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { ModificarUserComponent } from './components/modificar-user/modificar-user.component';
-
+import { UsuariosComponent } from './components/VistaUsers/usuarios/usuarios.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RolesComponent } from './components/VistaUsers/roles/roles.component';
+import { RegistrarRolComponent } from './components/VistaUsers/registrar-rol/registrar-rol.component';
 
 
 @NgModule({
@@ -35,13 +38,17 @@ import { ModificarUserComponent } from './components/modificar-user/modificar-us
     NavbarComponent,
     FooterComponent,
     ProyectosComponent,
-    ModificarUserComponent
+    ModificarUserComponent,
+    UsuariosComponent,
+    RolesComponent,
+    RegistrarRolComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [
     //JWT

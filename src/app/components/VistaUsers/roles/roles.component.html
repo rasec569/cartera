@@ -1,0 +1,29 @@
+<div class="container">
+  <table class="table table table-striped table-hover caption-top">
+    <caption>Lista de roles</caption>
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let roles of listaRol">
+        <th>{{roles.Id_Rol}}</th>
+        <td>{{roles.Nombre_Rol}}</td>
+        <td>{{roles.Descripcion}}</td>
+        <td>
+          <button (click)="modificarRol(roles.Id_Rol!)" type="button" ><i class="bi bi-pencil-fill" style=" color: rgb(28, 28, 29);" ></i></button>
+        </td>
+        <td>
+          <button (click)="eliminarRol(roles.Id_Rol!)" type="button" ><i class="bi bi-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" routerLink="/nuevoRol" class="btn btn-dark">Nuevo Rol</button>
+</div>
+
