@@ -33,6 +33,6 @@ export class RegistrarUserComponent implements OnInit {
     delete this.usuario.Id_Usuario;
     //le paso al servicio el arreglo
     this.userservice.NewUser(this.usuario).subscribe();
-    this.router.navigate(['/inicio']);
+    this.router.navigate(['/Usuario']);
   }
 }

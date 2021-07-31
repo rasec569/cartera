@@ -33,7 +33,7 @@ export class RolService {
 }
 
 export interface Rol{
-  Id_Rol?:string;
-  Nombre_Rol?:string;
-  Descripcion?:string;
+  Id_Rol?:string|undefined;
+  Nombre_Rol:string;
+  Descripcion:string;
 }

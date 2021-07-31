@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RolesComponent implements OnInit {
 
+
   constructor(private rolservice:RolService,
     private router: Router) { }
     listaRol:Rol[]=[];
@@ -34,6 +35,6 @@ export class RolesComponent implements OnInit {
       );
     }
     modificarRol(id:string){
-      this.router.navigate(['/editarUsuario/'+id]);
+      this.router.navigate(['/ModificarRol/'+id]);
     }
 }

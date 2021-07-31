@@ -1,65 +1,44 @@
-<header id="main-header" class="py-2 headerSti">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <h3>REGISTRO DE USUARIOS
-          <i class="fas fa-user"></i>
-        </h3>
-      </div>
-    </div>
-  </div>
-</header>
-
-<section id="actions" class="py-4 mb-4 bg-light">
-  <div class="container">
-    <div class="row">
-    </div>
-  </div>
-</section>
-<section id="login">
   <div class="container">
     <div class="row">
       <div class="col-md-6 mx-auto">
         <div class="card">
-          <div class="card-header headerLogi">REGISTRAR USUARIO
-
-          </div>
           <div class="card-body">
             <form >
+              <legend class="text-center header">REGISTRAR USUARIO</legend>
               <div class="form-group">
-                <label class="form-label">Nombres</label>
+                <i class="fa fa-user icon"></i><label class="form-label">Nombres</label>
                 <input type="text" [(ngModel)]="usuario.Nombre_Usuario" name="nombre" class="form-control" required>
               </div>
               <div class="form-group">
-                <label >Apellidos</label>
+                <i class="fa fa-users icon"></i><label >Apellidos</label>
                 <input type="text" [(ngModel)]="usuario.Apellido_Usuario" name="nombre" class="form-control" required>
               </div>
               <div class="form-group">
-                <label for="usuario">Usuario</label>
+                <i class="fa fa-user-circle-o icon" aria-hidden="true"></i><label for="usuario">Usuario</label>
                 <input type="text" [(ngModel)]="usuario.Usuario" name="nombre" class="form-control" required>
               </div>
               <div class="form-group">
-                <label for="password">Password</label>
+                <i class="fa fa-unlock icon"></i><label for="password">Password</label>
                 <input type="password" input [(ngModel)]="usuario.password" name="nombre" class="form-control" required>
               </div>
               <div class="form-group">
-                <label>Celular</label>
+                <i class="fa fa-phone icon"></i><label>Celular</label>
                 <input type="text" [(ngModel)]="usuario.Celular" name="nombre" class="form-control" required>
               </div>
               <div class="form-group">
-                <label >email</label>
+                <i class="fa fa-envelope icon"></i><label >email</label>
                 <input type="text" input [(ngModel)]="usuario.email" name="nombre" class="form-control" required>
               </div>
               <div class="form-group">
-                <label>Rol</label>
+                <i class="fa fa-id-card icon"></i><label>Rol</label>
                 <input type="text" [(ngModel)]="usuario.Rol" name="nombre" class="form-control" required>
               </div>
               <div class="form-group">
-                <label>Area</label>
+                <i class="fa fa-briefcase icon"></i><label>Area</label>
                 <input type="text" input [(ngModel)]="usuario.Area" name="nombre" class="form-control" required>
               </div>
               <div class="d-grid gap-2 mt-3">
-                <button class="btn btn-primary btn-md" (click)="newuser()" ><i class="fa fa-sign-in"></i>Registrar Usuario</button>
+                <button class="btn btn-dark btn-md" (click)="newuser()" ><i class="fa fa-user-plus icon"></i>Registrar Usuario</button>
               </div>
             </form>
           </div>
@@ -67,5 +46,4 @@
       </div>
     </div>
   </div>
-</section>
 

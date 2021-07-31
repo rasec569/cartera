@@ -12,6 +12,7 @@ import { RoleGuard } from './guards/role.guard';
 import { UsuarioComponent } from './components/VistaUsers/usuario/usuario.component';
 import { RolesComponent } from './components/VistaUsers/roles/roles.component';
 import { RegistrarRolComponent } from './components/VistaUsers/registrar-rol/registrar-rol.component';
+import { ModicarRolComponent } from './components/VistaUsers/modicar-rol/modicar-rol.component';
 
 const routes: Routes = [
   { path:'inicio', component:InicioComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path:'editarUsuario', component:ModificarUserComponent, canActivate:[AutenticacionGuard]},
   { path:'Roles', component:RolesComponent, canActivate:[AutenticacionGuard]},
   { path:'nuevoRol', component:RegistrarRolComponent, canActivate:[AutenticacionGuard]},
+  { path:'ModificarRol/:id', component:ModicarRolComponent, canActivate:[AutenticacionGuard]},
 
 
 
