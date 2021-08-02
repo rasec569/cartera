@@ -25,6 +25,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RolesComponent } from './components/VistaUsers/roles/roles.component';
 import { RegistrarRolComponent } from './components/VistaUsers/registrar-rol/registrar-rol.component';
 import { ModicarRolComponent } from './components/VistaUsers/modicar-rol/modicar-rol.component';
+import { AreasComponent } from './components/VistaUsers/areas/areas.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ModicarRolComponent } from './components/VistaUsers/modicar-rol/modicar
     UsuariosComponent,
     RolesComponent,
     RegistrarRolComponent,
-    ModicarRolComponent
+    ModicarRolComponent,
+    AreasComponent
   ],
   imports: [
     BrowserModule,
