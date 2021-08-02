@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <form class="formulario" >
+            <legend class="text-center header">MODIFICAR USUARIO</legend>
+            <div class="form-group ">
+              <i class="fa fa-user icon"></i><label class="form-label">Nombres</label>
+              <input type="text" [(ngModel)]="usuario.Nombre_Usuario" name="Nombre_Usuario" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <i class="fa fa-users icon"></i><label >Apellidos</label>
+              <input type="text" [(ngModel)]="usuario.Apellido_Usuario" name="Apellido_Usuario" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <i class="fa fa-user-circle-o icon" aria-hidden="true"></i><label for="usuario">Usuario</label>
+              <input type="text" [(ngModel)]="usuario.Usuario" name="Usuario" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <i class="fa fa-phone icon"></i><label>Celular</label>
+              <input type="text" [(ngModel)]="usuario.Celular" name="Celular" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <i class="fa fa-envelope icon"></i><label >email</label>
+              <input type="text" input [(ngModel)]="usuario.email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <i class="fa fa-id-card icon"></i><label>Rol</label>
+              <input type="text" [(ngModel)]="usuario.Rol" name="Rol" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <i class="fa fa-briefcase icon"></i><label>Area</label>
+              <input type="text" input [(ngModel)]="usuario.Area" name="Area" class="form-control" required>
+            </div>
+            <div class="d-grid gap-2 mt-3">
+              <button class="btn btn-dark btn-md" (click)="edituser()" ><i class="fa fa-user-plus icon"></i>Modificar Usuario</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

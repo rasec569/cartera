@@ -11,7 +11,7 @@
             </div>
             <div class="form-group">
               <i class="fa fa-commenting icon"></i><label >Descripción</label>
-              <input type="text" [(ngModel)]="rol.Descripcion"  row=3 name="nombre" class="form-control" required>
+              <textarea type="text" [(ngModel)]="rol.Descripcion"  row=3 name="nombre" class="form-control" required></textarea>
             </div>
             <div class="d-grid gap-2 mt-3">
               <button class="btn btn-dark btn-md" (click)="newrol()" ><i class="fa fa-user-plus icon"></i>Registrar Rol</button>
