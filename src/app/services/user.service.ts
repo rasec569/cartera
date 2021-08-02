@@ -35,12 +35,12 @@ export class UserService {
 
 export interface User{
   Id_Usuario?:string;
-  Nombre_Usuario?:string;
-  Apellido_Usuario?:string;
-  Usuario?:string;
-  password?:string;
-  Celular?:string;
-  email?:string;
-  Rol?:string;
-  Area?:string;
+  Nombre_Usuario:string;
+  Apellido_Usuario:string;
+  Usuario:string;
+  password:string;
+  Celular:string;
+  email:string;
+  Rol:string;
+  Area:string;
 }

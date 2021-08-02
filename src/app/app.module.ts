@@ -19,7 +19,7 @@ import { UsuarioComponent } from './components/VistaUsers/usuario/usuario.compon
 import { NavbarComponent } from './components/Plantillas/navbar/navbar.component';
 import { FooterComponent } from './components/Plantillas/footer/footer.component';
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
-import { ModificarUserComponent } from './components/modificar-user/modificar-user.component';
+import { ModificarUserComponent } from './components/VistaUsers/modificar-user/modificar-user.component';
 import { UsuariosComponent } from './components/VistaUsers/usuarios/usuarios.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RolesComponent } from './components/VistaUsers/roles/roles.component';
