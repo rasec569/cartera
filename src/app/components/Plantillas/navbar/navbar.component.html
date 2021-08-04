@@ -1,53 +1,50 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
-    <div class="container">
-      <a class="navbar-brand" routerLink="/">
-        <img src="/assets/brand/logo.png" alt="" width="300" height="70" class="d-inline-block align-text-top">
-      </a>
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">
+      <img src="/assets/brand/logo.png" alt="" width="300" height="70" class="d-inline-block align-text-top">
+    </a>
 
-        <button class= "navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+      <button class= "navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul  class="navbar-nav ms-auto">
-            <li class="nav-item">
-                <a routerLink="inicio" class="nav-link">Inicio</a>
-            </li>
-        </ul>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav ms-auto">  <!-- ms-auto para que cargue elemento a la derecha -->
+        <li class="nav-item">
+          <a routerLink="inicio" class="nav-link"><i class="fa fa-home" aria-hidden="true"></i>
+            Inicio</a>
+        </li>
+          <li  class="nav-item dropdown mr-3">
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                  <i class="fa fa-calculator"></i> Cartera
+              </a>
 
-        <ul class="navbar-nav ms-auto">  <!-- ms-auto para que cargue elemento a la derecha -->
-            <li  class="nav-item dropdown mr-3">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                    <i class="fas fa-calculator"></i> Cartera
-                </a>
+          </li>
+          <li  class="nav-item">
+              <a routerLink="/Usuario" class="nav-link" routerLinkActive="router-link-active">
+                  <i class="fa fa-users"></i> Usuario
 
-            </li>
-            <li  class="nav-item">
-                <a routerLink="/Usuario" class="nav-link" routerLinkActive="router-link-active">
-                    <i class="fas fa-user"></i>Usuario
-
-                </a>
-            </li>
-
-            <li  class="nav-item">
-              <a routerLink="/login" class="nav-link" routerLinkActive="router-link-active">
-                <i class="fas fa-user"></i> Iniciar Sesión
+              </a>
+          </li>
+          <li  class="nav-item">
+              <a routerLink="/Proyectos" class="nav-link" routerLinkActive="router-link-active">
+                <i class="fa fa-calendar"></i> Proyectos
               </a>
             </li>
-
-            <li  class="nav-item">
-                <a routerLink="/proyectos" class="nav-link" routerLinkActive="router-link-active">
-                  <i class="far fa-file-alt"></i> Proyectos
-                </a>
-              </li>
-
-            <li  class="nav-item">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Login
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a routerLink="/login" class="nav-link" routerLinkActive="router-link-active">
+                <i class="fa fa-sign-in"></i> Iniciar Sesión</a>
                 <a style="cursor: pointer" class="nav-link">
-                    <i class="fas fa-user-times"></i> Salir
-
-                </a>
-            </li>
-        </ul>
-    </div>
+                  <i class="fa fa-user-times"></i> Salir</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+      </ul>
   </div>
-  </nav>
+</div>
+</nav>

@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+/* Iconos Formulario */
+.header {
+  color: #090e13;
+  font-size: 27px;
+  padding: 10px;
+}
+.icon {
+  font-size: 25px;
+  color: #090e13;
+  padding-right: 5px;
+}
+

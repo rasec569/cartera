@@ -1,0 +1,28 @@
+<div class="container">
+  <table class="table table table-striped table-hover caption-top">
+    <caption>Lista de Proyectos</caption>
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Proyecto</th>
+        <th scope="col">Ubicacion</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proyectos of listaProyecto">
+        <th>{{proyectos.Id_Proyecto}}</th>
+        <td>{{proyectos.Nombre_Proyecto}}</td>
+        <td>{{proyectos.Ubicacion_Proyecto}}</td>
+        <td>
+          <button (click)="modificarProyecto(proyectos.Id_Proyecto!)" type="button" ><i class="bi bi-pencil-fill" style=" color: rgb(28, 28, 29);" ></i></button>
+        </td>
+        <td>
+          <button (click)="eliminarProyecto(proyectos.Id_Proyecto!)" type="button" ><i class="bi bi-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" routerLink="/NuevoProyecto" class="btn btn-dark">Nuevo Proyecto</button>
+</div>

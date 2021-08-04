@@ -29,12 +29,12 @@ export class RolesComponent implements OnInit {
   eliminarRol(id:string ){
     this.rolservice.deleteRol(id).subscribe(
       res=>{
-        console.log('Usuario eliminado');
+        console.log('rol eliminado');
         this.listarRol();
       }, err=> console.log(err)
       );
     }
     modificarRol(id:string){
-      this.router.navigate(['/ModificarRol/'+id]);
+      this.router.navigate(['/EditarRol/'+id]);
     }
 }

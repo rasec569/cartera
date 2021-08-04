@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {NgxPopperjsModule} from 'ngx-popperjs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { InicioComponent } from './components/inicio/inicio.component';
 import { PrivadoComponent } from './components/privado/privado.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegistrarUserComponent } from './components/VistaUsers/registrar-user/registrar-user.component';
+import { LoginComponent } from './components/Vistas/login/login.component';
+import { RegistrarUserComponent } from './components/Vistas/Users/registrar-user/registrar-user.component';
 
 //Modulos
 import { FormsModule } from '@angular/forms';
@@ -15,23 +15,24 @@ import{HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http';
 //Providers
 import{JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-import { UsuarioComponent } from './components/VistaUsers/usuario/usuario.component';
+import { UsuarioComponent } from './components/Vistas/Users//usuario/usuario.component';
 import { NavbarComponent } from './components/Plantillas/navbar/navbar.component';
 import { FooterComponent } from './components/Plantillas/footer/footer.component';
-import { ProyectosComponent } from './components/proyectos/proyectos.component';
-import { ModificarUserComponent } from './components/VistaUsers/modificar-user/modificar-user.component';
-import { UsuariosComponent } from './components/VistaUsers/usuarios/usuarios.component';
+import { ProyectosComponent } from './components/Vistas/Proyects/proyectos/proyectos.component';
+import { ModificarUserComponent } from './components/Vistas/Users//modificar-user/modificar-user.component';
+import { UsuariosComponent } from './components/Vistas/Users//usuarios/usuarios.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { RolesComponent } from './components/VistaUsers/roles/roles.component';
-import { RegistrarRolComponent } from './components/VistaUsers/registrar-rol/registrar-rol.component';
-import { ModicarRolComponent } from './components/VistaUsers/modicar-rol/modicar-rol.component';
-import { AreasComponent } from './components/VistaUsers/areas/areas.component';
+import { RolesComponent } from './components/Vistas/Users//roles/roles.component';
+import { RegistrarRolComponent } from './components/Vistas/Users//registrar-rol/registrar-rol.component';
+import { ModicarRolComponent } from './components/Vistas/Users//modicar-rol/modicar-rol.component';
+import { AreasComponent } from './components/Vistas/Users//areas/areas.component';
+import { RegistrarProyectoComponent } from './components/Vistas/Proyects/registrar-proyecto/registrar-proyecto.component';
+import { ModificarProyectoComponent } from './components/Vistas/Proyects/modificar-proyecto/modificar-proyecto.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    InicioComponent,
     PrivadoComponent,
     AdminComponent,
     LoginComponent,
@@ -45,10 +46,13 @@ import { AreasComponent } from './components/VistaUsers/areas/areas.component';
     RolesComponent,
     RegistrarRolComponent,
     ModicarRolComponent,
-    AreasComponent
+    AreasComponent,
+    RegistrarProyectoComponent,
+    ModificarProyectoComponent
   ],
   imports: [
     BrowserModule,
+    NgxPopperjsModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,

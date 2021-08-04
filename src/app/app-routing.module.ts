@@ -1,33 +1,38 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './components/admin/admin.component';
-import { InicioComponent } from './components/inicio/inicio.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/Vistas/login/login.component';
 import { PrivadoComponent } from './components/privado/privado.component';
-import { ProyectosComponent } from './components/proyectos/proyectos.component';
-import { RegistrarUserComponent } from './components/VistaUsers/registrar-user/registrar-user.component';
-import { ModificarUserComponent } from './components/VistaUsers/modificar-user/modificar-user.component';
+import { ProyectosComponent } from './components/Vistas/Proyects/proyectos/proyectos.component';
+import { RegistrarUserComponent } from './components/Vistas/Users//registrar-user/registrar-user.component';
+import { ModificarUserComponent } from './components/Vistas/Users//modificar-user/modificar-user.component';
 import { AutenticacionGuard } from './guards/autenticacion.guard';
 import { RoleGuard } from './guards/role.guard';
-import { UsuarioComponent } from './components/VistaUsers/usuario/usuario.component';
-import { RolesComponent } from './components/VistaUsers/roles/roles.component';
-import { RegistrarRolComponent } from './components/VistaUsers/registrar-rol/registrar-rol.component';
+import { UsuarioComponent } from './components/Vistas/Users//usuario/usuario.component';
+import { RolesComponent } from './components/Vistas/Users//roles/roles.component';
+import { RegistrarRolComponent } from './components/Vistas/Users//registrar-rol/registrar-rol.component';
+import { ModicarRolComponent } from './components/Vistas/Users/modicar-rol/modicar-rol.component';
+import { RegistrarProyectoComponent } from './components/Vistas/Proyects/registrar-proyecto/registrar-proyecto.component';
+import { ModificarProyectoComponent } from './components/Vistas/Proyects/modificar-proyecto/modificar-proyecto.component';
 
 const routes: Routes = [
-  { path:'inicio', component:InicioComponent},
-  { path:'privado', component:PrivadoComponent, canActivate:[AutenticacionGuard]},
 
+  { path:'privado', component:PrivadoComponent, canActivate:[AutenticacionGuard]},
   { path:'admin', component:AdminComponent, canActivate:[RoleGuard] ,data:{expecteRole:'0'}},
-  { path: 'proyectos', component: ProyectosComponent, canActivate:[AutenticacionGuard]},
   { path: 'login', component: LoginComponent },
 
-  // Usuarios
+  // Usuario
   { path:'Usuario', component:UsuarioComponent, canActivate:[AutenticacionGuard]},
   { path:'nuevoUsuario', component:RegistrarUserComponent, canActivate:[AutenticacionGuard]},
   { path:'editarUsuario/:id', component:ModificarUserComponent, canActivate:[AutenticacionGuard]},
   { path:'Roles', component:RolesComponent, canActivate:[AutenticacionGuard]},
-  { path:'nuevoRol', component:RegistrarRolComponent, canActivate:[AutenticacionGuard]},
+  { path:'NuevoRol', component:RegistrarRolComponent, canActivate:[AutenticacionGuard]},
+  { path:'EditarRol/:id', component:ModicarRolComponent, canActivate:[AutenticacionGuard]},
 
+  //Proyecto
+  { path: 'Proyectos', component: ProyectosComponent, canActivate:[AutenticacionGuard]},
+  { path: 'NuevoProyecto', component: RegistrarProyectoComponent, canActivate:[AutenticacionGuard]},
+  { path: 'EditarProyecto/:id', component: ModificarProyectoComponent, canActivate:[AutenticacionGuard]},
 
 
   { path:'**', pathMatch:'full', redirectTo:'login'}
