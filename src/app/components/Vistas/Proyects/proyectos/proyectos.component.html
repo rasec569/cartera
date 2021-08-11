@@ -6,8 +6,9 @@
         <th scope="col">Id</th>
         <th scope="col">Proyecto</th>
         <th scope="col">Ubicacion</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
+        <th scope="col">Detalle</th>
       </tr>
     </thead>
     <tbody>
@@ -16,10 +17,13 @@
         <td>{{proyectos.Nombre_Proyecto}}</td>
         <td>{{proyectos.Ubicacion_Proyecto}}</td>
         <td>
-          <button (click)="modificarProyecto(proyectos.Id_Proyecto!)" type="button" ><i class="bi bi-pencil-fill" style=" color: rgb(28, 28, 29);" ></i></button>
+          <button (click)="modificarProyecto(proyectos.Id_Proyecto!)" type="button" class='text-center' ><i class="fas fa-edit"></i></button>
         </td>
         <td>
-          <button (click)="eliminarProyecto(proyectos.Id_Proyecto!)" type="button" ><i class="bi bi-trash"></i></button>
+          <button (click)="eliminarProyecto(proyectos.Id_Proyecto!)" type="button" ><i class="fas fa-trash-alt"></i></button>
+        </td>
+        <td>
+          <button (click)="detalleProyecto()" type="button" ><i class="fas fa-search-plus"></i></button>
         </td>
       </tr>
     </tbody>

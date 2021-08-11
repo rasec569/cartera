@@ -21,13 +21,15 @@ import { FooterComponent } from './components/Plantillas/footer/footer.component
 import { ProyectosComponent } from './components/Vistas/Proyects/proyectos/proyectos.component';
 import { ModificarUserComponent } from './components/Vistas/Users//modificar-user/modificar-user.component';
 import { UsuariosComponent } from './components/Vistas/Users//usuarios/usuarios.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RolesComponent } from './components/Vistas/Users//roles/roles.component';
 import { RegistrarRolComponent } from './components/Vistas/Users//registrar-rol/registrar-rol.component';
 import { ModicarRolComponent } from './components/Vistas/Users//modicar-rol/modicar-rol.component';
 import { AreasComponent } from './components/Vistas/Users//areas/areas.component';
 import { RegistrarProyectoComponent } from './components/Vistas/Proyects/registrar-proyecto/registrar-proyecto.component';
 import { ModificarProyectoComponent } from './components/Vistas/Proyects/modificar-proyecto/modificar-proyecto.component';
+import { RegistrarInmuebleComponent } from './components/Vistas/Inmueble/registrar-inmueble/registrar-inmueble.component';
+import { InmueblesComponent } from './components/Vistas/Inmueble/inmuebles/inmuebles.component';
+import { ModificarInmueblesComponent } from './components/Vistas/Inmueble/modificar-inmuebles/modificar-inmuebles.component';
 
 
 @NgModule({
@@ -48,15 +50,17 @@ import { ModificarProyectoComponent } from './components/Vistas/Proyects/modific
     ModicarRolComponent,
     AreasComponent,
     RegistrarProyectoComponent,
-    ModificarProyectoComponent
+    ModificarProyectoComponent,
+    RegistrarInmuebleComponent,
+    InmueblesComponent,
+    ModificarInmueblesComponent
   ],
   imports: [
     BrowserModule,
     NgxPopperjsModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,
-    FontAwesomeModule
+    HttpClientModule
   ],
   providers: [
     //JWT

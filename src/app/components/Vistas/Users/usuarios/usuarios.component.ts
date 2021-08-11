@@ -35,5 +35,6 @@ export class UsuariosComponent implements OnInit {
   modificarUsuario(id:string){
     this.router.navigate(['/editarUsuario/'+id]);
   }
+  
 
 }

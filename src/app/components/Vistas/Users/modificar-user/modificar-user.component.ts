@@ -16,7 +16,7 @@ export class ModificarUserComponent implements OnInit {
     private activatedRoute: ActivatedRoute) { }
 
     usuario!: User;
-  editaruser = new FormGroup ({
+    editaruser = new FormGroup ({
     Nombre_Usuario: new FormControl(''),
     Apellido_Usuario: new FormControl(''),
     Usuario: new FormControl(''),

@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <form >
+            <legend class="text-center header">REGISTRAR INMUEBLE</legend>
+            <div class="form-group">
+              <i class="fas fa-map-signs icon"></i><label class="form-label">Manzana</label>
+              <input type="text" [(ngModel)]="inmueble.Manzana" name="Manzana" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <i class="fas fa-home icon"></i><label class="form-label">Casa</label>
+              <input type="text" [(ngModel)]="inmueble.Num_Casa" name="Num_Casa" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <i class="fas fa-file-invoice-dollar icon"></i><label class="form-label" >Valor Inicial</label>
+              <input type="text" [(ngModel)]="inmueble.Valor_Inicial" name="Valor_Inicial" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <i class="fas fa-layer-group icon"></i><label class="form-label" for="Ficha_Catastral">Ficha Catastral</label>
+              <input type="text" input [(ngModel)]="inmueble.Ficha_Catastral" name="Ficha_Catastral" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <i class="fas fa-file-signature icon"></i><label class="form-label">Escritura</label>
+              <input type="text" [(ngModel)]="inmueble.Escritura" name="Escritura" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <i class="fas fa-sign icon"></i><label class="form-label">Matricula</label>
+              <input type="text" input [(ngModel)]="inmueble.Matricula_inmobiliaria" name="Matricula_inmobiliaria" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <i class="fas fa-tags icon"></i><label class="form-label">Estado</label>
+              <input type="text" [(ngModel)]="inmueble.Estado" name="Estado" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <i class="fa fa-briefcase icon"></i><label class="form-label">Proyecto</label>
+              <input type="text" [(ngModel)]="inmueble.Fk_Id_Proyecto" name="Fk_Id_Proyecto" class="form-control" required>
+              <!-- <select [(ngModel)]="listaArea" class="form-select">
+                <option value="" disabled selected>Seleccione una opción</option>
+                <option *ngFor="let areas of listaArea" [value]="areas.Id_Area" >
+                  {{areas.Nom_Area}}
+                </option>
+              </select> -->
+            </div>
+            <div class="d-grid gap-2 mt-3">
+              <button class="btn btn-dark btn-md" (click)="newinmueble()" ><i class="fa fa-user-plus icon"></i>Registrar Inmueble</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -14,6 +14,9 @@ import { RegistrarRolComponent } from './components/Vistas/Users//registrar-rol/
 import { ModicarRolComponent } from './components/Vistas/Users/modicar-rol/modicar-rol.component';
 import { RegistrarProyectoComponent } from './components/Vistas/Proyects/registrar-proyecto/registrar-proyecto.component';
 import { ModificarProyectoComponent } from './components/Vistas/Proyects/modificar-proyecto/modificar-proyecto.component';
+import { InmueblesComponent } from './components/Vistas/Inmueble/inmuebles/inmuebles.component';
+import { RegistrarInmuebleComponent } from './components/Vistas/Inmueble/registrar-inmueble/registrar-inmueble.component';
+import { ModificarInmueblesComponent } from './components/Vistas/Inmueble/modificar-inmuebles/modificar-inmuebles.component';
 
 const routes: Routes = [
 
@@ -33,6 +36,10 @@ const routes: Routes = [
   { path: 'Proyectos', component: ProyectosComponent, canActivate:[AutenticacionGuard]},
   { path: 'NuevoProyecto', component: RegistrarProyectoComponent, canActivate:[AutenticacionGuard]},
   { path: 'EditarProyecto/:id', component: ModificarProyectoComponent, canActivate:[AutenticacionGuard]},
+  //Inmueble
+  { path: 'NuevoInmueble', component:RegistrarInmuebleComponent, canActivate:[AutenticacionGuard]},
+  { path: 'Inmuebles', component: InmueblesComponent, canActivate:[AutenticacionGuard]},
+  { path: 'EditarInmueble/:id', component: ModificarInmueblesComponent, canActivate:[AutenticacionGuard]},
 
 
   { path:'**', pathMatch:'full', redirectTo:'login'}
