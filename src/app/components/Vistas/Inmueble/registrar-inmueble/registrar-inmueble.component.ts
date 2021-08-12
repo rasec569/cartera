@@ -27,9 +27,9 @@ export class RegistrarInmuebleComponent implements OnInit {
   }
   newinmueble(){
     delete this.inmueble.Id_Inmueble;
-    
+
     this.inmuebleservice.newInmueble(this.inmueble).subscribe();
-    this.router.navigate(['DetalleProyecto'])
+    this.router.navigate(['/Inmuebles'])
   }
 
 }

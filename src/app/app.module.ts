@@ -30,6 +30,7 @@ import { ModificarProyectoComponent } from './components/Vistas/Proyects/modific
 import { RegistrarInmuebleComponent } from './components/Vistas/Inmueble/registrar-inmueble/registrar-inmueble.component';
 import { InmueblesComponent } from './components/Vistas/Inmueble/inmuebles/inmuebles.component';
 import { ModificarInmueblesComponent } from './components/Vistas/Inmueble/modificar-inmuebles/modificar-inmuebles.component';
+import { RegistrarEtapaComponent } from './components/Vistas/Proyects/registrar-etapa/registrar-etapa.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { ModificarInmueblesComponent } from './components/Vistas/Inmueble/modifi
     ModificarProyectoComponent,
     RegistrarInmuebleComponent,
     InmueblesComponent,
-    ModificarInmueblesComponent
+    ModificarInmueblesComponent,
+    RegistrarEtapaComponent
   ],
   imports: [
     BrowserModule,

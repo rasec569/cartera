@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 /* import {UserService, User } from 'src/app/services/user.service'; */
 import { InmuebleService, Inmueble } from 'src/app/services/inmueble.service';
 
@@ -10,16 +10,33 @@ import { InmuebleService, Inmueble } from 'src/app/services/inmueble.service';
 })
 export class InmueblesComponent implements OnInit {
 
+
   constructor(private inmuebleservice:InmuebleService,
-    private router: Router) { }
+    private router: Router,
+    private activatedRoute: ActivatedRoute) { }
     listaInmueble : Inmueble[]=[];
 
   ngOnInit(): void {
-    this.listarInmuebles();
+    const id_entrada = this.activatedRoute.snapshot.paramMap.get('id');
+    if(id_entrada){
+      this.listarInmueblesProyecto(id_entrada);
+    }else{
+      this.listarInmuebles();
+    }
+
   }
   listarInmuebles(){
     this.inmuebleservice.getInmuebles().subscribe(
       res=>{
+        this.listaInmueble=<any>res;
+      },
+      err=> console.log(err)
+    );
+  }
+  listarInmueblesProyecto(id:string){
+    this.inmuebleservice.getInmuebleProyecto(id).subscribe(
+      res=>{
+        console.log("entro al metodo", res);
         this.listaInmueble=<any>res;
       },
       err=> console.log(err)
@@ -35,8 +52,5 @@ export class InmueblesComponent implements OnInit {
   }
   modificarInmueble(id:string){
     this.router.navigate(['/EditarInmueble/'+id]);
-  }
-  modificarUsuario(id:string){
-    this.router.navigate(['/editarUsuario/'+id]);
   }
 }

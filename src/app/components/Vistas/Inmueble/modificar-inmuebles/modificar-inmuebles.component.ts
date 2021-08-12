@@ -46,5 +46,13 @@ Fk_Id_Proyecto: new FormControl(''),
       );
     }
   }
+  editinmueble(){
+    this.inmuebleservice.editInmueble(this.inmueble.Id_Inmueble!, this.inmueble).subscribe(
+      res=>{
+        console.log(res);
+      }, err=> console.log(err)
+    );
+    this.router.navigate(['/Inmuebles'])
+  }
 
 }

@@ -39,6 +39,7 @@ const routes: Routes = [
   //Inmueble
   { path: 'NuevoInmueble', component:RegistrarInmuebleComponent, canActivate:[AutenticacionGuard]},
   { path: 'Inmuebles', component: InmueblesComponent, canActivate:[AutenticacionGuard]},
+  { path: 'InmueblesProyecto/:id', component: InmueblesComponent, canActivate:[AutenticacionGuard]},
   { path: 'EditarInmueble/:id', component: ModificarInmueblesComponent, canActivate:[AutenticacionGuard]},
 
 

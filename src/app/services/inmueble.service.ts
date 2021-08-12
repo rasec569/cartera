@@ -14,7 +14,7 @@ export class InmuebleService {
   }
   //listar por proyectos
   getInmuebleProyecto(id:string){
-    return this.http.get(`${this.URL}/inmueble/proyecto`+id);
+    return this.http.get(`${this.URL}/inmueble/proyecto/`+id);
   }
   //buscar
   getInmueble(id:string){

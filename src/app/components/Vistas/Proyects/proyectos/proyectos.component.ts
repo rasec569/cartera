@@ -34,7 +34,8 @@ export class ProyectosComponent implements OnInit {
   modificarProyecto(id:string){
     this.router.navigate(['EditarProyecto/'+id]);
   }
-  detalleProyecto(){
-    this.router.navigate(['Inmuebles/']);
+  detalleProyecto(id:string){
+    this.router.navigate(['InmueblesProyecto/'+id]);
+    
   }
 }
