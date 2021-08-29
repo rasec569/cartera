@@ -1,53 +1,57 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './components/admin/admin.component';
-import { LoginComponent } from './components/Vistas/login/login.component';
-import { PrivadoComponent } from './components/privado/privado.component';
-import { ProyectosComponent } from './components/Vistas/Proyects/proyectos/proyectos.component';
-import { RegistrarUserComponent } from './components/Vistas/Users//registrar-user/registrar-user.component';
-import { ModificarUserComponent } from './components/Vistas/Users//modificar-user/modificar-user.component';
-import { AutenticacionGuard } from './guards/autenticacion.guard';
-import { RoleGuard } from './guards/role.guard';
-import { UsuarioComponent } from './components/Vistas/Users//usuario/usuario.component';
-import { RolesComponent } from './components/Vistas/Users//roles/roles.component';
-import { RegistrarRolComponent } from './components/Vistas/Users//registrar-rol/registrar-rol.component';
-import { ModicarRolComponent } from './components/Vistas/Users/modicar-rol/modicar-rol.component';
-import { RegistrarProyectoComponent } from './components/Vistas/Proyects/registrar-proyecto/registrar-proyecto.component';
-import { ModificarProyectoComponent } from './components/Vistas/Proyects/modificar-proyecto/modificar-proyecto.component';
-import { InmueblesComponent } from './components/Vistas/Inmueble/inmuebles/inmuebles.component';
-import { RegistrarInmuebleComponent } from './components/Vistas/Inmueble/registrar-inmueble/registrar-inmueble.component';
-import { ModificarInmueblesComponent } from './components/Vistas/Inmueble/modificar-inmuebles/modificar-inmuebles.component';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+
+// layouts
+import { AdminComponent } from "./layouts/admin/admin.component";
+import { AuthComponent } from "./layouts/auth/auth.component";
+
+// admin views
+import { DashboardComponent } from "./views/admin/dashboard/dashboard.component";
+import { MapsComponent } from "./views/admin/maps/maps.component";
+import { SettingsComponent } from "./views/admin/settings/settings.component";
+import { TablesComponent } from "./views/admin/tables/tables.component";
+
+// auth views
+import { LoginComponent } from "./views/auth/login/login.component";
+import { RegisterComponent } from "./views/auth/register/register.component";
+
+// no layouts views
+import { IndexComponent } from "./views/index/index.component";
+import { LandingComponent } from "./views/landing/landing.component";
+import { ProfileComponent } from "./views/profile/profile.component";
 
 const routes: Routes = [
-
-  { path:'privado', component:PrivadoComponent, canActivate:[AutenticacionGuard]},
-  { path:'admin', component:AdminComponent, canActivate:[RoleGuard] ,data:{expecteRole:'0'}},
-  { path: 'login', component: LoginComponent },
-
-  // Usuario
-  { path:'Usuario', component:UsuarioComponent, canActivate:[AutenticacionGuard]},
-  { path:'nuevoUsuario', component:RegistrarUserComponent, canActivate:[AutenticacionGuard]},
-  { path:'editarUsuario/:id', component:ModificarUserComponent, canActivate:[AutenticacionGuard]},
-  { path:'Roles', component:RolesComponent, canActivate:[AutenticacionGuard]},
-  { path:'NuevoRol', component:RegistrarRolComponent, canActivate:[AutenticacionGuard]},
-  { path:'EditarRol/:id', component:ModicarRolComponent, canActivate:[AutenticacionGuard]},
-
-  //Proyecto
-  { path: 'Proyectos', component: ProyectosComponent, canActivate:[AutenticacionGuard]},
-  { path: 'NuevoProyecto', component: RegistrarProyectoComponent, canActivate:[AutenticacionGuard]},
-  { path: 'EditarProyecto/:id', component: ModificarProyectoComponent, canActivate:[AutenticacionGuard]},
-  //Inmueble
-  { path: 'NuevoInmueble', component:RegistrarInmuebleComponent, canActivate:[AutenticacionGuard]},
-  { path: 'Inmuebles', component: InmueblesComponent, canActivate:[AutenticacionGuard]},
-  { path: 'InmueblesProyecto/:id', component: InmueblesComponent, canActivate:[AutenticacionGuard]},
-  { path: 'EditarInmueble/:id', component: ModificarInmueblesComponent, canActivate:[AutenticacionGuard]},
-
-
-  { path:'**', pathMatch:'full', redirectTo:'login'}
+  // admin views
+  {
+    path: "admin",
+    component: AdminComponent,
+    children: [
+      { path: "dashboard", component: DashboardComponent },
+      { path: "settings", component: SettingsComponent },
+      { path: "tables", component: TablesComponent },
+      { path: "maps", component: MapsComponent },
+      { path: "", redirectTo: "dashboard", pathMatch: "full" },
+    ],
+  },
+  // auth views
+  {
+    path: "auth",
+    component: AuthComponent,
+    children: [
+      { path: "login", component: LoginComponent },
+      { path: "register", component: RegisterComponent },
+      { path: "", redirectTo: "login", pathMatch: "full" },
+    ],
+  },
+  // no layout views
+  { path: "profile", component: ProfileComponent },
+  { path: "landing", component: LandingComponent },
+  { path: "", component: IndexComponent },
+  { path: "**", redirectTo: "", pathMatch: "full" },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
