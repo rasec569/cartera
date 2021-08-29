@@ -21,6 +21,9 @@
           <div class="text-blueGray-400 text-center mb-3 font-bold">
             <small>Inicia sesión con tu correo y contraseña</small>
           </div>
+          <span *ngIf="validationLogin" class="text-xs font-semibold inline-block py-1 px-2 text-center rounded text-red-600 bg-red-200  last:mr-0 mr-1">
+            {{ValidationMensage}}
+          </span>
           <form>
             <div class="relative w-full mb-3">
               <label
@@ -31,8 +34,10 @@
               </label>
               <input
                 type="email"
+                [(ngModel)]="Usuario.Usuario"
+                [ngModelOptions]="{standalone: true}"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                placeholder="Email"
+                placeholder="Correo"
               />
             </div>
 
@@ -45,6 +50,8 @@
               </label>
               <input
                 type="password"
+                [(ngModel)]="Usuario.password"
+                [ngModelOptions]="{standalone: true}"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Password"
               />
@@ -64,7 +71,7 @@
 
             <div class="text-center mt-6">
               <button
-              [routerLink]="['/admin/dashboard']"
+                (click)="Login()"
                 class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                 type="button"
               >

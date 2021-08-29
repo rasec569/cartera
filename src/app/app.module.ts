@@ -48,6 +48,12 @@ import { NotificationDropdownComponent } from "./components/dropdowns/notificati
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user-dropdown.component";
 
+//Modulos De cliente
+import{JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt';
+import{HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,8 +91,15 @@ import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user
     LandingComponent,
     ProfileComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule,
+    HttpClientModule, FormsModule],
+  providers: [
+    //JWT
+    {provide:JWT_OPTIONS, useValue:JWT_OPTIONS},
+    JwtHelperService,
+    //Token interceptor
+    {provide:HTTP_INTERCEPTORS, useClass:TokenInterceptorService, multi:true}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
