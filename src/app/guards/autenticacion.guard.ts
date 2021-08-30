@@ -14,7 +14,7 @@ export class AutenticacionGuard implements CanActivate {
   canActivate(): boolean {
     if(!this.autenticacionService.isAuth()){
       console.log('Token no es válido o expiró');
-      this.router.navigate(['login']);
+      this.router.navigate(['/auth/login']);
       return false;
     }
     return true;

@@ -1,9 +1,11 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { AutenticacionGuard } from "./guards/autenticacion.guard";
 
 // layouts
 import { AdminComponent } from "./layouts/admin/admin.component";
 import { AuthComponent } from "./layouts/auth/auth.component";
+import { ClientsComponent } from "./views/admin/clients/clients.component";
 
 // admin views
 import { DashboardComponent } from "./views/admin/dashboard/dashboard.component";
@@ -26,10 +28,11 @@ const routes: Routes = [
     path: "admin",
     component: AdminComponent,
     children: [
-      { path: "dashboard", component: DashboardComponent },
-      { path: "settings", component: SettingsComponent },
-      { path: "tables", component: TablesComponent },
-      { path: "maps", component: MapsComponent },
+      { path: "dashboard", component: DashboardComponent, canActivate: [AutenticacionGuard] },
+      { path: "clients", component: ClientsComponent, canActivate: [AutenticacionGuard] },
+      { path: "settings", component: SettingsComponent, canActivate: [AutenticacionGuard] },
+      { path: "tables", component: TablesComponent, canActivate: [AutenticacionGuard] },
+      { path: "maps", component: MapsComponent, canActivate: [AutenticacionGuard] },
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],
   },

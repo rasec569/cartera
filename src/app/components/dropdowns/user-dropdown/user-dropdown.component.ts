@@ -1,3 +1,4 @@
+import { Router} from '@angular/router';
 import { Component, AfterViewInit, ViewChild, ElementRef } from "@angular/core";
 import { createPopper } from "@popperjs/core";
 
@@ -10,6 +11,9 @@ export class UserDropdownComponent implements AfterViewInit {
   @ViewChild("btnDropdownRef", { static: false }) btnDropdownRef: ElementRef;
   @ViewChild("popoverDropdownRef", { static: false })
   popoverDropdownRef: ElementRef;
+  constructor(
+    private router: Router
+  ){  }
   ngAfterViewInit() {
     createPopper(
       this.btnDropdownRef.nativeElement,
@@ -18,6 +22,10 @@ export class UserDropdownComponent implements AfterViewInit {
         placement: "bottom-start",
       }
     );
+  }
+  CloseSesion(){
+    localStorage.clear();
+    this.router.navigate(['/auth/login']);
   }
   toggleDropdown(event) {
     event.preventDefault();
