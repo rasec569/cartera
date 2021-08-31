@@ -21,6 +21,5 @@ export class AutenticacionService {
       return false;
     }
     return true;
-
   }
 }

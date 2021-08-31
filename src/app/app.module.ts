@@ -13,6 +13,7 @@ import { DashboardComponent } from "./views/admin/dashboard/dashboard.component"
 import { MapsComponent } from "./views/admin/maps/maps.component";
 import { SettingsComponent } from "./views/admin/settings/settings.component";
 import { TablesComponent } from "./views/admin/tables/tables.component";
+import { ClientsComponent } from './views/admin/clients/clients.component';
 
 // auth views
 import { LoginComponent } from "./views/auth/login/login.component";
@@ -53,6 +54,8 @@ import{JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt';
 import{HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { FormsModule } from '@angular/forms';
+import { LogoutComponent } from './components/modals/logout/logout.component';
+import { CardClientListComponent } from './components/cards/card-client-list/card-client-list.component';
 
 @NgModule({
   declarations: [
@@ -90,10 +93,14 @@ import { FormsModule } from '@angular/forms';
     IndexComponent,
     LandingComponent,
     ProfileComponent,
+    LogoutComponent,
+    CardClientListComponent,
+    ClientsComponent
   ],
   imports: [BrowserModule, AppRoutingModule,
     HttpClientModule, FormsModule],
   providers: [
+    // modal
     //JWT
     {provide:JWT_OPTIONS, useValue:JWT_OPTIONS},
     JwtHelperService,
