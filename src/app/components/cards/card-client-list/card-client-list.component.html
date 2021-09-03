@@ -1,6 +1,7 @@
 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
   [ngClass]="color === 'light' ? 'bg-white' : 'bg-red-900 text-white'">
   <div class="rounded-t mb-0 px-4 py-3 border-0">
+    <alert></alert>
     <div class="flex flex-wrap items-center">
       <div class="relative w-full px-4 max-w-full flex-grow flex-1">
         <h3 class="font-semibold text-lg" [ngClass]="color === 'light' ? 'text-blueGray-800' : 'text-white'">
@@ -125,12 +126,12 @@
               <div class="flex flex-wrap items-center">
                 <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
                   <button class="text-amber-500 bg-transparent border border-solid border-amber-500 hover:bg-amber-500 hover:text-white active:bg-amber-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="changeMode(3)">
-                    <i class="fas fa-edit"></i> Editar
+                    <i class="fas fa-edit"></i>
                   </button>
                 </div>
                 <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
                   <button class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="changeMode(1)">
-                    <i class="fas fa-trash-alt"></i> Eliminar
+                    <i class="fas fa-trash-alt"></i>
                   </button>
                 </div>
               </div>
@@ -231,7 +232,7 @@
           <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
             <button
               class="bg-Blue-600 text-white active:bg-Blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button" (click)="changeMode(2)">
+              type="button" (click)="alertService.success('Cliente creado de forma exitosa', options)">
               <i class="fas fa-user-plus mr-2 text-sm"></i>
               Crear nuevo cliente
             </button>
@@ -355,3 +356,4 @@
     </div>
   </div>
 </div>
+

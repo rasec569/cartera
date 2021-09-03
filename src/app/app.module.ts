@@ -54,8 +54,9 @@ import{JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt';
 import{HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { FormsModule } from '@angular/forms';
-import { LogoutComponent } from './components/modals/logout/logout.component';
+import { LogoutComponent } from './components/modals/Util/logout.component';
 import { CardClientListComponent } from './components/cards/card-client-list/card-client-list.component';
+import { AlertModule } from "./components/_alert";
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { CardClientListComponent } from './components/cards/card-client-list/car
     ClientsComponent
   ],
   imports: [BrowserModule, AppRoutingModule,
-    HttpClientModule, FormsModule],
+    HttpClientModule, FormsModule,
+    AlertModule],
   providers: [
     // modal
     //JWT

@@ -1,6 +1,7 @@
 <div class="container mx-auto px-4 h-full">
   <div class="flex content-center items-center justify-center h-full">
     <div class="w-full lg:w-4/12 px-4">
+      <alert></alert>
       <div
         class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0"
       >
@@ -21,9 +22,6 @@
           <div class="text-blueGray-400 text-center mb-3 font-bold">
             <small>Inicia sesión con tu correo y contraseña</small>
           </div>
-          <span *ngIf="validationLogin" class="text-xs font-semibold inline-block py-1 px-2 text-center rounded text-red-600 bg-red-200  last:mr-0 mr-1">
-            {{ValidationMensage}}
-          </span>
           <form>
             <div class="relative w-full mb-3">
               <label

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { AlertService } from "src/app/components/_alert";
 import { AutenticacionService } from "src/app/services/autenticacion.service";
 @Component({
   selector: "app-login",
@@ -12,9 +13,14 @@ export class LoginComponent implements OnInit {
   };
   validationLogin: boolean = false;
   ValidationMensage: string = "";
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: false
+  };
   constructor(
     private autenticacionService: AutenticacionService,
-    private router: Router
+    private router: Router,
+    protected alertService: AlertService
   ) {}
 
   ngOnInit(): void {}
@@ -24,9 +30,7 @@ export class LoginComponent implements OnInit {
       this.validationLogin = false;
       this.ValidationMensage = "";
       if (this.Usuario.Usuario == "" || this.Usuario.password == "") {
-        this.validationLogin = true;
-        this.ValidationMensage =
-          "Los campos de Correo/Contraseña no pueden ser nulos!";
+        this.alertService.error('Los campos de Correo/Contraseña no pueden ser nulos!', this.options);
       } else {
         this.autenticacionService.signin(this.Usuario).subscribe(
           (res: any) => {
@@ -35,21 +39,16 @@ export class LoginComponent implements OnInit {
               localStorage.setItem("token", res.token);
               this.router.navigate(["/admin/dashboard"]);
             } else {
-              this.validationLogin = true;
-              this.ValidationMensage = "Correo/Contraseña incorrectos!";
+              this.alertService.error('Correo/Contraseña incorrectos!', this.options);
             }
           },
           (err) => {
-            this.validationLogin = true;
-            this.ValidationMensage =
-              "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!";
+            this.alertService.error('rror de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!', this.options);
           }
         );
       }
     } catch (error) {
-      this.validationLogin = true;
-      this.ValidationMensage =
-        "Error en el sistema, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!";
+      this.alertService.error('Error en el sistema, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!', this.options);
     }
   }
 }

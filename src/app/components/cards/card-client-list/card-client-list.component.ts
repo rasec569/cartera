@@ -1,5 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { ClientesService, Clients } from 'src/app/services/clientes.service';
+import { AlertService } from '../../_alert';
+import { cliente } from '../../../interfaces/cliente.interface'
 
 @Component({
   selector: 'app-card-client-list',
@@ -24,7 +26,12 @@ export class CardClientListComponent implements OnInit {
    * 3 => Modificar Clientes
    */
    idOption:number=1;
-  constructor(private clientes: ClientesService) { }
+   options = {
+    autoClose: true,
+    keepAfterRouteChange: false
+};
+
+  constructor(private clientes: ClientesService,protected alertService: AlertService) { }
   changeMode(option:number){
     this.idOption=option;
     if(option==1){
@@ -34,16 +41,17 @@ export class CardClientListComponent implements OnInit {
   ngOnInit(): void {
     this.refreshUser();
   }
+  public showModal = false;
+  public toggleModal(){
+    this.showModal = !this.showModal;
+  }
   refreshUser(){
     try {
-      this.validationLogin = false;
-      this.ValidationMensage = "";
-
         this.clientes.getClientes().subscribe(
-          (res: any) => {
-            console.log(res);
+          (res: cliente) => {
+            const response:cliente=res[0];
             this.users=res[0];
-            this.CloneUsers=res[0]
+            this.CloneUsers=res[0];
             /*if (res.token != null) {
               localStorage.setItem("token", res.token);
             } else {
@@ -52,15 +60,11 @@ export class CardClientListComponent implements OnInit {
             }*/
           },
           (err) => {
-            this.validationLogin = true;
-            this.ValidationMensage =
-              "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!";
+            this.alertService.error('Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!', this.options);
           }
         );
     } catch (error) {
-      this.validationLogin = true;
-      this.ValidationMensage =
-        "Error en el sistema, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!";
+      this.alertService.error('Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!', this.options);
     }
   }
 

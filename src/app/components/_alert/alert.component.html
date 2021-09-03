@@ -1,0 +1,17 @@
+﻿<!--<div *ngFor="let alert of alerts" class="{{cssClass(alert)}}">
+    <a class="close" (click)="removeAlert(alert)">&times;</a>
+    <span [innerHTML]="alert.message"></span>
+</div>
+-->
+<div *ngFor="let alert of alerts" class="{{cssClass(alert)}}">
+  <span class="text-xl inline-block mr-5 align-middle">
+    <i class="fas fa-bell"></i>
+  </span>
+  &nbsp;&nbsp;
+  <span  class="inline-block align-middle mr-8">
+    <p [innerHTML]="alert.message" class="text-2xl font-normal leading-normal mt-0 mb-2"></p>
+  </span>
+  <button (click)="removeAlert(alert)" class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none">
+    <span>&times;</span>
+  </button>
+</div>
