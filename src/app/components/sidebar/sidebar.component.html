@@ -49,7 +49,7 @@
               [routerLink]="['/']"
               class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             >
-              Contrucciones S.A.S
+              MCG Contrucciones S.A.S
             </a>
           </div>
           <div class="w-6/12 flex justify-end">
@@ -125,6 +125,27 @@
               "
             ></i>
             Clientes
+          </a>
+        </li>
+        <li class="items-center">
+          <a
+            [routerLink]="['/admin/user']"
+            class="text-xs uppercase py-3 font-bold block"
+            routerLinkActive
+            #adminUser="routerLinkActive"
+            [ngClass]="
+            adminUser.isActive
+                ? 'text-red-600 hover:text-red-700'
+                : 'text-blueGray-700 hover:text-blueGray-500'
+            "
+          >
+            <i
+              class="fas fa-tools mr-2 text-sm"
+              [ngClass]="
+                adminUser.isActive ? 'opacity-75' : 'text-blueGray-300'
+              "
+            ></i>
+            Panel
           </a>
         </li>
         <li class="items-center">
