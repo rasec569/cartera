@@ -6,6 +6,9 @@ import { AutenticacionGuard } from "./guards/autenticacion.guard";
 import { AdminComponent } from "./layouts/admin/admin.component";
 import { AuthComponent } from "./layouts/auth/auth.component";
 import { ClientsComponent } from "./views/admin/clients/clients.component";
+import { UserComponent } from "./views/admin/user/user.component";
+import { ProyectsComponent } from "./views/admin/proyects/proyects.component";
+import { InmueblesComponent } from "./views/admin/inmuebles/inmuebles.component";
 
 // admin views
 import { DashboardComponent } from "./views/admin/dashboard/dashboard.component";
@@ -21,6 +24,7 @@ import { RegisterComponent } from "./views/auth/register/register.component";
 import { IndexComponent } from "./views/index/index.component";
 import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
+import { useAnimation } from "@angular/animations";
 
 const routes: Routes = [
   // admin views
@@ -30,6 +34,9 @@ const routes: Routes = [
     children: [
       { path: "dashboard", component: DashboardComponent, canActivate: [AutenticacionGuard] },
       { path: "clients", component: ClientsComponent, canActivate: [AutenticacionGuard] },
+      { path: "user", component: UserComponent, canActivate: [AutenticacionGuard] },
+      { path: "proyects", component: ProyectsComponent, canActivate: [AutenticacionGuard] },
+      { path: "inmuebles", component:InmueblesComponent, canActivate: [AutenticacionGuard]},
       { path: "settings", component: SettingsComponent, canActivate: [AutenticacionGuard] },
       { path: "tables", component: TablesComponent, canActivate: [AutenticacionGuard] },
       { path: "maps", component: MapsComponent, canActivate: [AutenticacionGuard] },

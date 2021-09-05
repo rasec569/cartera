@@ -11,14 +11,12 @@ export class UserService {
   constructor(private http:HttpClient) { }
   //agregar equipo
   NewUser(user:User){
-    /* console.log('por aqui paso',user); */
     return this.http.post(`${this.URL}/user/`, user);
   }
   //listar Usuario
   getUsuarios(){
     return this.http.get(`${this.URL}/user/`);
   }
-
   //get un Usuario
   getusuario(id:string){
     return this.http.get(`${this.URL}/user/`+id);

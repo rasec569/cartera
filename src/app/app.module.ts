@@ -57,6 +57,14 @@ import { FormsModule } from '@angular/forms';
 import { LogoutComponent } from './components/modals/Util/logout.component';
 import { CardClientListComponent } from './components/cards/card-client-list/card-client-list.component';
 import { AlertModule } from "./components/_alert";
+import { CardRolListComponent } from "./components/cards/card-rol-list/card-rol-list.component";
+import { UserComponent } from "./views/admin/user/user.component";
+import { CardUserListComponent } from './components/cards/card-user-list/card-user-list.component';
+import { CardAreaListComponent } from './components/cards/card-area-list/card-area-list.component';
+import { CardProyectListComponent } from './components/cards/card-proyect-list/card-proyect-list.component';
+import { ProyectsComponent } from './views/admin/proyects/proyects.component';
+import { InmueblesComponent } from './views/admin/inmuebles/inmuebles.component';
+import { CardInmueblesListComponent } from './components/cards/card-inmuebles-list/card-inmuebles-list.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +104,15 @@ import { AlertModule } from "./components/_alert";
     ProfileComponent,
     LogoutComponent,
     CardClientListComponent,
-    ClientsComponent
+    CardRolListComponent,
+    ClientsComponent,
+    UserComponent,
+    CardUserListComponent,
+    CardAreaListComponent,
+    CardProyectListComponent,
+    ProyectsComponent,
+    InmueblesComponent,
+    CardInmueblesListComponent
   ],
   imports: [BrowserModule, AppRoutingModule,
     HttpClientModule, FormsModule,
