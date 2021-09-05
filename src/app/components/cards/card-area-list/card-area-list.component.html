@@ -1,0 +1,193 @@
+<div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+  [ngClass]="color === 'light' ? 'bg-white' : 'bg-red-900 text-white'">
+  <div class="rounded-t mb-0 px-2 py-3 border-0">
+    <div class="flex flex-wrap items-center">
+      <div class="relative w-full px-2 max-w-full flex-grow flex-1">
+        <h3 class="font-semibold text-lg" [ngClass]="color === 'light' ? 'text-blueGray-800' : 'text-white'">
+          {{(idOption==1)?'Lista de Areas':(idOption==2)?'Agregar Nuevo Area':'Editar Area'}}
+        </h3>
+      </div>
+      <div class="relative w-full px-2 max-w-full flex-grow flex-1" *ngIf="idOption==1">
+        <button
+          class="bg-Blue-600 text-white active:bg-Blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="button" (click)="changeMode(2)">
+          <i class="fas fa-id-card-alt mr-2 text-sm"></i>
+          Nuevo
+        </button>
+      </div>
+      <div class="relative w-full px-4 max-w-full flex-grow flex-1" *ngIf="idOption==1">
+        <form class="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">
+          <div class="relative flex w-full flex-wrap items-stretch">
+            <span
+              class="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3"><i
+                class="fas fa-search"></i></span>
+            <input type="text" placeholder="Buscar Area aquí..."
+              (keyup)="getItems($event)"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="block w-full overflow-x-auto">
+    <!-- List Areas -->
+    <table class="items-center w-full bg-transparent border-collapse" *ngIf="idOption==1">
+      <thead>
+        <tr>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+            Area
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+            Descripción
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+            Acciones
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of areas">
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            <b>{{item.Area}}</b>
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            {{item.Descripcion}}
+          </td>
+          <td class="border-t-0 px-1 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-1 text-right">
+            <button class="text-amber-500 bg-transparent border border-solid border-amber-500 hover:bg-amber-500 hover:text-white active:bg-amber-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="changeMode(3)">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="changeMode(1)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    <!-- New Area -->
+    <div class="flex-auto px-4 lg:px-10 py-10 pt-0" *ngIf="idOption==2">
+      <form>
+        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+          Información del Area
+        </h6>
+        <div class="flex flex-wrap">
+          <div class="w-full lg:w-4/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Area
+              </label>
+              <input type="text"
+                placeholder="Nombre del Area"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
+            </div>
+          </div>
+          <div class="w-full lg:w-8/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Descripción
+              </label>
+              <input type="text"
+                placeholder="PrimerApellido SegundoApellido"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
+            </div>
+          </div>
+        </div>
+
+      </form>
+      <hr class="mt-6 border-b-1 border-blueGray-300" />
+      <div class="rounded-t mb-0 px-4 py-3 border-0">
+        <div class="flex flex-wrap items-center">
+          <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
+            <button
+              class="bg-Blue-600 text-white active:bg-Blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button" (click)="changeMode(2)">
+              <i class="fas fa-id-card-alt mr-2 text-sm"></i>
+              Crear nueva Area
+            </button>
+          </div>
+          <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
+            <button
+              class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button" (click)="changeMode(1)">
+              <i class="fas fa-ban mr-2 text-sm"></i>
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex-auto px-4 lg:px-10 py-10 pt-0" *ngIf="idOption==3">
+      <form>
+        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+          Información del Area
+        </h6>
+        <div class="flex flex-wrap">
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Area
+              </label>
+              <input type="text"
+              placeholder="Nombre del Area"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Descripción
+              </label>
+              <input type="text"
+                placeholder="Descripción del Area"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
+            </div>
+          </div>
+        </div>
+      </form>
+      <hr class="mt-6 border-b-1 border-blueGray-300" />
+      <div class="rounded-t mb-0 px-4 py-3 border-0">
+        <div class="flex flex-wrap items-center">
+          <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
+            <button
+              class="bg-Blue-600 text-white active:bg-Blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button" (click)="changeMode(3)">
+              <i class="fas fa-id-card-alt mr-2 text-sm"></i>
+              Editar Area
+            </button>
+          </div>
+          <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
+            <button
+              class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button" (click)="changeMode(1)">
+              <i class="fas fa-ban mr-2 text-sm"></i>
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
