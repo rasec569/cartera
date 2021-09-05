@@ -1,4 +1,4 @@
-export interface cliente{
+export interface clienteInterface{
   id_cliente:string;
   id_persona?:string;
   identificacion:string;

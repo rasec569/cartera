@@ -13,10 +13,12 @@ export class LoginComponent implements OnInit {
   };
   validationLogin: boolean = false;
   ValidationMensage: string = "";
+
   options = {
     autoClose: true,
     keepAfterRouteChange: false
   };
+
   constructor(
     private autenticacionService: AutenticacionService,
     private router: Router,
@@ -37,13 +39,14 @@ export class LoginComponent implements OnInit {
             console.log(res);
             if (res.token != null) {
               localStorage.setItem("token", res.token);
+              console.log(res.token)
               this.router.navigate(["/admin/dashboard"]);
             } else {
               this.alertService.error('Correo/Contraseña incorrectos!', this.options);
             }
           },
           (err) => {
-            this.alertService.error('rror de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!', this.options);
+            this.alertService.error('Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!', this.options);
           }
         );
       }
