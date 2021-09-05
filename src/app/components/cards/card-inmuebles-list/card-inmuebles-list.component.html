@@ -4,15 +4,15 @@
     <div class="flex flex-wrap items-center">
       <div class="relative w-full px-4 max-w-full flex-grow flex-1">
         <h3 class="font-semibold text-lg" [ngClass]="color === 'light' ? 'text-blueGray-800' : 'text-white'">
-          {{(idOption==1)?'Lista de Usuarios':(idOption==2)?'Agregar Nuevo Usuario':'Editar Usuario'}}
+          {{(idOption==1)?'Lista de Inmuebles':(idOption==2)?'Agregar Nuevo Inmueble':'Editar Inmueble'}}
         </h3>
       </div>
       <div class="relative w-full px-4 max-w-full flex-grow flex-1" *ngIf="idOption==1">
         <button
           class="bg-Blue-600 text-white active:bg-Blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button" (click)="changeMode(2)">
-          <i class="fas fa-user-plus mr-2 text-sm"></i>
-          Nuevo Usuario
+          <i class="fas fa-store-alt mr-2 text-sm"></i>
+          Nuevo Inmueble
         </button>
       </div>
       <div class="relative w-full px-4 max-w-full flex-grow flex-1" *ngIf="idOption==1">
@@ -21,7 +21,7 @@
             <span
               class="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3"><i
                 class="fas fa-search"></i></span>
-            <input type="text" placeholder="Buscar Usuarios aquí..."
+            <input type="text" placeholder="Buscar Inmuebles aquí..."
               (keyup)="getItems($event)"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10" />
           </div>
@@ -41,7 +41,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Nombres
+            Manzana
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -50,7 +50,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Apellidos
+            Casa
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -59,7 +59,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Telefono
+            Valor Inicial
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -68,7 +68,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Usuario
+            Proyecto
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -77,7 +77,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Contraseña
+            Ficha Catastral
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -86,7 +86,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Area
+            Escritura
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -95,7 +95,16 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Rol
+            Matricula
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+            Estado
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -109,27 +118,30 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of users">
+        <tr *ngFor="let item of inmuebles">
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <b>{{item.nombres}}</b>
+            <b>{{item.Manzana}}</b>
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{item.apellidos}}
+            {{item.Casa}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{item.telefono}}
+            {{item.ValorInicial}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{item.Usuario}}
+            {{item.proyecto}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{item.password}}
+            {{item.Ficha}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{item.Area}}
+            {{item.Escritura}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{item.Rol}}
+            {{item.Matricula}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            {{item.estado}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
             <button class="text-amber-500 bg-transparent border border-solid border-amber-500 hover:bg-amber-500 hover:text-white active:bg-amber-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="changeMode(3)">
@@ -137,6 +149,9 @@
             </button>
             <button class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="changeMode(1)">
               <i class="fas fa-trash-alt"></i>
+            </button>
+            <button class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" >
+              <i class="fas fa-search-plus"></i>
             </button>
           </td>
         </tr>
@@ -147,7 +162,7 @@
     <div class="flex-auto px-4 lg:px-10 py-10 pt-0" *ngIf="idOption==2">
       <form>
         <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          Información del Usuario
+          Información del Inmueble
         </h6>
         <div class="flex flex-wrap">
           <div class="w-full lg:w-6/12 px-4">
@@ -294,8 +309,8 @@
             <button
               class="bg-Blue-600 text-white active:bg-Blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button" (click)="changeMode(2)">
-              <i class="fas fa-user-plus mr-2 text-sm"></i>
-              Crear nuevo Usuario
+              <i class="fas fa-store-alt mr-2 text-sm"></i>
+              Crear nuevo Inmueble
             </button>
           </div>
           <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
@@ -312,7 +327,7 @@
     <div class="flex-auto px-4 lg:px-10 py-10 pt-0" *ngIf="idOption==3">
       <form>
         <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          Información del Usuario
+          Información del Inmueble
         </h6>
         <div class="flex flex-wrap">
           <div class="w-full lg:w-6/12 px-4">
@@ -427,8 +442,8 @@
             <button
               class="bg-Blue-600 text-white active:bg-Blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button" (click)="changeMode(3)">
-              <i class="fas fa-user-plus mr-2 text-sm"></i>
-              Editar cliente
+              <i class="fas fa-store-alt mr-2 text-sm"></i>
+              Editar Inmueble
             </button>
           </div>
           <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
@@ -444,4 +459,3 @@
     </div>
   </div>
 </div>
-

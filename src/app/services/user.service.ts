@@ -15,10 +15,8 @@ export class UserService {
   }
   //listar Usuario
   getUsuarios(){
-    console.log('por aqui paso');
     return this.http.get(`${this.URL}/user/`);
   }
-
   //get un Usuario
   getusuario(id:string){
     return this.http.get(`${this.URL}/user/`+id);
