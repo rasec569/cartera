@@ -50,7 +50,7 @@ export class LogoutComponent implements OnInit {
   constructor() { }
   ngOnInit(): void {
   }
-  public showModal = false;
+  public showModal = true;
   public toggleModal(){
     this.showModal = !this.showModal;
   }

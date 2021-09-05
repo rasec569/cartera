@@ -54,8 +54,9 @@ import{JwtHelperService, JWT_OPTIONS} from '@auth0/angular-jwt';
 import{HttpClientModule, HTTP_INTERCEPTORS}from '@angular/common/http';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { FormsModule } from '@angular/forms';
-import { LogoutComponent } from './components/modals/logout/logout.component';
+import { LogoutComponent } from './components/modals/Util/logout.component';
 import { CardClientListComponent } from './components/cards/card-client-list/card-client-list.component';
+import { AlertModule } from "./components/_alert";
 import { CardRolListComponent } from "./components/cards/card-rol-list/card-rol-list.component";
 import { UserComponent } from "./views/admin/user/user.component";
 import { CardUserListComponent } from './components/cards/card-user-list/card-user-list.component';
@@ -114,7 +115,8 @@ import { CardInmueblesListComponent } from './components/cards/card-inmuebles-li
     CardInmueblesListComponent
   ],
   imports: [BrowserModule, AppRoutingModule,
-    HttpClientModule, FormsModule],
+    HttpClientModule, FormsModule,
+    AlertModule],
   providers: [
     // modal
     //JWT
