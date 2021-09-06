@@ -8,8 +8,9 @@ declare const google: any;
 })
 export class MapExampleComponent implements OnInit {
   constructor() {}
-
   ngOnInit(): void {
+  }
+  old(): void {
     let map = document.getElementById("map-canvas");
     let lat = map.getAttribute("data-lat");
     let lng = map.getAttribute("data-lng");
