@@ -3,53 +3,17 @@
   <div class="px-4 md:px-10 mx-auto w-full">
     <div>
       <!-- Card stats -->
-      <div class="flex flex-wrap">
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
+      <div class="flex flex-wrap items-center" >
+        <div class="w-full lg:w-6/12 xl:w-3/12 px-4 items-center" *ngFor="let item of DataStats">
           <app-card-stats
-            statSubtitle="TRAFICO RED"
-            statTitle="350,897"
+            statSubtitle="{{item.Name}}"
+            statTitle={{item.DataNumber}}
             statArrow="up"
             statPercent="3.48"
             statPercentColor="text-emerald-500"
-            statDescripiron="Desde el mes pasado"
-            statIconName="far fa-chart-bar"
-            statIconColor="bg-red-500"
-          ></app-card-stats>
-        </div>
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="NUEVOS CLIENTES"
-            statTitle="2,356"
-            statArrow="down"
-            statPercent="3.48"
-            statPercentColor="text-red-500"
-            statDescripiron="Desde la semana pasada"
-            statIconName="fas fa-chart-pie"
-            statIconColor="bg-orange-500"
-          ></app-card-stats>
-        </div>
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="VENTAS"
-            statTitle="924"
-            statArrow="down"
-            statPercent="1.10"
-            statPercentColor="text-orange-500"
-            statDescripiron="Desde ayer"
-            statIconName="fas fa-users"
-            statIconColor="bg-pink-500"
-          ></app-card-stats>
-        </div>
-        <div class="w-full lg:w-6/12 xl:w-3/12 px-4">
-          <app-card-stats
-            statSubtitle="RENDIMIENTOS"
-            statTitle="49,65%"
-            statArrow="up"
-            statPercent="12"
-            statPercentColor="text-emerald-500"
-            statDescripiron="Desde el mes pasado"
-            statIconName="fas fa-percent"
-            statIconColor="bg-emerald-500"
+            statDescripiron={{item?.shortDescription}}
+            statIconName={{item.Icon}}
+            statIconColor={{item.ColorIcon}}
           ></app-card-stats>
         </div>
       </div>

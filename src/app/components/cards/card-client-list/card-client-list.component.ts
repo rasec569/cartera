@@ -1,26 +1,60 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { cliente } from "src/app/Models/cliente.model";
-import { clienteInterface } from "src/app/interfaces/cliente.interface"
+import { clienteInterface } from "src/app/interfaces/cliente.interface";
 import { ClientesService } from "src/app/services/clientes.service";
 import { AlertService } from "../../_alert";
+import { GlobalService } from "../../../providers/GlobalService";
+import { Stats } from "src/app/Models/Utils/Stats.model";
 
 @Component({
   selector: "app-card-client-list",
   templateUrl: "./card-client-list.component.html",
 })
 export class CardClientListComponent implements OnInit {
-  Cliente: cliente={
-    id:"",
-    nombres:"",
-    apellidos:"",
-    correo:"",
-    direccion:"",
-    identification:"",
-    telefono:"",
-    MENSAJE:"",
-    TIPO:""
+  Cliente: cliente = {
+    id: "",
+    nombres: "",
+    apellidos: "",
+    correo: "",
+    direccion: "",
+    identification: "",
+    telefono: "",
+    MENSAJE: "",
+    TIPO: "",
   };
-
+  StatsData: Stats[]=[
+    {
+      ColorIcon:"bg-red-500",
+      DataNumber:"10.24",
+      Icon:"far fa-chart-bar",
+      Name:"TRAFICO DE RED",
+      shortDescription:""
+    },
+    {
+      ColorIcon:"bg-pink-500",
+      DataNumber:"358",
+      Icon:"fas fa-chart-pie",
+      Name:"NUEVOS CLIENTES",
+      shortDescription:""
+    },
+    {
+      ColorIcon:"bg-orange-500",
+      DataNumber:"21.5",
+      Icon:"fas fa-users",
+      Name:"VENTAS",
+      shortDescription:""
+    }
+    /*
+    ,
+    {
+      ColorIcon:"bg-emerald-500",
+      DataNumber:"10.24",
+      Icon:"fas fa-percent",
+      Name:"RENDIMIENTOS",
+      shortDescription:""
+    }
+    */
+  ]
   @Input()
   get color(): string {
     return this._color;
@@ -46,7 +80,8 @@ export class CardClientListComponent implements OnInit {
 
   constructor(
     private clientes: ClientesService,
-    protected alertService: AlertService
+    protected alertService: AlertService,
+    private globalEvents: GlobalService
   ) {
 
   }
@@ -58,11 +93,29 @@ export class CardClientListComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    setTimeout(() => {
+      this.globalEvents.publishSomeData({
+        val: this.StatsData,
+      });
+    }, 1000);
     this.QueryClient();
   }
   public showModal = false;
   public toggleModal() {
     this.showModal = !this.showModal;
+  }
+  clearDataClient(){
+    this.Cliente={
+      id: "",
+      nombres: "",
+      apellidos: "",
+      correo: "",
+      direccion: "",
+      identification: "",
+      telefono: "",
+      MENSAJE: "",
+      TIPO: "",
+    };
   }
   /***
    * Cliente Operations
@@ -71,14 +124,11 @@ export class CardClientListComponent implements OnInit {
     try {
       this.clientes.getClientes().subscribe(
         (res: cliente[]) => {
-          if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
+          if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.users = res;
             this.CloneUsers = res;
-          }else{
-            this.alertService.error(
-              res[0].MENSAJE,
-              this.options
-            );
+          } else {
+            this.alertService.error(res[0].MENSAJE, this.options);
           }
         },
         (err) => {
@@ -95,30 +145,47 @@ export class CardClientListComponent implements OnInit {
       );
     }
   }
-  SaveCLiente(){
-
+  SaveCLiente() {
+    console.log(this.Cliente)
+    try {
+      this.clientes.createCliente(this.Cliente).subscribe(
+        (res: cliente[]) => {
+          if (res[0].TIPO == "3") {
+            this.alertService.success(res[0].MENSAJE, this.options);
+            this.changeMode(1);
+            this.QueryClient();
+            this.clearDataClient();
+          } else {
+            this.alertService.error(res[0].MENSAJE, this.options);
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    } catch (error) {
+      this.alertService.error(
+        "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
   }
 
-  UpdateCliente(){
+  UpdateCliente() {}
 
-  }
-
-  RemoveCliente(idCliente:any){
-    this.Cliente.id=idCliente;
+  RemoveCliente(idCliente: any) {
+    this.Cliente.id = idCliente;
     try {
       this.clientes.deleteCliente(this.Cliente).subscribe(
         (res: cliente[]) => {
-          if(res[0].TIPO=="3"){
-            this.alertService.success(
-              res[0].MENSAJE,
-              this.options
-            );
+          if (res[0].TIPO == "3") {
+            this.alertService.success(res[0].MENSAJE, this.options);
             this.QueryClient();
-          }else{
-            this.alertService.error(
-              res[0].MENSAJE,
-              this.options
-            );
+          } else {
+            this.alertService.error(res[0].MENSAJE, this.options);
           }
         },
         (err) => {

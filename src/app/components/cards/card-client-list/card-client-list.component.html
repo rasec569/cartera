@@ -32,7 +32,8 @@
   </div>
   <div class="block w-full overflow-x-auto">
     <!-- List Clients -->
-    <table class="items-center w-full bg-transparent border-collapse" *ngIf="idOption==1">
+    <div class="items-center" *ngIf="idOption==1">
+    <table class="items-center w-full bg-transparent border-collapse" >
       <thead>
         <tr>
           <th
@@ -141,98 +142,156 @@
 
       </tbody>
     </table>
+    <div class="py-2  top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
+      <nav class="block">
+        <ul class="flex pl-0 rounded list-none flex-wrap">
+          <li>
+            <a href="" class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-lightBlue-500 bg-white text-lightBlue-500">
+              <i class="fas fa-chevron-left -ml-px"></i>
+            </a>
+          </li>
+          <li>
+            <a href="" class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-lightBlue-500 text-white bg-lightBlue-500">
+              1
+            </a>
+          </li>
+          <li>
+            <a href="" class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-lightBlue-500 bg-white text-lightBlue-500">
+              2
+            </a>
+          </li>
+          <li>
+            <a href="" class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-lightBlue-500 bg-white text-lightBlue-500">
+              3
+            </a>
+          </li>
+          <li>
+            <a href="" class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-lightBlue-500 bg-white text-lightBlue-500">
+              4
+            </a>
+          </li>
+          <li>
+            <a href="" class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-lightBlue-500 bg-white text-lightBlue-500">
+              5
+            </a>
+          </li>
+          <li>
+            <a href="" class="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-lightBlue-500 bg-white text-lightBlue-500">
+              <i class="fas fa-chevron-right -mr-px"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    </div>
     <!-- New Client -->
     <div class="flex-auto px-4 lg:px-10 py-10 pt-0" *ngIf="idOption==2">
-      <form>
-        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          Información del Cliente
-        </h6>
-        <div class="flex flex-wrap">
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                Identificación
-              </label>
-              <input type="number"
-              placeholder="Ejem. 123456789"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value="" />
-            </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                Nombres
-              </label>
-              <input type="text"
-                placeholder="PrimerNombre SegundoNombre"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value="" />
-            </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                Apellidos
-              </label>
-              <input type="text"
-                placeholder="PrimerApellido SegundoApellido"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value="" />
-            </div>
-          </div>
-        </div>
 
-        <hr class="mt-6 border-b-1 border-blueGray-300" />
-
-        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          Información de Contácto
-        </h6>
-        <div class="flex flex-wrap">
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                Email
-              </label>
-              <input type="email"
-                placeholder="example@example.com.co"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value="" />
-            </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                Telefono
-              </label>
-              <input type="number"
-                placeholder="Ejem. 311111111"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value="" />
-            </div>
-          </div>
-          <div class="w-full lg:w-6/12 px-4">
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                Dirección
-              </label>
-              <input type="text"
-                placeholder="Ejem. Calle 5#9-03 B/Ejemplo"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value="" />
-            </div>
-          </div>
-        </div>
-
-        <hr class="mt-6 border-b-1 border-blueGray-300" />
-      </form>
       <hr class="mt-6 border-b-1 border-blueGray-300" />
       <div class="rounded-t mb-0 px-4 py-3 border-0">
-        <div class="flex flex-wrap items-center">
+        <form class="border-b-1">
+          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+            Información del Cliente
+          </h6>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                  Identificación
+                </label>
+                <input type="number"
+                [(ngModel)]="Cliente.identification"
+                [ngModelOptions]="{standalone: true}"
+                placeholder="Ejem. 123456789"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  value="" />
+              </div>
+            </div>
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                  Nombres
+                </label>
+                <input type="text"
+                  [(ngModel)]="Cliente.nombres"
+                  [ngModelOptions]="{standalone: true}"
+                  placeholder="PrimerNombre SegundoNombre"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  value="" />
+              </div>
+            </div>
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                  Apellidos
+                </label>
+                <input type="text"
+                [(ngModel)]="Cliente.apellidos"
+                [ngModelOptions]="{standalone: true}"
+                  placeholder="PrimerApellido SegundoApellido"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  value="" />
+              </div>
+            </div>
+          </div>
+
+          <hr class="mt-6 border-b-1 border-blueGray-300" />
+
+          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+            Información de Contácto
+          </h6>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                  Email
+                </label>
+                <input type="email"
+                [(ngModel)]="Cliente.correo"
+                [ngModelOptions]="{standalone: true}"
+                  placeholder="example@example.com.co"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  value="" />
+              </div>
+            </div>
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                  Telefono
+                </label>
+                <input type="number"
+                [(ngModel)]="Cliente.telefono"
+                [ngModelOptions]="{standalone: true}"
+                  placeholder="Ejem. 311111111"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  value="" />
+              </div>
+            </div>
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                  Dirección
+                </label>
+                <input type="text"
+                [(ngModel)]="Cliente.direccion"
+                [ngModelOptions]="{standalone: true}"
+                  placeholder="Ejem. Calle 5#9-03 B/Ejemplo"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  value="" />
+              </div>
+            </div>
+          </div>
+
+          <hr class="mt-6 border-b-1 border-blueGray-300" />
+        </form>
+
+        <hr class="mt-6 border-b-1 border-blueGray-300" />
+        <div class="mt-6 flex flex-wrap items-center">
           <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
             <button
               class="bg-Blue-600 text-white active:bg-Blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button" (click)="alertService.success('Cliente creado de forma exitosa', options)">
+              type="button"
+              (click)="SaveCLiente()">
               <i class="fas fa-user-plus mr-2 text-sm"></i>
               Crear nuevo cliente
             </button>
@@ -329,9 +388,8 @@
             </div>
           </div>
         </div>
-
-        <hr class="mt-6 border-b-1 border-blueGray-300" />
       </form>
+
       <hr class="mt-6 border-b-1 border-blueGray-300" />
       <div class="rounded-t mb-0 px-4 py-3 border-0">
         <div class="flex flex-wrap items-center">
@@ -356,4 +414,3 @@
     </div>
   </div>
 </div>
-
