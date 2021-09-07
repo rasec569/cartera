@@ -15,6 +15,16 @@ const httpOptions = {
     }
   ),
 };
+const HttpOptionsBody = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    "Authorization": "Bearer "+localStorage.getItem("token")
+  }),
+  body: {
+    id: "",
+  },
+};
+
 @Injectable({
   providedIn: "root",
 })
@@ -29,10 +39,19 @@ export class ClientesService {
       catchError(this.handleError)
     );
   }
+
+  public getCliente(Client: cliente): Observable<any> {
+    HttpOptionsBody.body.id=Client.id;
+    return this.http.get(`${environment.url}/clients/${Client.id}`,HttpOptionsBody).pipe(
+      tap((result: any) => {
+      }),
+      catchError(this.handleError)
+    );
+  }
   // crear cliente
-  public createCliente(newClient: cliente): Observable<any> {
+  public createCliente(Client: cliente): Observable<any> {
     return this.http
-      .post(`${environment.url}/clients/`, newClient, httpOptions)
+      .post(`${environment.url}/clients/`, Client, httpOptions)
       .pipe(
         tap((result: any) => {
           console.log(result);
@@ -43,7 +62,7 @@ export class ClientesService {
   // modificar cliente
   public updateCliente(Client: cliente): Observable<any> {
     return this.http
-      .put(`${environment.url}/clients/`, Client, httpOptions)
+      .put(`${environment.url}/clients/${Client.id}`, Client, httpOptions)
       .pipe(
         tap((result: any) => {
           console.log(result);
@@ -53,18 +72,9 @@ export class ClientesService {
   }
   // eliminar cliente
   public deleteCliente(Client: cliente): Observable<any> {
-    const options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        "Authorization": "Bearer "+localStorage.getItem("token")
-      }),
-      body: {
-        id: Client.id,
-      },
-    };
-
+    HttpOptionsBody.body.id=Client.id;
     return this.http
-      .delete(`${environment.url}/clients/`,options)
+      .delete(`${environment.url}/clients/`,HttpOptionsBody)
       .pipe(
         tap((result: any) => {
           console.log(result);
