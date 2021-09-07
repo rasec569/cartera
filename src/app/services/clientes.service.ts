@@ -42,7 +42,7 @@ export class ClientesService {
 
   public getCliente(Client: cliente): Observable<any> {
     HttpOptionsBody.body.id=Client.id;
-    return this.http.get(`${environment.url}/clients/`,HttpOptionsBody).pipe(
+    return this.http.get(`${environment.url}/clients/${Client.id}`,HttpOptionsBody).pipe(
       tap((result: any) => {
       }),
       catchError(this.handleError)
@@ -62,7 +62,7 @@ export class ClientesService {
   // modificar cliente
   public updateCliente(Client: cliente): Observable<any> {
     return this.http
-      .put(`${environment.url}/clients/`, Client, httpOptions)
+      .put(`${environment.url}/clients/${Client.id}`, Client, httpOptions)
       .pipe(
         tap((result: any) => {
           console.log(result);
