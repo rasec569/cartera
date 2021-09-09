@@ -184,8 +184,8 @@ export class CardAreaListComponent implements OnInit {
     }
   }
 
-  RemoveArea(idProyecto: any) {
-    this.Area.id = idProyecto;
+  RemoveArea(idArea: any) {
+    this.Area.id = idArea;
     try {
       this.AreaS.deleteArea(this.Area).subscribe(
         (res: area[]) => {
