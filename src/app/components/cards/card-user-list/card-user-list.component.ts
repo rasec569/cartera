@@ -38,8 +38,8 @@ export class CardUserListComponent implements OnInit {
   private _color = "light";
   users=[];
   CloneUsers=[];
-  validationLogin: boolean = false;
-  ValidationMensage: string = "";
+  /* validationLogin: boolean = false;
+  ValidationMensage: string = ""; */
   idOption:number=1;
   //alert options
   options = {
@@ -60,6 +60,37 @@ export class CardUserListComponent implements OnInit {
   public showModal = false;
   public toggleModal() {
   this.showModal = !this.showModal;
+  }
+  clearDataUsuario() {
+    this.Usuario = {
+     //persona
+    nombres: "",
+    apellidos:"",
+    telefono:"",
+    direccion:"",
+    correo:"",
+    identification:"",
+    //usuario
+    iduser:"",
+    usuario:"",
+    password: "",
+    Rol:"",
+    Area:"",
+   //error vars
+    TIPO:"",
+    MENSAJE:"",
+    };
+  }
+  validadorUsuario() {
+    if (
+      this.Usuario.nombres.trim() == "" ||
+      this.Usuario.apellidos.trim() == ""
+    ) {
+      this.alertService.warn("Todos los campos deben estar diligenciados!", this.options);
+      return false;
+    }else{
+      return true;
+    }
   }
   QueryUser(){
     try{
@@ -85,6 +116,117 @@ export class CardUserListComponent implements OnInit {
     }catch (error) {
       this.alertService.error(
         "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+  QueryOneUsuario(idUsuario: any) {
+    this.Usuario.iduser = idUsuario;
+    try {
+      this.User.getUsuario(this.Usuario).subscribe(
+        (res: usuario[]) => {
+          if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+            this.Usuario=res[0];
+              this.changeMode(3);
+          } else {
+            this.alertService.error(res[0].MENSAJE, this.options);
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+  SaveUsuario() {
+    try {
+      if (this.validadorUsuario()) {
+        this.User.createUsuarrio(this.Usuario).subscribe(
+          (res: usuario[]) => {
+            if (res[0].TIPO == "3") {
+              this.alertService.success(res[0].MENSAJE, this.options);
+              this.changeMode(1);
+              this.QueryUser();
+              this.clearDataUsuario();
+            } else {
+              this.alertService.error(res[0].MENSAJE, this.options);
+            }
+          },
+          (err) => {
+            this.alertService.error(
+              "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+              this.options
+            );
+          }
+        );
+      }
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+  UpdateUsuario() {
+    try {
+      if (this.validadorUsuario()) {
+        this.User.updateUsuario(this.Usuario).subscribe(
+          (res: usuario[]) => {
+            console.log(this.Usuario)
+            if (res[0].TIPO == "3") {
+              this.alertService.success(res[0].MENSAJE, this.options);
+              this.changeMode(1);
+              this.clearDataUsuario();
+            } else {
+              this.alertService.error(res[0].MENSAJE, this.options);
+            }
+          },
+          (err) => {
+            this.alertService.error(
+              "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+              this.options
+            );
+          }
+        );
+      }
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+
+  RemoveUsuario(idUsuario: any) {
+    this.Usuario.iduser = idUsuario;
+    try {
+      this.User.deleteUsuario(this.Usuario).subscribe(
+        (res: usuario[]) => {
+          if (res[0].TIPO == "3") {
+            this.alertService.success(res[0].MENSAJE, this.options);
+            this.QueryUser();
+          } else {
+            this.alertService.error(res[0].MENSAJE, this.options);
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
         this.options
       );
     }

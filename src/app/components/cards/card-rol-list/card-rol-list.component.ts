@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RolService, Rol} from 'src/app/services/rol.service';
+import { rol } from 'src/app/Models/rol.model';
+import { GlobalService } from 'src/app/providers/GlobalService';
+import { RolService} from 'src/app/services/rol.service';
+import { AlertService } from "../../_alert";
 
 @Component({
   selector: 'app-card-rol-list',
@@ -7,7 +10,14 @@ import { RolService, Rol} from 'src/app/services/rol.service';
  /*  styleUrls: ['./card-rol-list.component.css'] */
 })
 export class CardRolListComponent implements OnInit {
-
+  Rol: rol={
+    id: "",
+    nombre: "",
+    descripcion: "",
+    estado: "",
+    TIPO:"",
+    MENSAJE:""
+  }
   @Input()
   get color(): string {
     return this._color;
@@ -16,41 +26,188 @@ export class CardRolListComponent implements OnInit {
     this._color = color !== "light" && color !== "dark" ? "light" : color;
   }
   private _color = "light";
-roles=[];
-CloneRoles=[];
-validationLogin: boolean = false;
-ValidationMensage: string = "";
-idOption:number=1;
-  constructor(private Rol:RolService) { }
+  roles=[];
+  CloneRoles=[];
+  ValidationMensage: string = "";
+  idOption:number=1;
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: false,
+  };
+  constructor(private RolS:RolService,
+    protected alertService: AlertService,
+    private globalEvents: GlobalService) { }
   changeMode(option:number){
     this.idOption=option;
     if(option==1){
-      this.refreshRol();
+      this.QueryRoles();
     }
   }
   ngOnInit() {
-    this.refreshRol();
+    this.QueryRoles();
   }
-
-  refreshRol(){
+  public showModal = false;
+  public toggleModal() {
+  this.showModal = !this.showModal;
+  }
+  clearDataRol() {
+    this.Rol = {
+      id: "",
+      nombre: "",
+      descripcion: "",
+      estado:"",
+      MENSAJE: "",
+      TIPO: "",
+    };
+  }
+  validadorRol() {
+    if (
+      this.Rol.nombre.trim() == "" ||
+      this.Rol.descripcion.trim() == ""
+    ) {
+      this.alertService.warn("Todos los campos deben estar diligenciados!", this.options);
+      return false;
+    }else{
+      return true;
+    }
+  }
+  QueryRoles(){
     try{
-      this.validationLogin = false;
-      this.ValidationMensage = "";
-      this.Rol.getRoles().subscribe(
-        (res:any)=>{
-          console.log(res);
-          this.roles=res[0];
-          this.CloneRoles=res[0];
-        }, (err)=> {
-            this.validationLogin = true;
-            this.ValidationMensage =
-              "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!";
+      this.RolS.getRoles().subscribe(
+        (res:rol[])=>{
+          if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
+            this.roles=res;
+            this.CloneRoles=res;
+          }else{
+            this.alertService.error(
+              res[0].MENSAJE,
+              this.options
+            );
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
         }
       );
-    }catch (error) {
-      this.validationLogin = true;
-      this.ValidationMensage =
-        "Error en el sistema, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!";
+    } catch (error) {
+      this.alertService.error(
+        "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+  QueryOneRol(idRol: any) {
+    this.Rol.id = idRol;
+    try {
+      this.RolS.getRol(this.Rol).subscribe(
+        (res: rol[]) => {
+          if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+            this.Rol=res[0];
+            console.log(res[0])
+              this.changeMode(3);
+          } else {
+            this.alertService.error(res[0].MENSAJE, this.options);
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+  SaveRol() {
+    try {
+      if (this.validadorRol()) {
+        this.RolS.createRol(this.Rol).subscribe(
+          (res: rol[]) => {
+            if (res[0].TIPO == "3") {
+              this.alertService.success(res[0].MENSAJE, this.options);
+              this.changeMode(1);
+              this.QueryRoles();
+              this.clearDataRol();
+            } else {
+              this.alertService.error(res[0].MENSAJE, this.options);
+            }
+          },
+          (err) => {
+            this.alertService.error(
+              "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+              this.options
+            );
+          }
+        );
+      }
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+  UpdateRol() {
+    try {
+      if (this.validadorRol()) {
+        this.RolS.updateRol(this.Rol).subscribe(
+          (res: rol[]) => {
+            if (res[0].TIPO == "3") {
+              this.alertService.success(res[0].MENSAJE, this.options);
+              this.changeMode(1);
+              this.clearDataRol();
+            } else {
+              this.alertService.error(res[0].MENSAJE, this.options);
+            }
+          },
+          (err) => {
+            this.alertService.error(
+              "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+              this.options
+            );
+          }
+        );
+      }
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+
+  RemoveRol(idRol: any) {
+    this.Rol.id = idRol;
+    try {
+      this.RolS.deleteRol(this.Rol).subscribe(
+        (res: rol[]) => {
+          if (res[0].TIPO == "3") {
+            this.alertService.success(res[0].MENSAJE, this.options);
+            this.QueryRoles();
+          } else {
+            this.alertService.error(res[0].MENSAJE, this.options);
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
     }
   }
   async getItems(ev:any){

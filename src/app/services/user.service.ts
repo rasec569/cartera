@@ -14,23 +14,18 @@ const httpOptions = {
     }
   ),
 };
-
+const HttpOptionsBody = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    "Authorization": "Bearer "+localStorage.getItem("token")
+  }),
+  body: {id: "",},
+};
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   constructor(private http:HttpClient) { }
-  //agregar Usuario
-  public NewUser(newUser: usuario): Observable<any> {
-    return this.http
-      .post(`${environment.url}/user/`, newUser, httpOptions)
-      .pipe(
-        tap((result: any) => {
-          console.log(result);
-        }),
-        catchError(this.handleError)
-      );
-  }
   //listar Usuario
   public getUsuarios(): Observable<any> {
     return this.http.get(`${environment.url}/user/`,httpOptions).pipe(
@@ -39,10 +34,30 @@ export class UserService {
       catchError(this.handleError)
     );
   }
+  //buscar
+  public getUsuario(Usuario: usuario): Observable<any> {
+    HttpOptionsBody.body.id=Usuario.iduser;
+    return this.http.get(`${environment.url}/user/${Usuario.iduser}`,HttpOptionsBody).pipe(
+      tap((result: any) => {
+      }),
+      catchError(this.handleError)
+    );
+  }
+  //agregar Usuario
+  public createUsuarrio(Usuario: usuario): Observable<any> {
+    return this.http
+      .post(`${environment.url}/user/`, Usuario, httpOptions)
+      .pipe(
+        tap((result: any) => {
+          console.log(result);
+        }),
+        catchError(this.handleError)
+      );
+  }
    //modificar Usuario
   public updateUsuario(User: usuario): Observable<any> {
     return this.http
-      .put(`${environment.url}/user/`, User, httpOptions)
+      .put(`${environment.url}/user/${User.iduser}`, User, httpOptions)
       .pipe(
         tap((result: any) => {
           console.log(result);
@@ -51,25 +66,17 @@ export class UserService {
       );
   }
 //eliminar Usuario
-  public deleteCliente(User: usuario): Observable<any> {
-    const options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        "Authorization": "Bearer "+localStorage.getItem("token")
+public deleteUsuario(User: usuario): Observable<any> {
+  HttpOptionsBody.body.id=User.iduser;
+  return this.http
+    .delete(`${environment.url}/user/`,HttpOptionsBody)
+    .pipe(
+      tap((result: any) => {
+        console.log(result);
       }),
-      body: {
-        id: User.iduser,
-      },
-    };
-    return this.http
-      .delete(`${environment.url}/user/`,options)
-      .pipe(
-        tap((result: any) => {
-          console.log(result);
-        }),
-        catchError(this.handleError)
-      );;
-  }
+      catchError(this.handleError)
+    );;
+}
   // error handle
   handleError(error: HttpErrorResponse) {
     let errorMessage = "Unknown error!";

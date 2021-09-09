@@ -1,47 +1,88 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from "rxjs";
+import { tap, catchError } from "rxjs/operators";
+import { environment } from "src/environments/environment";
+import { inmueble } from '../Models/inmueble.model';
+const httpOptions = {
+  headers: new HttpHeaders(
+    {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer "+localStorage.getItem("token")
+    }
+  ),
+};
+const HttpOptionsBody = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    "Authorization": "Bearer "+localStorage.getItem("token")
+  }),
+  body: {id: "",},
+};
 @Injectable({
   providedIn: 'root'
 })
 export class InmuebleService {
-  private URL='http://localhost:3000';
-
   constructor(private http:HttpClient) { }
   //listar
-  getInmuebles(){
-    return this.http.get(`${this.URL}/inmueble/`);
-  }
-  //listar por proyectos
-  getInmuebleProyecto(id:string){
-    return this.http.get(`${this.URL}/inmueble/proyecto/`+id);
-  }
-  //buscar
-  getInmueble(id:string){
-    return this.http.get(`${this.URL}/inmueble/`+id);
-  }
-  //insert
-newInmueble(inmueble:Inmueble){
-  console.log("llego al servicio");
-  return this.http.post(`${this.URL}/inmueble/`, inmueble);
-  }
-//eliminar
-deleteInmueble(id:string){
-  return this.http.delete(`${this.URL}/inmueble/`+id);
-  }
-//modificar
-editInmueble(id:string, inmueble:Inmueble){
-  return this.http.put(`${this.URL}/inmueble/`+id, inmueble);
-  }
-}
-export interface Inmueble{
-  Id_Inmueble?:string;
-  Manzana:string;
-  Num_Casa:string;
-  Valor_Inicial:string;
-  Ficha_Catastral:string;
-  Escritura:string;
-  Matricula_inmobiliaria:string;
-  Estado:string;
-  Fk_Id_Proyecto:string;
+  public getInmuebles(): Observable<any> {
+    return this.http.get(`${environment.url}/inmueble/`,httpOptions).pipe(
+      tap((result: any) => {
+      }),
+      catchError(this.handleError)
+    );
+    }
+    //buscar
+    public getInmueble(Inmueble: inmueble): Observable<any> {
+      HttpOptionsBody.body.id=Inmueble.id;
+      return this.http.get(`${environment.url}/inmueble/${Inmueble.id}`,HttpOptionsBody).pipe(
+        tap((result: any) => {
+        }),
+        catchError(this.handleError)
+      );
+    }
+    //registrar
+    public createInmueble(Inmueble:inmueble): Observable<any> {
+      return this.http
+        .post(`${environment.url}/inmueble/`, Inmueble, httpOptions)
+        .pipe(
+          tap((result: any) => {
+            console.log(result);
+          }),
+          catchError(this.handleError)
+        );
+    }
+    //eliminar
+    public deleteInmueble(Inmueble: inmueble): Observable<any> {
+      HttpOptionsBody.body.id=Inmueble.id;
+      return this.http
+        .delete(`${environment.url}/inmueble/`,HttpOptionsBody)
+        .pipe(
+          tap((result: any) => {
+            console.log(result);
+          }),
+          catchError(this.handleError)
+        );;
+    }
+    //modificar
+    public updateInmueble(Inmueble: inmueble): Observable<any> {
+      return this.http
+        .put(`${environment.url}/inmueble/${Inmueble.id}`, Inmueble, httpOptions)
+        .pipe(
+          tap((result: any) => {
+            console.log(result);
+          }),
+          catchError(this.handleError)
+        );
+    }
+    // error handle
+    handleError(error: HttpErrorResponse) {
+    let errorMessage = "Unknown error!";
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(errorMessage);
+    }
 }

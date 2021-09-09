@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { area } from 'src/app/Models/area.model';
 import { AreasService } from 'src/app/services/areas.service';
+import { GlobalService } from 'src/app/providers/GlobalService';
+import { AlertService } from "../../_alert";
 
 @Component({
   selector: 'app-card-area-list',
@@ -7,7 +10,14 @@ import { AreasService } from 'src/app/services/areas.service';
   /* styleUrls: ['./card-area-list.component.css'] */
 })
 export class CardAreaListComponent implements OnInit {
-
+  Area: area={
+    id: "",
+    nombre: "",
+    descripcion: "",
+    estado: "",
+    TIPO:"",
+    MENSAJE:""
+  }
   @Input()
   get color(): string {
     return this._color;
@@ -16,41 +26,188 @@ export class CardAreaListComponent implements OnInit {
     this._color = color !== "light" && color !== "dark" ? "light" : color;
   }
   private _color = "light";
-areas=[];
-CloneAreas=[];
-validationLogin: boolean = false;
-ValidationMensage: string = "";
-idOption:number=1;
-
-  constructor(private Area:AreasService) { }
+  areas=[];
+  CloneAreas=[];
+  /* ValidationMensage: string = ""; */
+  idOption:number=1;
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: false,
+  };
+  constructor(private AreaS:AreasService,
+    protected alertService: AlertService,
+    private globalEvents: GlobalService) { }
   changeMode(option:number){
     this.idOption=option;
     if(option==1){
-      this.refreshAreas();
+      this.QueryAreas();
     }
   }
   ngOnInit(): void {
-    this.refreshAreas();
+    this.QueryAreas();
   }
-  refreshAreas(){
+  public showModal = false;
+  public toggleModal() {
+  this.showModal = !this.showModal;
+  }
+  clearDataArea() {
+    this.Area = {
+      id: "",
+      nombre: "",
+      descripcion: "",
+      estado: "",
+      MENSAJE: "",
+      TIPO: "",
+    };
+  }
+  validadorArea() {
+    if (
+      this.Area.nombre.trim() == "" ||
+      this.Area.descripcion.trim() == ""
+    ) {
+      this.alertService.warn("Todos los campos deben estar diligenciados!", this.options);
+      return false;
+    }else{
+      return true;
+    }
+  }
+  QueryAreas(){
     try{
-      this.validationLogin = false;
-      this.ValidationMensage = "";
-      this.Area.getAreas().subscribe(
-        (res:any)=>{
-          console.log(res);
-          this.areas=res[0];
-          this.CloneAreas=res[0];
-        }, (err)=> {
-            this.validationLogin = true;
-            this.ValidationMensage =
-              "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!";
+      this.AreaS.getAreas().subscribe(
+        (res:area[])=>{
+          if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
+            this.areas=res;
+            this.CloneAreas=res;
+          }else{
+            this.alertService.error(
+              res[0].MENSAJE,
+              this.options
+            );
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
         }
       );
-    }catch (error) {
-      this.validationLogin = true;
-      this.ValidationMensage =
-        "Error en el sistema, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!";
+    } catch (error) {
+      this.alertService.error(
+        "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+  QueryOneArea(idArea: any) {
+    this.Area.id = idArea;
+    try {
+      this.AreaS.getArea(this.Area).subscribe(
+        (res: area[]) => {
+          if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+            this.Area=res[0];
+            /* console.log(res[0]) */
+              this.changeMode(3);
+          } else {
+            this.alertService.error(res[0].MENSAJE, this.options);
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+  SaveArea() {
+    try {
+      if (this.validadorArea()) {
+        this.AreaS.createArea(this.Area).subscribe(
+          (res: area[]) => {
+            if (res[0].TIPO == "3") {
+              this.alertService.success(res[0].MENSAJE, this.options);
+              this.changeMode(1);
+              this.QueryAreas();
+              this.clearDataArea();
+            } else {
+              this.alertService.error(res[0].MENSAJE, this.options);
+            }
+          },
+          (err) => {
+            this.alertService.error(
+              "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+              this.options
+            );
+          }
+        );
+      }
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+  UpdateArea() {
+    try {
+      if (this.validadorArea()) {
+        this.AreaS.updateArea(this.Area).subscribe(
+          (res: area[]) => {
+            if (res[0].TIPO == "3") {
+              this.alertService.success(res[0].MENSAJE, this.options);
+              this.changeMode(1);
+              this.clearDataArea();
+            } else {
+              this.alertService.error(res[0].MENSAJE, this.options);
+            }
+          },
+          (err) => {
+            this.alertService.error(
+              "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+              this.options
+            );
+          }
+        );
+      }
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+
+  RemoveArea(idProyecto: any) {
+    this.Area.id = idProyecto;
+    try {
+      this.AreaS.deleteArea(this.Area).subscribe(
+        (res: area[]) => {
+          if (res[0].TIPO == "3") {
+            this.alertService.success(res[0].MENSAJE, this.options);
+            this.QueryAreas();
+          } else {
+            this.alertService.error(res[0].MENSAJE, this.options);
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
     }
   }
   async getItems(ev:any){

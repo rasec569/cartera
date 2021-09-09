@@ -18,9 +18,7 @@ const HttpOptionsBody = {
     'Content-Type': 'application/json',
     "Authorization": "Bearer "+localStorage.getItem("token")
   }),
-  body: {
-    id: "",
-  },
+  body: {id: "",},
 };
 @Injectable({
   providedIn: 'root'
@@ -44,10 +42,6 @@ export class ProyectoService {
       catchError(this.handleError)
     );
   }
-
-  /* getProyecto(id:string){
-    return this.http.get(`${this.URL}/proyecto/`+id);
-  } */
   //registrar
   public createProyecto(Proyecto:proyecto): Observable<any> {
     return this.http
