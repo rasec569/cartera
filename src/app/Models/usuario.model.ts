@@ -10,8 +10,8 @@ export class usuario{
   public iduser?:string;
   public usuario?:string;
   public password?: string;
-  public Rol:string;
-  public Area:string;
+  public IdRol:string;
+  public IdArea:string;
 
   //error vars
   public TIPO?:string;

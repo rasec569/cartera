@@ -270,10 +270,13 @@
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 Area
               </label>
-              <input type="text" [(ngModel)]="Usuario.Area" [ngModelOptions]="{standalone: true}"
-                placeholder="Area"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value="" />
+              <select [(ngModel)]="Usuario.IdArea" [ngModelOptions]="{standalone: true}"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  <option value="" disabled selected>Seleccione una opción</option>
+                  <option *ngFor="let area of listArea" [value]="area.id" >
+                    {{area.Area}}
+                  </option>
+                </select>
             </div>
           </div>
           <div class="w-full lg:w-6/12 px-4">
@@ -281,10 +284,13 @@
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 Rol
               </label>
-              <input type="text"
-                placeholder="Rol" [(ngModel)]="Usuario.Rol" [ngModelOptions]="{standalone: true}"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value="" />
+              <select [(ngModel)]="Usuario.IdRol" [ngModelOptions]="{standalone: true}"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  <option value="" disabled selected>Seleccione una opción</option>
+                  <option *ngFor="let rol of listRol" [value]="rol.id" >
+                    {{rol.nombre}}
+                  </option>
+                </select>
             </div>
           </div>
         </div>
@@ -350,6 +356,39 @@
                 value="" />
             </div>
           </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Usuario
+              </label>
+              <input type="text" [(ngModel)]="Usuario.usuario" [ngModelOptions]="{standalone: true}"
+                placeholder="Nick o Usuario "
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Contraseña Actual
+              </label>
+              <input type="password" [(ngModel)]="Usuario.password" [ngModelOptions]="{standalone: true}"
+                placeholder="Contraseña"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Nueva Contraseña
+              </label>
+              <input type="password" [(ngModel)]="Usuario.password" [ngModelOptions]="{standalone: true}"
+                placeholder="Contraseña"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
+            </div>
+          </div>
         </div>
 
         <hr class="mt-6 border-b-1 border-blueGray-300" />
@@ -403,10 +442,13 @@
                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                   Area
                 </label>
-                <input type="email" [(ngModel)]="Usuario.Area" [ngModelOptions]="{standalone: true}"
-                  placeholder="Area"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  value="" />
+                <select [(ngModel)]="Usuario.IdArea" [ngModelOptions]="{standalone: true}"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option *ngFor="let area of listArea" [value]="area.id" >
+                      {{area.Area}}
+                    </option>
+                  </select>
               </div>
             </div>
             <div class="w-full lg:w-6/12 px-4">
@@ -414,10 +456,13 @@
                 <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                   Rol
                 </label>
-                <input type="text" [(ngModel)]="Usuario.Rol" [ngModelOptions]="{standalone: true}"
-                  placeholder="Rol"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  value="" />
+                <select [(ngModel)]="Usuario.IdRol" [ngModelOptions]="{standalone: true}"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option *ngFor="let rol of listRol" [value]="rol.id" >
+                      {{rol.nombre}}
+                    </option>
+                  </select>
               </div>
             </div>
           </div>
@@ -446,4 +491,7 @@
     </div>
   </div>
 </div>
+<pre>
+  {{Usuario|json}}
+</pre>
 

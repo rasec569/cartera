@@ -3,6 +3,8 @@ import { InmuebleService } from 'src/app/services/inmueble.service';
 import { inmueble } from 'src/app/Models/inmueble.model';
 import { GlobalService } from 'src/app/providers/GlobalService';
 import { AlertService } from "../../_alert";
+import {proyecto} from 'src/app/Models/proyecto.model';
+import{ProyectoService} from 'src/app/services/proyecto.service';
 
 @Component({
   selector: 'app-card-inmuebles-list',
@@ -20,7 +22,7 @@ export class CardInmueblesListComponent implements OnInit {
     escritura: "",
     matricula:"",
     estado: "",
-    proyecto:"",
+    idproyecto:"",
     TIPO:"",
     MENSAJE:""
   }
@@ -34,12 +36,14 @@ export class CardInmueblesListComponent implements OnInit {
   private _color = "light";
   inmuebles=[];
   CloneInmuebles=[];
+  listProyectos=[];
   idOption:number=1;
   options = {
     autoClose: true,
     keepAfterRouteChange: false,
   };
     constructor(private InmuebleS:InmuebleService,
+      private ProyectoS:ProyectoService,
       protected alertService: AlertService,
       private globalEvents: GlobalService) { }
   changeMode(option:number){
@@ -50,6 +54,7 @@ export class CardInmueblesListComponent implements OnInit {
   }
   ngOnInit(): void {
     this.QueryInmuebles();
+    this.listarProyecto();
   }
   clearDataInmueble() {
     this.Inmueble = {
@@ -62,20 +67,52 @@ export class CardInmueblesListComponent implements OnInit {
       escritura: "",
       matricula:"",
       estado: "",
-      proyecto:"",
+      idproyecto:"",
       TIPO:"",
       MENSAJE:""
     };
   }
   validadorInmueble() {
     if (
-      this.Inmueble.manzana.trim() == "" ||
-      this.Inmueble.casa.trim() == ""
+      this.Inmueble.manzana == "" ||
+      this.Inmueble.casa == ""  ||
+      this.Inmueble.Valor_Inicial == ""  ||
+      this.Inmueble.estado == ""  ||
+      this.Inmueble.idproyecto == ""
     ) {
       this.alertService.warn("Todos los campos deben estar diligenciados!", this.options);
+      console.log("no")
       return false;
     }else{
       return true;
+    }
+  }
+  listarProyecto(){
+    try {
+      this.ProyectoS.getProyectos().subscribe(
+        (res:proyecto[])=> {
+          if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
+            this.listProyectos=res;
+          }else{
+            this.alertService.error(
+              res[0].MENSAJE,
+              this.options
+            );
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    } catch (error) {
+      console.log("entro"+error)
+      this.alertService.error(
+        "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
     }
   }
   QueryInmuebles(){
@@ -135,7 +172,9 @@ export class CardInmueblesListComponent implements OnInit {
   }
   SaveInmueble() {
     try {
+      console.log("entro")
       if (this.validadorInmueble()) {
+        console.log("entro al si")
         this.InmuebleS.createInmueble(this.Inmueble).subscribe(
           (res: inmueble[]) => {
             if (res[0].TIPO == "3") {
@@ -148,6 +187,7 @@ export class CardInmueblesListComponent implements OnInit {
             }
           },
           (err) => {
+            console.log("entro"+ err)
             this.alertService.error(
               "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
               this.options
@@ -156,6 +196,7 @@ export class CardInmueblesListComponent implements OnInit {
         );
       }
     } catch (error) {
+      console.log("entro"+ error)
       this.alertService.error(
         "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
         this.options

@@ -66,6 +66,7 @@ export class InmuebleService {
     }
     //modificar
     public updateInmueble(Inmueble: inmueble): Observable<any> {
+      console.log("entro al servicio");
       return this.http
         .put(`${environment.url}/inmueble/${Inmueble.id}`, Inmueble, httpOptions)
         .pipe(

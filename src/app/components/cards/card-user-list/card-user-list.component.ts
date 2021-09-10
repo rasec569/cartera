@@ -2,6 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { usuario } from 'src/app/Models/usuario.model';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from '../../_alert';
+import {rol} from 'src/app/Models/rol.model';
+import { RolService } from 'src/app/services/rol.service';
+import {area} from 'src/app/Models/area.model';
+import { AreasService } from 'src/app/services/areas.service';
 
 @Component({
   selector: 'app-card-user-list',
@@ -21,8 +25,8 @@ export class CardUserListComponent implements OnInit {
     iduser:"",
     usuario:"",
     password: "",
-    Rol:"",
-    Area:"",
+    IdRol:"",
+    IdArea:"",
    //error vars
     TIPO:"",
     MENSAJE:""
@@ -38,6 +42,8 @@ export class CardUserListComponent implements OnInit {
   private _color = "light";
   users=[];
   CloneUsers=[];
+  listRol=[];
+  listArea=[];
   /* validationLogin: boolean = false;
   ValidationMensage: string = ""; */
   idOption:number=1;
@@ -47,6 +53,8 @@ export class CardUserListComponent implements OnInit {
     keepAfterRouteChange: false,
   };
   constructor(private User:UserService,
+    private Area:AreasService,
+    private Rol:RolService,
     protected alertService: AlertService) { }
   changeMode(option:number){
     this.idOption=option;
@@ -56,6 +64,8 @@ export class CardUserListComponent implements OnInit {
   }
   ngOnInit(): void {
     this.QueryUser();
+    this.listarRol();
+    this.listarArea()
   }
   public showModal = false;
   public toggleModal() {
@@ -74,8 +84,8 @@ export class CardUserListComponent implements OnInit {
     iduser:"",
     usuario:"",
     password: "",
-    Rol:"",
-    Area:"",
+    IdRol:"",
+    IdArea:"",
    //error vars
     TIPO:"",
     MENSAJE:"",
@@ -90,6 +100,61 @@ export class CardUserListComponent implements OnInit {
       return false;
     }else{
       return true;
+    }
+  }
+  listarRol(){
+    try {
+      this.Rol.getRoles().subscribe(
+        (res:rol[])=> {
+          if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
+            this.listRol=res;
+          }else{
+            this.alertService.error(
+              res[0].MENSAJE,
+              this.options
+            );
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    } catch (error) {
+      this.alertService.error(
+        "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+  listarArea(){
+    try {
+      this.Area.getAreas().subscribe(
+        (res:area[])=> {
+          if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
+            console.log(res)
+            this.listArea=res;
+          }else{
+            this.alertService.error(
+              res[0].MENSAJE,
+              this.options
+            );
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    } catch (error) {
+      this.alertService.error(
+        "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
     }
   }
   QueryUser(){
