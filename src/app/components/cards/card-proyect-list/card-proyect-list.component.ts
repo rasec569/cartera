@@ -14,7 +14,6 @@ export class CardProyectListComponent implements OnInit {
     id:"",
     nombre:"",
     ubicacion:"",
-    etapas:"",
     estado:"",
     TIPO:"",
     MENSAJE:""
@@ -57,7 +56,6 @@ export class CardProyectListComponent implements OnInit {
       id: "",
       nombre: "",
       ubicacion: "",
-      etapas:"",
       estado:"",
       MENSAJE: "",
       TIPO: "",
@@ -67,7 +65,9 @@ export class CardProyectListComponent implements OnInit {
   validadorProyecto() {
     if (
       this.Proyecto.nombre.trim() == "" ||
-      this.Proyecto.ubicacion.trim() == ""
+      this.Proyecto.ubicacion.trim() == ""||
+      this.Proyecto.estado==""
+
     ) {
       this.alertService.warn("Todos los campos deben estar diligenciados!", this.options);
       return false;

@@ -20,10 +20,10 @@ export class CardUserListComponent implements OnInit {
     telefono:"",
     direccion:"",
     correo:"",
-    identification:"",
+    identificacion:"",
     //usuario
     iduser:"",
-    usuario:"",
+    nick:"",
     password: "",
     IdRol:"",
     IdArea:"",
@@ -79,10 +79,10 @@ export class CardUserListComponent implements OnInit {
     telefono:"",
     direccion:"",
     correo:"",
-    identification:"",
+    identificacion:"",
     //usuario
     iduser:"",
-    usuario:"",
+    nick:"",
     password: "",
     IdRol:"",
     IdArea:"",
@@ -242,6 +242,7 @@ export class CardUserListComponent implements OnInit {
   }
   UpdateUsuario() {
     try {
+      console.log("entro")
       if (this.validadorUsuario()) {
         this.User.updateUsuario(this.Usuario).subscribe(
           (res: usuario[]) => {

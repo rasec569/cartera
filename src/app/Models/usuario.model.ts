@@ -3,13 +3,13 @@ export class usuario{
   public nombres: string;
   public apellidos:string;
   public telefono:string;
-  public direccion:string;
+  public direccion?:string;
   public correo:string;
-  public identification?:string;
+  public identificacion:string;
   //usuario
   public iduser?:string;
-  public usuario?:string;
-  public password?: string;
+  public nick:string;
+  public password: string;
   public IdRol:string;
   public IdArea:string;
 

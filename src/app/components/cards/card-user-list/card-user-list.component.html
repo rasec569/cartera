@@ -60,25 +60,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Telefono
-          </th>
-          <th
-            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-            [ngClass]="
-              color === 'light'
-                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                : 'bg-red-800 text-red-300 border-red-700'
-            ">
             Usuario
-          </th>
-          <th
-            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
-            [ngClass]="
-              color === 'light'
-                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-                : 'bg-red-800 text-red-300 border-red-700'
-            ">
-            Contraseña
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -118,13 +100,7 @@
             {{item.apellidos}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{item.telefono}}
-          </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             {{item.usuario}}
-          </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{item.password}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             {{item.Area}}
@@ -157,7 +133,7 @@
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 Identificación
               </label>
-              <input type="number" [(ngModel)]="Usuario.identification" [ngModelOptions]="{standalone: true}"
+              <input type="number" [(ngModel)]="Usuario.identificacion" [ngModelOptions]="{standalone: true}"
               placeholder="Ejem. 123456789"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 value="" />
@@ -190,7 +166,7 @@
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 Usuario
               </label>
-              <input type="text" [(ngModel)]="Usuario.usuario" [ngModelOptions]="{standalone: true}"
+              <input type="text" [(ngModel)]="Usuario.nick" [ngModelOptions]="{standalone: true}"
                 placeholder="Nick o Usuario "
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 value="" />
@@ -328,7 +304,7 @@
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 Identificación
               </label>
-              <input type="number" [(ngModel)]="Usuario.identification" [ngModelOptions]="{standalone: true}"
+              <input type="number" [(ngModel)]="Usuario.identificacion" [ngModelOptions]="{standalone: true}"
               placeholder="Ejem. 123456789"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 value="" />
@@ -361,7 +337,7 @@
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 Usuario
               </label>
-              <input type="text" [(ngModel)]="Usuario.usuario" [ngModelOptions]="{standalone: true}"
+              <input type="text" [(ngModel)]="Usuario.nick" [ngModelOptions]="{standalone: true}"
                 placeholder="Nick o Usuario "
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 value="" />
@@ -491,7 +467,7 @@
     </div>
   </div>
 </div>
-<pre>
+<!-- <pre>
   {{Usuario|json}}
-</pre>
+</pre> -->
 
