@@ -9,6 +9,7 @@ export class inmueble{
   public matricula?:string;
   public estado: string;
   public idproyecto:string;
+  public idetapa:string;
   //error vars
   public TIPO?:string;
   public MENSAJE?:string;

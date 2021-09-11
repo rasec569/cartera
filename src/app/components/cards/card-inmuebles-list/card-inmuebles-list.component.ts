@@ -3,8 +3,12 @@ import { InmuebleService } from 'src/app/services/inmueble.service';
 import { inmueble } from 'src/app/Models/inmueble.model';
 import { GlobalService } from 'src/app/providers/GlobalService';
 import { AlertService } from "../../_alert";
+
 import {proyecto} from 'src/app/Models/proyecto.model';
 import{ProyectoService} from 'src/app/services/proyecto.service';
+
+import { EtapaService } from 'src/app/services/etapa.service';
+import { etapa } from 'src/app/Models/etapa.model'
 
 @Component({
   selector: 'app-card-inmuebles-list',
@@ -23,6 +27,17 @@ export class CardInmueblesListComponent implements OnInit {
     matricula:"",
     estado: "",
     idproyecto:"",
+    idetapa: "",
+    TIPO:"",
+    MENSAJE:""
+  }
+  Etapa:etapa={
+    id:"",
+    numero:"",
+    valor:"",
+    estado:"",
+    manzana:"",
+    idproyecto:"",
     TIPO:"",
     MENSAJE:""
   }
@@ -37,6 +52,7 @@ export class CardInmueblesListComponent implements OnInit {
   inmuebles=[];
   CloneInmuebles=[];
   listProyectos=[];
+  listEtapa=[];
   idOption:number=1;
   options = {
     autoClose: true,
@@ -44,6 +60,7 @@ export class CardInmueblesListComponent implements OnInit {
   };
     constructor(private InmuebleS:InmuebleService,
       private ProyectoS:ProyectoService,
+      private EtapaS:EtapaService,
       protected alertService: AlertService,
       private globalEvents: GlobalService) { }
   changeMode(option:number){
@@ -68,6 +85,7 @@ export class CardInmueblesListComponent implements OnInit {
       matricula:"",
       estado: "",
       idproyecto:"",
+      idetapa: "",
       TIPO:"",
       MENSAJE:""
     };
@@ -115,6 +133,32 @@ export class CardInmueblesListComponent implements OnInit {
       );
     }
   }
+  ListarEtapas(idProyecto:any):void{
+    this.Etapa.idproyecto=idProyecto;
+    try {
+      this.EtapaS.getEtapasProyecto(this.Etapa).subscribe(
+        (res: etapa[]) => {
+          if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+            this.listEtapa=res;
+            console.log(res)
+          } else {
+            this.alertService.error(res[0].MENSAJE, this.options);
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
   QueryInmuebles(){
     try{
       this.InmuebleS.getInmuebles().subscribe(
@@ -150,6 +194,7 @@ export class CardInmueblesListComponent implements OnInit {
         (res: inmueble[]) => {
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.Inmueble=res[0];
+            this.ListarEtapas(this.Inmueble.idproyecto);
             /* console.log(res[0]) */
               this.changeMode(3);
           } else {

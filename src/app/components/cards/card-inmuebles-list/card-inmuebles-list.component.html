@@ -180,15 +180,25 @@
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 Proyecto
               </label>
-              <!-- <input type="text" [(ngModel)]="Inmueble.proyecto" [ngModelOptions]="{standalone: true}"
-                placeholder="Proyecto nombre"
-                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value="" /> -->
-                <select [(ngModel)]="Inmueble.idproyecto" [ngModelOptions]="{standalone: true}" id="SelectProyecto"
+              <select [(ngModel)]="Inmueble.idproyecto" [ngModelOptions]="{standalone: true}" (change)="ListarEtapas($event.target.value)"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                   <option value="" disabled selected>Seleccione una opción</option>
                   <option *ngFor="let proyecto of listProyectos" [value]="proyecto.id" >
                     {{proyecto.nombre}}
+                  </option>
+                </select>
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Etapa
+              </label>
+              <select [(ngModel)]="Inmueble.idetapa" [ngModelOptions]="{standalone: true}"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  <option value="" disabled selected>Seleccione una proyecto</option>
+                  <option *ngFor="let etapa of listEtapa" [value]="etapa.id" >
+                    {{etapa.numero}}
                   </option>
                 </select>
             </div>
@@ -326,11 +336,25 @@
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                 Proyecto
               </label>
-              <select [(ngModel)]="Inmueble.idproyecto" [ngModelOptions]="{standalone: true}" id="SelectProyecto"
+              <select [(ngModel)]="Inmueble.idproyecto" [ngModelOptions]="{standalone: true}" (change)="ListarEtapas($event.target.value)"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                   <option value="" disabled selected>Seleccione una opción</option>
                   <option *ngFor="let proyecto of listProyectos" [value]="proyecto.id" >
                     {{proyecto.nombre}}
+                  </option>
+                </select>
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Etapa
+              </label>
+              <select [(ngModel)]="Inmueble.idetapa" [ngModelOptions]="{standalone: true}"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  <option value="" disabled selected>Seleccione un proyecto</option>
+                  <option *ngFor="let etapa of listEtapa" [value]="etapa.id" >
+                    {{etapa.numero}}
                   </option>
                 </select>
             </div>

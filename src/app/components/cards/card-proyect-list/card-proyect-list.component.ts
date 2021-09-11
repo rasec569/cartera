@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { proyecto } from 'src/app/Models/proyecto.model';
-import { GlobalService } from 'src/app/providers/GlobalService';
 import { ProyectoService } from 'src/app/services/proyecto.service';
+import { GlobalService } from 'src/app/providers/GlobalService';
 import { AlertService } from "../../_alert";
 
 @Component({
@@ -15,6 +15,9 @@ export class CardProyectListComponent implements OnInit {
     nombre:"",
     ubicacion:"",
     estado:"",
+    num_etapa:"",
+    estado_etapa:"",
+    manzanas:"",
     TIPO:"",
     MENSAJE:""
   };
@@ -57,6 +60,9 @@ export class CardProyectListComponent implements OnInit {
       nombre: "",
       ubicacion: "",
       estado:"",
+      num_etapa:"",
+      estado_etapa:"",
+      manzanas:"",
       MENSAJE: "",
       TIPO: "",
     };
@@ -66,7 +72,10 @@ export class CardProyectListComponent implements OnInit {
     if (
       this.Proyecto.nombre.trim() == "" ||
       this.Proyecto.ubicacion.trim() == ""||
-      this.Proyecto.estado==""
+      this.Proyecto.estado==""||
+      this.Proyecto.num_etapa==""||
+      this.Proyecto.manzanas==""||
+      this.Proyecto.estado_etapa==""
 
     ) {
       this.alertService.warn("Todos los campos deben estar diligenciados!", this.options);
