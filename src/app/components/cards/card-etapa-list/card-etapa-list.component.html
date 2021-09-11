@@ -94,10 +94,7 @@
       <tbody>
         <tr *ngFor="let item of listEtapa">
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <b>{{item.id}}</b>
-          </td>
-          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{item.numero}}
+            <b>{{item.numero}}</b>
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             {{item.inmuebles}}
@@ -107,6 +104,9 @@
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             {{item.valor}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            {{item.estado}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
             <button (click)="QueryOneEtapa(item.id)"
@@ -284,7 +284,7 @@
     </div>
   </div>
 </div>
-<pre>
+<!-- <pre>
   {{Etapa|json}}
-</pre>
+</pre> -->
 

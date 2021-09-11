@@ -5,6 +5,7 @@ import { GlobalService } from 'src/app/providers/GlobalService';
 import { AlertService } from "../../_alert";
 
 @Component({
+  selector: 'app-card-etapa-list',
   templateUrl: './card-etapa-list.component.html',
   styleUrls: ['./card-etapa-list.component.css']
 })
@@ -21,6 +22,8 @@ export class CardEtapaListComponent implements OnInit {
     MENSAJE:""
   }
   @Input()
+  proyecto:number=0;
+
   get color(): string {
     return this._color;
   }
@@ -43,11 +46,11 @@ export class CardEtapaListComponent implements OnInit {
     changeMode(option:number){
       this.idOption=option;
       if(option==1){
-        /* this.ListarEtapas(); */
+        this.ListarEtapas(this.proyecto);
       }
     }
   ngOnInit(): void {
-    /* this.ListarEtapas(); */
+    this.ListarEtapas(this.proyecto);
   }
   public showModal = false;
   public toggleModal() {
@@ -137,7 +140,7 @@ export class CardEtapaListComponent implements OnInit {
             if (res[0].TIPO == "3") {
               this.alertService.success(res[0].MENSAJE, this.options);
               this.changeMode(1);
-              this.QueryProyectos();
+              this.ListarEtapas(this.proyecto);
               this.clearDataEtapa();
             } else {
               this.alertService.error(res[0].MENSAJE, this.options);
@@ -194,7 +197,7 @@ export class CardEtapaListComponent implements OnInit {
         (res: etapa[]) => {
           if (res[0].TIPO == "3") {
             this.alertService.success(res[0].MENSAJE, this.options);
-            this.QueryProyectos();
+            this.ListarEtapas(this.proyecto);
           } else {
             this.alertService.error(res[0].MENSAJE, this.options);
           }
