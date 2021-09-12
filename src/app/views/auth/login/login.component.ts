@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
       } else {
         this.autenticacionService.signin(this.Usuario).subscribe(
           (res: any) => {
-            console.log(res);
             if (res.token != null) {
               localStorage.setItem("token", res.token);
               this.router.navigate(["/admin/dashboard"]);
@@ -45,6 +44,7 @@ export class LoginComponent implements OnInit {
             }
           },
           (err) => {
+            console.log(err)
             this.alertService.error('Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!', this.options);
           }
         );

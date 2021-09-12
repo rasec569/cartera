@@ -4,7 +4,6 @@ import { Observable, throwError } from "rxjs";
 import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { tap, catchError } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import { clienteInterface } from "../interfaces/cliente.interface";
 import { cliente } from "../Models/cliente.model";
 
 const httpOptions = {
