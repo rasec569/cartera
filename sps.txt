@@ -1,0 +1,24 @@
+Listar contratos cliente => CALL `ConsultarContratosClientes`('1')
+Crear contrato cliente =>CALL `CrearContratoCliente`('1', '1111111', 'none', '1123434', '2021-09-11', 'none observacion', '1');
+
+
+
+BEGIN
+	DECLARE exit handler for sqlexception
+  		BEGIN
+    		CALL `SHOW_MENSAJE`('1', 'Error, por el momento el sistema está teniendo problemas para realizar la operación solicitada. Tome una foto o captura de pantalla y contáctese con soporte, disculpe las molestias.');
+  		ROLLBACK;
+	END;
+
+	DECLARE exit handler for sqlwarning
+ 		BEGIN
+   	 	CALL `SHOW_MENSAJE`('2', 'Se ha producido un evento inesperado, por favor contáctar con soporte.');
+ 		ROLLBACK;
+	END;
+
+	START TRANSACTION;
+		
+
+
+	COMMIT;
+END

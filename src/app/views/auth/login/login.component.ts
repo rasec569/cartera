@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
             console.log(res);
             if (res.token != null) {
               localStorage.setItem("token", res.token);
-              console.log(res.token)
               this.router.navigate(["/admin/dashboard"]);
             } else {
               this.alertService.error('Correo/Contraseña incorrectos!', this.options);
