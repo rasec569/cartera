@@ -1,10 +1,10 @@
-export class etapa{
+export class adicional{
   public id?:string;
-  public numero:string;
+  public concepto:string;
   public valor:string;
-  public manzanas: string;
   public estado:string;
-  public idproyecto:string;
+  public fecha: string;
+  public idinmueble:string;
   //error vars
   public TIPO?:string;
   public MENSAJE?:string;

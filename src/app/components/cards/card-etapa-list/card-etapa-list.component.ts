@@ -16,7 +16,7 @@ export class CardEtapaListComponent implements OnInit {
     numero:"",
     valor:"",
     estado:"",
-    manzana:"",
+    manzanas:"",
     idproyecto:"",
     TIPO:"",
     MENSAJE:""
@@ -62,7 +62,7 @@ export class CardEtapaListComponent implements OnInit {
       numero:"",
       valor:"",
       estado:"",
-      manzana:"",
+      manzanas:"",
       idproyecto:"",
       TIPO:"",
       MENSAJE:"",
@@ -105,14 +105,13 @@ export class CardEtapaListComponent implements OnInit {
       );
     }
   }
-  QueryOneEtapa(idProyecto: any) {
-    this.Etapa.id = idProyecto;
+  QueryOneEtapa(idEtapa: any) {
+    this.Etapa.id = idEtapa;
     try {
       this.EtapaS.getEtapa(this.Etapa).subscribe(
         (res: etapa[]) => {
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.Etapa=res[0];
-            console.log(res[0])
               this.changeMode(3);
           } else {
             this.alertService.error(res[0].MENSAJE, this.options);
@@ -162,8 +161,10 @@ export class CardEtapaListComponent implements OnInit {
     }
   }
   UpdateEtapa() {
+    console.log('entro');
     try {
       if (this.validadorEtapa()) {
+        console.log('entro if');
         this.EtapaS.updateEtapa(this.Etapa).subscribe(
           (res: etapa[]) => {
             if (res[0].TIPO == "3") {
@@ -171,6 +172,7 @@ export class CardEtapaListComponent implements OnInit {
               this.changeMode(1);
               this.clearDataEtapa();
             } else {
+              console.log('error');
               this.alertService.error(res[0].MENSAJE, this.options);
             }
           },

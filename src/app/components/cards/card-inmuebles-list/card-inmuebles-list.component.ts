@@ -9,6 +9,7 @@ import{ProyectoService} from 'src/app/services/proyecto.service';
 
 import { EtapaService } from 'src/app/services/etapa.service';
 import { etapa } from 'src/app/Models/etapa.model'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-card-inmuebles-list',
@@ -36,7 +37,7 @@ export class CardInmueblesListComponent implements OnInit {
     numero:"",
     valor:"",
     estado:"",
-    manzana:"",
+    manzanas:"",
     idproyecto:"",
     TIPO:"",
     MENSAJE:""
@@ -52,7 +53,9 @@ export class CardInmueblesListComponent implements OnInit {
   inmuebles=[];
   CloneInmuebles=[];
   listProyectos=[];
-  listEtapa=[];
+
+  listEtapa:Observable<etapa[]>;
+
   idOption:number=1;
   options = {
     autoClose: true,
@@ -136,7 +139,12 @@ export class CardInmueblesListComponent implements OnInit {
   ListarEtapas(idProyecto:any):void{
     this.Etapa.idproyecto=idProyecto;
     try {
-      this.EtapaS.getEtapasProyecto(this.Etapa).subscribe(
+      this.listEtapa=this.EtapaS.getEtapasProyecto(this.Etapa);
+
+
+
+
+      /* this.EtapaS.getEtapasProyecto(this.Etapa).subscribe(
         (res: etapa[]) => {
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.listEtapa=res;
@@ -151,7 +159,7 @@ export class CardInmueblesListComponent implements OnInit {
             this.options
           );
         }
-      );
+      ); */
     } catch (error) {
       this.alertService.error(
         "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",

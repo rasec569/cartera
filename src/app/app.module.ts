@@ -66,7 +66,7 @@ import { ProyectsComponent } from './views/admin/proyects/proyects.component';
 import { InmueblesComponent } from './views/admin/inmuebles/inmuebles.component';
 import { CardInmueblesListComponent } from './components/cards/card-inmuebles-list/card-inmuebles-list.component';
 import { CardEtapaListComponent } from './components/cards/card-etapa-list/card-etapa-list.component';
-
+import { CardAdicionalListComponent } from "./components/cards/card-adicional-list/card-adicional-list.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -114,7 +114,8 @@ import { CardEtapaListComponent } from './components/cards/card-etapa-list/card-
     ProyectsComponent,
     InmueblesComponent,
     CardInmueblesListComponent,
-    CardEtapaListComponent
+    CardEtapaListComponent,
+    CardAdicionalListComponent
   ],
   imports: [BrowserModule, AppRoutingModule,
     HttpClientModule, FormsModule,

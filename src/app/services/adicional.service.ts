@@ -3,9 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, throwError } from "rxjs";
 import { tap, catchError } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import {etapa} from '../Models/etapa.model';
-import { inmueble } from '../Models/inmueble.model';
-
+import { adicional } from '../Models/adicional.model';
 const httpOptions = {
   headers: new HttpHeaders(
     {
@@ -21,34 +19,35 @@ const HttpOptionsBody = {
   }),
   body: {id: "",},
 };
+
 @Injectable({
   providedIn: 'root'
 })
-export class EtapaService {
+export class AdicionalService {
+
   constructor(private http:HttpClient) { }
-  //listar etapas proyecto select inmueble
-  public getEtapasProyecto(Etapa: etapa): Observable<any> {
-    HttpOptionsBody.body.id=Etapa.idproyecto;
-    return this.http.get(`${environment.url}/etapa/proyecto/${Etapa.idproyecto}`,HttpOptionsBody).pipe(
+  //listar adiconales del inmueble
+  public getEtapasProyecto(Adicional: adicional): Observable<any> {
+    HttpOptionsBody.body.id=Adicional.idinmueble;
+    return this.http.get(`${environment.url}/adicional/inmueble/${Adicional.idinmueble}`,HttpOptionsBody).pipe(
       tap((result: any) => {
       }),
       catchError(this.handleError)
     );
   }
   //buscar
-  public getEtapa(Etapa: etapa): Observable<any> {
-    HttpOptionsBody.body.id=Etapa.id;
-    return this.http.get(`${environment.url}/etapa/${Etapa.id}`,HttpOptionsBody).pipe(
+  public getEtapa(Adicional: adicional): Observable<any> {
+    HttpOptionsBody.body.id=Adicional.id;
+    return this.http.get(`${environment.url}/adicional/${Adicional.id}`,HttpOptionsBody).pipe(
       tap((result: any) => {
       }),
       catchError(this.handleError)
     );
   }
-
   //registrar
-  public createEtapa(Etapa:etapa): Observable<any> {
+  public createEtapa(Adicional:adicional): Observable<any> {
     return this.http
-      .post(`${environment.url}/etapa/`, Etapa, httpOptions)
+      .post(`${environment.url}/adicional/`, Adicional, httpOptions)
       .pipe(
         tap((result: any) => {
           console.log(result);
@@ -57,10 +56,10 @@ export class EtapaService {
       );
   }
   //eliminar
-  public deleteEtapa(Etapa: etapa): Observable<any> {
-    HttpOptionsBody.body.id=Etapa.id;
+  public deleteEtapa(Adicional: adicional): Observable<any> {
+    HttpOptionsBody.body.id=Adicional.id;
     return this.http
-      .delete(`${environment.url}/etapa/`,HttpOptionsBody)
+      .delete(`${environment.url}/adicional/`,HttpOptionsBody)
       .pipe(
         tap((result: any) => {
           console.log(result);
@@ -69,9 +68,9 @@ export class EtapaService {
       );;
   }
   //modificar
-  public updateEtapa(Etapa: etapa): Observable<any> {
+  public updateEtapa(Adicional: adicional): Observable<any> {
     return this.http
-      .put(`${environment.url}/etapa/${Etapa.id}`, Etapa, httpOptions)
+      .put(`${environment.url}/adicional/${Adicional.id}`, Adicional, httpOptions)
       .pipe(
         tap((result: any) => {
           console.log(result);
