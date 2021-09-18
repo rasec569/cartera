@@ -1,7 +1,12 @@
 Listar contratos cliente => CALL `ConsultarContratosClientes`('1')
 Crear contrato cliente =>CALL `CrearContratoCliente`('1', '1111111', 'none', '1123434', '2021-09-11', 'none observacion', '1');
 
+Listar Archivos => CALL `ConsultarArchivos`()
+Guardar Archivo => CALL `CrearArchivo`('file.png', 'xxxxxxxxxxxxxxx.png', 'archivos/xxxxxxx.png')
+Eliminar Archivo => CALL `EliminarArchivo`('1')
 
+
+SET @IDAREA=(SELECT IFNULL(MAX(area.Id_Area),0) FROM area);		
 
 BEGIN
 	DECLARE exit handler for sqlexception

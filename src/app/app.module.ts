@@ -67,6 +67,16 @@ import { InmueblesComponent } from './views/admin/inmuebles/inmuebles.component'
 import { CardInmueblesListComponent } from './components/cards/card-inmuebles-list/card-inmuebles-list.component';
 import { CardEtapaListComponent } from './components/cards/card-etapa-list/card-etapa-list.component';
 import { CardAdicionalListComponent } from "./components/cards/card-adicional-list/card-adicional-list.component";
+import { CardFileComponent } from './components/cards/card-file/card-file.component';
+import { CardClienteContratoComponent } from './components/cards/card-cliente-contrato/card-cliente-contrato.component';
+import { CardClienteAcuerdoPagoComponent } from './components/cards/card-cliente-acuerdo-pago/card-cliente-acuerdo-pago.component';
+import { CardAportesComponent } from './components/cards/card-aportes/card-aportes.component';
+import { CardObligacionComponent } from './components/cards/card-obligacion/card-obligacion.component';
+import { ClienteContratoComponent } from './views/admin/cliente-contrato/cliente-contrato.component';
+import { ClienteAcuerdoPagoComponent } from './views/admin/cliente-acuerdo-pago/cliente-acuerdo-pago.component';
+import { AportesComponent } from './views/admin/aportes/aportes.component';
+import { FilesComponent } from './views/admin/files/files.component';
+import { ObligacionesComponent } from './views/admin/obligaciones/obligaciones.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -115,7 +125,17 @@ import { CardAdicionalListComponent } from "./components/cards/card-adicional-li
     InmueblesComponent,
     CardInmueblesListComponent,
     CardEtapaListComponent,
-    CardAdicionalListComponent
+    CardAdicionalListComponent,
+    CardFileComponent,
+    CardClienteContratoComponent,
+    CardClienteAcuerdoPagoComponent,
+    CardAportesComponent,
+    CardObligacionComponent,
+    ClienteContratoComponent,
+    ClienteAcuerdoPagoComponent,
+    AportesComponent,
+    FilesComponent,
+    ObligacionesComponent
   ],
   imports: [BrowserModule, AppRoutingModule,
     HttpClientModule, FormsModule,
