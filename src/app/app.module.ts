@@ -72,6 +72,11 @@ import { CardClienteContratoComponent } from './components/cards/card-cliente-co
 import { CardClienteAcuerdoPagoComponent } from './components/cards/card-cliente-acuerdo-pago/card-cliente-acuerdo-pago.component';
 import { CardAportesComponent } from './components/cards/card-aportes/card-aportes.component';
 import { CardObligacionComponent } from './components/cards/card-obligacion/card-obligacion.component';
+import { ClienteContratoComponent } from './views/admin/cliente-contrato/cliente-contrato.component';
+import { ClienteAcuerdoPagoComponent } from './views/admin/cliente-acuerdo-pago/cliente-acuerdo-pago.component';
+import { AportesComponent } from './views/admin/aportes/aportes.component';
+import { FilesComponent } from './views/admin/files/files.component';
+import { ObligacionesComponent } from './views/admin/obligaciones/obligaciones.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -125,7 +130,12 @@ import { CardObligacionComponent } from './components/cards/card-obligacion/card
     CardClienteContratoComponent,
     CardClienteAcuerdoPagoComponent,
     CardAportesComponent,
-    CardObligacionComponent
+    CardObligacionComponent,
+    ClienteContratoComponent,
+    ClienteAcuerdoPagoComponent,
+    AportesComponent,
+    FilesComponent,
+    ObligacionesComponent
   ],
   imports: [BrowserModule, AppRoutingModule,
     HttpClientModule, FormsModule,
