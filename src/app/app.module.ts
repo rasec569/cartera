@@ -1,5 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule,LOCALE_ID } from "@angular/core";
+import localeEs from '@angular/common/locales/es-CO';
+import { registerLocaleData } from '@angular/common';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -77,6 +79,8 @@ import { ClienteAcuerdoPagoComponent } from './views/admin/cliente-acuerdo-pago/
 import { AportesComponent } from './views/admin/aportes/aportes.component';
 import { FilesComponent } from './views/admin/files/files.component';
 import { ObligacionesComponent } from './views/admin/obligaciones/obligaciones.component';
+
+registerLocaleData(localeEs,'es-CO');
 @NgModule({
   declarations: [
     AppComponent,
@@ -145,6 +149,7 @@ import { ObligacionesComponent } from './views/admin/obligaciones/obligaciones.c
     //JWT
     {provide:JWT_OPTIONS, useValue:JWT_OPTIONS},
     JwtHelperService,
+    {provide: LOCALE_ID, useValue: 'es-CO'},
     //Token interceptor
     {provide:HTTP_INTERCEPTORS, useClass:TokenInterceptorService, multi:true}
   ],

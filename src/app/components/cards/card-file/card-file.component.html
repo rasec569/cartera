@@ -1,1 +1,186 @@
-<p>card-file works!</p>
+<div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
+  [ngClass]="color === 'light' ? 'bg-white' : 'bg-red-900 text-white'">
+  <div class="rounded-t mb-0 px-4 py-3 border-0">
+    <alert></alert>
+    <div class="flex flex-wrap items-center">
+      <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+        <h3 class="font-semibold text-lg" [ngClass]="color === 'light' ? 'text-blueGray-800' : 'text-white'">
+          {{(idOption==1)?'Lista de Archivos':(idOption==2)?'Agregar Nuevo Archivo':''}}
+        </h3>
+      </div>
+      <div class="relative w-full px-4 max-w-full flex-grow flex-1" *ngIf="idOption==1">
+        <button
+          class="bg-Blue-600 text-white active:bg-Blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          type="button" (click)="changeMode(2)">
+          <i class="fas fa-file-upload mr-2 text-sm"></i>
+          Nuevo Archivo
+        </button>
+      </div>
+      <div class="relative w-full px-4 max-w-full flex-grow flex-1" *ngIf="idOption==1">
+        <form class="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">
+          <div class="relative flex w-full flex-wrap items-stretch">
+            <span
+              class="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3"><i
+                class="fas fa-search"></i></span>
+            <input type="text" placeholder="Buscar cliente aquí..." (keyup)="getItems($event)"
+              class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="block w-full overflow-x-auto">
+    <!-- List Files -->
+    <div class="items-center" *ngIf="idOption==1">
+      <table class="items-center w-full bg-transparent border-collapse">
+        <thead>
+          <tr>
+            <th
+              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+              Nombre
+            </th>
+            <th
+              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+                Ruta
+            </th>
+            <th
+              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+              Fecha Creación
+            </th>
+            <th
+              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+              Fecha Modificación
+            </th>
+            <th
+              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+              Acciones
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of Ufiles">
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+              <b>{{item.nombre}}</b>
+            </td>
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+              {{item.ruta}}
+            </td>
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+              {{item.fechaCreacion | date: 'dd MMM hh:mm'}}
+            </td>
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+              {{item.fechaModificacion | date: 'dd MMM hh:mm'}}
+            </td>
+
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+              <div class="rounded-t mb-0 px-4 py-3 border-0">
+                <div class="flex flex-wrap items-center">
+                  <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
+                    <button (click)="RemoveFile(item.id)"
+                      class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <!-- New File -->
+    <div class="flex-auto px-4 lg:px-10 py-10 pt-0" *ngIf="idOption==2">
+
+      <hr class="mt-6 border-b-1 border-blueGray-300" />
+      <div class="rounded-t mb-0 px-4 py-3 border-0">
+        <form class="border-b-1">
+          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+            Información del Cliente
+          </h6>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                  Identificación
+                </label>
+                <form id="file-upload-form" class="uploader">
+                  <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+
+                  <label for="file-upload" id="file-drag">
+                    <img id="file-image" src="#" alt="Preview" class="hidden">
+                    <div class="box">
+                      <input type="file" name="file-6[]" id="file-6" class="inputfile inputfile-5" data-multiple-caption="{count} files selected" multiple />
+                      <label for="file-6"><figure><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg></figure> <span></span></label>
+                    </div>
+                    <div id="response" class="hidden">
+                      <div id="messages"></div>
+                      <progress class="progress" id="file-progress" value="0">
+                        <span>0</span>%
+                      </progress>
+                    </div>
+                  </label>
+                </form>
+              <div class="custom-file">
+                  <form action="/api/upload" method="post" enctype="multipart/form-data">
+                      <input (change)="fileChange($event)"  type="file"  class="custom-file-input"  id="inputGroupFile01"  aria-describedby="inputGroupFileAddon01">
+                  </form>
+                  <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              </div>
+              </div>
+            </div>
+
+          </div>
+          <hr class="mt-6 border-b-1 border-blueGray-300" />
+        </form>
+
+        <hr class="mt-6 border-b-1 border-blueGray-300" />
+        <div class="mt-6 flex flex-wrap items-center">
+          <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
+            <button
+              class="bg-Blue-600 text-white active:bg-Blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button" (click)="upload()">
+              <i class="fas fa-file-upload mr-2 text-sm"></i>
+              Guardar Archivo
+            </button>
+          </div>
+          <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
+            <button
+              class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button" (click)="changeMode(1)">
+              <i class="fas fa-ban mr-2 text-sm"></i>
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
