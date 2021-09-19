@@ -26,6 +26,13 @@ import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
 import { useAnimation } from "@angular/animations";
 
+// components news
+import { FilesComponent } from "./views/admin/files/files.component";
+import { ClienteContratoComponent } from "./views/admin/cliente-contrato/cliente-contrato.component";
+import { ClienteAcuerdoPagoComponent } from "./views/admin/cliente-acuerdo-pago/cliente-acuerdo-pago.component";
+import { AportesComponent } from "./views/admin/aportes/aportes.component";
+import { ObligacionesComponent } from "./views/admin/obligaciones/obligaciones.component";
+
 const routes: Routes = [
   // admin views
   {
@@ -37,9 +44,11 @@ const routes: Routes = [
       { path: "user", component: UserComponent, canActivate: [AutenticacionGuard] },
       { path: "proyects", component: ProyectsComponent, canActivate: [AutenticacionGuard] },
       { path: "inmuebles", component:InmueblesComponent, canActivate: [AutenticacionGuard]},
-      { path: "settings", component: SettingsComponent, canActivate: [AutenticacionGuard] },
-      { path: "tables", component: TablesComponent, canActivate: [AutenticacionGuard] },
-      { path: "maps", component: MapsComponent, canActivate: [AutenticacionGuard] },
+      { path: "files", component:FilesComponent, canActivate: [AutenticacionGuard]},
+      { path: "cliente-contrato", component:ClienteContratoComponent, canActivate: [AutenticacionGuard]},
+      { path: "cliente-acuerdo-pago", component:ClienteAcuerdoPagoComponent, canActivate: [AutenticacionGuard]},
+      { path: "aportes", component:AportesComponent, canActivate: [AutenticacionGuard]},
+      { path: "obligaciones", component:ObligacionesComponent, canActivate: [AutenticacionGuard]},
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],
   },

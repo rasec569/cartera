@@ -66,7 +66,6 @@
         Páginas de Administración
       </h6>
       <!-- Navigation -->
-
       <ul class="md:flex-col md:min-w-full flex flex-col list-none">
         <li class="items-center">
           <a [routerLink]="['/admin/dashboard']" class="text-xs uppercase py-3 font-bold block" routerLinkActive
@@ -122,6 +121,7 @@
           </a>
         </li>
       </ul>
+
       <!-- Divider -->
       <hr class="my-4 md:min-w-full" />
       <!-- Heading -->
@@ -129,7 +129,6 @@
         Clientes
       </h6>
       <!-- Navigation -->
-
       <ul class="md:flex-col md:min-w-full flex flex-col list-none">
 
         <li class="items-center">
@@ -146,20 +145,107 @@
           </a>
         </li>
         <li class="items-center">
-          <a [routerLink]="['/admin/clients']" class="text-xs uppercase py-3 font-bold block" routerLinkActive
-            #adminClients="routerLinkActive" [ngClass]="
-                    adminClients.isActive
+          <a [routerLink]="['/admin/cliente-contrato']" class="text-xs uppercase py-3 font-bold block" routerLinkActive
+            #adminCliente_Contrato="routerLinkActive" [ngClass]="
+            adminCliente_Contrato.isActive
                       ? 'text-red-600 hover:text-red-700'
                       : 'text-blueGray-700 hover:text-blueGray-500'
                   ">
-            <i class="fas fa-user mr-2 text-sm" [ngClass]="
-                      adminClients.isActive ? 'opacity-75' : 'text-blueGray-300'
+            <i class="fas fa-paperclip mr-2 text-sm" [ngClass]="
+            adminCliente_Contrato.isActive ? 'opacity-75' : 'text-blueGray-300'
                     "></i>
-            Cliente Cartera
+            Cliente Contrato
+          </a>
+        </li>
+        <li class="items-center">
+          <a [routerLink]="['/admin/cliente-acuerdo-pago']" class="text-xs uppercase py-3 font-bold block"
+            routerLinkActive #adminCliente_acuerdo_pago="routerLinkActive" [ngClass]="
+                    adminCliente_acuerdo_pago.isActive
+                      ? 'text-red-600 hover:text-red-700'
+                      : 'text-blueGray-700 hover:text-blueGray-500'
+                  ">
+            <i class="fas fa-dollar-sign mr-2 text-sm" [ngClass]="
+            adminCliente_acuerdo_pago.isActive ? 'opacity-75' : 'text-blueGray-300'
+                    "></i>
+            Cliente Acuerdo Pago
           </a>
         </li>
       </ul>
 
+      <!-- Divider -->
+      <hr class="my-4 md:min-w-full" />
+      <!-- Heading -->
+      <h6 class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+        Archivos
+      </h6>
+      <!-- Navigation -->
+      <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+
+        <li class="items-center">
+          <a [routerLink]="['/admin/files']" class="text-xs uppercase py-3 font-bold block" routerLinkActive
+            #adminFiles="routerLinkActive" [ngClass]="
+            adminFiles.isActive
+                      ? 'text-red-600 hover:text-red-700'
+                      : 'text-blueGray-700 hover:text-blueGray-500'
+                  ">
+            <i class="fas fa-file mr-2 text-sm" [ngClass]="
+            adminFiles.isActive ? 'opacity-75' : 'text-blueGray-300'
+                    "></i>
+            Banco de Archivos
+          </a>
+        </li>
+
+      </ul>
+
+      <!-- Divider -->
+      <hr class="my-4 md:min-w-full" />
+      <!-- Heading -->
+      <h6 class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+        Aportes
+      </h6>
+      <!-- Navigation -->
+      <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+
+        <li class="items-center">
+          <a [routerLink]="['/admin/aportes']" class="text-xs uppercase py-3 font-bold block" routerLinkActive
+            #adminAportes="routerLinkActive" [ngClass]="
+            adminAportes.isActive
+                      ? 'text-red-600 hover:text-red-700'
+                      : 'text-blueGray-700 hover:text-blueGray-500'
+                  ">
+            <i class="fas fa-wallet mr-2 text-sm" [ngClass]="
+            adminAportes.isActive ? 'opacity-75' : 'text-blueGray-300'
+                    "></i>
+            Aportes
+          </a>
+        </li>
+
+      </ul>
+
+      <!-- Divider -->
+      <hr class="my-4 md:min-w-full" />
+      <!-- Heading -->
+      <h6 class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+        Obligaciones
+      </h6>
+      <!-- Navigation -->
+      <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+
+        <li class="items-center">
+          <a [routerLink]="['/admin/obligaciones']" class="text-xs uppercase py-3 font-bold block" routerLinkActive
+            #adminObligaciones="routerLinkActive" [ngClass]="
+            adminObligaciones.isActive
+                      ? 'text-red-600 hover:text-red-700'
+                      : 'text-blueGray-700 hover:text-blueGray-500'
+                  ">
+            <i class="fas fa-user-clock mr-2 text-sm" [ngClass]="
+            adminObligaciones.isActive ? 'opacity-75' : 'text-blueGray-300'
+                    "></i>
+            Obligaciones
+          </a>
+        </li>
+
+      </ul>
     </div>
   </div>
 </nav>
