@@ -5,20 +5,20 @@ import { Stats } from "src/app/Models/Utils/Stats.model";
 import { FilesService } from "src/app/services/files.service";
 import { file } from "src/app/Models/file.model";
 @Component({
-  selector: 'app-card-file',
-  templateUrl: './card-file.component.html',
-  styleUrls: ['./card-file.component.css']
+  selector: "app-card-file",
+  templateUrl: "./card-file.component.html",
+  styleUrls: ["./card-file.component.css"],
 })
 export class CardFileComponent implements OnInit {
   Files: file = {
-    nombreReal:'',
-    estadoArchivo:'',
-    rutaRelativa:'',
-    MENSAJE:'',
-    TIPO:'',
-    fechaCreacion:'',
-    fechaModificacion:'',
-    idArchivo:''
+    nombreReal: "",
+    estadoArchivo: "",
+    rutaRelativa: "",
+    MENSAJE: "",
+    TIPO: "",
+    fechaCreacion: "",
+    fechaModificacion: "",
+    idArchivo: "",
   };
   StatsData: Stats[] = [
     {
@@ -63,6 +63,7 @@ export class CardFileComponent implements OnInit {
   private _color = "light";
   Ufiles = [];
   CloneFiles = [];
+  TextFileInout = "";
   /**
    * 1 => Listar Clientes
    * 2 => Crear clientes
@@ -75,7 +76,7 @@ export class CardFileComponent implements OnInit {
     autoClose: true,
     keepAfterRouteChange: false,
   };
-  uploadedFiles: Array < File > ;
+  uploadedFiles: Array<File>;
   constructor(
     private files: FilesService,
     protected alertService: AlertService,
@@ -102,43 +103,23 @@ export class CardFileComponent implements OnInit {
   }
   clearDataFile() {
     this.Files = {
-      nombreReal:'',
-      estadoArchivo:'',
-      rutaRelativa:'',
-      MENSAJE:'',
-      TIPO:'',
-      fechaCreacion:'',
-      fechaModificacion:'',
-      idArchivo:''
+      nombreReal: "",
+      estadoArchivo: "",
+      rutaRelativa: "",
+      MENSAJE: "",
+      TIPO: "",
+      fechaCreacion: "",
+      fechaModificacion: "",
+      idArchivo: "",
     };
   }
-
-  validadorCliente() {
-    /*if (
-      this.Cliente.nombres.trim() == "" ||
-      this.Cliente.apellidos.trim() == "" ||
-      this.Cliente.correo.trim() == "" ||
-      this.Cliente.direccion.trim() == "" ||
-      this.Cliente.telefono == "" ||
-      this.Cliente.identification == ""
-    ) {
-      this.alertService.warn("Todos los campos deben estar diligenciados!", this.options);
-      return false;
-    } else {
-      if (
-        /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
-          this.Cliente.correo
-        )
-      ) {
-        return true;
-      } else {
-        this.alertService.warn(
-          "El campo de Email no está diligenciado de forma correcta!", this.options
-        );
-        return false;
-      }
-    }*/
+  fileChange(element) {
+    this.uploadedFiles = element.target.files;
+    for (var i = 0; i < this.uploadedFiles.length; i++) {
+      this.TextFileInout = this.uploadedFiles[i].name;
+    }
   }
+
   /***
    * Cliente Operations
    */
@@ -168,16 +149,24 @@ export class CardFileComponent implements OnInit {
     }
   }
 
-  SaveCLiente() {
-    /*try {
-      if (this.validadorCliente()) {
-        this.clientes.createCliente(this.Cliente).subscribe(
-          (res: cliente[]) => {
+  SaveFile() {
+    try {
+      let formData = new FormData();
+      for (var i = 0; i < this.uploadedFiles.length; i++) {
+        formData.append(
+          "uploads[]",
+          this.uploadedFiles[i],
+          this.uploadedFiles[i].name
+        );
+        this.TextFileInout = this.uploadedFiles[i].name;
+      }
+        this.files.createfiles(formData).subscribe(
+          (res: file[]) => {
             if (res[0].TIPO == "3") {
               this.alertService.success(res[0].MENSAJE, this.options);
               this.changeMode(1);
               this.QueryFile();
-              this.clearDataClient();
+              this.TextFileInout="";
             } else {
               this.alertService.error(res[0].MENSAJE, this.options);
             }
@@ -189,27 +178,13 @@ export class CardFileComponent implements OnInit {
             );
           }
         );
-      }
     } catch (error) {
       this.alertService.error(
         "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
         this.options
       );
-    }*/
-  }
-  fileChange(element) {
-    this.uploadedFiles = element.target.files;
-  }
-
-  upload() {
-    let formData = new FormData();
-    for (var i = 0; i < this.uploadedFiles.length; i++) {
-      formData.append("uploads[]", this.uploadedFiles[i], this.uploadedFiles[i].name);
     }
-    this.files.createfiles(formData).subscribe((res)=> {
-      console.log('response received is ', res);
-    });
-    }
+  }
 
   RemoveFile(idFile: any) {
     this.Files.idArchivo = idFile;
@@ -243,9 +218,7 @@ export class CardFileComponent implements OnInit {
     const val = ev.target.value;
     if (val && val.trim() !== "") {
       this.Ufiles = this.Ufiles.filter((item) => {
-        return (
-          item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1
-        );
+        return item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1;
       });
     } else {
       this.Ufiles = this.CloneFiles;
