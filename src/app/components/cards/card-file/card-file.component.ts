@@ -4,12 +4,14 @@ import { GlobalService } from "../../../providers/GlobalService";
 import { Stats } from "src/app/Models/Utils/Stats.model";
 import { FilesService } from "src/app/services/files.service";
 import { file } from "src/app/Models/file.model";
+import { environment } from "src/environments/environment";
 @Component({
   selector: "app-card-file",
   templateUrl: "./card-file.component.html",
   styleUrls: ["./card-file.component.css"],
 })
 export class CardFileComponent implements OnInit {
+  serverPath="";
   Files: file = {
     nombreReal: "",
     estadoArchivo: "",
@@ -96,6 +98,8 @@ export class CardFileComponent implements OnInit {
       });
     }, 1000);
     this.QueryFile();
+    this.serverPath=environment.url+"/";
+    console.log(environment.url+"/")
   }
   public showModal = false;
   public toggleModal() {
