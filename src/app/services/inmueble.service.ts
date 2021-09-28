@@ -32,10 +32,20 @@ export class InmuebleService {
       catchError(this.handleError)
     );
     }
+
     //buscar
     public getInmueble(Inmueble: inmueble): Observable<any> {
       HttpOptionsBody.body.id=Inmueble.id;
       return this.http.get(`${environment.url}/inmueble/${Inmueble.id}`,HttpOptionsBody).pipe(
+        tap((result: any) => {
+        }),
+        catchError(this.handleError)
+      );
+    }
+    //listar por proyecto
+    public getInmuebleProyecto(Inmueble: inmueble): Observable<any> {
+      HttpOptionsBody.body.id=Inmueble.idproyecto;
+      return this.http.get(`${environment.url}/inmueble/proyecto/${Inmueble.idproyecto}`,HttpOptionsBody).pipe(
         tap((result: any) => {
         }),
         catchError(this.handleError)

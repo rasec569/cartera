@@ -17,6 +17,8 @@ import { Observable } from 'rxjs';
   /* styleUrls: ['./card-inmuebles-list.component.css'] */
 })
 export class CardInmueblesListComponent implements OnInit {
+  total:number;
+  indice:number;
   Inmueble: inmueble={
     id:"",
     casa: "",
@@ -43,6 +45,7 @@ export class CardInmueblesListComponent implements OnInit {
     MENSAJE:""
   }
   @Input()
+  proyectoid:number=0;
   get color(): string {
     return this._color;
   }
@@ -69,11 +72,23 @@ export class CardInmueblesListComponent implements OnInit {
   changeMode(option:number){
     this.idOption=option;
     if(option==1){
-      this.QueryInmuebles();
+      if(this.proyectoid==0){
+        this.QueryInmuebles();
+      }
+      else{
+
+        this.QueryInmueblesProyecto(this.proyectoid);
+        this.changeMode(4);
+      }
     }
   }
   ngOnInit(): void {
-    this.QueryInmuebles();
+    if(this.proyectoid==0){
+      this.QueryInmuebles();
+    }
+    else{
+      this.QueryInmueblesProyecto(this.proyectoid);
+    }
     this.listarProyecto();
   }
   clearDataInmueble() {
@@ -174,6 +189,38 @@ export class CardInmueblesListComponent implements OnInit {
           if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
             this.inmuebles=res;
             this.CloneInmuebles=res;
+            this.Total();
+          }else{
+            this.alertService.error(
+              res[0].MENSAJE,
+              this.options
+            );
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    } catch (error) {
+      this.alertService.error(
+        "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+  QueryInmueblesProyecto(idProyecto:any):void{
+    this.Inmueble.idproyecto=idProyecto;
+    try{
+      this.InmuebleS.getInmuebleProyecto(this.Inmueble).subscribe(
+        (res:inmueble[])=>{
+          if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
+            this.changeMode(4);
+            this.inmuebles=res;
+            this.CloneInmuebles=res;
+            this.Total();
           }else{
             this.alertService.error(
               res[0].MENSAJE,
@@ -283,6 +330,14 @@ export class CardInmueblesListComponent implements OnInit {
         this.options
       );
     }
+  }
+  Total(){
+    this.total= this.inmuebles.reduce((
+      acc,
+      obj,
+    ) => acc + (obj.Valor_Final),
+    0);
+    this.indice= this.inmuebles.length;
   }
 
   RemoveInmueble(idInmueble: any) {
