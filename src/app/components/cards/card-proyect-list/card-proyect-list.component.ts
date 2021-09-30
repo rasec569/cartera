@@ -33,6 +33,7 @@ export class CardProyectListComponent implements OnInit {
   proyects=[];
   CloneProyects=[];
   idOption:number=1;
+  Detalle:string="";
   DetalleEtapa:boolean=false;
   DetalleInmueble:boolean=false;
   edicion:boolean= false;
@@ -57,23 +58,36 @@ export class CardProyectListComponent implements OnInit {
   public toggleModal() {
   this.showModal = !this.showModal;
   }
-  MotrarDetalleEtapa(){
-    if(this.DetalleEtapa==false){
-      this.DetalleEtapa=true;
-      this.DetalleInmueble=false;
+  MotrarDetalle(){
+    if(this.Detalle==""){
+      this.Detalle="Etapa";
     }else{
-      this.DetalleEtapa=false;
+      this.Detalle="";
     }
 
   }
-  MotrarDetalleInmuebles(){
-    if(this.DetalleInmueble==false){
-      this.DetalleEtapa=false;
-      this.DetalleInmueble=true;
+
+
+
+  MotrarDetalleEtapa(){
+    if(this.Detalle==""){
+      this.Detalle="Etapa";
+    }else if(this.Detalle=="Inmueble"){
+      this.Detalle="Etapa";
     }else{
-      this.DetalleInmueble=false;
+      this.Detalle="";
     }
 
+
+  }
+  MotrarDetalleInmuebles(){
+    if(this.Detalle==""){
+      this.Detalle="Inmueble";
+    }else if(this.Detalle=="Etapa"){
+      this.Detalle="Inmueble";
+    }else{
+      this.Detalle="";
+    }
   }
   clearDataProyect() {
     this.Proyecto = {

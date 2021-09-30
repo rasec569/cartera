@@ -281,7 +281,7 @@
 
       </form>
       <hr class="mt-6 border-b-1 border-blueGray-300" />
-      <div class="rounded-t mb-0 px-4 py-3 border-0">
+      <div class="rounded-t mb-0 px-4 py-3 border-0" *ngIf="Detalle===''">
         <div class="flex flex-wrap justify-center">
           <div class="mx-auto items-center flex flex-wrap">
             <button
@@ -320,7 +320,7 @@
               class="bg-emerald-500 text-white active:bg-orange-500 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button" (click)="MotrarDetalleEtapa()">
               <i class="fas fa-search mr-2 text-sm"></i>
-              {{(DetalleEtapa==false)?'Ver':'Ocultar'}}
+              {{(Detalle==='Etapa')?'Ocultar':'Ver'}}
             </button>
           </div>
         </div>
@@ -337,7 +337,7 @@
             class="bg-emerald-500 text-white active:bg-orange-500 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
             type="button" (click)="MotrarDetalleInmuebles()">
             <i class="fas fa-search mr-2 text-sm"></i>
-            {{(DetalleInmueble==false)?'Ver':'Ocultar'}}
+            {{(Detalle==='Inmueble')?'Ocultar':'Ver'}}
           </button>
           </div>
         </div>
@@ -345,10 +345,10 @@
       <hr class="mt-6 border-b-1 border-blueGray-300" />
     </div>
 
-      <div class="w-full mb-12 px-4"  *ngIf="DetalleEtapa">
+      <div class="w-full mb-12 px-4"  *ngIf="Detalle==='Etapa'">
         <app-card-etapa-list [proyecto]="Proyecto.id"></app-card-etapa-list>
       </div>
-      <div class="w-full mb-12 px-4"  *ngIf="DetalleInmueble">
+      <div class="w-full mb-12 px-4"  *ngIf="Detalle==='Inmueble'">
         <app-card-inmuebles-list [proyectoid]="Proyecto.id"></app-card-inmuebles-list>
       </div>
       <hr class="mt-6 border-b-1 border-blueGray-300" />
