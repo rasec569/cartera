@@ -15,7 +15,7 @@ export class CardProyectListComponent implements OnInit {
     nombre:"",
     ubicacion:"",
     estado:"",
-    num_etapa:"",
+    etapas:"",
     estado_etapa:"",
     manzanas:"",
     TIPO:"",
@@ -33,6 +33,9 @@ export class CardProyectListComponent implements OnInit {
   proyects=[];
   CloneProyects=[];
   idOption:number=1;
+  DetalleEtapa:boolean=false;
+  DetalleInmueble:boolean=false;
+  edicion:boolean= false;
   options = {
     autoClose: true,
     keepAfterRouteChange: false,
@@ -54,13 +57,31 @@ export class CardProyectListComponent implements OnInit {
   public toggleModal() {
   this.showModal = !this.showModal;
   }
+  MotrarDetalleEtapa(){
+    if(this.DetalleEtapa==false){
+      this.DetalleEtapa=true;
+      this.DetalleInmueble=false;
+    }else{
+      this.DetalleEtapa=false;
+    }
+
+  }
+  MotrarDetalleInmuebles(){
+    if(this.DetalleInmueble==false){
+      this.DetalleEtapa=false;
+      this.DetalleInmueble=true;
+    }else{
+      this.DetalleInmueble=false;
+    }
+
+  }
   clearDataProyect() {
     this.Proyecto = {
       id: "",
       nombre: "",
       ubicacion: "",
       estado:"",
-      num_etapa:"",
+      etapas:"",
       estado_etapa:"",
       manzanas:"",
       MENSAJE: "",
@@ -73,7 +94,7 @@ export class CardProyectListComponent implements OnInit {
       this.Proyecto.nombre.trim() == "" ||
       this.Proyecto.ubicacion.trim() == ""||
       this.Proyecto.estado==""||
-      this.Proyecto.num_etapa==""||
+      this.Proyecto.etapas==""||
       this.Proyecto.manzanas==""||
       this.Proyecto.estado_etapa==""
 
@@ -229,7 +250,7 @@ export class CardProyectListComponent implements OnInit {
     const val = ev.target.value;
         if (val && val.trim() !== '') {
           this.proyects = this.proyects.filter((item) => {
-            return (item.nombres.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            return (item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1);
           });
         } else {
           this.proyects=this.CloneProyects;

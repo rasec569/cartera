@@ -3,7 +3,7 @@ export class proyecto{
   public nombre:string;
   public ubicacion:string;
   public estado?:string;
-  public num_etapa?;
+  public etapas?;
   public estado_etapa?:string;
   public manzanas?:string;
 

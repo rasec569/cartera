@@ -370,7 +370,9 @@ export class CardInmueblesListComponent implements OnInit {
     const val = ev.target.value;
         if (val && val.trim() !== '') {
           this.inmuebles = this.inmuebles.filter((item) => {
-            return (item.nombres.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            this.Total();
+            return (item.proyecto.toLowerCase().indexOf(val.toLowerCase()) > -1);
+
           });
         } else {
           this.inmuebles=this.CloneInmuebles;

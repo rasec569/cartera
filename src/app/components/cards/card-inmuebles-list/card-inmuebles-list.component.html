@@ -33,7 +33,7 @@
   <div class="block w-full overflow-x-auto">
     <!-- List Inmuebles -->
     <table class="items-center w-full bg-transparent border-collapse" *ngIf="idOption==1">
-      <thead>
+      <thead align="center">
         <tr>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -91,7 +91,7 @@
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody align="center">
         <tr *ngFor="let item of inmuebles">
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             <b>{{item.Manzana}}</b>
@@ -123,7 +123,7 @@
           </td>
         </tr>
       </tbody>
-      <tfoot>
+      <tfoot align="center">
         <tr>
             <th>Inmuebles</th>
             <th>{{indice}}</th>
@@ -226,7 +226,7 @@
           </td>
         </tr>
       </tbody>
-      <tfoot>
+      <tfoot align="right">
         <tr>
             <th>Inmuebles</th>
             <th>{{indice}}</th>
@@ -536,15 +536,15 @@
       <hr class="mt-6 border-b-1 border-blueGray-300" />
       <div class="rounded-t mb-0 px-4 py-3 border-0">
         <div class="flex flex-wrap items-center">
-          <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
+          <div class="mx-auto items-center flex flex-wrap">
             <button
               class="bg-Blue-600 text-white active:bg-Blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button" (click)="UpdateInmueble()">
               <i class="fas fa-store-alt mr-2 text-sm"></i>
-              Editar Inmueble
+              Editar
             </button>
           </div>
-          <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
+          <div class="mx-auto items-center flex flex-wrap">
             <button
               class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button" (click)="changeMode(1)">
