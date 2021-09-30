@@ -1,5 +1,6 @@
 Listar contratos cliente => CALL `ConsultarContratosClientes`('1')
 Crear contrato cliente =>CALL `CrearContratoCliente`('1', '1111111', 'none', '1123434', '2021-09-11', 'none observacion', '1');
+Editar contrato cliente => CALL `EditarContratoCliente`('1', 'nueva forma de pago', '1234323', 'nueva observacion', 'Y')
 
 Listar Archivos => CALL `ConsultarArchivos`()
 Guardar Archivo => CALL `CrearArchivo`('file.png', 'xxxxxxxxxxxxxxx.png', 'archivos/xxxxxxx.png')

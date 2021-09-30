@@ -60,6 +60,24 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
+              Área
+            </th>
+            <th
+              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+              Categoría
+            </th>
+            <th
+              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+              [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
               Fecha Creación
             </th>
             <th
@@ -91,6 +109,12 @@
               {{item.ruta}}
             </td>
             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+              {{item.nombreArea}}
+            </td>
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+              {{item.nombreCategoria}}
+            </td>
+            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
               {{item.fechaCreacion | date: 'dd MMM hh:mm'}}
             </td>
             <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -106,10 +130,10 @@
                       type="button">
                       <i class="fas fa-trash-alt"></i>
                     </button>
-                    <a
-                    class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" [href]="serverPath+item.ruta" [download]="item.nombre" target="_blank"  >
-                    <i class="fas fa-search-plus"></i>
-                  </a>
+                    <a class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      [href]="serverPath+item.ruta" [download]="item.nombre" target="_blank">
+                      <i class="fas fa-search-plus"></i>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -128,29 +152,58 @@
           <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
             Por favor seleccione un archivo para cargar
           </h6>
-          <div class="flex flex-wrap">
-            <div class="w-full lg:w-12/12 px-4">
-              <div class="relative w-full mb-3">
+          <div class="w-full lg:w-12/12 px-4">
+            <div class="relative w-full mb-3">
 
-                  <form action="/api/upload" method="post" enctype="multipart/form-data">
-                    <label
-                      class="w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer hover:bg-purple-600 hover:text-white text-purple-600 ease-linear transition-all duration-150">
-                      <i class="fas fa-cloud-upload-alt fa-3x"></i>
-                      <input (change)="fileChange($event)"  type="file"  class="hidden"  id="inputGroupFile01"  aria-describedby="inputGroupFileAddon01">
-                    </label>
-                  </form>
-                  <br>
-                  <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" >
-                    {{TextFileInout}}
-                  </label>
-              </div>
+              <form action="/api/upload" method="post" enctype="multipart/form-data">
+                <label
+                  class="w-64 flex flex-col items-center px-4 py-6 bg-white rounded-md shadow-md tracking-wide uppercase border border-blue cursor-pointer hover:bg-purple-600 hover:text-white text-purple-600 ease-linear transition-all duration-150">
+                  <i class="fas fa-cloud-upload-alt fa-3x"></i>
+                  <input (change)="fileChange($event)" type="file" class="hidden" id="inputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01">
+                </label>
+              </form>
+              <br>
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                {{TextFileInout}}
+              </label>
             </div>
+          </div>
 
+          <div class="mt-6 flex flex-wrap items-center">
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Área
+              </label>
+              <select [(ngModel)]="Files.idarea" [ngModelOptions]="{standalone: true}"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  <option value="" disabled selected>Seleccione una opción</option>
+                  <option *ngFor="let area of listArea" [value]="area.id" >
+                    {{area.Area}}
+                  </option>
+                </select>
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Categoría
+              </label>
+              <select [(ngModel)]="Files.idCategoria" [ngModelOptions]="{standalone: true}"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  <option value="" disabled selected>Seleccione una opción</option>
+                  <option *ngFor="let categoria of listCategoria" [value]="categoria.id" >
+                    {{categoria.Nombre}}
+                  </option>
+                </select>
+            </div>
+          </div>
           </div>
           <hr class="mt-6 border-b-1 border-blueGray-300" />
         </form>
 
-        <hr class="mt-6 border-b-1 border-blueGray-300" />
+        <hr class="mt-6 border-b-1 border-blueGray-300" style="margin-top: 35%;" />
         <div class="mt-6 flex flex-wrap items-center">
           <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
             <button

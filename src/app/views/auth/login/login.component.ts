@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-
   Login() {
     try {
       this.validationLogin = false;

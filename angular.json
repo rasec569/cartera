@@ -73,7 +73,7 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "notus-angular:build:production"
+              "browserTarget": "notus-angular:build:environment"
             }
           }
         },

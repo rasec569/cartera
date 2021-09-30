@@ -6,7 +6,10 @@ export class file{
   public estadoArchivo:string;
   public fechaCreacion?:string;
   public fechaModificacion?:string;
-
+  public nombreArea:string;
+  public nombreCategoria?:string;
+  public idarea?:string;
+  public idCategoria?:string;
   //error vars
   public TIPO?:string;
   public MENSAJE?:string;
