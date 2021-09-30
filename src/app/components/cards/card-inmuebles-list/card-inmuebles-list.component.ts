@@ -369,11 +369,18 @@ export class CardInmueblesListComponent implements OnInit {
   async getItems(ev:any){
     const val = ev.target.value;
         if (val && val.trim() !== '') {
-          this.inmuebles = this.inmuebles.filter((item) => {
-            this.Total();
-            return (item.proyecto.toLowerCase().indexOf(val.toLowerCase()) > -1);
-
-          });
+          if(this.proyectoid==0){
+            this.inmuebles = this.inmuebles.filter((item) => {
+              this.Total();
+              return (item.proyecto.toLowerCase().indexOf(val.toLowerCase()) > -1);
+              });
+          }
+          else{
+            this.inmuebles = this.inmuebles.filter((item) => {
+              this.Total();
+              return (item.manzana.toLowerCase().indexOf(val.toLowerCase()) > -1);
+              });
+          }
         } else {
           this.inmuebles=this.CloneInmuebles;
         }
