@@ -46,6 +46,8 @@ export class CardInmueblesListComponent implements OnInit {
   }
   @Input()
   proyectoid:number=0;
+  etapaid:string="";
+
   get color(): string {
     return this._color;
   }
@@ -54,6 +56,7 @@ export class CardInmueblesListComponent implements OnInit {
   }
   private _color = "light";
   inmuebles=[];
+  inmueblesetapa=[];
   CloneInmuebles=[];
   listProyectos=[];
 
@@ -85,6 +88,8 @@ export class CardInmueblesListComponent implements OnInit {
   ngOnInit(): void {
     if(this.proyectoid==0){
       this.QueryInmuebles();
+    }else if(this.etapaid!=""){
+      this.QueryInmueblesEtapa(this.etapaid);
     }
     else{
       this.QueryInmueblesProyecto(this.proyectoid);
@@ -235,6 +240,20 @@ export class CardInmueblesListComponent implements OnInit {
           );
         }
       );
+    } catch (error) {
+      this.alertService.error(
+        "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+  QueryInmueblesEtapa(etapaid:any):void{
+    this.Inmueble.idetapa=etapaid;
+    try{
+      this.inmueblesetapa= this.inmuebles.filter(Inmueble=>{
+        return Inmueble.idetapa==etapa;
+      })
+      console.log(this.inmueblesetapa);
     } catch (error) {
       this.alertService.error(
         "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",

@@ -131,6 +131,32 @@ export class CardEtapaListComponent implements OnInit {
       );
     }
   }
+  QueryInmueblesOneEtapa(idEtapa: any) {
+    this.Etapa.id = idEtapa;
+    try {
+      this.EtapaS.getEtapa(this.Etapa).subscribe(
+        (res: etapa[]) => {
+          if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+            this.Etapa=res[0];
+              this.changeMode(3);
+          } else {
+            this.alertService.error(res[0].MENSAJE, this.options);
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
   SaveEtapa() {
     try {
       if (this.validadorEtapa()) {

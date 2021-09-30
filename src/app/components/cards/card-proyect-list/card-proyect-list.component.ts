@@ -77,8 +77,6 @@ export class CardProyectListComponent implements OnInit {
     }else{
       this.Detalle="";
     }
-
-
   }
   MotrarDetalleInmuebles(){
     if(this.Detalle==""){
@@ -155,8 +153,34 @@ export class CardProyectListComponent implements OnInit {
         (res: proyecto[]) => {
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.Proyecto=res[0];
-            console.log(res[0])
               this.changeMode(3);
+          } else {
+            this.alertService.error(res[0].MENSAJE, this.options);
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    } catch (error) {
+      this.alertService.error(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+  QueryOneProyectoDetalle(idProyecto: any) {
+    this.Proyecto.id = idProyecto;
+    try {
+      this.Proyect.getProyecto(this.Proyecto).subscribe(
+        (res: proyecto[]) => {
+          if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+            this.Proyecto=res[0];
+              
+              this.changeMode(4);
           } else {
             this.alertService.error(res[0].MENSAJE, this.options);
           }
