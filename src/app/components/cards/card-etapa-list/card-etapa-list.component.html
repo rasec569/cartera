@@ -5,7 +5,7 @@
     <div class="flex flex-wrap items-center">
       <div class="relative w-full px-4 max-w-full flex-grow flex-1">
         <h3 class="font-semibold text-lg" [ngClass]="color === 'light' ? 'text-blueGray-800' : 'text-white'">
-          {{(idOption==1)?'Lista de Etapas del Proyecto':(idOption==2)?'Agregar Nuevo Etapa':'Editar Etapa'}}
+          {{(idOption==1)?'Lista de Etapas del Proyecto':(idOption==2)?'Agregar Nuevo Etapa':(idOption==2)?'Editar Etapa':'Detalle Etapa '}}
         </h3>
       </div>
       <div class="relative w-full px-4 max-w-full flex-grow flex-1" *ngIf="idOption==1">
@@ -282,8 +282,79 @@
         </div>
       </div>
       <div class="w-full mb-12 px-4">
-        <!-- error en la variable etapaid -->
-        <!-- <app-card-inmuebles-list [etapaid]="Etapa.id"></app-card-inmuebles-list> -->
+        <app-card-inmuebles-list [etapaid]="Etapa.id"></app-card-inmuebles-list>
+      </div>
+    </div>
+    <!-- Detalle Etapa -->
+    <div class="flex-auto px-4 lg:px-10 py-10 pt-0" *ngIf="idOption==4">
+      <form>
+        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+          Información de la Etapa
+        </h6>
+        <div class="flex flex-wrap">
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Nombre de la Etapa
+              </label>
+              <select [(ngModel)]="Etapa.numero" [ngModelOptions]="{standalone: true}"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                <option value="" disabled selected>Seleccione una etapa</option>
+                <option value="Unica">Unica</option>
+                <option value="Primera">Primera</option>
+                <option value="Segunda">Segunda</option>
+                <option value="Tercera">Tercera</option>
+                <option value="Cuarta">Cuarta</option>
+                <option value="Quinta">Quinta</option>
+                <option value="Sexta">Sexta</option>
+                <option value="Septima">Septima</option>
+                <option value="Obtava">Obtava</option>
+                <option value="Novena">Novena</option>
+                <option value="Decima">Decima</option>
+                <option value="Tercera">Tercera</option>
+              </select>
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Estado
+              </label>
+              <select [(ngModel)]="Etapa.estado" [ngModelOptions]="{standalone: true}"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  <option value="" disabled selected>Seleccione una opción</option>
+                  <option value="Proyectada">Proyectada</option>
+                  <option value="En Ejecución">En Ejecución</option>
+                  <option value="Finalizada">Finalizada</option>
+                </select>
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                N° Manzanas
+              </label>
+              <input type="number" [(ngModel)]="Etapa.manzanas" [ngModelOptions]="{standalone: true}"
+                placeholder="Ubicación del Etapa"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
+            </div>
+          </div>
+          <div class="flex flex-wrap justify-center">
+            <div class="mx-auto items-center flex flex-wrap">
+              <button
+                class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button" (click)="changeMode(1)">
+                <i class="fas fa-ban mr-2 text-sm"></i>
+                Todas las Etapas
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <hr class="mt-6 border-b-1 border-blueGray-300" />
+      <div class="w-full mb-12 px-4">
+        <app-card-inmuebles-list [etapaid]="Etapa.id"></app-card-inmuebles-list>
       </div>
     </div>
   </div>

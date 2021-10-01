@@ -5,7 +5,7 @@
     <div class="flex flex-wrap items-center">
       <div class="relative w-full px-4 max-w-full flex-grow flex-1">
         <h3 class="font-semibold text-lg" [ngClass]="color === 'light' ? 'text-blueGray-800' : 'text-white'">
-          {{(idOption==1)?'Lista de Inmuebles':(idOption==2)?'Agregar Nuevo Inmueble':(idOption==3)?'INMUEBLE':'Lista de Inmuebles Proyecto'}}
+          {{(idOption==1)?'Lista de Inmuebles':(idOption==2)?'Agregar Nuevo Inmueble':(idOption==3)?'INMUEBLE':(idOption==4)?'Lista de Inmuebles Proyecto':'Lista de Inmuebles etapa'}}
         </h3>
       </div>
       <div class="relative w-full px-4 max-w-full flex-grow flex-1" *ngIf="(idOption==1||idOption==4)">
@@ -60,6 +60,15 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
+            Etapa
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
             Proyecto
           </th>
           <th
@@ -98,6 +107,9 @@
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             {{item.Casa}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            {{item.etapa}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             {{item.proyecto}}
@@ -163,7 +175,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Proyecto
+            Etapa
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -203,7 +215,110 @@
             {{item.Casa}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{item.proyecto}}
+            {{item.etapa}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            {{item.Valor_Final}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            {{item.estado}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+            <button (click)="QueryOneInmueble(item.id)"
+            class="text-amber-500 bg-transparent border border-solid border-amber-500 hover:bg-amber-500 hover:text-white active:bg-amber-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="changeMode(3)">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button (click)="RemoveInmueble(item.id)"
+            class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="changeMode(1)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+            <button class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" >
+              <i class="fas fa-search-plus"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot align="right">
+        <tr>
+            <th>Inmuebles</th>
+            <th>{{indice}}</th>
+            <th>Valor Total</th>
+            <th>{{total}}</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </tfoot>
+    </table>
+    <!-- List Inmuebles etapa -->
+    <table class="items-center w-full bg-transparent border-collapse" *ngIf="idOption==5">
+      <thead>
+        <tr>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+            Manzana
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+            Casa
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+            Valor Inicial
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+            Valor Venta
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+            Estado
+          </th>
+          <th
+            class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            [ngClass]="
+              color === 'light'
+                ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+                : 'bg-red-800 text-red-300 border-red-700'
+            ">
+            Acciones
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of inmuebles">
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            <b>{{item.Manzana}}</b>
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            {{item.Casa}}
+          </td>
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+            {{item.Valor_Inicial}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
             {{item.Valor_Final}}
@@ -556,7 +671,7 @@
       </div>
       <hr class="mt-6 border-b-1 border-blueGray-300" />
       <div class="w-full mb-12 px-4">
-        <!-- <app-card-file></app-card-file> -->
+        <app-card-file></app-card-file>
       </div>
     </div>
   </div>

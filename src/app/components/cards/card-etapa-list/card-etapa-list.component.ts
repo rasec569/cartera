@@ -138,7 +138,7 @@ export class CardEtapaListComponent implements OnInit {
         (res: etapa[]) => {
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.Etapa=res[0];
-              this.changeMode(3);
+              this.changeMode(4);
           } else {
             this.alertService.error(res[0].MENSAJE, this.options);
           }

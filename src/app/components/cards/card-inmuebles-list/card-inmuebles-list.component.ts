@@ -46,6 +46,7 @@ export class CardInmueblesListComponent implements OnInit {
   }
   @Input()
   proyectoid:number=0;
+  @Input()
   etapaid:string="";
 
   get color(): string {
@@ -86,7 +87,7 @@ export class CardInmueblesListComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    if(this.proyectoid==0){
+    if(this.proyectoid==0 && this.etapaid==""){
       this.QueryInmuebles();
     }else if(this.etapaid!=""){
       this.QueryInmueblesEtapa(this.etapaid);
@@ -249,11 +250,29 @@ export class CardInmueblesListComponent implements OnInit {
   }
   QueryInmueblesEtapa(etapaid:any):void{
     this.Inmueble.idetapa=etapaid;
+    console.log(etapaid);
     try{
-      this.inmueblesetapa= this.inmuebles.filter(Inmueble=>{
-        return Inmueble.idetapa==etapa;
-      })
-      console.log(this.inmueblesetapa);
+      this.InmuebleS.getInmuebleEtapa(this.Inmueble).subscribe(
+        (res:inmueble[])=>{
+          if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
+            this.changeMode(5);
+            this.inmuebles=res;
+            this.CloneInmuebles=res;
+            this.Total();
+          }else{
+            this.alertService.error(
+              res[0].MENSAJE,
+              this.options
+            );
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
     } catch (error) {
       this.alertService.error(
         "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
