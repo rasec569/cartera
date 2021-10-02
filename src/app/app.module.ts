@@ -79,6 +79,7 @@ import { ClienteAcuerdoPagoComponent } from './views/admin/cliente-acuerdo-pago/
 import { AportesComponent } from './views/admin/aportes/aportes.component';
 import { FilesComponent } from './views/admin/files/files.component';
 import { ObligacionesComponent } from './views/admin/obligaciones/obligaciones.component';
+import { CardCostoComponent } from './components/cards/card-costo/card-costo.component';
 
 registerLocaleData(localeEs,'es-CO');
 @NgModule({
@@ -139,7 +140,8 @@ registerLocaleData(localeEs,'es-CO');
     ClienteAcuerdoPagoComponent,
     AportesComponent,
     FilesComponent,
-    ObligacionesComponent
+    ObligacionesComponent,
+    CardCostoComponent
   ],
   imports: [BrowserModule, AppRoutingModule,
     HttpClientModule, FormsModule,
