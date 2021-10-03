@@ -80,6 +80,9 @@ import { AportesComponent } from './views/admin/aportes/aportes.component';
 import { FilesComponent } from './views/admin/files/files.component';
 import { ObligacionesComponent } from './views/admin/obligaciones/obligaciones.component';
 import { CardCostoComponent } from './components/cards/card-costo/card-costo.component';
+import { CardAcreedorComponent } from './components/cards/card-acreedor/card-acreedor.component';
+import { AcreedorComponent } from './views/admin/acreedor/acreedor.component';
+import { CardEgresoComponent } from './components/cards/card-egreso/card-egreso.component';
 
 registerLocaleData(localeEs,'es-CO');
 @NgModule({
@@ -141,7 +144,10 @@ registerLocaleData(localeEs,'es-CO');
     AportesComponent,
     FilesComponent,
     ObligacionesComponent,
-    CardCostoComponent
+    CardCostoComponent,
+    CardAcreedorComponent,
+    AcreedorComponent,
+    CardEgresoComponent
   ],
   imports: [BrowserModule, AppRoutingModule,
     HttpClientModule, FormsModule,

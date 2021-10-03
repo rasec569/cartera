@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from "rxjs";
+import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { tap, catchError } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import {etapa} from '../Models/etapa.model';
-import { inmueble } from '../Models/inmueble.model';
-
+import { egreso } from '../Models/egreso.model';
 const httpOptions = {
   headers: new HttpHeaders(
     {
@@ -21,24 +20,33 @@ const HttpOptionsBody = {
   }),
   body: {id: "",},
 };
+
 @Injectable({
   providedIn: 'root'
 })
-export class EtapaService {
+export class EgresoService {
+
   constructor(private http:HttpClient) { }
-  //listar etapas proyecto 
-  public getEtapasProyecto(Etapa: etapa): Observable<any> {
-    HttpOptionsBody.body.id=Etapa.idproyecto;
-    return this.http.get(`${environment.url}/etapa/proyecto/${Etapa.idproyecto}`,HttpOptionsBody).pipe(
+   //listar
+   public getEgresos(): Observable<any> {
+    return this.http.get(`${environment.url}/egreso/`, httpOptions).pipe(
+      tap((result: any) => {}),
+      catchError(this.handleError)
+    );
+  }
+  //listar egresos obligacion
+  public getEgresosObligacion(Egreso: egreso): Observable<any> {
+    HttpOptionsBody.body.id=Egreso.obligacionid;
+    return this.http.get(`${environment.url}/egreso/obligacion/${Egreso.obligacionid}`,HttpOptionsBody).pipe(
       tap((result: any) => {
       }),
       catchError(this.handleError)
     );
   }
   //buscar
-  public getEtapa(Etapa: etapa): Observable<any> {
-    HttpOptionsBody.body.id=Etapa.id;
-    return this.http.get(`${environment.url}/etapa/${Etapa.id}`,HttpOptionsBody).pipe(
+  public getEgreso(Egreso: egreso): Observable<any> {
+    HttpOptionsBody.body.id=Egreso.id;
+    return this.http.get(`${environment.url}/egreso/${Egreso.id}`,HttpOptionsBody).pipe(
       tap((result: any) => {
       }),
       catchError(this.handleError)
@@ -46,9 +54,9 @@ export class EtapaService {
   }
 
   //registrar
-  public createEtapa(Etapa:etapa): Observable<any> {
+  public createEgreso(Egreso:egreso): Observable<any> {
     return this.http
-      .post(`${environment.url}/etapa/`, Etapa, httpOptions)
+      .post(`${environment.url}/egreso/`, Egreso, httpOptions)
       .pipe(
         tap((result: any) => {
           console.log(result);
@@ -57,10 +65,10 @@ export class EtapaService {
       );
   }
   //eliminar
-  public deleteEtapa(Etapa: etapa): Observable<any> {
-    HttpOptionsBody.body.id=Etapa.id;
+  public deleteEgreso(Egreso: egreso): Observable<any> {
+    HttpOptionsBody.body.id=Egreso.id;
     return this.http
-      .delete(`${environment.url}/etapa/`,HttpOptionsBody)
+      .delete(`${environment.url}/egreso/`,HttpOptionsBody)
       .pipe(
         tap((result: any) => {
           console.log(result);
@@ -69,9 +77,9 @@ export class EtapaService {
       );;
   }
   //modificar
-  public updateEtapa(Etapa: etapa): Observable<any> {
+  public updateEgreso(Egreso: egreso): Observable<any> {
     return this.http
-      .put(`${environment.url}/etapa/${Etapa.id}`, Etapa, httpOptions)
+      .put(`${environment.url}/egreso/${Egreso.id}`, Egreso, httpOptions)
       .pipe(
         tap((result: any) => {
           console.log(result);
@@ -88,5 +96,4 @@ export class EtapaService {
     }
     return throwError(errorMessage);
   }
-
 }

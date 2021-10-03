@@ -1,19 +1,19 @@
 <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded"
   [ngClass]="color === 'light' ? 'bg-white' : 'bg-red-900 text-white'">
-  <div class="rounded-t mb-0 px-2 py-3 border-0">
+  <div class="rounded-t mb-0 px-4 py-3 border-0">
     <alert></alert>
     <div class="flex flex-wrap items-center">
-      <div class="relative w-full px-2 max-w-full flex-grow flex-1">
+      <div class="relative w-full px-4 max-w-full flex-grow flex-1">
         <h3 class="font-semibold text-lg" [ngClass]="color === 'light' ? 'text-blueGray-800' : 'text-white'">
-          {{(idOption==1)?'Lista de Costos':(idOption==2)?'Agregar Nuevo Costo':'Editar Costo'}}
+          {{(idOption==1)?'Lista de Acreedores':(idOption==2)?'Agregar Nuevo Acreedor':'Editar Acreedor'}}
         </h3>
       </div>
-      <div class="relative w-full px-2 max-w-full flex-grow flex-1" *ngIf="idOption==1">
+      <div class="relative w-full px-4 max-w-full flex-grow flex-1" *ngIf="idOption==1">
         <button
           class="bg-Blue-600 text-white active:bg-Blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button" (click)="changeMode(2)">
-          <i class="fas fa-id-card-alt mr-2 text-sm"></i>
-          Nuevo
+          <i class="fas fa-user-plus mr-2 text-sm"></i>
+          Nuevo Acreedor
         </button>
       </div>
       <div class="relative w-full px-4 max-w-full flex-grow flex-1" *ngIf="idOption==1">
@@ -22,7 +22,7 @@
             <span
               class="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3"><i
                 class="fas fa-search"></i></span>
-            <input type="text" placeholder="Buscar Costo"
+            <input type="text" placeholder="Buscar Acreedors aquí..."
               (keyup)="getItems($event)"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10" />
           </div>
@@ -31,7 +31,7 @@
     </div>
   </div>
   <div class="block w-full overflow-x-auto">
-    <!-- List Costos -->
+    <!-- List Clients -->
     <table class="items-center w-full bg-transparent border-collapse" *ngIf="idOption==1">
       <thead>
         <tr>
@@ -42,7 +42,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Concepto
+            Nombres
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -51,7 +51,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Valor
+            Apellidos
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -60,7 +60,7 @@
                 ? 'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
                 : 'bg-red-800 text-red-300 border-red-700'
             ">
-            Fecha
+            Descripción
           </th>
           <th
             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
@@ -74,22 +74,22 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of costos">
+        <tr *ngFor="let item of acreedor">
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            <b>{{item.concepto}}</b>
+            <b>{{item.nombres}}</b>
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{item.valor}}
+            {{item.apellidos}}
           </td>
           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-            {{item.fecha}}
+            {{item.descripcion}}
           </td>
-          <td class="border-t-0 px-1 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-1 text-right">
-            <button (click)="QueryOneCosto(item.id)"
+          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+            <button (click)="QueryOneAcreedor(item.id)"
             class="text-amber-500 bg-transparent border border-solid border-amber-500 hover:bg-amber-500 hover:text-white active:bg-amber-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="changeMode(3)">
               <i class="fas fa-edit"></i>
             </button>
-            <button (click)="RemoveCosto(item.id)"
+            <button (click)="RemoveAcreedor(item.id)"
             class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="changeMode(1)">
               <i class="fas fa-trash-alt"></i>
             </button>
@@ -97,20 +97,20 @@
         </tr>
       </tbody>
     </table>
-    <!-- New Costo -->
+    <!-- New Client -->
     <div class="flex-auto px-4 lg:px-10 py-10 pt-0" *ngIf="idOption==2">
       <form>
         <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          Información del Costo
+          Información del Acreedor
         </h6>
         <div class="flex flex-wrap">
-          <div class="w-full lg:w-12/12 px-4">
+          <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                Concepto
+                Identificación
               </label>
-              <input type="text" [(ngModel)]="Costo.concepto" [ngModelOptions]="{standalone: true}"
-                placeholder="Concepto del Costo"
+              <input type="number" [(ngModel)]="Acreedor.identificacion" [ngModelOptions]="{standalone: true}"
+              placeholder="Ejem. 123456789"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 value="" />
             </div>
@@ -118,10 +118,10 @@
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                Valor
+                Nombres
               </label>
-              <input type="number" [(ngModel)]="Costo.valor" [ngModelOptions]="{standalone: true}"
-                placeholder="76543"
+              <input type="text" [(ngModel)]="Acreedor.nombres" [ngModelOptions]="{standalone: true}"
+                placeholder="Primer Nombre Segundo Nombre"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 value="" />
             </div>
@@ -129,15 +129,66 @@
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                Fecha
+                Apellidos
               </label>
-              <input type="date" datetime="yyyy-MM-dd"[(ngModel)]="Costo.fecha" [ngModelOptions]="{standalone: true}"
-                placeholder="2018-01-01"
+              <input type="text" [(ngModel)]="Acreedor.apellidos" [ngModelOptions]="{standalone: true}"
+                placeholder="Primer Apellido Segundo Apellido"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value="2018-07-22" />
+                value="" />
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Descripción
+              </label>
+              <input type="text" [(ngModel)]="Acreedor.descripcion" [ngModelOptions]="{standalone: true}"
+                placeholder="Nick o Acreedor "
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
             </div>
           </div>
         </div>
+        <hr class="mt-6 border-b-1 border-blueGray-300" />
+        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+          Información de Contácto
+        </h6>
+        <div class="flex flex-wrap">
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Email
+              </label>
+              <input type="email" [(ngModel)]="Acreedor.correo" [ngModelOptions]="{standalone: true}"
+                placeholder="example@example.com.co"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Telefono
+              </label>
+              <input type="number" [(ngModel)]="Acreedor.telefono" [ngModelOptions]="{standalone: true}"
+                placeholder="Ejem. 311111111"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Dirección
+              </label>
+              <input type="text" [(ngModel)]="Acreedor.direccion" [ngModelOptions]="{standalone: true}"
+                placeholder="Ejem. Calle 5#9-03 B/Ejemplo"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
+            </div>
+          </div>
+        </div>
+        <hr class="mt-6 border-b-1 border-blueGray-300" />
       </form>
       <hr class="mt-6 border-b-1 border-blueGray-300" />
       <div class="rounded-t mb-0 px-4 py-3 border-0">
@@ -145,9 +196,9 @@
           <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
             <button
               class="bg-Blue-600 text-white active:bg-Blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button" (click)="SaveCosto()">
-              <i class="fas fa-id-card-alt mr-2 text-sm"></i>
-              Crear nueva Costo
+              type="button" (click)="SaveAcreedor()">
+              <i class="fas fa-user-plus mr-2 text-sm"></i>
+              Crear nuevo Acreedor
             </button>
           </div>
           <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
@@ -164,16 +215,16 @@
     <div class="flex-auto px-4 lg:px-10 py-10 pt-0" *ngIf="idOption==3">
       <form>
         <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-          Información del Costo
+          Información del Acreedor
         </h6>
         <div class="flex flex-wrap">
-          <div class="w-full lg:w-12/12 px-4">
+          <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                Concepto
+                Identificación
               </label>
-              <input type="text" [(ngModel)]="Costo.concepto" [ngModelOptions]="{standalone: true}"
-                placeholder="Concepto del Costo"
+              <input type="number" [(ngModel)]="Acreedor.identificacion" [ngModelOptions]="{standalone: true}"
+              placeholder="Ejem. 123456789"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 value="" />
             </div>
@@ -181,10 +232,10 @@
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                Valor
+                Nombres
               </label>
-              <input type="text" [(ngModel)]="Costo.valor" [ngModelOptions]="{standalone: true}"
-                placeholder="1345678"
+              <input type="text" [(ngModel)]="Acreedor.nombres" [ngModelOptions]="{standalone: true}"
+                placeholder="PrimerNombre SegundoNombre"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 value="" />
             </div>
@@ -192,15 +243,66 @@
           <div class="w-full lg:w-6/12 px-4">
             <div class="relative w-full mb-3">
               <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                Fecha
+                Apellidos
               </label>
-              <input type="text" date='dd-MM-yyyy'  [(ngModel)]="Costo.fecha" [ngModelOptions]="{standalone: true}"
-                placeholder="2018-01-01"
+              <input type="text" [(ngModel)]="Acreedor.apellidos" [ngModelOptions]="{standalone: true}"
+                placeholder="PrimerApellido SegundoApellido"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                value="2018-07-22" />
+                value="" />
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Descripción
+              </label>
+              <input type="text" [(ngModel)]="Acreedor.descripcion" [ngModelOptions]="{standalone: true}"
+                placeholder="Descripción Acreedor"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
             </div>
           </div>
         </div>
+        <hr class="mt-6 border-b-1 border-blueGray-300" />
+        <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+          Información de Contácto
+        </h6>
+        <div class="flex flex-wrap">
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Email
+              </label>
+              <input type="email" [(ngModel)]="Acreedor.correo" [ngModelOptions]="{standalone: true}"
+                placeholder="example@example.com.co"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Telefono
+              </label>
+              <input type="number" [(ngModel)]="Acreedor.telefono" [ngModelOptions]="{standalone: true}"
+                placeholder="Ejem. 311111111"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="relative w-full mb-3">
+              <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                Dirección
+              </label>
+              <input type="text" [(ngModel)]="Acreedor.direccion" [ngModelOptions]="{standalone: true}"
+                placeholder="Ejem. Calle 5#9-03 B/Ejemplo"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                value="" />
+            </div>
+          </div>
+        </div>
+        <hr class="mt-6 border-b-1 border-blueGray-300" />
       </form>
       <hr class="mt-6 border-b-1 border-blueGray-300" />
       <div class="rounded-t mb-0 px-4 py-3 border-0">
@@ -208,9 +310,9 @@
           <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
             <button
               class="bg-Blue-600 text-white active:bg-Blue-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button" (click)="UpdateCosto()">
-              <i class="fas fa-id-card-alt mr-2 text-sm"></i>
-              Editar Costo
+              type="button" (click)="UpdateAcreedor()">
+              <i class="fas fa-user-plus mr-2 text-sm"></i>
+              Editar
             </button>
           </div>
           <div class="relative w-full px-6 max-w-full flex-grow flex-1 items-center">
@@ -226,6 +328,7 @@
     </div>
   </div>
 </div>
-<pre>
-  {{Costo|json}}
-</pre>
+<!-- <pre>
+  {{Acreedor|json}}
+</pre> -->
+

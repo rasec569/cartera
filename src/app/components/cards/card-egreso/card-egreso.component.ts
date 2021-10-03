@@ -1,28 +1,27 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EtapaService } from 'src/app/services/etapa.service';
-import { etapa } from 'src/app/Models/etapa.model'
 import { GlobalService } from 'src/app/providers/GlobalService';
 import { AlertService } from "../../_alert";
+import { EgresoService } from 'src/app/services/egreso.service';
+import { egreso } from 'src/app/Models/egreso.model';
 
 @Component({
-  selector: 'app-card-etapa-list',
-  templateUrl: './card-etapa-list.component.html',
-  styleUrls: ['./card-etapa-list.component.css']
+  templateUrl: './card-egreso.component.html',
+  selector: 'app-card-egreso'
 })
-export class CardEtapaListComponent implements OnInit {
+export class CardEgresoComponent implements OnInit {
 
-  Etapa:etapa={
+  Egreso:egreso={
     id:"",
     numero:"",
+    fecha:"",
+    referencia:"",
     valor:"",
-    estado:"",
-    manzanas:"",
-    idproyecto:"",
+    obligacionid:"",
     TIPO:"",
     MENSAJE:""
   }
   @Input()
-  proyecto:number=0;
+  obligacion:string='1';
   @Input()
   get color(): string {
     return this._color;
@@ -31,46 +30,48 @@ export class CardEtapaListComponent implements OnInit {
     this._color = color !== "light" && color !== "dark" ? "light" : color;
   }
   private _color = "light";
-  listEtapa=[];
-  ClonelistEtapa=[];
+  egresos=[];
+  CloneEgresos=[];
   idOption:number=1;
   options = {
     autoClose: true,
     keepAfterRouteChange: false,
   };
-
-  constructor(private EtapaS:EtapaService,
+  constructor(private EgresoS:EgresoService,
     protected alertService: AlertService,
     private globalEvents: GlobalService) { }
 
     changeMode(option:number){
       this.idOption=option;
       if(option==1){
-        this.ListarEtapas(this.proyecto);
+        this.QueryEgresosObligacion(this.obligacion);
+        /* this.QueryEgresos(); */
       }
     }
+
   ngOnInit(): void {
-    this.ListarEtapas(this.proyecto);
+    this.QueryEgresosObligacion(this.obligacion);
+    /* this.QueryEgresos(); */
   }
   public showModal = false;
   public toggleModal() {
   this.showModal = !this.showModal;
   }
-  clearDataEtapa(){
-    this.Etapa={
+  clearDataEgreso(){
+    this.Egreso={
       id:"",
       numero:"",
+      fecha:"",
+      referencia:"",
       valor:"",
-      estado:"",
-      manzanas:"",
-      idproyecto:"",
+      obligacionid:"",
       TIPO:"",
-      MENSAJE:"",
+      MENSAJE:""
     }
   }
-  validadorEtapa() {
+  validarEgreso(){
     if (
-      this.Etapa.numero.trim() == ""
+      this.Egreso.referencia.trim() == ""
     ) {
       this.alertService.warn("Todos los campos deben estar diligenciados!", this.options);
       return false;
@@ -78,15 +79,42 @@ export class CardEtapaListComponent implements OnInit {
       return true;
     }
   }
-
-  ListarEtapas(idProyecto:any):void{
-    this.Etapa.idproyecto=idProyecto;
-    try {
-      this.EtapaS.getEtapasProyecto(this.Etapa).subscribe(
-        (res: etapa[]) => {
+  QueryEgresos(){
+    try{
+      this.EgresoS.getEgresos().subscribe(
+        (res: egreso[]) => {
+          if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
+            this.egresos = res;
+            this.CloneEgresos = res;
+          }else{
+            this.alertService.error(
+              res[0].MENSAJE,
+              this.options
+            );
+          }
+        },
+        (err) => {
+          this.alertService.error(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+            this.options
+          );
+        }
+      );
+    }catch (error) {
+      this.alertService.error(
+        "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
+        this.options
+      );
+    }
+  }
+  QueryEgresosObligacion(obligacionid:any){
+    this.Egreso.obligacionid=obligacionid;
+    try{
+      this.EgresoS.getEgresosObligacion(this.Egreso).subscribe(
+        (res: egreso[])=>{
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
-            this.listEtapa=res;
-            this.ClonelistEtapa=res;
+            this.egresos=res;
+            this.CloneEgresos=res;
           } else {
             this.alertService.error(res[0].MENSAJE, this.options);
           }
@@ -98,20 +126,20 @@ export class CardEtapaListComponent implements OnInit {
           );
         }
       );
-    } catch (error) {
+    }catch (error) {
       this.alertService.error(
         "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
         this.options
       );
     }
   }
-  QueryOneEtapa(idEtapa: any) {
-    this.Etapa.id = idEtapa;
+  QueryOneEgreso(idEgreso: any) {
+    this.Egreso.id = idEgreso;
     try {
-      this.EtapaS.getEtapa(this.Etapa).subscribe(
-        (res: etapa[]) => {
+      this.EgresoS.getEgreso(this.Egreso).subscribe(
+        (res: egreso[]) => {
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
-            this.Etapa=res[0];
+            this.Egreso=res[0];
               this.changeMode(3);
           } else {
             this.alertService.error(res[0].MENSAJE, this.options);
@@ -131,42 +159,17 @@ export class CardEtapaListComponent implements OnInit {
       );
     }
   }
-  QueryInmueblesOneEtapa(idEtapa: any) {
-    this.Etapa.id = idEtapa;
+  SaveEgreso() {
+    this.Egreso.obligacionid=this.obligacion
     try {
-      this.EtapaS.getEtapa(this.Etapa).subscribe(
-        (res: etapa[]) => {
-          if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
-            this.Etapa=res[0];
-              this.changeMode(4);
-          } else {
-            this.alertService.error(res[0].MENSAJE, this.options);
-          }
-        },
-        (err) => {
-          this.alertService.error(
-            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
-            this.options
-          );
-        }
-      );
-    } catch (error) {
-      this.alertService.error(
-        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!",
-        this.options
-      );
-    }
-  }
-  SaveEtapa() {
-    try {
-      if (this.validadorEtapa()) {
-        this.EtapaS.createEtapa(this.Etapa).subscribe(
-          (res: etapa[]) => {
+      if (this.validarEgreso()) {
+        this.EgresoS.createEgreso(this.Egreso).subscribe(
+          (res: egreso[]) => {
             if (res[0].TIPO == "3") {
               this.alertService.success(res[0].MENSAJE, this.options);
               this.changeMode(1);
-              this.ListarEtapas(this.proyecto);
-              this.clearDataEtapa();
+              this.QueryEgresosObligacion(this.obligacion);
+              this.clearDataEgreso();
             } else {
               this.alertService.error(res[0].MENSAJE, this.options);
             }
@@ -186,17 +189,16 @@ export class CardEtapaListComponent implements OnInit {
       );
     }
   }
-  UpdateEtapa() {
+  UpdateEgreso() {
     console.log('entro');
     try {
-      if (this.validadorEtapa()) {
-        console.log('entro if');
-        this.EtapaS.updateEtapa(this.Etapa).subscribe(
-          (res: etapa[]) => {
+      if (this.validarEgreso()) {
+        this.EgresoS.updateEgreso(this.Egreso).subscribe(
+          (res: egreso[]) => {
             if (res[0].TIPO == "3") {
               this.alertService.success(res[0].MENSAJE, this.options);
               this.changeMode(1);
-              this.clearDataEtapa();
+              this.clearDataEgreso();
             } else {
               console.log('error');
               this.alertService.error(res[0].MENSAJE, this.options);
@@ -218,14 +220,14 @@ export class CardEtapaListComponent implements OnInit {
     }
   }
 
-  RemoveEtapa(idProyecto: any) {
-    this.Etapa.id = idProyecto;
+  RemoveEgreso(id: any) {
+    this.Egreso.id = id;
     try {
-      this.EtapaS.deleteEtapa(this.Etapa).subscribe(
-        (res: etapa[]) => {
+      this.EgresoS.deleteEgreso(this.Egreso).subscribe(
+        (res: egreso[]) => {
           if (res[0].TIPO == "3") {
             this.alertService.success(res[0].MENSAJE, this.options);
-            this.ListarEtapas(this.proyecto);
+            this.QueryEgresosObligacion(this.obligacion);
           } else {
             this.alertService.error(res[0].MENSAJE, this.options);
           }
@@ -247,12 +249,11 @@ export class CardEtapaListComponent implements OnInit {
   async getItems(ev:any){
     const val = ev.target.value;
         if (val && val.trim() !== '') {
-          this.listEtapa = this.listEtapa.filter((item) => {
+          this.egresos = this.egresos.filter((item) => {
             return (item.numero.toLowerCase().indexOf(val.toLowerCase()) > -1);
           });
         } else {
-          this.listEtapa=this.ClonelistEtapa;
+          this.egresos=this.CloneEgresos;
         }
   }
-
 }

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from "rxjs";
+import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { tap, catchError } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import {etapa} from '../Models/etapa.model';
-import { inmueble } from '../Models/inmueble.model';
+import { acreedor } from '../Models/acreedor.model';
 
 const httpOptions = {
   headers: new HttpHeaders(
@@ -21,34 +21,34 @@ const HttpOptionsBody = {
   }),
   body: {id: "",},
 };
+
 @Injectable({
   providedIn: 'root'
 })
-export class EtapaService {
-  constructor(private http:HttpClient) { }
-  //listar etapas proyecto 
-  public getEtapasProyecto(Etapa: etapa): Observable<any> {
-    HttpOptionsBody.body.id=Etapa.idproyecto;
-    return this.http.get(`${environment.url}/etapa/proyecto/${Etapa.idproyecto}`,HttpOptionsBody).pipe(
-      tap((result: any) => {
-      }),
-      catchError(this.handleError)
-    );
-  }
-  //buscar
-  public getEtapa(Etapa: etapa): Observable<any> {
-    HttpOptionsBody.body.id=Etapa.id;
-    return this.http.get(`${environment.url}/etapa/${Etapa.id}`,HttpOptionsBody).pipe(
-      tap((result: any) => {
-      }),
-      catchError(this.handleError)
-    );
-  }
+export class AcreedorService {
 
-  //registrar
-  public createEtapa(Etapa:etapa): Observable<any> {
+  constructor(private http:HttpClient) { }
+//listar Acreedor
+public getAcreedores(): Observable<any> {
+  return this.http.get(`${environment.url}/acreedor/`,httpOptions).pipe(
+    tap((result: any) => {
+    }),
+    catchError(this.handleError)
+  );
+}
+  //buscar Acreedor
+  public getAcreedor(Acreedor: acreedor): Observable<any> {
+    HttpOptionsBody.body.id=Acreedor.idacreedor;
+    return this.http.get(`${environment.url}/acreedor/${Acreedor.idacreedor}`,HttpOptionsBody).pipe(
+      tap((result: any) => {
+      }),
+      catchError(this.handleError)
+    );
+  }
+  //agregar Acreedor
+  public createAcreedor(Acreedor: acreedor): Observable<any> {
     return this.http
-      .post(`${environment.url}/etapa/`, Etapa, httpOptions)
+      .post(`${environment.url}/acreedor/`, Acreedor, httpOptions)
       .pipe(
         tap((result: any) => {
           console.log(result);
@@ -56,22 +56,10 @@ export class EtapaService {
         catchError(this.handleError)
       );
   }
-  //eliminar
-  public deleteEtapa(Etapa: etapa): Observable<any> {
-    HttpOptionsBody.body.id=Etapa.id;
+   //modificar Acreedor
+  public updateAcreedor(Acreedor: acreedor): Observable<any> {
     return this.http
-      .delete(`${environment.url}/etapa/`,HttpOptionsBody)
-      .pipe(
-        tap((result: any) => {
-          console.log(result);
-        }),
-        catchError(this.handleError)
-      );;
-  }
-  //modificar
-  public updateEtapa(Etapa: etapa): Observable<any> {
-    return this.http
-      .put(`${environment.url}/etapa/${Etapa.id}`, Etapa, httpOptions)
+      .put(`${environment.url}/acreedor/${Acreedor.idacreedor}`, Acreedor, httpOptions)
       .pipe(
         tap((result: any) => {
           console.log(result);
@@ -79,6 +67,19 @@ export class EtapaService {
         catchError(this.handleError)
       );
   }
+//eliminar Acreedor
+public deleteAcreedor(Acreedor: acreedor): Observable<any> {
+  HttpOptionsBody.body.id=Acreedor.idacreedor;
+  return this.http
+    .delete(`${environment.url}/acreedor/`,HttpOptionsBody)
+    .pipe(
+      tap((result: any) => {
+        console.log(result);
+      }),
+      catchError(this.handleError)
+    );;
+}
+  // error handle
   handleError(error: HttpErrorResponse) {
     let errorMessage = "Unknown error!";
     if (error.error instanceof ErrorEvent) {
@@ -88,5 +89,4 @@ export class EtapaService {
     }
     return throwError(errorMessage);
   }
-
 }
