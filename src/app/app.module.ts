@@ -83,6 +83,8 @@ import { CardCostoComponent } from './components/cards/card-costo/card-costo.com
 import { CardAcreedorComponent } from './components/cards/card-acreedor/card-acreedor.component';
 import { AcreedorComponent } from './views/admin/acreedor/acreedor.component';
 import { CardEgresoComponent } from './components/cards/card-egreso/card-egreso.component';
+import { CardCarteraComponent } from './components/cards/card-cartera/card-cartera.component';
+import { CarteraComponent } from './views/admin/cartera/cartera.component';
 
 registerLocaleData(localeEs,'es-CO');
 @NgModule({
@@ -147,7 +149,9 @@ registerLocaleData(localeEs,'es-CO');
     CardCostoComponent,
     CardAcreedorComponent,
     AcreedorComponent,
-    CardEgresoComponent
+    CardEgresoComponent,
+    CardCarteraComponent,
+    CarteraComponent
   ],
   imports: [BrowserModule, AppRoutingModule,
     HttpClientModule, FormsModule,

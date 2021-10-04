@@ -80,7 +80,19 @@
             Tablero
           </a>
         </li>
-
+        <li class="items-center">
+          <a [routerLink]="['/admin/cartera']" class="text-xs uppercase py-3 font-bold block" routerLinkActive
+            #adminCartera="routerLinkActive" [ngClass]="
+              adminCartera.isActive
+                ? 'text-red-600 hover:text-red-700'
+                : 'text-blueGray-700 hover:text-blueGray-500'
+            ">
+            <i class="fas fa-briefcase mr-2 text-sm" [ngClass]="
+                adminCartera.isActive ? 'opacity-75' : 'text-blueGray-300'
+              "></i>
+            Cartera
+          </a>
+        </li>
         <li class="items-center">
           <a [routerLink]="['/admin/proyects']" class="text-xs uppercase py-3 font-bold block" routerLinkActive
             #adminProyects="routerLinkActive" [ngClass]="

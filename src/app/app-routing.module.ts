@@ -10,6 +10,7 @@ import { UserComponent } from "./views/admin/user/user.component";
 import { ProyectsComponent } from "./views/admin/proyects/proyects.component";
 import { InmueblesComponent } from "./views/admin/inmuebles/inmuebles.component";
 import { AcreedorComponent } from "./views/admin/acreedor/acreedor.component";
+import { CarteraComponent } from "./views/admin/cartera/cartera.component";
 
 // admin views
 import { DashboardComponent } from "./views/admin/dashboard/dashboard.component";
@@ -51,6 +52,7 @@ const routes: Routes = [
       { path: "cliente-acuerdo-pago", component:ClienteAcuerdoPagoComponent, canActivate: [AutenticacionGuard]},
       { path: "aportes", component:AportesComponent, canActivate: [AutenticacionGuard]},
       { path: "obligaciones", component:ObligacionesComponent, canActivate: [AutenticacionGuard]},
+      { path: "cartera", component:CarteraComponent, canActivate: [AutenticacionGuard]},
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],
   },

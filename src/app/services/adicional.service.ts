@@ -27,16 +27,16 @@ export class AdicionalService {
 
   constructor(private http:HttpClient) { }
   //listar adiconales del inmueble
-  public getEtapasProyecto(Adicional: adicional): Observable<any> {
-    HttpOptionsBody.body.id=Adicional.idinmueble;
-    return this.http.get(`${environment.url}/adicional/inmueble/${Adicional.idinmueble}`,HttpOptionsBody).pipe(
+  public getAdicionalesContrato(Adicional: adicional): Observable<any> {
+    HttpOptionsBody.body.id=Adicional.contratoid;
+    return this.http.get(`${environment.url}/adicional/contrato/${Adicional.contratoid}`,HttpOptionsBody).pipe(
       tap((result: any) => {
       }),
       catchError(this.handleError)
     );
   }
   //buscar
-  public getEtapa(Adicional: adicional): Observable<any> {
+  public getAdicional(Adicional: adicional): Observable<any> {
     HttpOptionsBody.body.id=Adicional.id;
     return this.http.get(`${environment.url}/adicional/${Adicional.id}`,HttpOptionsBody).pipe(
       tap((result: any) => {
@@ -45,7 +45,7 @@ export class AdicionalService {
     );
   }
   //registrar
-  public createEtapa(Adicional:adicional): Observable<any> {
+  public createAdicional(Adicional:adicional): Observable<any> {
     return this.http
       .post(`${environment.url}/adicional/`, Adicional, httpOptions)
       .pipe(
@@ -56,7 +56,7 @@ export class AdicionalService {
       );
   }
   //eliminar
-  public deleteEtapa(Adicional: adicional): Observable<any> {
+  public deleteAdicional(Adicional: adicional): Observable<any> {
     HttpOptionsBody.body.id=Adicional.id;
     return this.http
       .delete(`${environment.url}/adicional/`,HttpOptionsBody)
@@ -68,7 +68,7 @@ export class AdicionalService {
       );;
   }
   //modificar
-  public updateEtapa(Adicional: adicional): Observable<any> {
+  public updateAdicional(Adicional: adicional): Observable<any> {
     return this.http
       .put(`${environment.url}/adicional/${Adicional.id}`, Adicional, httpOptions)
       .pipe(

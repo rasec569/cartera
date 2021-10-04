@@ -4,7 +4,7 @@ export class adicional{
   public valor:string;
   public estado:string;
   public fecha: string;
-  public idinmueble:string;
+  public contratoid:string;
   //error vars
   public TIPO?:string;
   public MENSAJE?:string;
