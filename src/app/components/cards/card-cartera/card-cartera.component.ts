@@ -10,6 +10,10 @@ import { cartera } from 'src/app/Models/cartera.model';
   styleUrls: ['./card-cartera.component.css']
 })
 export class CardCarteraComponent implements OnInit {
+  openTab = 1;
+  toggleTabs($tabNumber: number){
+    this.openTab = $tabNumber;
+  }
   Cartera:cartera={
     id:"",
     estado:"",

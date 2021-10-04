@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-
+  openTab = 1;
+  toggleTabs($tabNumber: number){
+    this.openTab = $tabNumber;
+  }
   constructor() { }
 
   ngOnInit(): void {
