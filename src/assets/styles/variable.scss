@@ -16,7 +16,7 @@ $headingfont: 'Poppins', sans-serif;
 
 $primary: mat-palette($mat-light-blue, 900);
 $accent: mat-palette($mat-orange, 900);
-$warn: mat-palette($mat-pink, 500);
+$warn: mat-palette($mat-red, 500);
 $theme: mat-light-theme($primary, $accent, $warn);
 $background: map-get($theme, background);
 $foreground: map-get($theme, foreground);
@@ -56,10 +56,10 @@ $themecolor-alt: #f18016;
 $themecolor-dark: #4231db;
 
 /*bootstrap Color*/
-$danger: #fc4b6c;
+$danger: #ee163d;
 $success: #26c6da;
 $warning: #ffb22b;
-$primary: #7460ee;
+$primary: #280ae6;
 $info: #1e88e5;
 $inverse: #2f3d4a;
 $muted: #99abb4;
@@ -77,7 +77,7 @@ $light-info: #e3f3fd;
 $light-inverse: #f6f6f6;
 $light-megna: #e0f2f4;
 
-$danger-dark: #e6294b;
+$danger-dark: #f7022f;
 $success-dark: #1eacbe;
 $warning-dark: #e9ab2e;
 $primary-dark: #6352ce;
