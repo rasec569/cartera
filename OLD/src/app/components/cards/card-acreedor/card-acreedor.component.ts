@@ -22,7 +22,7 @@ export class CardAcreedorComponent implements OnInit {
     descripcion:"",
    //error vars
     TIPO:"",
-    MENSAJE:""
+    MENSAJE:"",
   };
   @Input()
   get color(): string {
