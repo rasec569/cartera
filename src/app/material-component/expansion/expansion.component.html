@@ -1,0 +1,86 @@
+<mat-card>
+    <mat-card-content>
+    <mat-card-title>Usuario</mat-card-title>
+    <mat-card-subtitle>Detalle</mat-card-subtitle>
+
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title> Información Personal </mat-panel-title>
+                    <mat-panel-description> Datos basicos
+                        <mat-icon>person_outline</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+                  <mat-form-field>
+                    <input matInput placeholder="Cedula"> </mat-form-field>
+                  <mat-form-field>
+                    <input matInput placeholder="Nombres"> </mat-form-field>
+                  <mat-form-field>
+                    <input matInput placeholder="Apellidos"> </mat-form-field>
+                </div>
+                <mat-action-row>
+                    <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+            <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title> Credenciales </mat-panel-title>
+                    <mat-panel-description> Datos de inicio de session
+                        <mat-icon>account_circle</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+                  <mat-form-field>
+                    <input matInput placeholder="Usuario"> </mat-form-field>
+                  <mat-form-field>
+                    <input matInput placeholder="Contraseña"> </mat-form-field>
+                  <mat-form-field>
+                    <input matInput placeholder="Confirme Contraseña"> </mat-form-field>
+                </div>
+                <mat-action-row>
+                    <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+                    <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+            <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title> Información de contácto </mat-panel-title>
+                    <mat-panel-description> Medio para entablar comunicación o contacto
+                        <mat-icon>contact_mail</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+                  <mat-form-field>
+                    <input matInput placeholder="Email"> </mat-form-field>
+                  <mat-form-field>
+                    <input matInput placeholder="Telefono"> </mat-form-field>
+                </div>
+                <mat-form-field>
+                  <input matInput placeholder="Dirección"> </mat-form-field>
+                <mat-action-row>
+                  <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+                  <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+            <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle="true">
+              <mat-expansion-panel-header>
+                  <mat-panel-title> Información laboral </mat-panel-title>
+                  <mat-panel-description> Datos de su trabajo
+                      <mat-icon>badge</mat-icon>
+                  </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+                <mat-form-field>
+                  <input matInput placeholder="Area"> </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="Rol"> </mat-form-field>
+              </div>
+              <mat-action-row>
+                  <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+                  <button mat-button color="primary" (click)="nextStep()">Finalizar</button>
+              </mat-action-row>
+          </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-content>
+</mat-card>

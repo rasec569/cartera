@@ -12,6 +12,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialRoutes } from './material.routing';
 import { ButtonsComponent } from './buttons/buttons.component';
+import { ExpansionComponent } from './expansion/expansion.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { ButtonsComponent } from './buttons/buttons.component';
   providers: [],
   entryComponents: [],
   declarations: [
-    ButtonsComponent
+    ButtonsComponent,
+    ExpansionComponent
   ]
 })
 export class MaterialComponentsModule {}
