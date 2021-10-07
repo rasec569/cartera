@@ -10,7 +10,8 @@ export interface Menu {
 const MENUITEMS = [
   { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
   { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },
-  
+  { state: 'login', type: 'link', name: 'login', icon: 'crop_7_5' }
+
 ];
 
 @Injectable()
