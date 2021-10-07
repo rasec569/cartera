@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-
 import { FullComponent } from './layouts/full/full.component';
+import { LoginComponent } from './pages/login/login.component';
 
 export const AppRoutes: Routes = [
   {
@@ -20,11 +20,7 @@ export const AppRoutes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
-      {
-        path: 'login',
-        loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
       }
     ]
-  }
+  }, {path:'login', component:LoginComponent}
 ];
