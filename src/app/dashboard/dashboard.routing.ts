@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AutenticacionGuard } from '../guards/autenticacion.guard';
 
 import { DashboardComponent } from './dashboard.component';
 

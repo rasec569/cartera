@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from "rxjs";
-import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { tap, catchError } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import { usuario } from '../Models/usuario.model';
+import {rol} from '../Models/rol.model';
 
 const httpOptions = {
   headers: new HttpHeaders(
@@ -22,31 +21,30 @@ const HttpOptionsBody = {
   body: {id: "",},
 };
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-export class UserService {
-  constructor(private http:HttpClient) { }
-  //listar Usuario
-  public getUsuarios(): Observable<any> {
-    return this.http.get(`${environment.url}/user/`,httpOptions).pipe(
-      tap((result: any) => {
-      }),
+export class RolService {
+  constructor(private http: HttpClient) {}
+  //listar
+  public getRoles(): Observable<any> {
+    return this.http.get(`${environment.url}/rol/`, httpOptions).pipe(
+      tap((result: any) => {}),
       catchError(this.handleError)
     );
   }
   //buscar
-  public getUsuario(Usuario: usuario): Observable<any> {
-    HttpOptionsBody.body.id!=Usuario.iduser;
-    return this.http.get(`${environment.url}/user/${Usuario.iduser}`,HttpOptionsBody).pipe(
+  public getRol(Rol: rol): Observable<any> {
+    HttpOptionsBody.body.id!=Rol.id;
+    return this.http.get(`${environment.url}/rol/${Rol.id}`,HttpOptionsBody).pipe(
       tap((result: any) => {
       }),
       catchError(this.handleError)
     );
   }
-  //agregar Usuario
-  public createUsuarrio(Usuario: usuario): Observable<any> {
+  //registrar
+  public createRol(Rol:rol): Observable<any> {
     return this.http
-      .post(`${environment.url}/user/`, Usuario, httpOptions)
+      .post(`${environment.url}/rol/`, Rol, httpOptions)
       .pipe(
         tap((result: any) => {
           console.log(result);
@@ -54,10 +52,22 @@ export class UserService {
         catchError(this.handleError)
       );
   }
-   //modificar Usuario
-  public updateUsuario(User: usuario): Observable<any> {
+  //eliminar
+  public deleteRol(Rol: rol): Observable<any> {
+    HttpOptionsBody.body.id!=Rol.id;
     return this.http
-      .put(`${environment.url}/user/${User.iduser}`, User, httpOptions)
+      .delete(`${environment.url}/rol/`,HttpOptionsBody)
+      .pipe(
+        tap((result: any) => {
+          console.log(result);
+        }),
+        catchError(this.handleError)
+      );;
+  }
+  //modificar
+  public updateRol(Rol: rol): Observable<any> {
+    return this.http
+      .put(`${environment.url}/rol/${Rol.id}`, Rol, httpOptions)
       .pipe(
         tap((result: any) => {
           console.log(result);
@@ -65,19 +75,6 @@ export class UserService {
         catchError(this.handleError)
       );
   }
-//eliminar Usuario
-public deleteUsuario(User: usuario): Observable<any> {
-  HttpOptionsBody.body.id!=User.iduser;
-  return this.http
-    .delete(`${environment.url}/user/`,HttpOptionsBody)
-    .pipe(
-      tap((result: any) => {
-        console.log(result);
-      }),
-      catchError(this.handleError)
-    );;
-}
-  // error handle
   handleError(error: HttpErrorResponse) {
     let errorMessage = "Unknown error!";
     if (error.error instanceof ErrorEvent) {
@@ -88,3 +85,4 @@ public deleteUsuario(User: usuario): Observable<any> {
     return throwError(errorMessage);
   }
 }
+

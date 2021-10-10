@@ -6,8 +6,8 @@ File: scss
 */
 
 
-/*============================================================== 
- For all pages 
+/*==============================================================
+ For all pages
  ============================================================== */
 
 
@@ -24,11 +24,11 @@ File: scss
 	bottom: 0;
 	left: 0;
 	right: 0;
-} 
+}
 
 .mat-drawer-container{
 		background: $bodycolor;
-		
+
 }
 
 html .page-wrapper{
@@ -41,7 +41,9 @@ html .page-wrapper{
 .align-items-center{
 		align-items: center;
 }
-
+.mat-card {
+  margin: 2%;
+  padding: 2%;}
 /*******************
 Chartistt chart css
 ******************/
@@ -87,7 +89,7 @@ Chartistt chart css
 		border-radius: 100%;
 			}
  }
-}        
+}
 
 .button-row button{
 	margin-bottom: 5px;

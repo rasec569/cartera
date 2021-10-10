@@ -1,19 +1,26 @@
 <div class='body'>
-  <div class='login'>
-    <mat-spinner *ngIf='loading' class='spinner' diameter='50'></mat-spinner>
-    <form *ngIf='!loading' [formGroup]="form"(ngSubmit)="Ingresar()">
-    <img src="./assets/images/logo.png" alt="">
-    <h1>Inicio de sesión </h1>
-    <mat-form-field class='ancho' appearance="fill">
-      <mat-label>Usuario</mat-label>
-      <input type='text' matInput formControlName="usuario">
-    </mat-form-field>
-    <mat-form-field class='ancho' appearance="fill">
-      <mat-label>Contraseña</mat-label>
-      <input type='password' matInput formControlName="password">
-    </mat-form-field>
-    <button type='submit' class='ancho boton' mat-raised-button color="primary" [disabled]='form.invalid'>Ingresar</button>
-  </form>
-  </div>
+  <mat-card>
+    <mat-card-content>
+      <div class='login'>
+        <form  [formGroup]="formUser" (ngSubmit)="ingresar()">
+          <img src="./assets/images/logo.png" alt="">
+          <h1>Inicio de sesión </h1>
+          <mat-form-field class='ancho' appearance="fill">
+            <mat-label>Usuario</mat-label>
+            <input type='text' matInput formControlName="Usuario">
+          </mat-form-field>
+          <mat-form-field class='ancho' appearance="fill">
+            <mat-label>Contraseña</mat-label>
+            <input type='password' matInput formControlName="password">
+          </mat-form-field>
+          <button type="submit" [disabled]="formUser.invalid" class='ancho boton' mat-raised-button color="primary"
+            >Ingresar</button>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>
+<!-- <pre>
+  {{formUser.value|json}}
+</pre> -->
 

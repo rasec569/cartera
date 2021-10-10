@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { tap, catchError } from "rxjs/operators";
-/* import { JwtHelperService } from "@auth0/angular-jwt"; */
+import { JwtHelperService } from "@auth0/angular-jwt";
 import { environment } from 'src/environments/environment';
 const httpOptions = {
   headers: new HttpHeaders(
@@ -18,13 +18,13 @@ const httpOptions = {
 export class AutenticacionService {
 
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient/* , private jwtHelper:JwtHelperService */) { }
 
   signin(user:any): Observable<any>{
     return this.http.post(`${environment.url}/login/`,user, httpOptions).pipe(
       tap((result: any) => {
       }),
-      catchError(this.handleError)
+      catchError((err)=>this.handleError(err))
     );
   }
  /*  isAuth():boolean{
@@ -39,10 +39,11 @@ export class AutenticacionService {
   handleError(error: HttpErrorResponse) {
     let errorMessage = "Unknown error!";
     if (error.error instanceof ErrorEvent) {
-      errorMessage = `Error: ${error.error.message}`;
+      errorMessage = `Error: ${error.message}`;
     } else {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
+    console.log('mensaje Error',errorMessage);
     return throwError(errorMessage);
   }
 }

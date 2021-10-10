@@ -1,0 +1,211 @@
+<mat-card>
+  <mat-card-content>
+    <mat-card-title>Usuarios</mat-card-title>
+    <mat-card-subtitle>{{(idOption==1)?'Lista de Usuarios':(idOption==2)?'Agregar Nuevo Usuario':(idOption==3)?'Editar Usuario':'Detalle Usuario'}}</mat-card-subtitle>
+    <ng-container *ngIf="idOption==1">
+    <table style="text-align:center;" class="example-full-width" cellspacing="15">
+      <tr>
+        <td>
+          <mat-form-field appearance="standard">
+            <mat-label>Buscar</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+          </mat-form-field>
+        </td>
+        <td>
+          <button mat-raised-button color="primary"(click)="changeMode(2)"> Nuevo </button>
+        </td>
+      </tr>
+    </table>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+      <!-- Position Column -->
+      <ng-container matColumnDef="nombres">
+        <th mat-header-cell *matHeaderCellDef> nombres </th>
+        <td mat-cell *matCellDef="let item"> {{item.nombres}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="apellidos">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> apellidos </th>
+        <td mat-cell *matCellDef="let item"> {{item.apellidos}} </td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="usuario">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> usuario </th>
+        <td mat-cell *matCellDef="let item"> {{item.usuario}} </td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="Area">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Area </th>
+        <td mat-cell *matCellDef="let item"> {{item.Area}} </td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="Rol">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
+        <td mat-cell *matCellDef="let item"> {{item.Rol}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button [matMenuTriggerFor]="menu4">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu4="matMenu">
+            <button mat-menu-item (click)="changeMode(3)">
+              <mat-icon>edit</mat-icon>
+              <span>Editar</span>
+            </button>
+            <button mat-menu-item color="warn">
+              <mat-icon>delete</mat-icon>
+              <span>Eliminar</span>
+            </button>
+            <button mat-menu-item (click)="changeMode(4)" color="primary">
+              <mat-icon>loupe</mat-icon>
+              <span>Detalle</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No hay datos que coincidan con el filtro "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic items">
+    </mat-paginator>
+  </ng-container>
+  <ng-container *ngIf="idOption==2">
+    <mat-form-field>
+      <input matInput placeholder="Nombre area">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Descripción del area">
+    </mat-form-field>
+    <table style="text-align:center;" class="example-full-width" cellspacing="15">
+      <tr>
+        <td>
+          <button mat-raised-button color="primary"> Guardar </button>
+        </td>
+        <td>
+          <button mat-raised-button color="warn" (click)="changeMode(1)"> Cancelar </button>
+        </td>
+      </tr>
+    </table>
+</ng-container>
+<ng-container *ngIf="idOption==3">
+  <mat-form-field>
+    <input matInput placeholder="Nombre area">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Descripción del area">
+  </mat-form-field>
+  <table style="text-align:center;" class="example-full-width" cellspacing="15">
+    <tr>
+      <td>
+        <button mat-raised-button color="primary"> Guardar </button>
+      </td>
+      <td>
+        <button mat-raised-button color="warn" (click)="changeMode(1)"> Cancelar </button>
+      </td>
+    </tr>
+  </table>
+</ng-container>
+<ng-container *ngIf="idOption==4">
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title> Información Personal </mat-panel-title>
+            <mat-panel-description> Datos basicos
+                <mat-icon>person_outline</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+          <mat-form-field>
+            <input matInput placeholder="Cedula"> </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Nombres"> </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Apellidos"> </mat-form-field>
+        </div>
+        <mat-action-row>
+            <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title> Credenciales </mat-panel-title>
+            <mat-panel-description> Datos de inicio de session
+                <mat-icon>account_circle</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+          <mat-form-field>
+            <input matInput placeholder="Usuario"> </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Contraseña"> </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Confirme Contraseña"> </mat-form-field>
+        </div>
+        <mat-action-row>
+            <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+            <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title> Información contácto </mat-panel-title>
+            <mat-panel-description> Medio para entablar comunicación o contacto
+                <mat-icon>contact_mail</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+          <mat-form-field>
+            <input matInput placeholder="Email"> </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Telefono"> </mat-form-field>
+        </div>
+        <mat-form-field>
+          <input matInput placeholder="Dirección"> </mat-form-field>
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+          <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle="true">
+      <mat-expansion-panel-header>
+          <mat-panel-title> Información laboral </mat-panel-title>
+          <mat-panel-description> Datos de su trabajo
+              <mat-icon>badge</mat-icon>
+          </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+        <mat-form-field>
+          <input matInput placeholder="Area"> </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Rol"> </mat-form-field>
+      </div>
+      <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+          <button mat-button color="primary" (click)="nextStep()">Finalizar</button>
+      </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+  <table style="text-align:center;" class="example-full-width" cellspacing="15">
+    <tr>
+      <td>
+        <button mat-raised-button color="primary"> Guardar </button>
+      </td>
+      <td>
+        <button mat-raised-button color="warn" (click)="changeMode(1)"> Cancelar </button>
+      </td>
+    </tr>
+  </table>
+</ng-container>
+
+  </mat-card-content>
+</mat-card>

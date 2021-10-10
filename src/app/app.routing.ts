@@ -1,11 +1,16 @@
 import { Routes } from '@angular/router';
 import { FullComponent } from './layouts/full/full.component';
+import { AutenticacionGuard } from "./guards/autenticacion.guard";
 
 export const AppRoutes: Routes = [
   {
     path: '',
     redirectTo: '/login',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   {
     path: '',
@@ -17,11 +22,11 @@ export const AppRoutes: Routes = [
           () => import('./material-component/material.module').then(m => m.MaterialComponentsModule)
       },
       {
-        path: 'dashboard',
+        path: '',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
-        path: 'pages',
+        path: '',
         loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
       },
       { path:'**',
@@ -30,10 +35,7 @@ export const AppRoutes: Routes = [
       }
     ]
   },
-  {
-    path: '',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
-  }
+
 
 
 

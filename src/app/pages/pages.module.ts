@@ -11,6 +11,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { PagesRoutes } from './pages.routing';
+import { PanelComponent } from './panel/panel.component';
+import { AreaComponent } from './panel/panel-components/area/area.component';
+import { RolComponent } from './panel/panel-components/rol/rol.component';
+import { UserComponent } from './panel/panel-components/user/user.component';
 
 
 
@@ -28,7 +32,11 @@ import { PagesRoutes } from './pages.routing';
   ],providers: [],
   entryComponents: [],
   declarations: [
-    
+  
+    PanelComponent,
+       AreaComponent,
+       RolComponent,
+       UserComponent
   ]
 })
 export class PagesModule { }

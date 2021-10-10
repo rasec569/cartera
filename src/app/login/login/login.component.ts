@@ -1,67 +1,65 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
+import { AutenticacionService } from 'src/app/services/autenticacion.service';
 
 @Component({
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;
-  loading = false;
-  validationLogin: boolean = false;
+  formUser: FormGroup;
   ValidationMensage: string = "";
 
   options = {
     autoClose: true,
-    keepAfterRouteChange: false
+    keepAfterRouteChange: false,
   };
-  constructor(
-              private fb:FormBuilder,
-              private _snackBar:MatSnackBar
-              , private router: Router)
-  {
-    this.form=this.fb.group({
-      usuario:['',Validators.required],
-      password:['',Validators.required]
+  constructor( private fb:FormBuilder,
+    private autenticacionService: AutenticacionService,
+    private _snackBar: MatSnackBar,
+    private router: Router)
+    {this.formUser=this.fb.group({
+      Usuario:['', Validators.required],
+      password:['', Validators.required]
     })
-  }
+    }
 
   ngOnInit(): void {
   }
-  Ingresar(){
-    this.validationLogin = false;
-    this.ValidationMensage = "";
-    const usuario=this.form.value.usuario;
-    const password=this.form.value.password;
-    /* this.autenticacionService.signin(this.Usuario).subscribe(
+  ingresar() {
+    this.autenticacionService.signin(this.formUser.value).subscribe(
       (res: any) => {
+        console.log(res.token != null);
         if (res.token != null) {
           localStorage.setItem("token", res.token);
-          this.espera();
+          this.router.navigate(["dashboard"]);
         } else {
-          this.error('Usurio o contraseña incorrecta');
-          this.Usuario.reset();
+          this.error("Usurio o contraseña incorrecta", 'Error');
+          this.formUser.reset();
         }
-      },
-      (err) => {
-        console.log(err)
-        this.error('Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!');
+      },(err) => {
+        console.log(err);
+        this.error(
+          "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+          , "Error"
+        );
       }
-    ); */
+    );
   }
-    error(Mensaje: string) {
-      this._snackBar.open(Mensaje, 'Error', {
-        duration:5000,
-        horizontalPosition: 'right',
-        verticalPosition: 'bottom',
-      });
-    }
-    espera(){
-      this.loading=true;
-      setTimeout(() =>{
-        this.router.navigate(['dashboard']);
-      }, 1500);
-    }
+  error(Mensaje: string, Tipo:string) {
+    this._snackBar.open(Mensaje, Tipo, {
+      duration: 5000,
+      horizontalPosition: "right",
+      verticalPosition: "top",
+      /* panelClass: ['mat-toolbar', 'mat-primary'], */
+    });
+  }
+  espera() {
+    setTimeout(() => {
+      this.router.navigate(["dashboard"]);
+    }, 1500);
+  }
 }

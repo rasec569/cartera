@@ -27,3 +27,12 @@ File: scss
 @import 'responsive';
 
 @import "../styles/icons/material-design-iconic-font/css/materialdesignicons.min.css";
+/* Structure */
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
