@@ -23,6 +23,9 @@ export class AutenticacionService {
   signin(user:any): Observable<any>{
     return this.http.post(`${environment.url}/login/`,user, httpOptions).pipe(
       tap((result: any) => {
+        if (result.token != null) {
+          localStorage.setItem("token", result.token);
+        }
       }),
       catchError((err)=>this.handleError(err))
     );
@@ -34,6 +37,9 @@ export class AutenticacionService {
     }
     return true;
   } */
+  logut(){
+    localStorage.removeItem("token");
+  }
 
   // error handle
   handleError(error: HttpErrorResponse) {

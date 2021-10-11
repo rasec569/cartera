@@ -1,9 +1,9 @@
-export class rol{
-  public id?:string;
-  public nombre!:string;
-  public descripcion!: string;
-  public estado!:string;
+export interface rol{
+  id:string;
+  nombre:string;
+  descripcion: string;
+  estado:string;
   //error vars
-  public TIPO?:string;
-  public MENSAJE?:string;
+  TIPO?:string;
+  MENSAJE?:string;
 }

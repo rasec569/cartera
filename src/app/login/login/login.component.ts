@@ -11,12 +11,6 @@ import { AutenticacionService } from 'src/app/services/autenticacion.service';
 })
 export class LoginComponent implements OnInit {
   formUser: FormGroup;
-  ValidationMensage: string = "";
-
-  options = {
-    autoClose: true,
-    keepAfterRouteChange: false,
-  };
   constructor( private fb:FormBuilder,
     private autenticacionService: AutenticacionService,
     private _snackBar: MatSnackBar,
@@ -25,6 +19,9 @@ export class LoginComponent implements OnInit {
       Usuario:['', Validators.required],
       password:['', Validators.required]
     })
+    if(localStorage.getItem('token')!=null){
+      this.router.navigate(["dashboard"]);
+    }
     }
 
   ngOnInit(): void {
@@ -32,9 +29,7 @@ export class LoginComponent implements OnInit {
   ingresar() {
     this.autenticacionService.signin(this.formUser.value).subscribe(
       (res: any) => {
-        console.log(res.token != null);
         if (res.token != null) {
-          localStorage.setItem("token", res.token);
           this.router.navigate(["dashboard"]);
         } else {
           this.error("Usurio o contraseña incorrecta", 'Error');

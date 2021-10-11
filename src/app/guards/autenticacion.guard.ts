@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router} from '@angular/router';
 import { AutenticacionService } from '../services/autenticacion.service';
 
 @Injectable({
@@ -11,15 +11,18 @@ export class AutenticacionGuard implements CanActivate {
     private router: Router
   ){  }
 
-  canActivate(): boolean {
-    /* if(!this.autenticacionService.isAuth()){
+  canActivate(route:ActivatedRouteSnapshot){
+    this.router.navigate(['/login/']);
+    return false;
+  }
+  /* canActivate(): boolean {
+    if(!this.autenticacionService.isAuth()){
       console.log('Token no es válido o expiró');
       this.router.navigate(['/login']);
       return false;
-    } */
     console.log('Token válido');
     return true;
 
-  }
+  } */
 
 }

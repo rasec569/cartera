@@ -54,7 +54,7 @@ export class RolService {
   }
   //eliminar
   public deleteRol(Rol: rol): Observable<any> {
-    HttpOptionsBody.body.id!=Rol.id;
+    HttpOptionsBody.body.id=Rol.id;
     return this.http
       .delete(`${environment.url}/rol/`,HttpOptionsBody)
       .pipe(
