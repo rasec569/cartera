@@ -36,7 +36,6 @@ export class UserService {
   }
   //buscar
   public getUsuario(iduser: any): Observable<any> {
-    console.log('en el servicio' ,iduser);
     HttpOptionsBody.body.id!=iduser;
     return this.http.get(`${environment.url}/user/${iduser}`,HttpOptionsBody).pipe(
       tap((result: any) => {
@@ -50,7 +49,6 @@ export class UserService {
       .post(`${environment.url}/user/`, Usuario, httpOptions)
       .pipe(
         tap((result: any) => {
-          console.log(result);
         }),
         catchError(this.handleError)
       );

@@ -6,24 +6,23 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeletevalidacionComponent } from 'src/app/shared/deletevalidacion/deletevalidacion.component';
 import { MatDialog } from '@angular/material/dialog';
 
-import { UserService } from 'src/app/services/user.service';
-import { usuario } from 'src/app/Models/usuario.model';
-
+import { InmuebleService } from 'src/app/services/inmueble.service';
+import { inmueble } from 'src/app/Models/inmueble.model';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-list-inmuebles',
+  templateUrl: './list-inmuebles.component.html',
+  styleUrls: ['./list-inmuebles.component.css']
 })
-export class UsersComponent implements  OnInit, AfterViewInit  {
- /*  public listUser!: any[]; */
-  dataSource = new MatTableDataSource<usuario>();
+export class ListInmueblesComponent implements OnInit {
+  dataSource = new MatTableDataSource<inmueble>();
   public displayedColumns: string[] = [
-    "nombres",
-    "apellidos",
-    "usuario",
-    "Area",
-    "Rol",
+    "Manzana",
+    "Casa",
+    "etapa",
+    "proyecto",
+    "Valor_Final",
+    "estado",
     "Acciones",
   ];
   @ViewChild(MatPaginator)
@@ -31,12 +30,12 @@ export class UsersComponent implements  OnInit, AfterViewInit  {
   @ViewChild(MatSort)
   sort!: MatSort;
   constructor(private _snackBar: MatSnackBar,
-              private UserS: UserService,
+              private InmuebleS: InmuebleService,
               private changeDetectorRefs: ChangeDetectorRef,
               public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.QueryUser();
+    this.QueryInmuebles();
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -46,10 +45,10 @@ export class UsersComponent implements  OnInit, AfterViewInit  {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  QueryUser() {
+  QueryInmuebles() {
     try {
-      this.UserS.getUsuarios().subscribe(
-        (res: usuario[]) => {
+      this.InmuebleS.getInmuebles().subscribe(
+        (res: inmueble[]) => {
           console.log(res);
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             /* this.listUser=res;
@@ -72,18 +71,26 @@ export class UsersComponent implements  OnInit, AfterViewInit  {
       );
     }
   }
-  RemoveUsuario(Usuario: usuario) {
+  notificacion(Mensaje: string) {
+    this._snackBar.open(Mensaje, "", {
+      duration: 5000,
+      horizontalPosition: "right",
+      verticalPosition: "top",
+      /* panelClass: ['mat-toolbar', 'mat-primary'], */
+    });
+  }
+  RemoveInmueble(Inmueble: inmueble) {
     const dialogoRef = this.dialog.open(DeletevalidacionComponent, {
       width: "300px",
     });
     dialogoRef.afterClosed().subscribe((res) => {
       if (res) {
         try {
-          this.UserS.deleteUsuario(Usuario).subscribe(
-            (res: usuario[]) => {
+          this.InmuebleS.deleteInmueble(Inmueble).subscribe(
+            (res: inmueble[]) => {
               if (res[0].TIPO == "3") {
                 this.notificacion(res[0].MENSAJE!);
-                this.QueryUser();
+                this.QueryInmuebles();
               } else {
                 this.notificacion(res[0].MENSAJE!);
               }
@@ -100,39 +107,6 @@ export class UsersComponent implements  OnInit, AfterViewInit  {
           );
         }
       }
-    });
-
-  }
-  /* RemoveUsuario(Usuario: usuario) {
-    try {
-      console.log(Usuario)
-      this.UserS.deleteUsuario(Usuario).subscribe(
-        (res: usuario[]) => {
-          if (res[0].TIPO == "3") {
-            this.notificacion(res[0].MENSAJE!);
-            this.QueryUser();
-          } else {
-            this.notificacion(res[0].MENSAJE!);
-          }
-        },
-        (err) => {
-          this.notificacion(
-            "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
-          );
-        }
-      );
-    } catch (error) {
-      this.notificacion(
-        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
-      );
-    }
-  } */
-  notificacion(Mensaje: string) {
-    this._snackBar.open(Mensaje, "", {
-      duration: 5000,
-      horizontalPosition: "right",
-      verticalPosition: "top",
-      /* panelClass: ['mat-toolbar', 'mat-primary'], */
     });
   }
 }

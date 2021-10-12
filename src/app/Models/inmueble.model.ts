@@ -1,5 +1,5 @@
 export interface inmueble {
-  id?: string;
+  id: string;
   manzana: string;
   casa: string;
   Valor_Inicial: string;
