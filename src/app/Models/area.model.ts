@@ -1,9 +1,9 @@
-export class area{
-  public id?:string;
-  public nombre!: string;
-  public descripcion!: string;
-  public estado!:string;
+export interface area {
+  id?: string;
+  nombre: string;
+  descripcion: string;
+  estado: string;
   //error vars
-  public TIPO?:string;
-  public MENSAJE?:string;
+  TIPO?: string;
+  MENSAJE?: string;
 }

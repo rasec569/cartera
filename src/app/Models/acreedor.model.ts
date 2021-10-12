@@ -1,17 +1,17 @@
-export class acreedor{
+export interface acreedor{
   //persona
-  public id?:string;
-  public nombres: string;
-  public apellidos:string;
-  public telefono:string;
-  public direccion?:string;
-  public correo:string;
-  public identificacion:string;
+   id?:string;
+   nombres: string;
+   apellidos:string;
+   telefono:string;
+   direccion?:string;
+   correo:string;
+   identificacion:string;
   //usuario
-  public idacreedor?:string;
-  public descripcion:string;
+   idacreedor?:string;
+   descripcion:string;
 
   //error vars
-  public TIPO?:string;
-  public MENSAJE?:string;
+   TIPO?:string;
+   MENSAJE?:string;
 }

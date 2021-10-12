@@ -1,16 +1,16 @@
-export class file{
-  public idArchivo?:string;
-  public nombreReal:string;
-  public nombreDerivado?: string;
-  public rutaRelativa:string;
-  public estadoArchivo:string;
-  public fechaCreacion?:string;
-  public fechaModificacion?:string;
-  public nombreArea:string;
-  public nombreCategoria?:string;
-  public idarea?:string;
-  public idCategoria?:string;
+export interface file {
+  idArchivo?: string;
+  nombreReal: string;
+  nombreDerivado?: string;
+  rutaRelativa: string;
+  estadoArchivo: string;
+  fechaCreacion?: string;
+  fechaModificacion?: string;
+  nombreArea: string;
+  nombreCategoria?: string;
+  idarea?: string;
+  idCategoria?: string;
   //error vars
-  public TIPO?:string;
-  public MENSAJE?:string;
+  TIPO?: string;
+  MENSAJE?: string;
 }

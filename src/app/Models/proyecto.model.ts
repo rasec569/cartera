@@ -1,13 +1,12 @@
-export class proyecto{
-  public id?:string;
-  public nombre:string;
-  public ubicacion:string;
-  public estado?:string;
-  public etapas?;
-  public estado_etapa?:string;
-  public manzanas?:string;
-
+export interface proyecto {
+  id?: string;
+  nombre: string;
+  ubicacion: string;
+  estado?: string;
+  etapas?: string;
+  estado_etapa?: string;
+  manzanas?: string;
   //error vars
-  public TIPO?:string;
-  public MENSAJE?:string;
+  TIPO?: string;
+  MENSAJE?: string;
 }

@@ -1,13 +1,13 @@
-export class cliente{
-  public id?:string;
-  public identification?:string;
-  public nombres: string;
-  public apellidos:string;
-  public telefono:string;
-  public direccion:string;
-  public correo:string;
+export interface cliente {
+  id?: string;
+  identification?: string;
+  nombres: string;
+  apellidos: string;
+  telefono: string;
+  direccion: string;
+  correo: string;
 
   //error vars
-  public TIPO?:string;
-  public MENSAJE?:string;
+  TIPO?: string;
+  MENSAJE?: string;
 }

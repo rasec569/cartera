@@ -1,11 +1,11 @@
-export class egreso{
-  public id?:string;
-  public numero:string;
-  public fecha: string;
-  public referencia:string;
-  public valor: string;
-  public obligacionid: string;
+export interface egreso {
+  id?: string;
+  numero: string;
+  fecha: string;
+  referencia: string;
+  valor: string;
+  obligacionid: string;
   //error vars
-  public TIPO?:string;
-  public MENSAJE?:string;
+  TIPO?: string;
+  MENSAJE?: string;
 }

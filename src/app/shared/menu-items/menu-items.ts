@@ -13,7 +13,6 @@ const MENUITEMS = [
   { state: 'login', type: 'link', name: 'login', icon: 'crop_7_5' },
   { state: 'expansion', type: 'link', name: 'form', icon: 'crop_7_5' },
   { state: 'panel', type: 'link', name: 'Panel', icon: 'tune' }
-
 ];
 
 @Injectable()

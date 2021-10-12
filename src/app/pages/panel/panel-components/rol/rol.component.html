@@ -2,54 +2,53 @@
   <mat-card-content>
       <mat-card-title>Rol</mat-card-title>
       <mat-card-subtitle>{{(idOption==1)?'Lista de Roles':(idOption==2)?'Agregar Nuevo Rol':'Editar Rol'}}</mat-card-subtitle>
-      <ng-container *ngIf="idOption==1">
+      <ng-container *ngIf="idOption==1 && dataSource.data.length>=1">
         <div>
-          <table class="example-full-width" style="text-align:center;" cellspacing="15">
-            <tr>
-              <td>
-                <mat-form-field appearance="standard">
-                  <mat-label>Buscar</mat-label>
-                  <input matInput (keyup)="applyFilter($event)" matTooltip="Buscar en la lista de roles" placeholder="Cualquier palabra" #input>
-                </mat-form-field>
-              </td>
-              <td>
-                <button mat-raised-button color="primary" (click)="changeMode(2)" matTooltip="Registar nuevo rol"> Nuevo </button>
-              </td>
-            </tr>
-          </table>
           <div class="mat-elevation-z8">
+            <table class="example-full-width" style="text-align:center;" cellspacing="15">
+              <tr>
+                <td>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Buscar</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" matTooltip="Buscar en la lista de roles" placeholder="Cualquier palabra" #input>
+                  </mat-form-field>
+                </td>
+                <td>
+                  <button mat-raised-button color="primary" (click)="changeMode(2)" matTooltip="Registar nuevo rol"> Nuevo </button>
+                </td>
+              </tr>
+            </table>
           <table mat-table [dataSource]="dataSource"  matSort >
             <!-- Position Column -->
             <ng-container matColumnDef="nombre">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
-              <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+              <td mat-cell *matCellDef="let item"> {{item.nombre}} </td>
             </ng-container>
             <!-- Name Column -->
             <ng-container matColumnDef="descripcion">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
-              <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+              <td mat-cell *matCellDef="let item"> {{item.descripcion}} </td>
             </ng-container>
             <ng-container matColumnDef="Acciones">
-              <th mat-header-cell *matHeaderCellDef> </th>
-              <td mat-cell *matCellDef="let element">
+              <th mat-header-cell *matHeaderCellDef> Acción</th>
+              <td mat-cell *matCellDef="let item">
                 <button mat-icon-button [matMenuTriggerFor]="menu4" matTooltip="Acciones del rol">
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu4="matMenu">
-                  <button mat-menu-item (click)="QueryOneRol(element)">
+                  <button mat-menu-item (click)="QueryOneRol(item)">
                     <mat-icon>edit</mat-icon>
                     <span>Editar</span>
                   </button>
-                  <button mat-menu-item color="warn" (click)="RemoveRol(element)">
+                  <button mat-menu-item color="warn" (click)="RemoveRol(item)">
                     <mat-icon>delete</mat-icon>
                     <span>Eliminar</span>
                   </button>
                 </mat-menu>
               </td>
             </ng-container>
-
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
             <!-- Row shown when there is no matching data. -->
             <tr class="mat-row" *matNoDataRow>
@@ -60,12 +59,11 @@
           </mat-paginator>
         </div>
       </div>
-      <div  *ngIf="dataSource.length===0">
-        <h2>Sin datos para mostar</h2>
-      </div>
-
     </ng-container>
-  <ng-container *ngIf="idOption==2">
+    <div  *ngIf="dataSource.data.length===0">
+      <h3>Sin datos para mostar</h3>
+    </div>
+  <ng-container *ngIf="idOption===2">
     <form  [formGroup]="formRol" (ngSubmit)="SaveRol()">
       <mat-form-field>
         <input matInput placeholder="Nombre Rol" formControlName="nombre">

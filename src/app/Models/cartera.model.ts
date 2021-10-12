@@ -1,11 +1,11 @@
-export class cartera{
-  public id?:string;
-  public estado:string;
-  public recaudado: string;
-  public saldo:string;
-  public total: string;
-  public clienteid: string;
+export interface cartera {
+  id?: string;
+  estado: string;
+  recaudado: string;
+  saldo: string;
+  total: string;
+  clienteid: string;
   //error vars
-  public TIPO?:string;
-  public MENSAJE?:string;
+  TIPO?: string;
+  MENSAJE?: string;
 }

@@ -1,19 +1,18 @@
-export class usuario{
+export interface usuario {
   //persona
-  public nombres!: string;
-  public apellidos!:string;
-  public telefono!:string;
-  public direccion?:string;
-  public correo!:string;
-  public identificacion!:string;
+  nombres: string;
+  apellidos: string;
+  telefono: string;
+  direccion: string;
+  correo: string;
+  identificacion: string;
   //usuario
-  public iduser?:string;
-  public nick!:string;
-  public password!: string;
-  public IdRol!:string;
-  public IdArea!:string;
-
+  iduser: string;
+  nick: string;
+  password: string;
+  IdRol: string;
+  IdArea: string;
   //error vars
-  public TIPO?:string;
-  public MENSAJE?:string;
+  TIPO?: string;
+  MENSAJE?: string;
 }

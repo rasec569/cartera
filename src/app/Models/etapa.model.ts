@@ -1,11 +1,11 @@
-export class etapa{
-  public id?:string;
-  public numero:string;
-  public valor:string;
-  public manzanas: string;
-  public estado:string;
-  public idproyecto:string;
+export interface etapa {
+  id?: string;
+  numero: string;
+  valor: string;
+  manzanas: string;
+  estado: string;
+  idproyecto: string;
   //error vars
-  public TIPO?:string;
-  public MENSAJE?:string;
+  TIPO?: string;
+  MENSAJE?: string;
 }

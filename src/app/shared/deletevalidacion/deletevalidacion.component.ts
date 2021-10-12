@@ -8,5 +8,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DeletevalidacionComponent {
 
-  constructor(dialogoRef:MatDialogRef<DeletevalidacionComponent>) { }
+  constructor(public dialogoRef:MatDialogRef<DeletevalidacionComponent>) { }
+  onNoClick(): void {
+    this.dialogoRef.close();
+  }
 }

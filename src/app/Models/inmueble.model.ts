@@ -1,16 +1,16 @@
-export class inmueble{
-  public id?:string;
-  public manzana:string;
-  public casa:string;
-  public Valor_Inicial: string;
-  public Valor_Final?:string;
-  public catastral?:string;
-  public escritura?: string;
-  public matricula?:string;
-  public estado: string;
-  public idproyecto:string;
-  public idetapa:string;
+export interface inmueble {
+  id?: string;
+  manzana: string;
+  casa: string;
+  Valor_Inicial: string;
+  Valor_Final?: string;
+  catastral?: string;
+  escritura?: string;
+  matricula?: string;
+  estado: string;
+  idproyecto: string;
+  idetapa: string;
   //error vars
-  public TIPO?:string;
-  public MENSAJE?:string;
+  TIPO?: string;
+  MENSAJE?: string;
 }

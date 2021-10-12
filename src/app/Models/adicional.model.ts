@@ -1,11 +1,11 @@
-export class adicional{
-  public id?:string;
-  public concepto:string;
-  public valor:string;
-  public estado:string;
-  public fecha: string;
-  public contratoid:string;
+export interface adicional {
+  id?: string;
+  concepto: string;
+  valor: string;
+  estado: string;
+  fecha: string;
+  contratoid: string;
   //error vars
-  public TIPO?:string;
-  public MENSAJE?:string;
+  TIPO?: string;
+  MENSAJE?: string;
 }

@@ -35,9 +35,10 @@ export class UserService {
     );
   }
   //buscar
-  public getUsuario(Usuario: usuario): Observable<any> {
-    HttpOptionsBody.body.id!=Usuario.iduser;
-    return this.http.get(`${environment.url}/user/${Usuario.iduser}`,HttpOptionsBody).pipe(
+  public getUsuario(iduser: any): Observable<any> {
+    console.log('en el servicio' ,iduser);
+    HttpOptionsBody.body.id!=iduser;
+    return this.http.get(`${environment.url}/user/${iduser}`,HttpOptionsBody).pipe(
       tap((result: any) => {
       }),
       catchError(this.handleError)
@@ -67,7 +68,7 @@ export class UserService {
   }
 //eliminar Usuario
 public deleteUsuario(User: usuario): Observable<any> {
-  HttpOptionsBody.body.id!=User.iduser;
+  HttpOptionsBody.body.id=User.iduser;
   return this.http
     .delete(`${environment.url}/user/`,HttpOptionsBody)
     .pipe(
