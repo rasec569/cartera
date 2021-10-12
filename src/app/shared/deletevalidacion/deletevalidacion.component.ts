@@ -2,14 +2,9 @@ import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-deletevalidacion',
-  templateUrl: './deletevalidacion.component.html',
-  styleUrls: ['./deletevalidacion.component.css']
+  templateUrl: './deletevalidacion.component.html'
 })
 export class DeletevalidacionComponent {
 
   constructor(public dialogoRef:MatDialogRef<DeletevalidacionComponent>) { }
-  onNoClick(): void {
-    this.dialogoRef.close();
-  }
 }

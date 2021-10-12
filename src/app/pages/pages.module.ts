@@ -16,6 +16,7 @@ import { AreaComponent } from './panel/panel-components/area/area.component';
 import { RolComponent } from './panel/panel-components/rol/rol.component';
 import { UserComponent } from './panel/panel-components/user/user.component';
 import { FormUserComponent } from './panel/panel-components/form-user/form-user.component';
+import { UsersComponent } from './panel/panel-components/users/users.component';
 
 
 
@@ -38,7 +39,8 @@ import { FormUserComponent } from './panel/panel-components/form-user/form-user.
        AreaComponent,
        RolComponent,
        UserComponent,
-       FormUserComponent
+       FormUserComponent,
+       UsersComponent
   ]
 })
 export class PagesModule { }

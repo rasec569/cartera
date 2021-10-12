@@ -157,37 +157,42 @@ export class RolComponent implements OnInit, AfterViewInit {
   }
 
   RemoveRol(Rol: rol) {
-    try {
-      this.RolS.deleteRol(Rol).subscribe(
-        (res: rol[]) => {
-          if (res[0].TIPO == "3") {
-            this.notificacion(res[0].MENSAJE!);
-            this.QueryRoles();
-          } else {
-            this.notificacion(res[0].MENSAJE!);
-          }
-        },
-        (err) => {
-          this.QueryRoles();
-          this.notificacion(
-            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
-          );
-        }
-      );
-    } catch (notificacion) {
-      this.notificacion(
-        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
-      );
-    }
-  }
-  confirmaciondelete(Rol: rol) {
-    console.log(Rol);
     const dialogoRef = this.dialog.open(DeletevalidacionComponent, {
       width: "300px",
     });
     dialogoRef.afterClosed().subscribe((res) => {
-      console.log(res);
-      if (res === 1) {
+      if (res) {
+        try {
+          this.RolS.deleteRol(Rol).subscribe(
+            (res: rol[]) => {
+              if (res[0].TIPO == "3") {
+                this.notificacion(res[0].MENSAJE!);
+                this.QueryRoles();
+              } else {
+                this.notificacion(res[0].MENSAJE!);
+              }
+            },
+            (err) => {
+              this.notificacion(
+                "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+              );
+            }
+          );
+        } catch (notificacion) {
+          this.notificacion(
+            "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+          );
+        }
+      }
+    });
+
+  }
+  confirmaciondelete(Rol: rol) {
+    const dialogoRef = this.dialog.open(DeletevalidacionComponent, {
+      width: "300px",
+    });
+    dialogoRef.afterClosed().subscribe((res) => {
+      if (res) {
         this.RemoveRol(Rol);
       }
       this.QueryRoles();

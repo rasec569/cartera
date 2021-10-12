@@ -1,8 +1,8 @@
 <h1 mat-dialog-title>Eliminar</h1>
 <div mat-dialog-content >
-  <h3>¿Esta seguro de elimniar?</h3>
+  <h3>¿Esta seguro de lo que va a elimniar?</h3>
 </div>
-<div>
-  <button mat-raised-button color="primary" (click)="onNoClick()" >Cancelar </button>
-  <button mat-button matDialogClose>Eliminar</button>
+<div style="text-align: center;">
+  <button mat-raised-button color="primary" cdkFocusInitial [mat-dialog-close]="false" style="margin-right: 10px" >Cancelar </button>
+  <button mat-raised-button color="warn"  [mat-dialog-close]="true">Eliminar</button>
 </div>

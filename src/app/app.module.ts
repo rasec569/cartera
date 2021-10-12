@@ -18,6 +18,7 @@ import { DemoMaterialModule } from './demo-material-module';
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { DeletevalidacionComponent } from './shared/deletevalidacion/deletevalidacion.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     FullComponent,
     AppHeaderComponent,
     SpinnerComponent,
-    AppSidebarComponent
+    AppSidebarComponent,
+    DeletevalidacionComponent
   ],
   imports: [
     BrowserModule,
