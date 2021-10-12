@@ -1,5 +1,5 @@
 export interface proyecto {
-  id?: string;
+  id: string;
   nombre: string;
   ubicacion: string;
   estado?: string;

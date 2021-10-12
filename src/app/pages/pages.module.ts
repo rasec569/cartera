@@ -18,6 +18,8 @@ import { FormUserComponent } from "./panel/panel-components/form-user/form-user.
 import { UsersComponent } from "./panel/panel-components/users/users.component";
 import { InmuebleComponent } from './inmueble/inmueble.component';
 import { ListInmueblesComponent } from './inmueble/list-inmuebles/list-inmuebles.component';
+import { ProyectoComponent } from './proyecto/proyecto.component';
+import { ListProyetoComponent } from './proyecto/list-proyeto/list-proyeto.component';
 
 @NgModule({
   imports: [
@@ -40,6 +42,8 @@ import { ListInmueblesComponent } from './inmueble/list-inmuebles/list-inmuebles
     UsersComponent,
     InmuebleComponent,
     ListInmueblesComponent,
+    ProyectoComponent,
+    ListProyetoComponent,
   ],
 })
 export class PagesModule {}
