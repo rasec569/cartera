@@ -1,14 +1,14 @@
 export interface acreedor{
   //persona
-   id?:string;
+   id:string;
    nombres: string;
    apellidos:string;
    telefono:string;
-   direccion?:string;
+   direccion:string;
    correo:string;
    identificacion:string;
   //usuario
-   idacreedor?:string;
+   idacreedor:string;
    descripcion:string;
 
   //error vars

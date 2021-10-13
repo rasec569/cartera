@@ -20,6 +20,13 @@ import { InmuebleComponent } from './inmueble/inmueble.component';
 import { ListInmueblesComponent } from './inmueble/list-inmuebles/list-inmuebles.component';
 import { ProyectoComponent } from './proyecto/proyecto.component';
 import { ListProyetoComponent } from './proyecto/list-proyeto/list-proyeto.component';
+import { ClienenteComponent } from './clienente/clienente.component';
+import { ListClientesComponent } from './clienente/list-clientes/list-clientes.component';
+import { CarteraComponent } from './cartera/cartera.component';
+import { ArchivoComponent } from './archivo/archivo.component';
+import { ListAllFileComponent } from './archivo/list-all-file/list-all-file.component';
+import { AcreedoresComponent } from './acreedores/acreedores.component';
+import { ListAcreedoresComponent } from './acreedores/list-acreedores/list-acreedores.component';
 
 @NgModule({
   imports: [
@@ -44,6 +51,13 @@ import { ListProyetoComponent } from './proyecto/list-proyeto/list-proyeto.compo
     ListInmueblesComponent,
     ProyectoComponent,
     ListProyetoComponent,
+    ClienenteComponent,
+    ListClientesComponent,
+    CarteraComponent,
+    ArchivoComponent,
+    ListAllFileComponent,
+    AcreedoresComponent,
+    ListAcreedoresComponent,
   ],
 })
 export class PagesModule {}

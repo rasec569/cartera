@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-content>
 
-    <mat-card-title>Usuarios {{userid}}</mat-card-title>
+    <mat-card-title>Usuario  {{formUser.value.nick}}</mat-card-title>
     <mat-card-subtitle>Formulario</mat-card-subtitle>
     <mat-accordion class="example-headers-align" [formGroup]="formUser">
       <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
@@ -34,9 +34,9 @@
             <mat-form-field>
               <input matInput placeholder="Usuario" formControlName="nick"> </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Contraseña" formControlName="password"> </mat-form-field>
+              <input type="password" matInput placeholder="Contraseña" formControlName="password"> </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Confirme Contraseña" > </mat-form-field>
+              <input matInput placeholder="Confirme Contraseña"> </mat-form-field>
           </div>
           <mat-action-row>
               <button mat-button color="warn" (click)="prevStep()">Anterior</button>
@@ -97,15 +97,16 @@
   <table style="text-align:center;" class="example-full-width" cellspacing="15">
     <tr>
       <td>
-        <button (click)="SaveUsuario()" mat-raised-button color="primary" [disabled]="formUser.invalid"> Guardar </button>
+        <button mat-raised-button color="warn" [routerLink]="['/panel']"> Cancelar </button>
+
       </td>
       <td>
-        <button mat-raised-button color="warn" [routerLink]="['/panel']"> Cancelar </button>
+        <button (click)="SaveUsuario()" mat-raised-button color="primary" [disabled]="formUser.invalid"> Guardar </button>
       </td>
     </tr>
   </table>
-  <pre>
+  <!-- <pre>
     {{formUser.value|json}}
-  </pre>
+  </pre> -->
   </mat-card-content>
 </mat-card>

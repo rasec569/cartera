@@ -1,6 +1,6 @@
 export interface cliente {
-  id?: string;
-  identification?: string;
+  id: string;
+  identification: string;
   nombres: string;
   apellidos: string;
   telefono: string;

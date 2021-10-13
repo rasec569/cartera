@@ -3,7 +3,6 @@
       <mat-card-title>Rol</mat-card-title>
       <mat-card-subtitle>{{(idOption==1)?'Lista de Roles':(idOption==2)?'Agregar Nuevo Rol':'Editar Rol'}}</mat-card-subtitle>
       <ng-container *ngIf="idOption==1 && dataSource.data.length>=1">
-        <div>
           <div class="mat-elevation-z8">
             <table class="example-full-width" style="text-align:center;" cellspacing="15">
               <tr>
@@ -58,7 +57,6 @@
           <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
           </mat-paginator>
         </div>
-      </div>
     </ng-container>
     <div  *ngIf="dataSource.data.length===0">
       <h3>Sin datos para mostar</h3>

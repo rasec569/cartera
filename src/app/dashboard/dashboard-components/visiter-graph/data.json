@@ -1,9 +1,9 @@
 {
   "Bar": {
-    "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-    "series": [[9, 4, 11, 7, 10, 12], [3, 2, 9, 5, 8, 10]]
+    "labels": ["Ene", "Feb", "Mar", "Abr", "May", "Jun"],
+    "series": [[1, 1, 1, 1, 1, 1], [3, 2, 9, 5, 8, 10]]
   },
   "Pie": {
-    "series": [20, 10, 30, 40]
+    "series": [20, 40, 30, 10]
   }
 }
