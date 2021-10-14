@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ProyectoService } from 'src/app/services/proyecto.service';
 import { proyecto } from 'src/app/Models/proyecto.model';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-detalle-proyecto',
@@ -23,8 +23,7 @@ export class DetalleProyectoComponent implements OnInit {
   ];
   constructor(private _snackBar: MatSnackBar,
     private ProyectoS: ProyectoService,
-    private route: ActivatedRoute,
-    private router: Router,) { }
+    private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {

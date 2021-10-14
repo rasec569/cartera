@@ -1,5 +1,5 @@
 export interface etapa {
-  id?: string;
+  id: string;
   numero: string;
   valor: string;
   manzanas: string;

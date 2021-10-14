@@ -31,6 +31,8 @@ import { ListCarteraComponent } from './cartera/list-cartera/list-cartera.compon
 import { FormProyectoComponent } from './proyecto/form-proyecto/form-proyecto.component';
 import { FormEditProyectoComponent } from './proyecto/form-edit-proyecto/form-edit-proyecto.component';
 import { DetalleProyectoComponent } from './proyecto/detalle-proyecto/detalle-proyecto.component';
+import { EtapaProyectoComponent } from './proyecto/etapa-proyecto/etapa-proyecto.component';
+import { InmuebleProyectoComponent } from './proyecto/inmueble-proyecto/inmueble-proyecto.component';
 
 @NgModule({
   imports: [
@@ -66,6 +68,8 @@ import { DetalleProyectoComponent } from './proyecto/detalle-proyecto/detalle-pr
     FormProyectoComponent,
     FormEditProyectoComponent,
     DetalleProyectoComponent,
+    EtapaProyectoComponent,
+    InmuebleProyectoComponent,
   ],
 })
 export class PagesModule {}

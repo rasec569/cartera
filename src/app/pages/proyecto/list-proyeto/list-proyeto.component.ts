@@ -14,7 +14,7 @@ import { proyecto } from 'src/app/Models/proyecto.model';
   templateUrl: './list-proyeto.component.html',
   styleUrls: ['./list-proyeto.component.css']
 })
-export class ListProyetoComponent implements OnInit {
+export class ListProyetoComponent implements OnInit,AfterViewInit {
   dataSource = new MatTableDataSource<proyecto>();
   public displayedColumns: string[] = [
     "nombre",

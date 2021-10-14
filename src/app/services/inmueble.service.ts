@@ -43,9 +43,9 @@ export class InmuebleService {
       );
     }
     //listar por proyecto
-    public getInmuebleProyecto(Inmueble: inmueble): Observable<any> {
-      HttpOptionsBody.body.id=Inmueble.idproyecto;
-      return this.http.get(`${environment.url}/inmueble/proyecto/${Inmueble.idproyecto}`,HttpOptionsBody).pipe(
+    public getInmuebleProyecto(idproyecto: any): Observable<any> {
+      HttpOptionsBody.body.id=idproyecto;
+      return this.http.get(`${environment.url}/inmueble/proyecto/${idproyecto}`,HttpOptionsBody).pipe(
         tap((result: any) => {
         }),
         catchError(this.handleError)

@@ -1,8 +1,4 @@
-<mat-card>
-  <mat-card-content>
-    <mat-card-title>Proyectos</mat-card-title>
-    <mat-card-subtitle>Lista de Proyectos</mat-card-subtitle>
-    <div class="mat-elevation-z8">
+
       <table class="example-full-width" style="text-align:center;" cellspacing="15">
         <tr>
           <td>
@@ -19,17 +15,25 @@
         </tr>
       </table>
       <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length" matSort>
-        <ng-container matColumnDef="nombre">
+        <ng-container matColumnDef="Manzana">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Manzana </th>
+          <td mat-cell *matCellDef="let item"> {{item.Manzana}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Casa">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Casa </th>
+          <td mat-cell *matCellDef="let item"> {{item.Casa}} </td>
+        </ng-container>
+        <ng-container matColumnDef="etapa">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Etapa </th>
+          <td mat-cell *matCellDef="let item"> {{item.etapa}} </td>
+        </ng-container>
+        <ng-container matColumnDef="proyecto">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Proyecto </th>
-          <td mat-cell *matCellDef="let item"> {{item.nombre}} </td>
+          <td mat-cell *matCellDef="let item"> {{item.proyecto}} </td>
         </ng-container>
-        <ng-container matColumnDef="ubicacion">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Ubicación </th>
-          <td mat-cell *matCellDef="let item"> {{item.ubicacion}} </td>
-        </ng-container>
-        <ng-container matColumnDef="etapas">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Etapas </th>
-          <td mat-cell *matCellDef="let item"> {{item.etapas}} </td>
+        <ng-container matColumnDef="Valor_Final">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor Venta </th>
+          <td mat-cell *matCellDef="let item"> {{item.Valor_Final}} </td>
         </ng-container>
         <ng-container matColumnDef="estado">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
@@ -72,6 +76,3 @@
       </div>
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
       </mat-paginator>
-    </div>
-  </mat-card-content>
-</mat-card>
