@@ -1,58 +1,66 @@
 <mat-card>
   <mat-card-content>
-    <mat-card-title>Proyectos</mat-card-title>
-    <mat-card-subtitle>Lista de Proyectos</mat-card-subtitle>
-    <div class="mat-elevation-z8">
+    <mat-card-title>Cartera</mat-card-title>
+    <mat-card-subtitle>Lista de Carteras</mat-card-subtitle>
+    <div class="mat-elevation-z8" >
       <table class="example-full-width" style="text-align:center;" cellspacing="15">
         <tr>
           <td>
             <mat-form-field appearance="standard">
               <mat-label>Buscar</mat-label>
-              <input matInput (keyup)="applyFilter($event)" matTooltip="Buscar en la lista de Proyectos"
+              <input matInput (keyup)="applyFilter($event)" matTooltip="Buscar en la lista de carteras"
                 placeholder="Cualquier palabra clave" #input>
             </mat-form-field>
           </td>
           <td>
-            <button mat-raised-button color="primary" matTooltip="Registar nuevo Proyectos" [routerLink]="['/newproyecto']"> Nuevo
+            <button mat-raised-button color="primary" matTooltip="Registar nuevo rol" [routerLink]="['/newuser']"> listar por proyectos
             </button>
           </td>
         </tr>
       </table>
       <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length" matSort>
-        <ng-container matColumnDef="nombre">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Proyecto </th>
-          <td mat-cell *matCellDef="let item"> {{item.nombre}} </td>
+        <ng-container matColumnDef="cedula">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Cedula </th>
+          <td mat-cell *matCellDef="let item"> {{item.cedula}} </td>
         </ng-container>
-        <ng-container matColumnDef="ubicacion">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Ubicación </th>
-          <td mat-cell *matCellDef="let item"> {{item.ubicacion}} </td>
+        <ng-container matColumnDef="nombres">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
+          <td mat-cell *matCellDef="let item"> {{item.nombres}} </td>
         </ng-container>
-        <ng-container matColumnDef="etapas">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Etapas </th>
-          <td mat-cell *matCellDef="let item"> {{item.etapas}} </td>
+        <ng-container matColumnDef="apellidos">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
+          <td mat-cell *matCellDef="let item"> {{item.apellidos}} </td>
         </ng-container>
         <ng-container matColumnDef="estado">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
           <td mat-cell *matCellDef="let item"> {{item.estado}} </td>
         </ng-container>
+        <ng-container matColumnDef="recaudado">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Recaudado </th>
+          <td mat-cell *matCellDef="let item"> {{item.recaudado}} </td>
+        </ng-container>
+        <ng-container matColumnDef="saldo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Saldo </th>
+          <td mat-cell *matCellDef="let item"> {{item.saldo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+          <td mat-cell *matCellDef="let item"> {{item.total}} </td>
+        </ng-container>
         <ng-container matColumnDef="Acciones">
-          <th mat-header-cell *matHeaderCellDef></th>
+          <th mat-header-cell *matHeaderCellDef> Acción</th>
           <td mat-cell *matCellDef="let item">
-            <button mat-icon-button [matMenuTriggerFor]="menu4" matTooltip="Acciones del Usuario">
+            <button mat-icon-button [matMenuTriggerFor]="menu4" matTooltip="Acciones del Cartera">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu4="matMenu">
-              <button mat-menu-item [routerLink]="['/editproyecto',item.id]">
+              <button mat-menu-item [routerLink]="['/newuser',item.iduser]">
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>
               </button>
-              <button mat-menu-item color="warn" (click)="RemoveProyecto(item)">
+              <button mat-menu-item color="warn" (click)="RemoveUsuario(item)">
                 <mat-icon>delete</mat-icon>
                 <span>Eliminar</span>
-              </button>
-              <button mat-menu-item [routerLink]="['/proyectodetalle',item.id]">
-                <mat-icon>launch</mat-icon>
-                <span>Detalle</span>
               </button>
             </mat-menu>
           </td>

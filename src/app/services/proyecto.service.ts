@@ -42,6 +42,14 @@ export class ProyectoService {
       catchError(this.handleError)
     );
   }
+  public getProyectoDetalle(idproyecto: any): Observable<any> {
+    HttpOptionsBody.body.id=idproyecto;
+    return this.http.get(`${environment.url}/proyecto/detalle/${idproyecto}`,HttpOptionsBody).pipe(
+      tap((result: any) => {
+      }),
+      catchError(this.handleError)
+    );
+  }
   //registrar
   public createProyecto(Proyecto:proyecto): Observable<any> {
     return this.http

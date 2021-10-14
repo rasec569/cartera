@@ -1,0 +1,78 @@
+<mat-card>
+  <mat-card-content>
+  <mat-card-title>Proyecto  {{formProyecto.value.nombre}}</mat-card-title>
+    <mat-card-subtitle>Formulario</mat-card-subtitle>
+    <mat-accordion class="example-headers-align" [formGroup]="formProyecto">
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+          <mat-expansion-panel-header>
+              <mat-panel-title> Información del Proyecto </mat-panel-title>
+              <mat-panel-description> Datos basicos
+                  <mat-icon>person_outline</mat-icon>
+              </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+            <mat-form-field>
+              <input matInput placeholder="Nombre del Proyecto" formControlName="nombre"> </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Estado del proyecto</mat-label>
+                <mat-select formControlName="estado">
+                <mat-option value="En Venta">En Venta</mat-option>
+                <mat-option value="Vendido">Vendido</mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+          <mat-form-field>
+            <input matInput placeholder="Ubicación  del proyecto" formControlName="ubicacion"> </mat-form-field>
+          <mat-action-row>
+              <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+          </mat-action-row>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+          <mat-expansion-panel-header>
+              <mat-panel-title> Información Etapa </mat-panel-title>
+              <mat-panel-description> Datos Etapa inicial del Proyecto
+                  <mat-icon>account_circle</mat-icon>
+              </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+              <mat-form-field appearance="fill">
+                <mat-label>Nombre de la etapa</mat-label>
+                <mat-select formControlName="etapas">
+                <mat-option value="Unica">Unica</mat-option>
+                <mat-option value="Primera">Primera</mat-option>
+                </mat-select>
+              </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="N° Manzanas" formControlName="manzanas"> </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Estado de la etapa</mat-label>
+                <mat-select formControlName="estado_etapa">
+                <mat-option value="Proyectada">Proyectada</mat-option>
+                <mat-option value="En Ejecución">En Ejecución</mat-option>
+                <mat-option value="Finalizada">Finalizada</mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+          <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+              <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+          </mat-action-row>
+      </mat-expansion-panel>
+  </mat-accordion>
+  <table style="text-align:center;" class="example-full-width" cellspacing="15">
+    <tr>
+      <td>
+        <button mat-raised-button color="warn" [routerLink]="['/proyectos']"> Cancelar </button>
+
+      </td>
+      <td>
+        <button (click)="SaveProyecto()" mat-raised-button color="primary" [disabled]="formProyecto.invalid"> Guardar </button>
+      </td>
+    </tr>
+  </table>
+  <!-- <pre>
+    {{formProyecto.value|json}}
+  </pre> -->
+</mat-card-content>
+</mat-card>
+

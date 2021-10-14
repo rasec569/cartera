@@ -4,6 +4,7 @@ export interface proyecto {
   ubicacion: string;
   estado?: string;
   etapas?: string;
+  numetapas: number;
   estado_etapa?: string;
   manzanas?: string;
   //error vars

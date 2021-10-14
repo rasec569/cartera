@@ -10,7 +10,7 @@ export interface Menu {
 const MENUITEMS = [
   { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
   /* { state: 'login', type: 'link', name: 'login', icon: 'monetization_on' }, */
-  { state: '', type: 'link', name: 'Cartera', icon: 'card_travel' },
+  { state: 'cartera', type: 'link', name: 'Cartera', icon: 'card_travel' },
   { state: 'clientes', type: 'link', name: 'Clientes', icon: 'family_restroom' },
   { state: 'proyectos', type: 'link', name: 'Proyectos', icon: 'cases' },
   { state: 'inmueble', type: 'link', name: 'Inmuebles', icon: 'maps_home_work' },

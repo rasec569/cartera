@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-content>
+  <mat-card-title>Proyecto  {{formProyecto.value.nombre}}</mat-card-title>
+    <mat-card-subtitle>Formulario</mat-card-subtitle>
+      <div class="mat-elevation-z8">
+        <mat-card-content>
+          <form [formGroup]="formProyecto">
+            <mat-card-subtitle> Información del Proyecto </mat-card-subtitle>
+                <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+                  <mat-form-field>
+                    <input matInput placeholder="Nombre del Proyecto" formControlName="nombre"> </mat-form-field>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Estado del proyecto</mat-label>
+                      <mat-select formControlName="estado">
+                      <mat-option value="En Venta">En Venta</mat-option>
+                      <mat-option value="Vendido">Vendido</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                </div>
+                <mat-form-field>
+                  <input matInput placeholder="Ubicación  del proyecto" formControlName="ubicacion"> </mat-form-field>
+          </form>
+        </mat-card-content>
+    </div>
+  <table style="text-align:center;" class="example-full-width" cellspacing="15">
+    <tr>
+      <td>
+        <button mat-raised-button color="warn" [routerLink]="['/proyectos']"> Cancelar </button>
+
+      </td>
+      <td>
+        <button (click)="SaveProyecto()" mat-raised-button color="primary" [disabled]="formProyecto.invalid"> Guardar </button>
+      </td>
+    </tr>
+  </table>
+  <!-- <pre>
+    {{formProyecto.value|json}}
+  </pre> -->
+</mat-card-content>
+</mat-card>
+

@@ -27,6 +27,10 @@ import { ArchivoComponent } from './archivo/archivo.component';
 import { ListAllFileComponent } from './archivo/list-all-file/list-all-file.component';
 import { AcreedoresComponent } from './acreedores/acreedores.component';
 import { ListAcreedoresComponent } from './acreedores/list-acreedores/list-acreedores.component';
+import { ListCarteraComponent } from './cartera/list-cartera/list-cartera.component';
+import { FormProyectoComponent } from './proyecto/form-proyecto/form-proyecto.component';
+import { FormEditProyectoComponent } from './proyecto/form-edit-proyecto/form-edit-proyecto.component';
+import { DetalleProyectoComponent } from './proyecto/detalle-proyecto/detalle-proyecto.component';
 
 @NgModule({
   imports: [
@@ -58,6 +62,10 @@ import { ListAcreedoresComponent } from './acreedores/list-acreedores/list-acree
     ListAllFileComponent,
     AcreedoresComponent,
     ListAcreedoresComponent,
+    ListCarteraComponent,
+    FormProyectoComponent,
+    FormEditProyectoComponent,
+    DetalleProyectoComponent,
   ],
 })
 export class PagesModule {}

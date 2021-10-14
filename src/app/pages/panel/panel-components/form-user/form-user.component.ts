@@ -59,7 +59,6 @@ export class FormUserComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.userid = params.id;
     });
-    console.log("en el inicio", this.userid);
     if(this.userid != ""){
       this.QueryOneUsuario(this.userid);
     }
