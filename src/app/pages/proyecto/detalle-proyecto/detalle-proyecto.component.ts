@@ -64,6 +64,9 @@ export class DetalleProyectoComponent implements OnInit {
       );
     }
   }
+  close() {
+    this.dialogoRef.close();
+  }
   notificacion(Mensaje: string) {
     this._snackBar.open(Mensaje, "", {
       duration: 5000,

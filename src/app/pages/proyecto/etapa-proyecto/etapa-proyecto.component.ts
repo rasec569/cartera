@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EtapaService } from 'src/app/services/etapa.service';
 import { etapa } from 'src/app/Models/etapa.model';
 import { FormEtapaComponent } from '../form-etapa/form-etapa.component';
+import { InmuenblesEtapaComponent } from '../inmuenbles-etapa/inmuenbles-etapa.component';
 
 @Component({
   selector: 'app-etapa-proyecto',
@@ -77,6 +78,15 @@ export class EtapaProyectoComponent implements OnInit, AfterViewInit {
     const dialogoRef = this.dialog.open(FormEtapaComponent, {
       width: this.width,
       data: {etapaid:"",proyectoid:this.proyectoid }
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryEtapas(this.proyectoid);
+    });
+  }
+  OpenDetalle(id: any){
+    const dialogoRef = this.dialog.open(InmuenblesEtapaComponent, {
+      width: '900px',
+      data: id
     });
     dialogoRef.afterClosed().subscribe(res=>{
       this.QueryEtapas(this.proyectoid);

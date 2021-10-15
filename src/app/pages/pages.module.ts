@@ -34,6 +34,7 @@ import { DetalleProyectoComponent } from './proyecto/detalle-proyecto/detalle-pr
 import { EtapaProyectoComponent } from './proyecto/etapa-proyecto/etapa-proyecto.component';
 import { InmuebleProyectoComponent } from './proyecto/inmueble-proyecto/inmueble-proyecto.component';
 import { FormEtapaComponent } from './proyecto/form-etapa/form-etapa.component';
+import { InmuenblesEtapaComponent } from './proyecto/inmuenbles-etapa/inmuenbles-etapa.component';
 
 @NgModule({
   imports: [
@@ -72,6 +73,7 @@ import { FormEtapaComponent } from './proyecto/form-etapa/form-etapa.component';
     EtapaProyectoComponent,
     InmuebleProyectoComponent,
     FormEtapaComponent,
+    InmuenblesEtapaComponent,
   ],
 })
 export class PagesModule {}

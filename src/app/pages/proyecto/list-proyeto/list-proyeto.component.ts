@@ -71,7 +71,7 @@ export class ListProyetoComponent implements OnInit,AfterViewInit {
   }
   OpenDetalle(id: any){
     const dialogoRef = this.dialog.open(DetalleProyectoComponent, { width: this.width,
-      data: id});
+      data: id, panelClass: 'my-dialog',});
       dialogoRef.afterClosed().subscribe(res=>{
         this.QueryProyectos();
       });

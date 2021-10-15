@@ -52,9 +52,9 @@ export class InmuebleService {
       );
     }
     //listar por etapa
-    public getInmuebleEtapa(Inmueble: inmueble): Observable<any> {
-      HttpOptionsBody.body.id=Inmueble.idetapa;
-      return this.http.get(`${environment.url}/inmueble/proyecto/${Inmueble.idetapa}`,HttpOptionsBody).pipe(
+    public getInmuebleEtapa(idetapa: any): Observable<any> {
+      HttpOptionsBody.body.id=idetapa;
+      return this.http.get(`${environment.url}/inmueble/etapa/${idetapa}`,HttpOptionsBody).pipe(
         tap((result: any) => {
         }),
         catchError(this.handleError)

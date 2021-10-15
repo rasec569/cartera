@@ -45,6 +45,11 @@ table {
   justify-content: space-between;
   align-items: center;
 }
+.close.mat-icon-button {
+  float: right;
+  top:-24px;
+  right:-24px;
+}
 /* .example-form {
   min-width: 100px;
   max-width: 500px;
