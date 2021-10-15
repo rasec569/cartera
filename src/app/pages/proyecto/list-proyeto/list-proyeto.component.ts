@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { ProyectoService } from 'src/app/services/proyecto.service';
 import { proyecto } from 'src/app/Models/proyecto.model';
+import { DetalleProyectoComponent } from '../detalle-proyecto/detalle-proyecto.component';
 
 @Component({
   selector: 'app-list-proyeto',
@@ -23,6 +24,7 @@ export class ListProyetoComponent implements OnInit,AfterViewInit {
     "estado",
     "Acciones",
   ];
+  readonly width:string='900px';
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -66,6 +68,14 @@ export class ListProyetoComponent implements OnInit,AfterViewInit {
         "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde! "+error
       );
     }
+  }
+  OpenDetalle(id: any){
+    const dialogoRef = this.dialog.open(DetalleProyectoComponent, { width: this.width,
+      data: id});
+      dialogoRef.afterClosed().subscribe(res=>{
+        this.QueryProyectos();
+      });
+
   }
   RemoveProyecto(Proyecto:proyecto){
     const dialogoRef = this.dialog.open(DeletevalidacionComponent, {

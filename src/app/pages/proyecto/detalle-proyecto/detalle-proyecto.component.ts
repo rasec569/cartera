@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 import { ProyectoService } from 'src/app/services/proyecto.service';
 import { proyecto } from 'src/app/Models/proyecto.model';
@@ -22,15 +23,23 @@ export class DetalleProyectoComponent implements OnInit {
   ];
   constructor(private _snackBar: MatSnackBar,
     private ProyectoS: ProyectoService,
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute,
+    public dialogoRef: MatDialogRef<DetalleProyectoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      console.log('esto trae al dialog', data);
+      if (data != ""){
+        this.proyectoid=data;
+        this.QueryProyectos(data);
+      }
+    }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
+    /* this.route.params.subscribe((params: Params) => {
       this.proyectoid = params.id;
     });
     if(this.proyectoid != ""){
       this.QueryProyectos(this.proyectoid);
-    }
+    } */
   }
   QueryProyectos(proyectoid:any) {
     try {
