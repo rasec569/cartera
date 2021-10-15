@@ -39,7 +39,7 @@ export class AreaComponent implements OnInit , AfterViewInit{
   }
   ngAfterViewInit(){
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort=this.sort;
+
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -52,6 +52,7 @@ export class AreaComponent implements OnInit , AfterViewInit{
           console.log(res);
           if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
             this.dataSource.data=res;
+            this.dataSource.sort=this.sort;
             ;
           }else{
             this.error(

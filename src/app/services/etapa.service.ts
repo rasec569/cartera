@@ -36,9 +36,9 @@ export class EtapaService {
     );
   }
   //buscar
-  public getEtapa(Etapa: etapa): Observable<any> {
-    HttpOptionsBody.body.id=Etapa.id;
-    return this.http.get(`${environment.url}/etapa/${Etapa.id}`,HttpOptionsBody).pipe(
+  public getEtapa(id: any): Observable<any> {
+    HttpOptionsBody.body.id=id;
+    return this.http.get(`${environment.url}/etapa/${id}`,HttpOptionsBody).pipe(
       tap((result: any) => {
       }),
       catchError(this.handleError)
@@ -70,6 +70,7 @@ export class EtapaService {
   }
   //modificar
   public updateEtapa(Etapa: etapa): Observable<any> {
+    console.log("llega al servicio",Etapa)
     return this.http
       .put(`${environment.url}/etapa/${Etapa.id}`, Etapa, httpOptions)
       .pipe(

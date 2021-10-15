@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { EtapaService } from 'src/app/services/etapa.service';
 import { etapa } from 'src/app/Models/etapa.model';
+import { FormEtapaComponent } from '../form-etapa/form-etapa.component';
 
 @Component({
   selector: 'app-etapa-proyecto',
@@ -26,6 +27,7 @@ export class EtapaProyectoComponent implements OnInit, AfterViewInit {
     "estado",
     "Acciones",
   ];
+  readonly width:string='300px';
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -70,6 +72,54 @@ export class EtapaProyectoComponent implements OnInit, AfterViewInit {
         "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde! "+error
       );
     }
+  }
+  OpenAdd(){
+    const dialogoRef = this.dialog.open(FormEtapaComponent, {
+      width: this.width,
+      data: {etapaid:"",proyectoid:this.proyectoid }
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryEtapas(this.proyectoid);
+    });
+  }
+  OpenEdit(id: any){
+    const dialogoRef = this.dialog.open(FormEtapaComponent, {
+      width: this.width,
+      data: {etapaid:id,proyectoid:this.proyectoid }
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryEtapas(this.proyectoid);
+    });
+  }
+  OpenDelete(Etapa:etapa){
+    const dialogoRef = this.dialog.open(DeletevalidacionComponent, {
+      width: "300px",
+    });
+    dialogoRef.afterClosed().subscribe((res) => {
+      if (res) {
+        try {
+          this.EtapaS.deleteEtapa(Etapa).subscribe(
+            (res: etapa[]) => {
+              if (res[0].TIPO == "3") {
+                this.notificacion(res[0].MENSAJE!);
+                this.QueryEtapas(this.proyectoid);
+              } else {
+                this.notificacion(res[0].MENSAJE!);
+              }
+            },
+            (err) => {
+              this.notificacion(
+                "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+              );
+            }
+          );
+        } catch (notificacion) {
+          this.notificacion(
+            "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+          );
+        }
+      }
+    });
   }
   notificacion(Mensaje: string) {
     this._snackBar.open(Mensaje, "", {

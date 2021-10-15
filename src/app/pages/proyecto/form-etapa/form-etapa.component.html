@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Nueva etapa</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formEtapa">
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre de la etapa</mat-label>
+      <mat-select formControlName="numero">
+      <mat-option value="Unica">Unica</mat-option>
+      <mat-option value="Primera">Primera</mat-option>
+      <mat-option value="Segunda">Segunda</mat-option>
+      <mat-option value="Tercera">Tercera</mat-option>
+      <mat-option value="Cuarta">Cuarta</mat-option>
+      <mat-option value="Quinta">Quinta</mat-option>
+      <mat-option value="Sexta">Sexta</mat-option>
+      <mat-option value="Septima">Septima</mat-option>
+      <mat-option value="Obtava">Obtava</mat-option>
+      <mat-option value="Novena">Novena</mat-option>
+      <mat-option value="Decima">Decima</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="N° Manzanas" formControlName="manzanas"> </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Estado de la etapa</mat-label>
+        <mat-select formControlName="estado">
+        <mat-option value="Proyectada">Proyectada</mat-option>
+        <mat-option value="En Ejecución">En Ejecución</mat-option>
+        <mat-option value="Finalizada">Finalizada</mat-option>
+        </mat-select>
+      </mat-form-field>
+  </form>
+</div>
+<div style="text-align: center;">
+  <button mat-raised-button color="warn" (click)="close()" [mat-dialog-close]="false" style="margin-right: 10px" >Cancelar </button>
+  <button mat-raised-button color="primary" cdkFocusInitial (click)="SaveEtapa()" [mat-dialog-close]="true">Guardar</button>
+</div>
+<!-- <pre>
+  {{formEtapa.value|json}}
+</pre> -->

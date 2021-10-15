@@ -1,11 +1,10 @@
 <mat-card>
   <mat-card-content>
-    <mat-card-title>Proyectos</mat-card-title>
-    <mat-card-subtitle>Detalle Proyectos</mat-card-subtitle>
+    <mat-card-title>Detalle</mat-card-title>
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length" matSort>
+      <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length" >
         <ng-container matColumnDef="nombre">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Proyecto </th>
+          <th mat-header-cell *matHeaderCellDef > Proyecto </th>
           <td mat-cell *matCellDef="let item"> {{item.nombre}} </td>
         </ng-container>
         <ng-container matColumnDef="ubicacion">
@@ -19,28 +18,6 @@
         <ng-container matColumnDef="estado">
           <th mat-header-cell *matHeaderCellDef> Estado </th>
           <td mat-cell *matCellDef="let item"> {{item.estado}} </td>
-        </ng-container>
-        <ng-container matColumnDef="Acciones">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let item">
-            <button mat-icon-button [matMenuTriggerFor]="menu4" matTooltip="Acciones del Usuario">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu4="matMenu">
-              <button mat-menu-item color="warn" (click)="RemoveProyecto(item)">
-                <mat-icon>launch</mat-icon>
-                <span>Detalle</span>
-              </button>
-              <button mat-menu-item [routerLink]="['/editproyecto',item.id]">
-                <mat-icon>edit</mat-icon>
-                <span>Editar</span>
-              </button>
-              <button mat-menu-item color="warn" (click)="RemoveProyecto(item)">
-                <mat-icon>delete</mat-icon>
-                <span>Eliminar</span>
-              </button>
-            </mat-menu>
-          </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

@@ -19,7 +19,6 @@ export class DetalleProyectoComponent implements OnInit {
     "ubicacion",
     "etapas",
     "estado",
-    "Acciones",
   ];
   constructor(private _snackBar: MatSnackBar,
     private ProyectoS: ProyectoService,
