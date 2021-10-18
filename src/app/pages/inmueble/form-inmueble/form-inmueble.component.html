@@ -1,0 +1,98 @@
+<mat-card>
+  <mat-card-content>
+    <mat-card-title>Inmueble</mat-card-title>
+    <mat-card-subtitle>Formulario</mat-card-subtitle>
+    <mat-accordion class="example-headers-align" [formGroup]="formInmueble">
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Información del Inmueble</mat-panel-title>
+          <mat-panel-description> Datos basicos
+            <mat-icon>person_outline</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+          <mat-form-field>
+            <input matInput placeholder="Manzana de ubicacion" formControlName="manzana">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Numero de casa" formControlName="casa">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Valor neto" formControlName="Valor_Inicial">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Valor Final" formControlName="Valor_Final">
+          </mat-form-field>
+        </div>
+        <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+          <mat-form-field appearance="fill">
+            <mat-label>Proyecto al que pertence</mat-label>
+            <mat-select formControlName="idproyecto" (selectionChange)="onSelect($event)">
+              <mat-option *ngFor="let proyect of DataProyectos" [value]="proyect.id">
+                {{proyect.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Etapa del Proyecto</mat-label>
+            <mat-select formControlName="idetapa">
+              <mat-option *ngFor="let etapa of DataEtapas" [value]="etapa.id">
+                {{etapa.numero}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Estado de la etapa</mat-label>
+            <mat-select formControlName="estado">
+              <mat-option value="Lote">Lote</mat-option>
+              <mat-option value="En Venta">En Venta</mat-option>
+              <mat-option value="Vendido">Vendido</mat-option>
+              <mat-option value="Pagado">Pagado</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <mat-action-row>
+          <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Documentación </mat-panel-title>
+          <mat-panel-description> Documentos del Inmueble
+            <mat-icon>badge</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+          <mat-form-field>
+            <input matInput placeholder="Ficha Catastral Numero" formControlName="catastral">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Escritura Numero" formControlName="escritura">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Matricula Inmobiliaria" formControlName="matricula">
+          </mat-form-field>
+        </div>
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+          <button mat-button color="primary" (click)="nextStep()">Finalizar</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <table style="text-align:center;" class="example-full-width" cellspacing="15">
+      <tr>
+        <td>
+          <button mat-raised-button color="warn" [routerLink]="['/inmueble']"> Cancelar </button>
+
+        </td>
+        <td>
+          <button (click)="SaveInmueble()" mat-raised-button color="primary" [disabled]="formInmueble.invalid"> Guardar
+          </button>
+        </td>
+      </tr>
+    </table>
+    <!-- <pre>
+    {{formInmueble.value|json}}
+  </pre> -->
+  </mat-card-content>
+</mat-card>

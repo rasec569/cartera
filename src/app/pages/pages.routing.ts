@@ -10,15 +10,18 @@ import { FormProyectoComponent } from './proyecto/form-proyecto/form-proyecto.co
 import { FormEditProyectoComponent } from './proyecto/form-edit-proyecto/form-edit-proyecto.component';
 import { DetalleProyectoComponent } from './proyecto/detalle-proyecto/detalle-proyecto.component';
 
+import { FormInmuebleComponent } from './inmueble/form-inmueble/form-inmueble.component';
+
 export const PagesRoutes: Routes = [
   {  path: 'panel', component:PanelComponent },
   { path:'newuser', component:FormUserComponent},
   { path:'newuser/:id', component:FormUserComponent},
   { path:'inmueble', component:InmuebleComponent},
+  { path:'newinmueble', component:FormInmuebleComponent},
+  { path:'newinmueble/:id', component:FormInmuebleComponent},
   { path:'proyectos', component:ProyectoComponent},
   { path:'newproyecto', component:FormProyectoComponent},
   { path:'editproyecto/:id', component:FormEditProyectoComponent},
-  { path:'proyectodetalle/:id', component:DetalleProyectoComponent},
 
   { path:'clientes', component:ClienenteComponent},
   { path:'acreedores', component:AcreedoresComponent},

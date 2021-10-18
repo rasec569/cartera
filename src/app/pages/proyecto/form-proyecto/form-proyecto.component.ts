@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { Component, OnInit} from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { UserService } from "src/app/services/user.service";
-import { usuario } from "src/app/Models/usuario.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router, ActivatedRoute, Params } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 import { ProyectoService } from "src/app/services/proyecto.service";
 import { proyecto } from "src/app/Models/proyecto.model";
@@ -53,7 +51,7 @@ prevStep() {
     console.log("entro id",this.formProyecto.value.id);
     try {
         this.ProyectoS.createProyecto(this.formProyecto.value).subscribe(
-          (res: usuario[]) => {
+          (res: proyecto[]) => {
             if (res[0].TIPO == "3") {
               this.notificacion(res[0].MENSAJE!);
               this.formProyecto.reset();
