@@ -17,6 +17,7 @@ import { EtapaService } from 'src/app/services/etapa.service';
   styleUrls: ['./form-inmueble.component.css']
 })
 export class FormInmuebleComponent implements OnInit {
+  myValue!: string;
   inmuebleid='';
   public DataProyectos!: any[];
   public DataEtapas!: any[];
@@ -65,6 +66,10 @@ prevStep() {
 
     }
     this.listarProyecto();
+  }
+  processMyValue(): void {
+    let numberVal = parseInt(this.myValue).toLocaleString();
+    this.formInmueble.value.Valor_Inicial = numberVal;
   }
   listarProyecto(){
     try {

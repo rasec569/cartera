@@ -1,5 +1,5 @@
 export interface costo {
-  id?: string;
+  id: string;
   concepto: string;
   valor: string;
   fecha: string;

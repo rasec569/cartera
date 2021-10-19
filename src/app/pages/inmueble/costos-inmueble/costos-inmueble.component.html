@@ -3,37 +3,29 @@
     <td>
       <mat-form-field appearance="standard">
         <mat-label>Buscar</mat-label>
-        <input matInput (keyup)="applyFilter($event)" matTooltip="Buscar en la lista de Proyectos"
+        <input matInput (keyup)="applyFilter($event)" matTooltip="Buscar en la lista de costos"
           placeholder="Cualquier palabra clave" #input>
       </mat-form-field>
     </td>
     <td>
-      <button mat-raised-button color="primary" matTooltip="Registar nuevo Proyectos" (click)="OpenAdd()">
+      <button mat-raised-button color="primary" matTooltip="Registar nuevo costos" (click)="OpenAdd()">
         Nueva
       </button>
     </td>
   </tr>
 </table>
-<table mat-table [dataSource]="dataSourceEtapa" *ngIf="dataSourceEtapa.data.length" matSort>
-  <ng-container matColumnDef="numero">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> numero </th>
-    <td mat-cell *matCellDef="let item"> {{item.numero}} </td>
-  </ng-container>
-  <ng-container matColumnDef="inmuebles">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> inmuebles </th>
-    <td mat-cell *matCellDef="let item"> {{item.inmuebles}} </td>
-  </ng-container>
-  <ng-container matColumnDef="manzanas">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> manzanas </th>
-    <td mat-cell *matCellDef="let item"> {{item.manzanas}} </td>
+<table mat-table [dataSource]="dataSourceCosto" *ngIf="dataSourceCosto.data.length" matSort>
+  <ng-container matColumnDef="concepto">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> concepto </th>
+    <td mat-cell *matCellDef="let item"> {{item.concepto}} </td>
   </ng-container>
   <ng-container matColumnDef="valor">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> valor </th>
-    <td mat-cell *matCellDef="let item"> {{item.valor|currency: 'USD':'symbol':'.0-0'}} </td>
+    <td mat-cell *matCellDef="let item"> {{item.valor |number:digitInfo }} </td>
   </ng-container>
-  <ng-container matColumnDef="estado">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> estado </th>
-    <td mat-cell *matCellDef="let item"> {{item.estado}} </td>
+  <ng-container matColumnDef="fecha">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> fecha </th>
+    <td mat-cell *matCellDef="let item"> {{item.fecha| date: 'dd MM yyyy'}} </td>
   </ng-container>
   <ng-container matColumnDef="Acciones">
     <th mat-header-cell *matHeaderCellDef></th>
@@ -65,9 +57,9 @@
     <td class="mat-cell" colspan="4">No hay datos que coincidan con el filtro "{{input.value}}"</td>
   </tr>
 </table>
-<div *ngIf="!dataSourceEtapa.data.length">
+<div *ngIf="!dataSourceCosto.data.length">
   <mat-card>
-    <mat-card-title>Sin datos para mostar en Cartera</mat-card-title>
+    <mat-card-title>Sin datos para mostar en Costos</mat-card-title>
   </mat-card>
 </div>
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">

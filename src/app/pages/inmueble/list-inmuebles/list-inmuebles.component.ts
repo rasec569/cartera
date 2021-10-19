@@ -9,6 +9,7 @@ import { MatDialog } from "@angular/material/dialog";
 
 import { InmuebleService } from "src/app/services/inmueble.service";
 import { inmueble } from "src/app/Models/inmueble.model";
+import{DetalleInmuebleComponent} from "../detalle-inmueble/detalle-inmueble.component"
 
 @Component({
   selector: "app-list-inmuebles",
@@ -26,6 +27,7 @@ export class ListInmueblesComponent implements OnInit {
     "estado",
     "Acciones",
   ];
+  readonly width:string='900px';
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -74,6 +76,13 @@ export class ListInmueblesComponent implements OnInit {
           error
       );
     }
+  }
+  OpenDetalle(id: any){
+    const dialogoRef = this.dialog.open(DetalleInmuebleComponent , { width: this.width,
+      data: id, panelClass: 'my-dialog',});
+      dialogoRef.afterClosed().subscribe(res=>{
+        this.QueryInmuebles();
+      });
   }
   RemoveInmueble(Inmueble: inmueble) {
     const dialogoRef = this.dialog.open(DeletevalidacionComponent, {

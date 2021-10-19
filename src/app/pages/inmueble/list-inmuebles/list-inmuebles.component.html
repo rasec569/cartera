@@ -37,7 +37,7 @@
         </ng-container>
         <ng-container matColumnDef="Valor_Final">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor Venta </th>
-          <td mat-cell *matCellDef="let item"> {{item.Valor_Final}} </td>
+          <td mat-cell *matCellDef="let item"> {{item.Valor_Final |currency: 'USD':'symbol':'.0-0'}} </td>
         </ng-container>
         <ng-container matColumnDef="estado">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
@@ -50,6 +50,10 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu4="matMenu">
+              <button mat-menu-item (click)="OpenDetalle(item.id)">
+                <mat-icon>launch</mat-icon>
+                <span>Detalle</span>
+              </button>
               <button mat-menu-item [routerLink]="['/newinmueble',item.id]">
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>

@@ -75,7 +75,6 @@ export class ListProyetoComponent implements OnInit,AfterViewInit {
       dialogoRef.afterClosed().subscribe(res=>{
         this.QueryProyectos();
       });
-
   }
   RemoveProyecto(Proyecto:proyecto){
     const dialogoRef = this.dialog.open(DeletevalidacionComponent, {

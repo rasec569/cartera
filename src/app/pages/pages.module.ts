@@ -6,6 +6,8 @@ import { CommonModule } from "@angular/common";
 
 import { DemoMaterialModule } from "../demo-material-module";
 import { CdkTableModule } from "@angular/cdk/table";
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -36,6 +38,10 @@ import { InmuebleProyectoComponent } from './proyecto/inmueble-proyecto/inmueble
 import { FormEtapaComponent } from './proyecto/form-etapa/form-etapa.component';
 import { InmuenblesEtapaComponent } from './proyecto/inmuenbles-etapa/inmuenbles-etapa.component';
 import { FormInmuebleComponent } from "./inmueble/form-inmueble/form-inmueble.component";
+import { DetalleInmuebleComponent } from './inmueble/detalle-inmueble/detalle-inmueble.component';
+import { CostosInmuebleComponent } from "./inmueble/costos-inmueble/costos-inmueble.component";
+import { FormCostoComponent } from './inmueble/form-costo/form-costo.component';
+import { FormtInputMoneyDirective } from './formtInputMoney.directive';
 
 @NgModule({
   imports: [
@@ -48,9 +54,12 @@ import { FormInmuebleComponent } from "./inmueble/form-inmueble/form-inmueble.co
     FlexLayoutModule,
     CdkTableModule,
   ],
-  providers: [],
+  providers: [
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+  ],
   entryComponents: [],
-  declarations: [
+  declarations: [	
     PanelComponent,
     AreaComponent,
     RolComponent,
@@ -76,6 +85,10 @@ import { FormInmuebleComponent } from "./inmueble/form-inmueble/form-inmueble.co
     FormEtapaComponent,
     InmuenblesEtapaComponent,
     FormInmuebleComponent,
-  ],
+    DetalleInmuebleComponent,
+    CostosInmuebleComponent,
+    FormCostoComponent,
+      FormtInputMoneyDirective
+   ],
 })
 export class PagesModule {}
