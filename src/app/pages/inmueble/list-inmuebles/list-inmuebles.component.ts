@@ -17,6 +17,7 @@ import{DetalleInmuebleComponent} from "../detalle-inmueble/detalle-inmueble.comp
   styleUrls: ["./list-inmuebles.component.css"],
 })
 export class ListInmueblesComponent implements OnInit {
+  public total:any;
   dataSource = new MatTableDataSource<inmueble>();
   public displayedColumns: string[] = [
     "Manzana",
@@ -49,6 +50,8 @@ export class ListInmueblesComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    var filteredData = this.dataSource.filteredData;
+    this.total=filteredData.reduce((summ, v) => summ += parseInt(v.Valor_Final), 0);
   }
 
   QueryInmuebles() {
@@ -59,6 +62,7 @@ export class ListInmueblesComponent implements OnInit {
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.dataSource.data = res;
             this.changeDetectorRefs.detectChanges();
+            this.total=res.reduce((summ, v) => summ += parseInt(v.Valor_Final), 0);
           } else {
             this.notificacion(res[0].MENSAJE!);
           }

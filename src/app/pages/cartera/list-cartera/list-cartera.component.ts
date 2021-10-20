@@ -15,6 +15,9 @@ import { cartera } from 'src/app/Models/cartera.model';
   styleUrls: ['./list-cartera.component.css']
 })
 export class ListCarteraComponent implements OnInit, AfterViewInit {
+  public TotalRecaudado:any;
+  public TotalSaldo:any;
+  public Total:any;
   dataSource = new MatTableDataSource<cartera>();
   public displayedColumns: string[] = [
     "cedula",
@@ -45,6 +48,10 @@ export class ListCarteraComponent implements OnInit, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    var filteredData = this.dataSource.filteredData;
+    this.Total=filteredData.reduce((summ, v) => summ += parseInt(v.total), 0);
+    this.TotalSaldo=filteredData.reduce((summ, v) => summ += parseInt(v.saldo), 0);
+    this.TotalRecaudado=filteredData.reduce((summ, v) => summ += parseInt(v.recaudado), 0);
   }
   QueryCartera() {
     try {
@@ -55,6 +62,9 @@ export class ListCarteraComponent implements OnInit, AfterViewInit {
             console.log('Datos res',res[0].TIPO,res[0].MENSAJE);
             this.dataSource.data = res;
             this.changeDetectorRefs.detectChanges();
+            this.Total=res.reduce((summ, v) => summ += parseInt(v.total), 0);
+            this.TotalSaldo=res.reduce((summ, v) => summ += parseInt(v.saldo), 0);
+            this.TotalRecaudado=res.reduce((summ, v) => summ += parseInt(v.recaudado), 0);
           } else {
             this.notificacion(res[0].MENSAJE!);
             console.log('Datos res',res[0].TIPO,res[0].MENSAJE);

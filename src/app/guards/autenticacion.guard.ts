@@ -11,18 +11,17 @@ export class AutenticacionGuard implements CanActivate {
     private router: Router
   ){  }
 
-  canActivate(route:ActivatedRouteSnapshot){
+ /*  canActivate(route:ActivatedRouteSnapshot){
     this.router.navigate(['/login/']);
     return false;
-  }
-  /* canActivate(): boolean {
+  } */
+  canActivate(): boolean {
     if(!this.autenticacionService.isAuth()){
       console.log('Token no es válido o expiró');
       this.router.navigate(['/login']);
       return false;
-    console.log('Token válido');
+    }
     return true;
-
-  } */
+  }
 
 }

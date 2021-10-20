@@ -3,10 +3,10 @@ export interface inmueble {
   manzana: string;
   casa: string;
   Valor_Inicial: string;
-  Valor_Final?: string;
-  catastral?: string;
-  escritura?: string;
-  matricula?: string;
+  Valor_Final: string;
+  catastral: string;
+  escritura: string;
+  matricula: string;
   estado: string;
   idproyecto: string;
   idetapa: string;
