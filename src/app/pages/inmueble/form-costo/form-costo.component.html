@@ -9,7 +9,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Fecha del costo</mat-label>
-      <input matInput placeholder="MM/DD/YYYY"  [matDatepicker]="picker" (dateChange)="dateChange($event.value)" formControlName="fecha">
+      <input matInput placeholder="DD/MM/YYYY"  [matDatepicker]="picker" (dateChange)="dateChange($event.value)" formControlName="fecha">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>

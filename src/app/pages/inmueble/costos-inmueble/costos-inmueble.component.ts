@@ -9,11 +9,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { CostoService } from 'src/app/services/costo.service';
 import { costo } from 'src/app/Models/costo.model';
 import { FormCostoComponent } from '../form-costo/form-costo.component';
+
 @Component({
   selector: 'app-costos-inmueble',
   templateUrl: './costos-inmueble.component.html',
   styleUrls: ['./costos-inmueble.component.css']
 })
+
 export class CostosInmuebleComponent implements OnInit {
   @Input() inmuebleid!:string;
   dataSourceCosto= new MatTableDataSource<costo>();
@@ -39,6 +41,11 @@ export class CostosInmuebleComponent implements OnInit {
     ngAfterViewInit() {
       this.dataSourceCosto.paginator = this.paginator;
 
+    }
+    getTotalCost() {
+      
+
+      /* return this.transactions.map(t => t.cost).reduce((acc, value) => acc + value, 0); */
     }
     applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
