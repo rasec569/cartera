@@ -23,7 +23,7 @@
   <ng-container matColumnDef="valor">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> valor </th>
     <td mat-cell *matCellDef="let item"> {{item.valor |currency: 'USD':'symbol':'.0-0' }} </td>
-    <td mat-footer-cell *matFooterCellDef> <!-- {{getTotalCost() | currency}} --> </td>
+    <td mat-footer-cell *matFooterCellDef> {{total | currency}} </td>
   </ng-container>
   <ng-container matColumnDef="fecha">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> fecha </th>

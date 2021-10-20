@@ -19,7 +19,7 @@ export class AutenticacionService {
 
 
   constructor(private http:HttpClient/* , private jwtHelper:JwtHelperService */) { }
-
+  public jwtHelper: JwtHelperService = new JwtHelperService();
   signin(user:any): Observable<any>{
     return this.http.post(`${environment.url}/login/`,user, httpOptions).pipe(
       tap((result: any) => {
@@ -30,13 +30,13 @@ export class AutenticacionService {
       catchError((err)=>this.handleError(err))
     );
   }
- /*  isAuth():boolean{
+  isAuth():boolean{
     const token:any= localStorage.getItem('token');
     if(this.jwtHelper.isTokenExpired(token) ||!localStorage.getItem('token')){
       return false;
     }
     return true;
-  } */
+  }
   logut(){
     localStorage.removeItem("token");
   }

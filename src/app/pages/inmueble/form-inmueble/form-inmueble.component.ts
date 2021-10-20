@@ -129,6 +129,7 @@ prevStep() {
           console.log(res[0]);
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.listarEtapa(res[0].idproyecto);
+            console.log('consulta inmuble',res)
             this.formInmueble.controls['idetapa'].setValue(res[0].idetapa);
             this.formInmueble.patchValue(res[0]);
           } else {

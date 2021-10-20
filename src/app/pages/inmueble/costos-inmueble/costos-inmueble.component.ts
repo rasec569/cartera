@@ -18,6 +18,7 @@ import { FormCostoComponent } from '../form-costo/form-costo.component';
 
 export class CostosInmuebleComponent implements OnInit {
   @Input() inmuebleid!:string;
+  public total:any;
   dataSourceCosto= new MatTableDataSource<costo>();
   public displayedColumns: string[] = [
     "concepto",
@@ -43,23 +44,31 @@ export class CostosInmuebleComponent implements OnInit {
 
     }
     getTotalCost() {
-      
+
 
       /* return this.transactions.map(t => t.cost).reduce((acc, value) => acc + value, 0); */
     }
     applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
       this.dataSourceCosto.filter = filterValue.trim().toLowerCase();
+      var filteredData = this.dataSourceCosto.filteredData;
+      this.total=filteredData.reduce((summ, v) => summ += parseInt(v.valor), 0);
+      /* console.log('datos en filter',this.dataSourceCosto.data);
+      console.log('datos en filter2',filteredData); */
+      /* this.total=res.reduce((summ, v) => summ += parseInt(v.valor), 0); */
     }
     QueryCostos(inmuebleid:any) {
       try {
 
         this.CostoS.getCostosInmueble(inmuebleid).subscribe(
           (res: costo[]) => {
+
             console.log(res);
             if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
               this.dataSourceCosto.data = res;
               this.changeDetectorRefs.detectChanges();
+              this.total=res.reduce((summ, v) => summ += parseInt(v.valor), 0);
+              console.log('total',this.total);
               this.dataSourceCosto.sort = this.sort;
             } else {
               this.notificacion(res[0].MENSAJE!);
