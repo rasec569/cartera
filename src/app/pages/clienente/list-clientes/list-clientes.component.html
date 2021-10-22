@@ -46,11 +46,11 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu4="matMenu">
-              <button mat-menu-item [routerLink]="['/EditarCliente',item.iduser]">
+              <button mat-menu-item [routerLink]="['/EditarCliente',item.id]">
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>
               </button>
-              <button mat-menu-item color="warn" (click)="RemoveUsuario(item)">
+              <button mat-menu-item color="warn" (click)="RemoveCliente(item)">
                 <mat-icon>delete</mat-icon>
                 <span>Eliminar</span>
               </button>

@@ -39,9 +39,9 @@ export class ClientesService {
     );
   }
 
-  public getCliente(iduser: any): Observable<any> {
-    HttpOptionsBody.body.id=iduser;
-    return this.http.get(`${environment.url}/clients/${iduser}`,HttpOptionsBody).pipe(
+  public getCliente(id: any): Observable<any> {
+    HttpOptionsBody.body.id=id;
+    return this.http.get(`${environment.url}/clients/${id}`,HttpOptionsBody).pipe(
       tap((result: any) => {
       }),
       catchError(this.handleError)

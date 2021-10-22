@@ -27,6 +27,7 @@ export const PagesRoutes: Routes = [
 
   { path:'Clientes', component:ClienenteComponent, canActivate: [AutenticacionGuard]},
   { path:'NuevoCliente', component:FormClienteComponent, canActivate: [AutenticacionGuard]},
+  { path:'EditarCliente/:id', component:FormClienteComponent, canActivate: [AutenticacionGuard]},
 
   { path:'Acreedores', component:AcreedoresComponent, canActivate: [AutenticacionGuard]},
   { path:'Cartera', component:CarteraComponent, canActivate: [AutenticacionGuard]}

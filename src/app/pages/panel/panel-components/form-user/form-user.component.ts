@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router ,ActivatedRoute ,Params} from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { UserService } from 'src/app/services/user.service';
 import { usuario } from 'src/app/Models/usuario.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router ,ActivatedRoute ,Params} from '@angular/router';
 
 import {rol} from 'src/app/Models/rol.model';
 import { RolService } from 'src/app/services/rol.service';
@@ -98,7 +99,7 @@ export class FormUserComponent implements OnInit {
             if (res[0].TIPO == "3") {
               this.notificacion(res[0].MENSAJE!);
               this.formUser.reset();
-              this.router.navigate(['panel']);
+              this.router.navigate(['Panel']);
             } else {
               this.notificacion(res[0].MENSAJE!);
             }
@@ -115,7 +116,7 @@ export class FormUserComponent implements OnInit {
             if (res[0].TIPO == "3") {
               this.notificacion(res[0].MENSAJE!);
               this.formUser.reset();
-              this.router.navigate(['panel']);
+              this.router.navigate(['Panel']);
             } else {
               this.notificacion(res[0].MENSAJE!);
             }

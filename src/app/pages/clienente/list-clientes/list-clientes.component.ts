@@ -68,14 +68,14 @@ export class ListClientesComponent implements OnInit,AfterViewInit {
       );
     }
   }
-  RemoveUsuario(Usuario: cliente) {
+  RemoveCliente(Cliente: cliente) {
     const dialogoRef = this.dialog.open(DeletevalidacionComponent, {
       width: "300px",
     });
     dialogoRef.afterClosed().subscribe((res) => {
       if (res) {
         try {
-          this.ClienteS.deleteCliente(Usuario).subscribe(
+          this.ClienteS.deleteCliente(Cliente).subscribe(
             (res: cliente[]) => {
               if (res[0].TIPO == "3") {
                 this.notificacion(res[0].MENSAJE!);
