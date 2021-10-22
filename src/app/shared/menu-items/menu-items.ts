@@ -10,13 +10,13 @@ export interface Menu {
 const MENUITEMS = [
   { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
   /* { state: 'login', type: 'link', name: 'login', icon: 'monetization_on' }, */
-  { state: 'cartera', type: 'link', name: 'Cartera', icon: 'card_travel' },
-  { state: 'clientes', type: 'link', name: 'Clientes', icon: 'family_restroom' },
-  { state: 'proyectos', type: 'link', name: 'Proyectos', icon: 'cases' },
-  { state: 'inmueble', type: 'link', name: 'Inmuebles', icon: 'maps_home_work' },
+  { state: 'Cartera', type: 'link', name: 'Cartera', icon: 'card_travel' },
+  { state: 'Clientes', type: 'link', name: 'Clientes', icon: 'family_restroom' },
+  { state: 'Proyectos', type: 'link', name: 'Proyectos', icon: 'cases' },
+  { state: 'Inmuebles', type: 'link', name: 'Inmuebles', icon: 'maps_home_work' },
   { state: 'button', type: 'link', name: 'Archivo', icon: 'drive_folder_upload' },
-  { state: 'acreedores', type: 'link', name: 'Acreedores', icon: 'request_quote' },
-  { state: 'panel', type: 'link', name: 'Panel', icon: 'tune' },
+  { state: 'Acreedores', type: 'link', name: 'Acreedores', icon: 'request_quote' },
+  { state: 'Panel', type: 'link', name: 'Panel', icon: 'tune' },
 
 ];
 

@@ -10,21 +10,25 @@ import { CarteraComponent } from './cartera/cartera.component';
 import { FormProyectoComponent } from './proyecto/form-proyecto/form-proyecto.component';
 import { FormEditProyectoComponent } from './proyecto/form-edit-proyecto/form-edit-proyecto.component';
 import { FormInmuebleComponent } from './inmueble/form-inmueble/form-inmueble.component';
+import { FormClienteComponent } from './clienente/form-cliente/form-cliente.component';
 
 
 export const PagesRoutes: Routes = [
-  { path: 'panel', component:PanelComponent, canActivate: [AutenticacionGuard] },
-  { path:'newuser', component:FormUserComponent, canActivate: [AutenticacionGuard]},
-  { path:'newuser/:id', component:FormUserComponent, canActivate: [AutenticacionGuard]},
-  { path:'inmueble', component:InmuebleComponent, canActivate: [AutenticacionGuard]},
-  { path:'newinmueble', component:FormInmuebleComponent, canActivate: [AutenticacionGuard]},
-  { path:'newinmueble/:id', component:FormInmuebleComponent, canActivate: [AutenticacionGuard]},
-  { path:'proyectos', component:ProyectoComponent, canActivate: [AutenticacionGuard]},
-  { path:'newproyecto', component:FormProyectoComponent, canActivate: [AutenticacionGuard]},
-  { path:'editproyecto/:id', component:FormEditProyectoComponent, canActivate: [AutenticacionGuard]},
+  { path: 'Panel', component:PanelComponent, canActivate: [AutenticacionGuard] },
+  { path:'NuevoUsuario', component:FormUserComponent, canActivate: [AutenticacionGuard]},
+  { path:'EditarUsuario/:id', component:FormUserComponent, canActivate: [AutenticacionGuard]},
+  { path:'Inmuebles', component:InmuebleComponent, canActivate: [AutenticacionGuard]},
+  { path:'NuevoInmueble', component:FormInmuebleComponent, canActivate: [AutenticacionGuard]},
+  { path:'EditarInmueble/:id', component:FormInmuebleComponent, canActivate: [AutenticacionGuard]},
+  { path:'Proyectos', component:ProyectoComponent, canActivate: [AutenticacionGuard]},
+  { path:'NuevoProyecto', component:FormProyectoComponent, canActivate: [AutenticacionGuard]},
+  { path:'EditarProyecto/:id', component:FormEditProyectoComponent, canActivate: [AutenticacionGuard]},
 
-  { path:'clientes', component:ClienenteComponent, canActivate: [AutenticacionGuard]},
-  { path:'acreedores', component:AcreedoresComponent, canActivate: [AutenticacionGuard]},
-  { path:'cartera', component:CarteraComponent, canActivate: [AutenticacionGuard]}
+
+  { path:'Clientes', component:ClienenteComponent, canActivate: [AutenticacionGuard]},
+  { path:'NuevoCliente', component:FormClienteComponent, canActivate: [AutenticacionGuard]},
+
+  { path:'Acreedores', component:AcreedoresComponent, canActivate: [AutenticacionGuard]},
+  { path:'Cartera', component:CarteraComponent, canActivate: [AutenticacionGuard]}
 
 ];

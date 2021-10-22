@@ -9,7 +9,7 @@
             </mat-form-field>
           </td>
           <td>
-            <button mat-raised-button color="primary" matTooltip="Registar nuevo Proyectos" [routerLink]="['/newproyecto']"> Nuevo
+            <button mat-raised-button color="primary" matTooltip="Registar nuevo inmueble" [routerLink]="['/NuevoInmueble']"> Nuevo
             </button>
           </td>
         </tr>
@@ -46,18 +46,18 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu4="matMenu">
-              <button mat-menu-item [routerLink]="['/proyectodetalle',item.id]">
+              <button mat-menu-item (click)="OpenDetalle(item.id)">
                 <mat-icon>launch</mat-icon>
                 <span>Detalle</span>
               </button>
-              <button mat-menu-item [routerLink]="['/editproyecto',item.id]">
+              <!-- <button mat-menu-item [routerLink]="['/EditarInmueble',item.id]">
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>
               </button>
               <button mat-menu-item color="warn" (click)="RemoveProyecto(item)">
                 <mat-icon>delete</mat-icon>
                 <span>Eliminar</span>
-              </button>
+              </button> -->
             </mat-menu>
           </td>
         </ng-container>

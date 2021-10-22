@@ -18,10 +18,10 @@
             <input matInput placeholder="Numero de casa" formControlName="casa">
           </mat-form-field>
           <mat-form-field>
-            <input appFormtInputMoney matInput  type="text" placeholder="Valor neto" formControlName="Valor_Inicial" >
+            <input appFormtInputMoney matInput  type="text" placeholder="Valor neto" formControlName="Valor_Inicial" (blur)="onValueChange()">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Valor Final" formControlName="Valor_Final">
+            <input appFormtInputMoney matInput placeholder="Valor Final" formControlName="Valor_Final">
           </mat-form-field>
         </div>
         <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
@@ -82,7 +82,7 @@
     <table style="text-align:center;" class="example-full-width" cellspacing="15">
       <tr>
         <td>
-          <button mat-raised-button color="warn" [routerLink]="['/inmueble']"> Cancelar </button>
+          <button mat-raised-button color="warn" [routerLink]="['/Inmuebles']"> Cancelar </button>
 
         </td>
         <td>

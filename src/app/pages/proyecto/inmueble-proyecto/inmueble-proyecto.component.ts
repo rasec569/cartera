@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { InmuebleService } from 'src/app/services/inmueble.service';
 import { inmueble } from 'src/app/Models/inmueble.model';
+import { DetalleInmuebleComponent } from '../../inmueble/detalle-inmueble/detalle-inmueble.component';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class InmuebleProyectoComponent implements OnInit, AfterViewInit {
     "estado",
     "Acciones",
   ];
+  readonly width:string='900px';
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -46,11 +48,17 @@ export class InmuebleProyectoComponent implements OnInit, AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  OpenDetalle(id: any){
+    const dialogoRef = this.dialog.open(DetalleInmuebleComponent , { width: this.width,
+      data: id, panelClass: 'my-dialog',});
+      dialogoRef.afterClosed().subscribe(res=>{
+        this.QueryInmuebles(this.proyectoid);
+      });
+  }
   QueryInmuebles(proyectoid:any) {
     try {
       this.InmuebleS.getInmuebleProyecto(proyectoid).subscribe(
         (res: inmueble[]) => {
-          console.log( 'inmuebles proyecto' ,res);
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.dataSource.data = res;
             this.changeDetectorRefs.detectChanges();

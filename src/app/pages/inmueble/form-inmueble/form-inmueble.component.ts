@@ -17,7 +17,10 @@ import { EtapaService } from 'src/app/services/etapa.service';
   styleUrls: ['./form-inmueble.component.css']
 })
 export class FormInmuebleComponent implements OnInit {
-  myValue!: string;
+  /* myValue!: string; */
+  CalValorFinal:any;
+  CalValorInicial:any;
+  ValorFinal:any;
   inmuebleid='';
   public DataProyectos!: any[];
   public DataEtapas!: any[];
@@ -67,16 +70,25 @@ prevStep() {
     }
     this.listarProyecto();
   }
+  onValueChange() {
+    if(this.inmuebleid === undefined|| this.inmuebleid ==''){
+      this.formInmueble.controls['Valor_Final'].setValue(this.formInmueble.controls['Valor_Inicial'].value);
+    }else{
+      this.CalValorFinal= (this.formInmueble.controls['Valor_Inicial'].value-this.CalValorInicial)+this.ValorFinal;
+      this.formInmueble.controls['Valor_Final'].setValue(this.CalValorFinal);
+    }
+  }
+
+  /*
   processMyValue(): void {
     let numberVal = parseInt(this.myValue).toLocaleString();
     this.formInmueble.value.Valor_Inicial = numberVal;
-  }
+  } */
   listarProyecto(){
     try {
       this.ProyectoS.getProyectos().subscribe(
         (res:proyecto[])=> {
           if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
-            console.log('Lista para select 2',res)
             this.DataProyectos=res;
           }else{
             this.notificacion(res[0].MENSAJE!);
@@ -94,7 +106,6 @@ prevStep() {
       );
     }
   }onSelect(seleccion:any){
-    console.log("esto llega al evento", seleccion.value)
     this.listarEtapa(seleccion.value);
 
   }
@@ -102,7 +113,7 @@ prevStep() {
     try {
       console.log('entro con el proyectoid', id);
       this.EtapaS.getEtapasProyecto(id).subscribe(
-        (res:proyecto[])=> {
+        (res:etapa[])=> {
           if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
             this.DataEtapas=res;
           }else{
@@ -122,14 +133,13 @@ prevStep() {
     }
   }
   QueryOneInmueble(inmuebleid:any) {
-    console.log("en el metodo", inmuebleid)
     try {
       this.InmuebleS.getInmueble(inmuebleid).subscribe(
         (res: inmueble[]) => {
-          console.log(res[0]);
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.listarEtapa(res[0].idproyecto);
-            console.log('consulta inmuble',res)
+            this.CalValorInicial=res[0].Valor_Inicial;
+            this.ValorFinal=res[0].Valor_Final;
             this.formInmueble.controls['idetapa'].setValue(res[0].idetapa);
             this.formInmueble.patchValue(res[0]);
           } else {
@@ -149,28 +159,6 @@ prevStep() {
     }
   }
   SaveInmueble() {
-    try {
-        this.InmuebleS.createInmueble(this.formInmueble.value).subscribe(
-          (res: inmueble[]) => {
-            if (res[0].TIPO == "3") {
-              this.notificacion(res[0].MENSAJE!);
-              this.formInmueble.reset();
-              this.router.navigate(['inmueble']);
-            } else {
-              this.notificacion(res[0].MENSAJE!);
-            }
-          },
-          (err) => {
-            this.notificacion(
-              "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
-            );
-          }
-        );
-    } catch (error) {
-      this.notificacion(
-        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
-      );
-    }
     try {
       if((this.formInmueble.value.id== null) ||(this.formInmueble.value.id=="")){
         this.InmuebleS.createInmueble(this.formInmueble.value).subscribe(

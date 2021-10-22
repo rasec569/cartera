@@ -13,7 +13,7 @@
             </mat-form-field>
           </td>
           <td>
-            <button mat-raised-button color="primary" matTooltip="Registar nuevo rol" [routerLink]="['/newuser']"> Nuevo
+            <button mat-raised-button color="primary" matTooltip="Registar nuevo usuario" [routerLink]="['/NuevoUsuario']"> Nuevo
             </button>
           </td>
         </tr>
@@ -46,7 +46,7 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu4="matMenu">
-              <button mat-menu-item [routerLink]="['/newuser',item.iduser]">
+              <button mat-menu-item [routerLink]="['/EditarUsuario',item.iduser]">
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>
               </button>

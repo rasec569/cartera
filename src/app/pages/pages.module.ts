@@ -42,6 +42,7 @@ import { DetalleInmuebleComponent } from './inmueble/detalle-inmueble/detalle-in
 import { CostosInmuebleComponent } from "./inmueble/costos-inmueble/costos-inmueble.component";
 import { FormCostoComponent } from './inmueble/form-costo/form-costo.component';
 import { FormtInputMoneyDirective } from './formtInputMoney.directive';
+import { FormClienteComponent } from './clienente/form-cliente/form-cliente.component';
 
 @NgModule({
   imports: [
@@ -88,7 +89,8 @@ import { FormtInputMoneyDirective } from './formtInputMoney.directive';
     DetalleInmuebleComponent,
     CostosInmuebleComponent,
     FormCostoComponent,
-      FormtInputMoneyDirective
+      FormtInputMoneyDirective,
+      FormClienteComponent
    ],
 })
 export class PagesModule {}

@@ -36,39 +36,27 @@ export class CostosInmuebleComponent implements OnInit {
     public dialog: MatDialog) { }
 
     ngOnInit(): void {
-      console.log('inmueble', this.inmuebleid)
       this.QueryCostos(this.inmuebleid);
     }
     ngAfterViewInit() {
       this.dataSourceCosto.paginator = this.paginator;
 
     }
-    getTotalCost() {
-
-
-      /* return this.transactions.map(t => t.cost).reduce((acc, value) => acc + value, 0); */
-    }
     applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
       this.dataSourceCosto.filter = filterValue.trim().toLowerCase();
       var filteredData = this.dataSourceCosto.filteredData;
       this.total=filteredData.reduce((summ, v) => summ += parseInt(v.valor), 0);
-      /* console.log('datos en filter',this.dataSourceCosto.data);
-      console.log('datos en filter2',filteredData); */
-      /* this.total=res.reduce((summ, v) => summ += parseInt(v.valor), 0); */
     }
     QueryCostos(inmuebleid:any) {
       try {
 
         this.CostoS.getCostosInmueble(inmuebleid).subscribe(
           (res: costo[]) => {
-
-            console.log(res);
             if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
               this.dataSourceCosto.data = res;
               this.changeDetectorRefs.detectChanges();
               this.total=res.reduce((summ, v) => summ += parseInt(v.valor), 0);
-              console.log('total',this.total);
               this.dataSourceCosto.sort = this.sort;
             } else {
               this.notificacion(res[0].MENSAJE!);
@@ -102,6 +90,36 @@ export class CostosInmuebleComponent implements OnInit {
       });
       dialogoRef.afterClosed().subscribe(res=>{
         this.QueryCostos(this.inmuebleid);
+      });
+    }
+    OpenDelete(Costo:costo){
+      const dialogoRef = this.dialog.open(DeletevalidacionComponent, {
+        width: "300px",
+      });
+      dialogoRef.afterClosed().subscribe((res) => {
+        if (res) {
+          try {
+            this.CostoS.deleteCosto(Costo).subscribe(
+              (res: costo[]) => {
+                if (res[0].TIPO == "3") {
+                  this.notificacion(res[0].MENSAJE!);
+                  this.QueryCostos(this.inmuebleid);
+                } else {
+                  this.notificacion(res[0].MENSAJE!);
+                }
+              },
+              (err) => {
+                this.notificacion(
+                  "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+                );
+              }
+            );
+          } catch (notificacion) {
+            this.notificacion(
+              "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+            );
+          }
+        }
       });
     }
     notificacion(Mensaje: string) {

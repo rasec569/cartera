@@ -13,7 +13,7 @@
             </mat-form-field>
           </td>
           <td>
-            <button mat-raised-button color="primary" matTooltip="Registar nuevo Proyectos" [routerLink]="['/newproyecto']"> Nuevo
+            <button mat-raised-button color="primary" matTooltip="Registar nuevo Proyectos" [routerLink]="['/NuevoProyecto']"> Nuevo
             </button>
           </td>
         </tr>
@@ -46,7 +46,7 @@
                 <mat-icon>launch</mat-icon>
                 <span>Detalle</span>
               </button>
-              <button mat-menu-item [routerLink]="['/editproyecto',item.id]">
+              <button mat-menu-item [routerLink]="['/EditarProyecto',item.id]">
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>
               </button>
