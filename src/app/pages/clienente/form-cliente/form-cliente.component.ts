@@ -5,8 +5,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ClientesService } from 'src/app/services/clientes.service';
 import { cliente } from 'src/app/Models/cliente.model';
-import { Observable } from 'rxjs';
-import { startWith } from 'rxjs-compat/operator/startWith';
 
 @Component({
   selector: 'app-form-cliente',
@@ -17,7 +15,7 @@ export class FormClienteComponent implements OnInit {
   clienteid='';
   formCliente: FormGroup;
   public ListaClientes:cliente[]=[];
-  filteredOptions!: Observable<cliente[]>;
+  public CloneClientes:cliente[]=[];
   // expacion
   panelOpenState = false;
   step = 0;
@@ -45,36 +43,47 @@ export class FormClienteComponent implements OnInit {
         telefono: ["", Validators.required],
         direccion: ["", Validators.required],
       })
-      this.formCliente.get('nombres')?.valueChanges.subscribe(res=>{
-        this.filter(res);
-      })
-     }
+    }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.clienteid = params.id;
     });
+
     if(this.clienteid != ""){
       this.QueryOneCliente(this.clienteid);
     }
-    this.QuerClientes();
-
-    /* this.filteredOptions=this.formCliente.controls.onValueChange.pipe(startWith(''),map(value=>this._filter(value))
-    ); */
+     if (this.clienteid === undefined){
+      this.QuerClientes();
+      this.formCliente.get('nombres')?.valueChanges.subscribe(res=>{
+        this.filter(res);
+      })
+    }
   }
   mostrar(subject: { nombres: any; }){
     return subject ? subject.nombres: undefined;
   }
   filter(value: string){
-    console.log('valor input',value);
-    this.ListaClientes=this.ListaClientes.filter(cliente =>{
-      return cliente.nombres.toLowerCase().indexOf(value.toLowerCase())>-1
-    })
+    const val = value;
+    if (val !== "") {
+      this.ListaClientes=this.ListaClientes.filter(cliente =>{
+        if(this.ListaClientes.length===1){
+          this.clienteid = cliente.id;
+          this.QueryOneCliente(cliente.id);
+          this.ListaClientes = this.CloneClientes;
+        }
+        return cliente.nombres.toLowerCase().indexOf(val.toLowerCase())>-1
+      })
+    }
+    else {
+      this.ListaClientes = this.CloneClientes;
+    }
+
   }
-  filer2(value: string):cliente[]{
+  filter2(value: string):cliente[]{
     const filterValue=value.toLowerCase();
     console.log('valor',filterValue);
-    return this.ListaClientes.filter(cliente => cliente.nombres.toLowerCase().indexOf(filterValue) === 0);
+    return this.ListaClientes.filter(cliente => cliente.nombres.toLowerCase().indexOf(filterValue.toLowerCase()) >-1);
   }
   QuerClientes() {
     try {
@@ -83,7 +92,7 @@ export class FormClienteComponent implements OnInit {
           console.log(res);
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.ListaClientes = res;
-            /* this.filterData(res); */
+            this.CloneClientes=res;
           } else {
             this.notificacion(res[0].MENSAJE!);
           }
@@ -164,6 +173,7 @@ export class FormClienteComponent implements OnInit {
           }
         );
       }
+      this.formCliente.reset();
     } catch (error) {
       this.notificacion(
         "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"

@@ -33,7 +33,7 @@ export class ListClientesComponent implements OnInit,AfterViewInit {
               public dialog: MatDialog  ) { }
 
   ngOnInit(): void {
-  this.QuerClientes();
+  this.QueryClientes();
 
   }
   ngAfterViewInit() {
@@ -44,7 +44,7 @@ export class ListClientesComponent implements OnInit,AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  QuerClientes() {
+  QueryClientes() {
     try {
       this.ClienteS.getClientes().subscribe(
         (res: cliente[]) => {
@@ -79,7 +79,7 @@ export class ListClientesComponent implements OnInit,AfterViewInit {
             (res: cliente[]) => {
               if (res[0].TIPO == "3") {
                 this.notificacion(res[0].MENSAJE!);
-                this.QuerClientes();
+                this.QueryClientes();
               } else {
                 this.notificacion(res[0].MENSAJE!);
               }
