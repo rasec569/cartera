@@ -14,7 +14,7 @@ const MENUITEMS = [
   { state: 'Clientes', type: 'link', name: 'Clientes', icon: 'family_restroom' },
   { state: 'Proyectos', type: 'link', name: 'Proyectos', icon: 'cases' },
   { state: 'Inmuebles', type: 'link', name: 'Inmuebles', icon: 'maps_home_work' },
-  { state: 'button', type: 'link', name: 'Archivo', icon: 'drive_folder_upload' },
+  { state: 'Archivos', type: 'link', name: 'Archivo', icon: 'drive_folder_upload' },
   { state: 'Acreedores', type: 'link', name: 'Acreedores', icon: 'request_quote' },
   { state: 'Panel', type: 'link', name: 'Panel', icon: 'tune' },
 

@@ -1,1 +1,74 @@
-<p>list-all-file works!</p>
+<mat-card>
+  <mat-card-content>
+    <mat-card-title>Archivos</mat-card-title>
+    <mat-card-subtitle>Lista de Archivos</mat-card-subtitle>
+    <div class="mat-elevation-z8">
+      <table class="example-full-width" style="text-align:center;" cellspacing="15">
+        <tr>
+          <td>
+            <mat-form-field appearance="standard">
+              <mat-label>Buscar</mat-label>
+              <input matInput (keyup)="applyFilter($event)" matTooltip="Buscar en la lista de archios"
+                placeholder="Cualquier palabra clave" #input>
+            </mat-form-field>
+          </td>
+          <td>
+            <button mat-raised-button color="primary" matTooltip="Cargar nuevo archivo" [routerLink]="['/Upload']"> Nuevo
+            </button>
+          </td>
+        </tr>
+      </table>
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> nombre </th>
+          <td mat-cell *matCellDef="let item"> {{item.nombre}} </td>
+        </ng-container>
+        <ng-container matColumnDef="nombreArea">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> nombreArea </th>
+          <td mat-cell *matCellDef="let item"> {{item.nombreArea}} </td>
+        </ng-container>
+        <ng-container matColumnDef="nombreCategoria">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> nombreCategoria </th>
+          <td mat-cell *matCellDef="let item"> {{item.nombreCategoria}} </td>
+        </ng-container>
+        <ng-container matColumnDef="fechaCreacion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Creado </th>
+          <td mat-cell *matCellDef="let item"> {{item.fechaCreacion | date: 'dd MMM yy'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="fechaModificacion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Modificado </th>
+          <td mat-cell *matCellDef="let item"> {{item.fechaModificacion | date: 'dd MMM yy'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Acciones">
+          <th mat-header-cell *matHeaderCellDef> Acción</th>
+          <td mat-cell *matCellDef="let item">
+            <a mat-icon-button  [href]="serverPath+item.ruta" [download]="item.nombre"  target="_blank">
+              <mat-icon>open_in_new</mat-icon>
+            </a>
+            <button mat-icon-button [matMenuTriggerFor]="menu4" matTooltip="Acciones del Archivo">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu4="matMenu">
+              <a mat-icon-button  [href]="serverPath+item.ruta" [download]="item.nombre"  target="_blank">
+                <mat-icon>open_in_new</mat-icon>
+              </a>
+              <button mat-menu-item color="warn" (click)="RemoveCliente(item)">
+                <mat-icon>delete</mat-icon>
+                <span>Eliminar</span>
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No hay datos que coincidan con el filtro "{{input.value}}"</td>
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

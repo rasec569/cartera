@@ -11,6 +11,8 @@ import { FormProyectoComponent } from './proyecto/form-proyecto/form-proyecto.co
 import { FormEditProyectoComponent } from './proyecto/form-edit-proyecto/form-edit-proyecto.component';
 import { FormInmuebleComponent } from './inmueble/form-inmueble/form-inmueble.component';
 import { FormClienteComponent } from './clienente/form-cliente/form-cliente.component';
+import { ArchivoComponent } from './archivo/archivo.component';
+import { UploadFileComponent } from './archivo/upload-file/upload-file.component';
 
 
 export const PagesRoutes: Routes = [
@@ -30,6 +32,9 @@ export const PagesRoutes: Routes = [
   { path:'EditarCliente/:id', component:FormClienteComponent, canActivate: [AutenticacionGuard]},
 
   { path:'Acreedores', component:AcreedoresComponent, canActivate: [AutenticacionGuard]},
+  { path:'Archivos', component:ArchivoComponent, canActivate: [AutenticacionGuard]},
+  { path:'Upload', component:UploadFileComponent, canActivate: [AutenticacionGuard]},
+
   { path:'Cartera', component:CarteraComponent, canActivate: [AutenticacionGuard]}
 
 ];

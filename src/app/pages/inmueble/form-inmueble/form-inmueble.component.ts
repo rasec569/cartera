@@ -166,7 +166,7 @@ prevStep() {
             if (res[0].TIPO == "3") {
               this.notificacion(res[0].MENSAJE!);
               this.formInmueble.reset();
-              this.router.navigate(['inmueble']);
+              this.router.navigate(['Inmuebles']);
             } else {
               this.notificacion(res[0].MENSAJE!);
             }
@@ -183,7 +183,7 @@ prevStep() {
             if (res[0].TIPO == "3") {
               this.notificacion(res[0].MENSAJE!);
               this.formInmueble.reset();
-              this.router.navigate(['inmueble']);
+              this.router.navigate(['Inmuebles']);
             } else {
               this.notificacion(res[0].MENSAJE!);
             }

@@ -1,0 +1,66 @@
+<mat-card>
+  <mat-card-content>
+    <mat-card-title>Archivo </mat-card-title>
+    <mat-card-subtitle>Cargar nuevo archivo</mat-card-subtitle>
+    <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+      <mat-form-field appearance="fill">
+        <mat-label>Area</mat-label>
+        <mat-select placeholder="Seleccione un area" [(ngModel)]="Files.idarea">
+          <mat-option *ngFor="let area of DataAreas" [value]="area.id">
+            {{area.Area}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Categoria</mat-label>
+        <mat-select [(ngModel)]="Files.idCategoria">
+          <mat-option *ngFor="let categoria of DataCategoria" [value]="categoria.id">
+            {{categoria.Nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+    <form action="/api/upload" method="post" enctype="multipart/form-data">
+      <input type="file" class="file-input" [accept]="requiredFileType" (change)="onFileSelected($event)" #fileUpload multiple>
+    </form>
+
+    <table style="text-align:center;" class="example-full-width" cellspacing="15">
+      <tr>
+        <td>
+          <div class="file-upload">
+            {{fileName || "Aún no se ha seleccionado ningún archivo."}}
+            <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+          </div>
+        </td>
+        <td>
+          <table style="text-align:center;" class="example-full-width" cellspacing="15">
+            <tr>
+              <td>
+                <button mat-raised-button color="warn" [routerLink]="['/Archivos']"> Cancelar </button>
+              </td>
+              <td>
+                <button (click)="SaveFile()" mat-raised-button color="primary"> Guardar </button>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <div class="progress">
+
+      <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress" *ngIf="uploadProgress">
+
+      </mat-progress-bar>
+
+      <mat-icon class="cancel-upload" (click)="cancelUpload()" *ngIf="uploadProgress">delete_forever</mat-icon>
+
+    </div>
+   <!--    <pre>
+    {{Files|json}}
+  </pre> -->
+  </mat-card-content>
+</mat-card>
+

@@ -55,9 +55,9 @@ export class FormClienteComponent implements OnInit {
     }
      if (this.clienteid === undefined){
       this.QuerClientes();
-      this.formCliente.get('nombres')?.valueChanges.subscribe(res=>{
+      /* this.formCliente.get('nombres')?.valueChanges.subscribe(res=>{
         this.filter(res);
-      })
+      }) */
     }
   }
   mostrar(subject: { nombres: any; }){
@@ -79,6 +79,21 @@ export class FormClienteComponent implements OnInit {
       this.ListaClientes = this.CloneClientes;
     }
 
+  }
+  getItems(ev: any){
+    const val = ev.target.value;
+    console.log(val);
+    if (val && val.trim() !== "") {
+      this.ListaClientes = this.ListaClientes.filter((item) => {
+        if(this.ListaClientes.length===1){
+          this.clienteid = item.id;
+          this.QueryOneCliente(item.id);
+        }
+        return item.nombres.toLowerCase().indexOf(val.toLowerCase()) > -1;
+      });
+    } else {
+      this.ListaClientes = this.CloneClientes;
+    }
   }
   filter2(value: string):cliente[]{
     const filterValue=value.toLowerCase();

@@ -43,6 +43,7 @@ import { CostosInmuebleComponent } from "./inmueble/costos-inmueble/costos-inmue
 import { FormCostoComponent } from './inmueble/form-costo/form-costo.component';
 import { FormtInputMoneyDirective } from './formtInputMoney.directive';
 import { FormClienteComponent } from './clienente/form-cliente/form-cliente.component';
+import { UploadFileComponent } from './archivo/upload-file/upload-file.component';
 
 @NgModule({
   imports: [
@@ -60,7 +61,7 @@ import { FormClienteComponent } from './clienente/form-cliente/form-cliente.comp
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   ],
   entryComponents: [],
-  declarations: [	
+  declarations: [
     PanelComponent,
     AreaComponent,
     RolComponent,
@@ -90,7 +91,8 @@ import { FormClienteComponent } from './clienente/form-cliente/form-cliente.comp
     CostosInmuebleComponent,
     FormCostoComponent,
       FormtInputMoneyDirective,
-      FormClienteComponent
+      FormClienteComponent,
+      UploadFileComponent
    ],
 })
 export class PagesModule {}

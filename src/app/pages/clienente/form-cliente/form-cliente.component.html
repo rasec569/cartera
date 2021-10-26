@@ -12,9 +12,9 @@
           </mat-expansion-panel-header>
           <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
             <mat-form-field>
-              <input matInput placeholder="Cedula" formControlName="identificacion"> </mat-form-field>
+              <input matInput placeholder="Cedula" formControlName="identificacion"  > </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Nombres"formControlName="nombres" [matAutocomplete]="auto">
+              <input matInput placeholder="Nombres"formControlName="nombres" (keyup)="getItems($event)" [matAutocomplete]="auto">
               <mat-autocomplete #auto="matAutocomplete">
                 <mat-option *ngFor="let item of ListaClientes" [value]="item">
                   {{item.nombres}}
