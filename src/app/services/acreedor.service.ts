@@ -70,6 +70,7 @@ public getAcreedores(): Observable<any> {
 //eliminar Acreedor
 public deleteAcreedor(Acreedor: acreedor): Observable<any> {
   HttpOptionsBody.body.id=Acreedor.idacreedor;
+  console.log(Acreedor.idacreedor)
   return this.http
     .delete(`${environment.url}/acreedor/`,HttpOptionsBody)
     .pipe(

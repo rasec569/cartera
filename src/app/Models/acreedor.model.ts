@@ -1,15 +1,13 @@
 export interface acreedor{
-  //persona
+  //obligacion
    id:string;
-   nombres: string;
-   apellidos:string;
-   telefono:string;
-   direccion:string;
-   correo:string;
-   identificacion:string;
-  //usuario
+   fecha: string;
+   valor:string;
+   estado:string;
+   concepto:string;
+   fecha_pago:string;
+  //acreedor
    idacreedor:string;
-   descripcion:string;
 
   //error vars
    TIPO?:string;

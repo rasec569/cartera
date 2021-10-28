@@ -44,6 +44,8 @@ import { FormCostoComponent } from './inmueble/form-costo/form-costo.component';
 import { FormtInputMoneyDirective } from './formtInputMoney.directive';
 import { FormClienteComponent } from './clienente/form-cliente/form-cliente.component';
 import { UploadFileComponent } from './archivo/upload-file/upload-file.component';
+import { FormAcreedoresComponent } from './acreedores/form-acreedores/form-acreedores.component';
+import { ListObligacionesComponent } from './acreedores/list-obligaciones/list-obligaciones.component';
 
 @NgModule({
   imports: [
@@ -92,7 +94,9 @@ import { UploadFileComponent } from './archivo/upload-file/upload-file.component
     FormCostoComponent,
       FormtInputMoneyDirective,
       FormClienteComponent,
-      UploadFileComponent
+      UploadFileComponent,
+      FormAcreedoresComponent,
+      ListObligacionesComponent
    ],
 })
 export class PagesModule {}

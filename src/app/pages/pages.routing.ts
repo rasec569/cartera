@@ -13,6 +13,7 @@ import { FormInmuebleComponent } from './inmueble/form-inmueble/form-inmueble.co
 import { FormClienteComponent } from './clienente/form-cliente/form-cliente.component';
 import { ArchivoComponent } from './archivo/archivo.component';
 import { UploadFileComponent } from './archivo/upload-file/upload-file.component';
+import { FormAcreedoresComponent } from './acreedores/form-acreedores/form-acreedores.component';
 
 
 export const PagesRoutes: Routes = [
@@ -32,6 +33,8 @@ export const PagesRoutes: Routes = [
   { path:'EditarCliente/:id', component:FormClienteComponent, canActivate: [AutenticacionGuard]},
 
   { path:'Acreedores', component:AcreedoresComponent, canActivate: [AutenticacionGuard]},
+  { path:'NuevoAcreedor', component:FormAcreedoresComponent, canActivate: [AutenticacionGuard]},
+  { path:'EditarAcreedor/:id', component:FormAcreedoresComponent, canActivate: [AutenticacionGuard]},
   { path:'Archivos', component:ArchivoComponent, canActivate: [AutenticacionGuard]},
   { path:'Upload', component:UploadFileComponent, canActivate: [AutenticacionGuard]},
 

@@ -1,0 +1,88 @@
+<mat-card>
+  <mat-card-content>
+    <mat-card-title>Acreedor </mat-card-title>
+    <mat-card-subtitle>Formulario</mat-card-subtitle>
+    <mat-accordion class="example-headers-align" [formGroup]="formAcreedor">
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+          <mat-expansion-panel-header>
+              <mat-panel-title> Información Personal </mat-panel-title>
+              <mat-panel-description> Datos basicos
+                  <mat-icon>person_outline</mat-icon>
+              </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+            <mat-form-field>
+              <input matInput placeholder="Cedula" formControlName="identificacion"> </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Nombres"formControlName="nombres" > </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Apellidos" formControlName="apellidos"> </mat-form-field>
+          </div>
+          <mat-action-row>
+              <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+          </mat-action-row>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+          <mat-expansion-panel-header>
+              <mat-panel-title> Descripción </mat-panel-title>
+              <mat-panel-description> Detalles o características  relevantes
+                  <mat-icon>account_circle</mat-icon>
+              </mat-panel-description>
+          </mat-expansion-panel-header>
+          <mat-form-field>
+            <mat-label>Acreedor</mat-label>
+            <textarea matInput placeholder="Descripción" formControlName="descripcion"></textarea>
+          </mat-form-field>
+          <mat-action-row>
+              <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+              <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+          </mat-action-row>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+          <mat-expansion-panel-header>
+              <mat-panel-title> Información contacto </mat-panel-title>
+              <mat-panel-description> Medio para entablar comunicación o contacto
+                  <mat-icon>contact_mail</mat-icon>
+              </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+            <mat-form-field>
+              <input matInput placeholder="Email" formControlName="correo"> </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Telefono" formControlName="telefono"> </mat-form-field>
+          </div>
+          <mat-form-field>
+            <input matInput placeholder="Dirección" formControlName="direccion"> </mat-form-field>
+        <mat-action-row>
+            <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+            <button mat-button color="primary" (click)="nextStep()">Finalizar</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <table style="text-align:center;"*ngIf="acreedorid">
+    <tr>
+      <td>
+        <span >Fecha de Creacion: {{formAcreedor.value.registrado| date: 'dd MMM yy hh:mm:ss'}}</span>
+      </td>
+      <td>
+        <span >fecha de modificación: {{formAcreedor.value.modificado| date: 'dd MMM yy hh:mm:ss'}}</span>
+      </td>
+    </tr>
+  </table>
+  <table style="text-align:center;" class="example-full-width" cellspacing="15">
+    <tr>
+      <td>
+        <button mat-raised-button color="warn" [routerLink]="['/Acreedores']"> Cancelar </button>
+
+      </td>
+      <td>
+        <button (click)="SaveAcreedor()" mat-raised-button color="primary" [disabled]="formAcreedor.invalid"> Guardar </button>
+      </td>
+    </tr>
+  </table>
+  <!-- <pre>
+    {{formAcreedor.value|json}}
+  </pre> -->
+  </mat-card-content>
+
+</mat-card>
