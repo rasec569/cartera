@@ -27,8 +27,8 @@ import { ListClientesComponent } from './clienente/list-clientes/list-clientes.c
 import { CarteraComponent } from './cartera/cartera.component';
 import { ArchivoComponent } from './archivo/archivo.component';
 import { ListAllFileComponent } from './archivo/list-all-file/list-all-file.component';
-import { AcreedoresComponent } from './acreedores/acreedores.component';
-import { ListAcreedoresComponent } from './acreedores/list-acreedores/list-acreedores.component';
+import { ObligacionComponent } from './obligacion/obligacion.component';
+import { ListAcreedoresComponent } from './obligacion/list-acreedores/list-acreedores.component';
 import { ListCarteraComponent } from './cartera/list-cartera/list-cartera.component';
 import { FormProyectoComponent } from './proyecto/form-proyecto/form-proyecto.component';
 import { FormEditProyectoComponent } from './proyecto/form-edit-proyecto/form-edit-proyecto.component';
@@ -44,8 +44,9 @@ import { FormCostoComponent } from './inmueble/form-costo/form-costo.component';
 import { FormtInputMoneyDirective } from './formtInputMoney.directive';
 import { FormClienteComponent } from './clienente/form-cliente/form-cliente.component';
 import { UploadFileComponent } from './archivo/upload-file/upload-file.component';
-import { FormAcreedoresComponent } from './acreedores/form-acreedores/form-acreedores.component';
-import { ListObligacionesComponent } from './acreedores/list-obligaciones/list-obligaciones.component';
+import { FormAcreedorComponent } from './obligacion/form-acreedores/form-acreedor.component';
+import { ListObligacionesComponent } from './obligacion/list-obligaciones/list-obligaciones.component';
+import { FormObligacionComponent } from './obligacion/form-obligacion/form-obligacion.component';
 
 @NgModule({
   imports: [
@@ -78,7 +79,7 @@ import { ListObligacionesComponent } from './acreedores/list-obligaciones/list-o
     CarteraComponent,
     ArchivoComponent,
     ListAllFileComponent,
-    AcreedoresComponent,
+    ObligacionComponent,
     ListAcreedoresComponent,
     ListCarteraComponent,
     FormProyectoComponent,
@@ -95,8 +96,9 @@ import { ListObligacionesComponent } from './acreedores/list-obligaciones/list-o
       FormtInputMoneyDirective,
       FormClienteComponent,
       UploadFileComponent,
-      FormAcreedoresComponent,
-      ListObligacionesComponent
+      FormAcreedorComponent,
+      ListObligacionesComponent,
+      FormObligacionComponent
    ],
 })
 export class PagesModule {}

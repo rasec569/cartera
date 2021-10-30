@@ -8,15 +8,15 @@ export interface Menu {
 }
 
 const MENUITEMS = [
-  { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
+  { state: 'dashboard', name: 'DASHBOARD', type: 'link', icon: 'av_timer' },
   /* { state: 'login', type: 'link', name: 'login', icon: 'monetization_on' }, */
-  { state: 'Cartera', type: 'link', name: 'Cartera', icon: 'card_travel' },
-  { state: 'Clientes', type: 'link', name: 'Clientes', icon: 'family_restroom' },
-  { state: 'Proyectos', type: 'link', name: 'Proyectos', icon: 'cases' },
-  { state: 'Inmuebles', type: 'link', name: 'Inmuebles', icon: 'maps_home_work' },
-  { state: 'Archivos', type: 'link', name: 'Archivo', icon: 'drive_folder_upload' },
-  { state: 'Acreedores', type: 'link', name: 'Acreedores', icon: 'request_quote' },
-  { state: 'Panel', type: 'link', name: 'Panel', icon: 'tune' },
+  { state: 'Cartera', type: 'link', name: 'CARTERA', icon: 'card_travel' },
+  { state: 'Clientes', type: 'link', name: 'CLIENTES', icon: 'family_restroom' },
+  { state: 'Proyectos', type: 'link', name: 'PROYECTOS', icon: 'cases' },
+  { state: 'Inmuebles', type: 'link', name: 'INMUEBLES', icon: 'maps_home_work' },
+  { state: 'Archivos', type: 'link', name: 'ARCHIVO', icon: 'drive_folder_upload' },
+  { state: 'Obligaciones', type: 'link', name: 'OBLIGACIONES', icon: 'request_quote' },
+  { state: 'Panel', type: 'link', name: 'PANEL', icon: 'tune' },
 
 ];
 

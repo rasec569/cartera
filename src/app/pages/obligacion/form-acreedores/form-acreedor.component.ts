@@ -7,14 +7,14 @@ import { AcreedorService } from "src/app/services/acreedor.service";
 import { acreedor } from "src/app/Models/acreedor.model";
 
 @Component({
-  selector: "app-form-acreedores",
-  templateUrl: "./form-acreedores.component.html",
-  styleUrls: ["./form-acreedores.component.css"],
+  selector: "app-form-acreedor",
+  templateUrl: "./form-acreedor.component.html",
+  styleUrls: ["./form-acreedor.component.css"],
 })
-export class FormAcreedoresComponent implements OnInit {
+export class FormAcreedorComponent implements OnInit {
   acreedorid = "";
   formAcreedor: FormGroup;
-  // expacion
+  // expiación
   panelOpenState = false;
   step = 0;
   setStep(index: number) {
@@ -38,7 +38,7 @@ export class FormAcreedoresComponent implements OnInit {
       descripcion: ["", Validators.required],
       registrado: [""],
       modificado: [""],
-      
+
       identificacion: ["", Validators.required],
       nombres: ["", Validators.required],
       apellidos: ["", Validators.required],

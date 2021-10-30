@@ -25,7 +25,7 @@ export class ListObligacionesComponent implements OnInit {
   public displayedColumns: string[] = [
     "valor",
     "concepto",
-    /* "fecha", */
+    "fecha",
     "fecha_pago",
     /* "acreedor", */
     "acciones",
