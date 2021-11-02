@@ -1,0 +1,30 @@
+<mat-card>
+    <mat-horizontal-stepper #stepper>
+      <mat-step>
+          <ng-template matStepLabel>ACREEDOR</ng-template>
+          <app-form-acreedor></app-form-acreedor>
+          <div style="text-align: right;">
+            <p>Click para actualizar o guardar cambios.</p>
+            <button mat-raised-button color="accent" matStepperNext>Siguiente</button>
+          </div>
+      </mat-step>
+      <mat-step>
+          <ng-template matStepLabel>OBLIGACIÓN</ng-template>
+          <app-form-obligacion></app-form-obligacion>
+          <div style="text-align: right;">
+            <p>Go to a different step to see the error state</p>
+            <button mat-raised-button color="warn" matStepperPrevious>Atras</button>
+            <button mat-raised-button color="accent" matStepperNext>Siguiente</button>
+          </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>RESUMEN</ng-template>
+        <p>You are now done.</p>
+        <div style="text-align: right;">
+          <button mat-raised-button color="accent" matStepperPrevious>Atras</button>
+          <button mat-raised-button color="warn" (click)="stepper.reset()">Limpiar</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card>
+

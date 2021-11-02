@@ -82,6 +82,37 @@ export class ListAllFileComponent implements OnInit,AfterViewInit {
       );
     }
   }
+  RemoveFiles(Files: file) {
+    const dialogoRef = this.dialog.open(DeletevalidacionComponent, {
+      width: "300px",
+    });
+    dialogoRef.afterClosed().subscribe((res) => {
+      if (res) {
+        try {
+          this.FilesS.deletefiles(Files).subscribe(
+            (res: file[]) => {
+              if (res[0].TIPO == "3") {
+                this.notificacion(res[0].MENSAJE!);
+                this.QueryFiles();
+              } else {
+                this.notificacion(res[0].MENSAJE!);
+              }
+            },
+            (err) => {
+              this.notificacion(
+                "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+              );
+            }
+          );
+        } catch (notificacion) {
+          this.notificacion(
+            "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+          );
+        }
+      }
+    });
+
+  }
   listarArea() {
     try {
       this.AreaS.getAreas().subscribe(

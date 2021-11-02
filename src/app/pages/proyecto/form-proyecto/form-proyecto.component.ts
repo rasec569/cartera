@@ -55,7 +55,7 @@ prevStep() {
             if (res[0].TIPO == "3") {
               this.notificacion(res[0].MENSAJE!);
               this.formProyecto.reset();
-              this.router.navigate(['proyectos']);
+              this.router.navigate(['Proyectos']);
             } else {
               this.notificacion(res[0].MENSAJE!);
             }

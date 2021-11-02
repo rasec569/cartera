@@ -12,7 +12,7 @@
             </mat-form-field>
           </td>
           <td>
-            <button mat-raised-button color="primary" matTooltip="Registrar nuevo obligacion" [routerLink]="['/NuevoObligacion']"> Nueva
+            <button mat-raised-button color="primary" matTooltip="Registrar nuevo obligacion" (click)="OpenAdd()"> Nueva
             </button>
           </td>
         </tr>
@@ -41,7 +41,7 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu4="matMenu">
-              <button mat-menu-item [routerLink]="['/EditarObligacion',item.idacreedor]">
+              <button mat-menu-item (click)="OpenEdit(item.id, item.idacreedor)">
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>
               </button>

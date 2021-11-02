@@ -41,15 +41,30 @@ import { FormInmuebleComponent } from "./inmueble/form-inmueble/form-inmueble.co
 import { DetalleInmuebleComponent } from './inmueble/detalle-inmueble/detalle-inmueble.component';
 import { CostosInmuebleComponent } from "./inmueble/costos-inmueble/costos-inmueble.component";
 import { FormCostoComponent } from './inmueble/form-costo/form-costo.component';
-import { FormtInputMoneyDirective } from './formtInputMoney.directive';
 import { FormClienteComponent } from './clienente/form-cliente/form-cliente.component';
 import { UploadFileComponent } from './archivo/upload-file/upload-file.component';
 import { FormAcreedorComponent } from './obligacion/form-acreedores/form-acreedor.component';
 import { ListObligacionesComponent } from './obligacion/list-obligaciones/list-obligaciones.component';
 import { FormObligacionComponent } from './obligacion/form-obligacion/form-obligacion.component';
+import { AcreedorObligacionComponent } from './obligacion/acreedor-obligacion/acreedor-obligacion.component';
+import { DatePipe } from "@angular/common";
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
+export const MY_FORMATS = {
+  parse: {
+    dateInput: "DD/MM/YYYY"
+  },
+  display: {
+    dateInput: "DD/MM/YYYY",
+    monthYearLabel: "MMM YYYY",
+    dateA11yLabel: "DD/MM/YYYY",
+    monthYearA11yLabel: "MMMM YYYY"
+  },
+};
 @NgModule({
   imports: [
+    NgxMaskModule.forRoot(),
     CommonModule,
     RouterModule.forChild(PagesRoutes),
     DemoMaterialModule,
@@ -57,11 +72,16 @@ import { FormObligacionComponent } from './obligacion/form-obligacion/form-oblig
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CdkTableModule,
+    CdkTableModule
   ],
   providers: [
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE]
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+    DatePipe
   ],
   entryComponents: [],
   declarations: [
@@ -93,12 +113,12 @@ import { FormObligacionComponent } from './obligacion/form-obligacion/form-oblig
     DetalleInmuebleComponent,
     CostosInmuebleComponent,
     FormCostoComponent,
-      FormtInputMoneyDirective,
       FormClienteComponent,
       UploadFileComponent,
       FormAcreedorComponent,
       ListObligacionesComponent,
-      FormObligacionComponent
-   ],
+      FormObligacionComponent,
+      AcreedorObligacionComponent
+  ],
 })
 export class PagesModule {}

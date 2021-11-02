@@ -12,7 +12,7 @@
             </mat-form-field>
           </td>
           <td>
-            <button mat-raised-button color="primary" matTooltip="Registrar nuevo acreedor" [routerLink]="['/NuevoAcreedor']"> Nuevo
+            <button mat-raised-button color="primary" matTooltip="Registrar nuevo acreedor" [routerLink]="['/Acreedor/Nuevo']"> Nuevo
             </button>
           </td>
         </tr>
@@ -37,7 +37,7 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu4="matMenu">
-              <button mat-menu-item [routerLink]="['/EditarAcreedor',item.idacreedor]">
+              <button mat-menu-item [routerLink]="['/Acreedor/Editar',item.idacreedor]">
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>
               </button>

@@ -1,12 +1,11 @@
 <mat-card>
   <mat-card-content>
-    <mat-card-title>Acreedor </mat-card-title>
-    <mat-card-subtitle>Formulario</mat-card-subtitle>
+    <mat-card-subtitle>Formulario Acreedor</mat-card-subtitle>
     <mat-accordion class="example-headers-align" [formGroup]="formAcreedor">
       <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
           <mat-expansion-panel-header>
-              <mat-panel-title> Información Personal </mat-panel-title>
-              <mat-panel-description> Datos basicos
+              <mat-panel-title> Datos basicos </mat-panel-title>
+              <mat-panel-description>Información Personal
                   <mat-icon>person_outline</mat-icon>
               </mat-panel-description>
           </mat-expansion-panel-header>
@@ -25,7 +24,7 @@
       <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
           <mat-expansion-panel-header>
               <mat-panel-title> Descripción </mat-panel-title>
-              <mat-panel-description> Detalles o características  relevantes
+              <mat-panel-description> Características  relevantes
                   <mat-icon>account_circle</mat-icon>
               </mat-panel-description>
           </mat-expansion-panel-header>
@@ -40,8 +39,8 @@
       </mat-expansion-panel>
       <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
           <mat-expansion-panel-header>
-              <mat-panel-title> Información contacto </mat-panel-title>
-              <mat-panel-description> Medio para entablar comunicación o contacto
+              <mat-panel-title> Contacto </mat-panel-title>
+              <mat-panel-description> Medio de comunicación
                   <mat-icon>contact_mail</mat-icon>
               </mat-panel-description>
           </mat-expansion-panel-header>
@@ -49,7 +48,7 @@
             <mat-form-field>
               <input matInput placeholder="Email" formControlName="correo"> </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Telefono" formControlName="telefono"> </mat-form-field>
+              <input matInput placeholder="Telefono" mask="(000) 000 00 00" formControlName="telefono"> </mat-form-field>
           </div>
           <mat-form-field>
             <input matInput placeholder="Dirección" formControlName="direccion"> </mat-form-field>
@@ -80,9 +79,9 @@
       </td>
     </tr>
   </table>
-  <!-- <pre>
+  <pre>
     {{formAcreedor.value|json}}
-  </pre> -->
+  </pre>
   </mat-card-content>
 
 </mat-card>

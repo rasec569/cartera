@@ -28,8 +28,11 @@
       <tr>
         <td>
           <div class="file-upload">
+            <mat-nav-list>
+              <a mat-list-item *ngFor="let item of uploadedFiles"> {{ item.name}} </a>
+           </mat-nav-list>
             {{fileName || "Aún no se ha seleccionado ningún archivo."}}
-            <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+            <button mat-mini-fab color="primary" class="upload-btn" matTooltip="10 archivos max" (click)="fileUpload.click()">
               <mat-icon>attach_file</mat-icon>
             </button>
           </div>

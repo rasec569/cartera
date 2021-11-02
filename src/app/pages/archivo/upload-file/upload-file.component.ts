@@ -54,32 +54,34 @@ export class UploadFileComponent implements OnInit {
   }
   onFileSelected(event:any) {
     this.uploadedFiles = event.target.files;
-    for (var i = 0; i < this.uploadedFiles.length; i++) {
-      this.fileName = this.uploadedFiles[i].name;
-    }
+    console.log('cargar', event.target.files);
+
+      this.fileName = "Oprima el boton guardar para subir los archivos";
 }
 SaveFile() {
   try {
     let formData = new FormData();
     for (var i = 0; i < this.uploadedFiles.length; i++) {
       formData.append(
-        "uploads[]",
+        "uploads",
         this.uploadedFiles[i],
         this.uploadedFiles[i].name
       );
       formData.append('file',JSON.stringify(this.Files))
       this.fileName = this.uploadedFiles[i].name;
     }
+    /* utf8' is currently an alias for the character set UTF8MB3, but will be an alias for UTF8MB4 in a future release. Please consider using UTF8MB4 in order to be unambiguous. */
     console.log(formData);
     this.FilesS.createfiles(formData).subscribe(
-      (res: file[]) => {
-        if (res[0].TIPO == "3") {
-          this.notificacion(res[0].MENSAJE!);
-          this.fileName = "";
+      (res: file) => {
+        console.log("-----------------------------")
+        console.log(res);
+        if (res.TIPO == "3") {
+          this.notificacion(res.MENSAJE!);
           this.router.navigate(['Archivos']);
 
         } else {
-          this.notificacion(res[0].MENSAJE!);
+          this.notificacion(res.MENSAJE!);
         }
       },
       (err) => {

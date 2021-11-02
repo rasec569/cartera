@@ -1,41 +1,44 @@
-<mat-card>
-  <mat-stepper #stepper>
-    <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>
-        <div>
-          <p>Go to a different step to see the error state</p>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out your address</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Address</mat-label>
-          <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl"
-                 required>
-        </mat-form-field>
-        <div>
-          <p>Go to a different step to see the error state</p>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
-    </mat-step>
-  </mat-stepper>
-</mat-card>
+<h1 mat-dialog-title>Nueva obligación</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formObligacion">
+    <mat-form-field>
+      <input matInput placeholder="Acreedor" formControlName="acreedor">
+    </mat-form-field>
+    <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha pago</mat-label>
+        <input matInput placeholder="DD/MM/YYYY" [matDatepicker]="picker"formControlName="fecha">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha pago</mat-label>
+        <input matInput placeholder="DD/MM/YYYY" [matDatepicker]="picker2"  formControlName="fecha_pago">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <mat-form-field>
+      <input matInput placeholder="Concepto" formControlName="concepto">
+    </mat-form-field>
+    <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+      <mat-form-field>
+        <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="valor">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Interes mensual" prefix="$" mask="separator" thousandSeparator="." formControlName="interes">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Total" prefix="$" mask="separator" thousandSeparator="." formControlName="total">
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div style="text-align: center;">
+  <button mat-raised-button color="warn" (click)="close()" [mat-dialog-close]="false" style="margin-right: 10px" >Cancelar </button>
+  <button mat-raised-button color="primary" cdkFocusInitial (click)="SaveObligacion()" [disabled]="formObligacion.invalid" [mat-dialog-close]="true">Guardar</button>
+</div>
+<pre>
+  {{formObligacion.value|json}}
+</pre>
 

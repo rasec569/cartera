@@ -1,18 +1,13 @@
 export interface obligacion{
   //persona
    id:string;
-   nombres: string;
-   apellidos:string;
-   telefono:string;
-   direccion:string;
-   correo:string;
-   identificacion:string;
-  //usuario
+   fecha: Date;
+   concepto:string;
+   valor:string;
+   interes:string;
+   total:string;
+   fecha_pago:Date;
    idacreedor:string;
-   descripcion:string;
-   registrado:string;
-   modificado:string;
-
   //error vars
    TIPO?:string;
    MENSAJE?:string;

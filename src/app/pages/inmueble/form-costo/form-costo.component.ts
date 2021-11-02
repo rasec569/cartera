@@ -5,7 +5,6 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { CostoService } from "src/app/services/costo.service";
 import { costo } from "src/app/Models/costo.model";
 import * as moment from "moment";
-import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-form-costo',
@@ -19,12 +18,10 @@ formattedDate:any;
     public CostoS: CostoService,
     public _snackBar: MatSnackBar,
     private fb: FormBuilder,
-    private dateAdapter: DateAdapter<Date>,
     public dialogoRef: MatDialogRef<FormCostoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
 
   ) {
-    this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
     this.formCosto= this.fb.group({
       id: [""],
       concepto: ["", Validators.required],

@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  ViewChild,
-  Component,
-  OnInit,
-  ChangeDetectorRef,
-} from "@angular/core";
+import {AfterViewInit,ViewChild, Component,OnInit,ChangeDetectorRef} from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from "@angular/material/sort";
@@ -14,6 +8,7 @@ import { MatDialog } from "@angular/material/dialog";
 
 import { ObligacionesService } from "src/app/services/obligaciones.service";
 import { obligacion } from "src/app/Models/obligacion.model";
+import { FormObligacionComponent } from "../form-obligacion/form-obligacion.component";
 
 @Component({
   selector: "app-list-obligaciones",
@@ -21,6 +16,7 @@ import { obligacion } from "src/app/Models/obligacion.model";
   styleUrls: ["./list-obligaciones.component.css"],
 })
 export class ListObligacionesComponent implements OnInit {
+  acreedorid="";
   dataSource = new MatTableDataSource<obligacion>();
   public displayedColumns: string[] = [
     "valor",
@@ -30,6 +26,7 @@ export class ListObligacionesComponent implements OnInit {
     /* "acreedor", */
     "acciones",
   ];
+  readonly width:string='700px';
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -52,6 +49,24 @@ export class ListObligacionesComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  OpenAdd(){
+    const dialogoRef = this.dialog.open(FormObligacionComponent, {
+      width: this.width,
+      data: {obligacionid:"",acreedorid:""}
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryObligaciones();
+    });
+  }
+  OpenEdit(id: any, acreedor:any){
+    const dialogoRef = this.dialog.open(FormObligacionComponent, {
+      width: this.width,
+      data: {obligacionid:id,acreedorid:acreedor}
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryObligaciones();
+    });
   }
   QueryObligaciones() {
     try {
