@@ -91,7 +91,7 @@ export class FormAcreedorComponent implements OnInit {
             if (res[0].TIPO == "3") {
               this.notificacion(res[0].MENSAJE!);
               this.formAcreedor.reset();
-              this.router.navigate(['Acreedores']);
+              this.router.navigate(['Obligaciones']);
             } else {
               this.notificacion(res[0].MENSAJE!);
             }
@@ -108,7 +108,7 @@ export class FormAcreedorComponent implements OnInit {
             if (res[0].TIPO == "3") {
               this.notificacion(res[0].MENSAJE!);
               this.formAcreedor.reset();
-              this.router.navigate(['Acreedores']);
+              this.router.navigate(['Obligaciones']);
             } else {
               this.notificacion(res[0].MENSAJE!);
             }

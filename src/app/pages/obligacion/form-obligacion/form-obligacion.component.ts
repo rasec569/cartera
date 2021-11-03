@@ -2,10 +2,13 @@ import { Component, Inject, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import * as moment from "moment";
+
 import { ObligacionesService } from 'src/app/services/obligaciones.service';
 import { obligacion } from 'src/app/Models/obligacion.model';
-import { DatePipe } from '@angular/common';
-import * as moment from "moment";
+
+import { AcreedorService } from 'src/app/services/acreedor.service';
+import { acreedor } from 'src/app/Models/acreedor.model';
 
 @Component({
   selector: 'app-form-obligacion',
@@ -16,9 +19,12 @@ export class FormObligacionComponent implements OnInit {
   formObligacion: FormGroup;
   formattedDate:any;
   formattedDate2:any;
+  public listaAcreedores:acreedor[] = [];
+  public CloneAcreedores:acreedor[]=[];
   constructor(public ObligacionS: ObligacionesService,
+    private AcreedorS:AcreedorService,
     public _snackBar: MatSnackBar,
-    private fb: FormBuilder, private datePipe: DatePipe,
+    private fb: FormBuilder,
     public dialogoRef: MatDialogRef<FormObligacionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       this.formObligacion=this.fb.group({
@@ -29,19 +35,67 @@ export class FormObligacionComponent implements OnInit {
         interes:["", Validators.required],
         total:["", Validators.required],
         fecha_pago:["", Validators.required],
-        idacreedor:["", Validators.required],
-        acreedor:["", Validators.required],
+        idacreedor:[""],
+        identificacion:["", Validators.required],
+        nomacreedor:["", Validators.required],
       });
       console.log(data);
       if(data.obligacionid != ""){
         this.QueryOneObligacion(this.data.obligacionid);
       }
     }
-
   ngOnInit(): void {
+    this.QueryAcreedores();
   }
   close() {
     this.dialogoRef.close();
+  }
+  filter(ev: any){
+    const val = ev.target.value;
+    console.log(val);
+    if (val && val.trim() !== "") {
+      this.listaAcreedores = this.listaAcreedores.filter((item) => {
+        if(this.listaAcreedores.length===1){
+          this.formObligacion.controls['identificacion'].setValue(item.identificacion);
+          this.formObligacion.controls['nomacreedor'].setValue(item.nombres+" "+item.apellidos);
+          this.formObligacion.controls['idacreedor']. setValue(item.idacreedor);
+        }
+        return item.identificacion.toLowerCase().indexOf(val.toLowerCase()) > -1;
+      });
+    } else {
+      this.listaAcreedores = this.CloneAcreedores;
+    }
+  }
+  clickseltec(event:any){
+    this.formObligacion.controls['identificacion'].setValue(event.option.value);
+    this.formObligacion.controls['nomacreedor'].setValue(event.option.id.nombres+' '+event.option.id.apellidos);
+    this.formObligacion.controls['idacreedor']. setValue(event.option.id.idacreedor);
+
+  }
+  QueryAcreedores() {
+    try {
+      this.AcreedorS.getAcreedores().subscribe(
+        (res: acreedor[]) => {
+          console.log(res);
+          if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+            this.listaAcreedores = res;
+            console.log(res);
+            this.CloneAcreedores=res;
+          } else {
+            this.notificacion(res[0].MENSAJE!);
+          }
+        },
+        (err) => {
+          this.notificacion(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"+err
+          );
+        }
+      );
+    } catch (error) {
+      this.notificacion(
+        "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde! "+error
+      );
+    }
   }
   QueryOneObligacion(idobligacion: any) {
     try {

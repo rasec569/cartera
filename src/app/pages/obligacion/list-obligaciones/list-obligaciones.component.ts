@@ -19,11 +19,11 @@ export class ListObligacionesComponent implements OnInit {
   acreedorid="";
   dataSource = new MatTableDataSource<obligacion>();
   public displayedColumns: string[] = [
-    "valor",
+    "acreedor",
     "concepto",
+    "valor",
     "fecha",
     "fecha_pago",
-    /* "acreedor", */
     "acciones",
   ];
   readonly width:string='700px';

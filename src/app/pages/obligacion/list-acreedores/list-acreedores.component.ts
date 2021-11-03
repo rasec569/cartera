@@ -31,7 +31,7 @@ export class ListAcreedoresComponent implements OnInit {
               public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.QueryAcreedor();
+    this.QueryAcreedores();
   }
 
   ngAfterViewInit() {
@@ -42,7 +42,7 @@ export class ListAcreedoresComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  QueryAcreedor() {
+  QueryAcreedores() {
     try {
       this.AcreedorS.getAcreedores().subscribe(
         (res: acreedor[]) => {
@@ -78,7 +78,7 @@ export class ListAcreedoresComponent implements OnInit {
             (res: acreedor[]) => {
               if (res[0].TIPO == "3") {
                 this.notificacion(res[0].MENSAJE!);
-                this.QueryAcreedor();
+                this.QueryAcreedores();
               } else {
                 this.notificacion(res[0].MENSAJE!);
               }
