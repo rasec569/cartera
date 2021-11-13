@@ -15,7 +15,9 @@
       <div fxFlex.gt-lg="66" fxFlex.gt-md="66" fxFlex.gt-xs="100" fxFlex="100">
         <mat-form-field>
           <input matInput placeholder="Acreedor" formControlName="nomacreedor" >
-
+          <button matSuffix mat-icon-button (click)="OpenFormacreedor()"matTooltip="Nuevo acreedor">
+            <mat-icon>add</mat-icon>
+          </button>
         </mat-form-field>
       </div>
     </div>
@@ -23,13 +25,13 @@
       <mat-form-field appearance="fill">
         <mat-label>Fecha pago</mat-label>
         <input matInput placeholder="DD/MM/YYYY" [matDatepicker]="picker"formControlName="fecha">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle matSuffix [for]="picker" matTooltip="Seleccione una fecha de obligación"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Fecha pago</mat-label>
         <input matInput placeholder="DD/MM/YYYY" [matDatepicker]="picker2"  formControlName="fecha_pago">
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker-toggle matSuffix [for]="picker2" matTooltip="Seleccione una fecha de pago"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
     </div>
@@ -53,7 +55,7 @@
   <button mat-raised-button color="warn" (click)="close()" [mat-dialog-close]="false" style="margin-right: 10px" >Cancelar </button>
   <button mat-raised-button color="primary" cdkFocusInitial (click)="SaveObligacion()" [disabled]="formObligacion.invalid" [mat-dialog-close]="true">Guardar</button>
 </div>
-<pre>
+<!-- <pre>
   {{formObligacion.value|json}}
-</pre>
+</pre> -->
 

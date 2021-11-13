@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute, Params } from "@angular/router";
+import { Component, Inject, OnInit } from "@angular/core";
+import { Router} from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { AcreedorService } from "src/app/services/acreedor.service";
@@ -29,9 +30,10 @@ export class FormAcreedorComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private AcreedorS:AcreedorService,
+    public dialogoRef: MatDialogRef<FormAcreedorComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.formAcreedor = this.fb.group({
       idacreedor: [""],
@@ -45,19 +47,15 @@ export class FormAcreedorComponent implements OnInit {
       correo: ["", Validators.required],
       telefono: ["", Validators.required],
       direccion: ["", Validators.required],
-
-
-
     });
-  }
-  ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.acreedorid = params.id;
-      console.log('inicio',params.id);
-    });
-    if(this.acreedorid != ""){
-      this.QueryOneAcreedor(this.acreedorid);
+    console.log(data)
+    if(data.acreedorid != ""){
+      this.QueryOneAcreedor(this.data.acreedorid);
     }
+  }
+  ngOnInit(): void {  }
+  close() {
+    this.dialogoRef.close();
   }
   QueryOneAcreedor(acreedorid:any) {
     try {

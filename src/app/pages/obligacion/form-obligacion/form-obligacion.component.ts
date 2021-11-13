@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import * as moment from "moment";
 
@@ -9,6 +9,7 @@ import { obligacion } from 'src/app/Models/obligacion.model';
 
 import { AcreedorService } from 'src/app/services/acreedor.service';
 import { acreedor } from 'src/app/Models/acreedor.model';
+import { FormAcreedorComponent } from '../form-acreedores/form-acreedor.component';
 
 @Component({
   selector: 'app-form-obligacion',
@@ -17,14 +18,16 @@ import { acreedor } from 'src/app/Models/acreedor.model';
 })
 export class FormObligacionComponent implements OnInit {
   formObligacion: FormGroup;
-  formattedDate:any;
-  formattedDate2:any;
+
   public listaAcreedores:acreedor[] = [];
   public CloneAcreedores:acreedor[]=[];
+  readonly width:string='750px';
+  
   constructor(public ObligacionS: ObligacionesService,
     private AcreedorS:AcreedorService,
     public _snackBar: MatSnackBar,
     private fb: FormBuilder,
+    public dialog: MatDialog,
     public dialogoRef: MatDialogRef<FormObligacionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       this.formObligacion=this.fb.group({
@@ -39,13 +42,26 @@ export class FormObligacionComponent implements OnInit {
         identificacion:["", Validators.required],
         nomacreedor:["", Validators.required],
       });
-      console.log(data);
+      console.log('ensayo',data);
       if(data.obligacionid != ""){
         this.QueryOneObligacion(this.data.obligacionid);
       }
     }
   ngOnInit(): void {
-    this.QueryAcreedores();
+    console.log('esto trajo',this.data.obligacionid)
+    if(this.data.obligacionid===""){
+
+      this.QueryAcreedores();
+    }
+  }
+  OpenFormacreedor(){
+    const dialogoRef = this.dialog.open(FormAcreedorComponent, {
+      width: this.width,
+      data: {acreedorid:""}
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryAcreedores();
+    });
   }
   close() {
     this.dialogoRef.close();

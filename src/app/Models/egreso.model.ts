@@ -1,5 +1,5 @@
 export interface egreso {
-  id?: string;
+  id: string;
   numero: string;
   fecha: string;
   referencia: string;

@@ -7,10 +7,11 @@ export interface acreedor{
    direccion:string;
    correo:string;
    identificacion:string;
-  //usuario
+  //acreedor
    idacreedor:string;
    descripcion:string;
    registrado:string;
+   deuda:string;
    modificado:string;
 
   //error vars

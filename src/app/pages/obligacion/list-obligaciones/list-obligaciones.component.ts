@@ -9,6 +9,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { ObligacionesService } from "src/app/services/obligaciones.service";
 import { obligacion } from "src/app/Models/obligacion.model";
 import { FormObligacionComponent } from "../form-obligacion/form-obligacion.component";
+import { ListEgresosClienteComponent } from "../list-egresos-cliente/list-egresos-cliente.component";
+import { FormEgresoComponent } from "../form-egreso/form-egreso.component";
 
 @Component({
   selector: "app-list-obligaciones",
@@ -16,6 +18,7 @@ import { FormObligacionComponent } from "../form-obligacion/form-obligacion.comp
   styleUrls: ["./list-obligaciones.component.css"],
 })
 export class ListObligacionesComponent implements OnInit {
+  public total:any;
   acreedorid="";
   dataSource = new MatTableDataSource<obligacion>();
   public displayedColumns: string[] = [
@@ -49,11 +52,31 @@ export class ListObligacionesComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    var filteredData = this.dataSource.filteredData;
+    this.total=filteredData.reduce((summ, v) => summ += parseInt(v.valor), 0);
   }
   OpenAdd(){
     const dialogoRef = this.dialog.open(FormObligacionComponent, {
       width: this.width,
       data: {obligacionid:"",acreedorid:""}
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryObligaciones();
+    });
+  }
+  OpenAddEgreso(id: any){
+    const dialogoRef = this.dialog.open(FormEgresoComponent, {
+      width:'300px',
+      data: {egresoid:"", obligacionid:id}
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryObligaciones();
+    });
+  }
+  OpenEgresos(id: any){
+    const dialogoRef = this.dialog.open(ListEgresosClienteComponent, {
+      width: this.width,
+      data: {obligacionid:id}
     });
     dialogoRef.afterClosed().subscribe(res=>{
       this.QueryObligaciones();
@@ -76,6 +99,7 @@ export class ListObligacionesComponent implements OnInit {
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.dataSource.data = res;
             this.changeDetectorRefs.detectChanges();
+            this.total=res.reduce((summ, v) => summ += parseInt(v.valor), 0);
           } else {
             this.notificacion(res[0].MENSAJE!);
           }

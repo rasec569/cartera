@@ -1,7 +1,7 @@
-<mat-card>
-  <mat-card-content>
-    <mat-card-subtitle>Formulario Acreedor</mat-card-subtitle>
-    <mat-accordion class="example-headers-align" [formGroup]="formAcreedor">
+<h1 mat-dialog-title>Formulario acreedor</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formAcreedor">
+    <mat-accordion class="example-headers-align" >
       <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
           <mat-expansion-panel-header>
               <mat-panel-title> Datos basicos </mat-panel-title>
@@ -58,6 +58,7 @@
         </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
+</form>
   <table style="text-align:center;"*ngIf="acreedorid">
     <tr>
       <td>
@@ -68,20 +69,10 @@
       </td>
     </tr>
   </table>
-  <table style="text-align:center;" class="example-full-width" cellspacing="15">
-    <tr>
-      <td>
-        <button mat-raised-button color="warn" [routerLink]="['/Obligaciones']"> Cancelar </button>
-
-      </td>
-      <td>
-        <button (click)="SaveAcreedor()" mat-raised-button color="primary" [disabled]="formAcreedor.invalid"> Guardar </button>
-      </td>
-    </tr>
-  </table>
-  <pre>
+  <div style="text-align: center;">
+    <button mat-raised-button color="warn" (click)="close()" [mat-dialog-close]="false" style="margin-right: 10px" >Cancelar </button>
+    <button mat-raised-button color="primary" cdkFocusInitial (click)="SaveAcreedor()" [disabled]="formAcreedor.invalid" [mat-dialog-close]="true">Guardar</button>
+  </div>
+  <!-- <pre>
     {{formAcreedor.value|json}}
-  </pre>
-  </mat-card-content>
-
-</mat-card>
+  </pre> -->

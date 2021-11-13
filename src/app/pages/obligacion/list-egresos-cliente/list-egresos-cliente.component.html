@@ -1,56 +1,55 @@
-<mat-card>
-  <mat-card-content>
-    <mat-card-subtitle>Lista de Acreedores</mat-card-subtitle>
+<button class="close"mat-icon-button  color="warn"(click)="close()">X</button>
+<h1 mat-dialog-title>Egresos obligacion</h1>
+<div mat-dialog-content>
     <div class="mat-elevation-z8">
       <table class="example-full-width" style="text-align:center;" cellspacing="15">
         <tr>
           <td>
             <mat-form-field appearance="standard">
               <mat-label>Buscar</mat-label>
-              <input matInput (keyup)="applyFilter($event)" matTooltip="Buscar en la lista de acreedor"
+              <input matInput (keyup)="applyFilter($event)" matTooltip="Buscar en la lista de egresos"
                 placeholder="Cualquier palabra clave" #input>
             </mat-form-field>
           </td>
           <td>
-            <button mat-raised-button color="primary" matTooltip="Registrar nuevo acreedor" (click)="OpenAdd()"> Nuevo
+            <button mat-raised-button color="primary" matTooltip="Registrar nuevo egreso"(click)="OpenAdd()" > Nuevo
             </button>
           </td>
         </tr>
       </table>
-      <table mat-table [dataSource]="dataSource" matSort>
-        <ng-container matColumnDef="nombres">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
-          <td mat-cell *matCellDef="let item"> {{item.nombres}} </td>
+      <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length" matSort>
+        <ng-container matColumnDef="numero">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Num </th>
+          <td mat-cell *matCellDef="let item"> {{item.numero}} </td>
           <td mat-footer-cell *matFooterCellDef></td>
         </ng-container>
-        <ng-container matColumnDef="apellidos">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
-          <td mat-cell *matCellDef="let item"> {{item.apellidos}} </td>
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+          <td mat-cell *matCellDef="let item"> {{item.fecha| date: 'dd MMM yy'}} </td>
           <td mat-footer-cell *matFooterCellDef></td>
         </ng-container>
-        <ng-container matColumnDef="descripcion">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
-          <td mat-cell *matCellDef="let item"> {{item.descripcion}} </td>
+        <ng-container matColumnDef="referencia">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Referencia </th>
+          <td mat-cell *matCellDef="let item"> {{item.referencia}} </td>
           <td mat-footer-cell *matFooterCellDef>Total</td>
         </ng-container>
-        <ng-container matColumnDef="deuda">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor deuda </th>
-          <td mat-cell *matCellDef="let item"> {{item.deuda|  mask: 'separator':'.'}} </td>
+        <ng-container matColumnDef="valor">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
+          <td mat-cell *matCellDef="let item"> {{item.valor| mask: 'separator':'.'}} </td>
           <td mat-footer-cell *matFooterCellDef> {{total |currency: 'USD':'symbol':'.0-0'}} </td>
         </ng-container>
-
         <ng-container matColumnDef="Acciones">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let item">
-            <button mat-icon-button [matMenuTriggerFor]="menu4" matTooltip="Acciones del Acreedor">
+            <button mat-icon-button [matMenuTriggerFor]="menu4" matTooltip="Acciones de los egresos">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu4="matMenu">
-              <button mat-menu-item (click)="OpenEdit(item.idacreedor)">
+              <button mat-menu-item (click)="OpenEdit(item.id)">
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>
               </button>
-              <button mat-menu-item color="warn" (click)="RemoveAcreedor(item)">
+              <button mat-menu-item color="warn" (click)="RemoveEgreso(item)">
                 <mat-icon>delete</mat-icon>
                 <span>Eliminar</span>
               </button>
@@ -67,8 +66,12 @@
           <td class="mat-cell" colspan="4">No hay datos que coincidan con el filtro "{{input.value}}"</td>
         </tr>
       </table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Seleccione una page of Acreedor">
+      <div *ngIf="!dataSource.data.length">
+        <mat-card>
+          <mat-card-title>Sin datos para mostar en egresos</mat-card-title>
+        </mat-card>
+      </div>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
       </mat-paginator>
     </div>
-  </mat-card-content>
-</mat-card>
+</div>
