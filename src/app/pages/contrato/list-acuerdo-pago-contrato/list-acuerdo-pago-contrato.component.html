@@ -1,0 +1,25 @@
+
+  <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length" matSort>
+    <ng-container matColumnDef="aporte_cliente">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Aportes Propios </th>
+      <td mat-cell *matCellDef="let item"> {{item.aporte_cliente|currency: 'USD':'symbol':'.0-0'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="valor_credito">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Aportes Credito </th>
+      <td mat-cell *matCellDef="let item"> {{item.valor_credito|currency: 'USD':'symbol':'.0-0'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="valor_total">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+      <td mat-cell *matCellDef="let item"> {{item.valor_total|currency: 'USD':'symbol':'.0-0'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="entidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Entidad </th>
+      <td mat-cell *matCellDef="let item"> {{item.entidad}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <app-list-cuotas (messageEvent)="receiveMessage($event)"></app-list-cuotas>
+
+
+
