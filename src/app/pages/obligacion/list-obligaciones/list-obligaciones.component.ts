@@ -9,7 +9,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ObligacionesService } from "src/app/services/obligaciones.service";
 import { obligacion } from "src/app/Models/obligacion.model";
 import { FormObligacionComponent } from "../form-obligacion/form-obligacion.component";
-import { ListEgresosClienteComponent } from "../list-egresos-cliente/list-egresos-cliente.component";
+import { ListEgresosObligacionComponent } from "../list-egresos-obligacion/list-egresos-obligacion.component";
 import { FormEgresoComponent } from "../form-egreso/form-egreso.component";
 
 @Component({
@@ -27,7 +27,7 @@ export class ListObligacionesComponent implements OnInit {
     "valor",
     "fecha",
     "fecha_pago",
-    "acciones",
+    "Acciones",
   ];
   readonly width:string='700px';
   @ViewChild(MatPaginator)
@@ -74,7 +74,7 @@ export class ListObligacionesComponent implements OnInit {
     });
   }
   OpenEgresos(id: any){
-    const dialogoRef = this.dialog.open(ListEgresosClienteComponent, {
+    const dialogoRef = this.dialog.open(ListEgresosObligacionComponent, {
       width: this.width,
       data: {obligacionid:id}
     });

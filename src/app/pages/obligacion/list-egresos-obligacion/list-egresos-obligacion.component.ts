@@ -11,12 +11,12 @@ import { egreso } from 'src/app/Models/egreso.model';
 import { FormEgresoComponent } from '../form-egreso/form-egreso.component';
 
 @Component({
-  selector: 'app-list-egresos-cliente',
-  templateUrl: './list-egresos-cliente.component.html',
-  styleUrls: ['./list-egresos-cliente.component.css']
+  selector: 'app-list-egresos-obligacion',
+  templateUrl: './list-egresos-obligacion.component.html',
+  styleUrls: ['./list-egresos-obligacion.component.css']
 })
 
-export class ListEgresosClienteComponent implements OnInit {
+export class ListEgresosObligacionComponent implements OnInit {
 public total:any;
 idobligacion = '';
 dataSource = new MatTableDataSource<egreso>();
@@ -33,7 +33,7 @@ paginator!: MatPaginator;
 @ViewChild(MatSort)
 sort!: MatSort;
   constructor(private EgresoS:EgresoService,
-    public dialogoRef: MatDialogRef<ListEgresosClienteComponent>,
+    public dialogoRef: MatDialogRef<ListEgresosObligacionComponent>,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any) {
