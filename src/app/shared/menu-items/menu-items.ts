@@ -9,8 +9,8 @@ export interface Menu {
 
 const MENUITEMS = [
   { state: 'dashboard', name: 'DASHBOARD', type: 'link', icon: 'av_timer' },
-  /* { state: 'login', type: 'link', name: 'login', icon: 'monetization_on' }, */
   { state: 'Cartera', type: 'link', name: 'CARTERA', icon: 'card_travel' },
+  { state: 'Contratos', type: 'link', name: 'CONTRATOS', icon: 'monetization_on' },
   { state: 'Clientes', type: 'link', name: 'CLIENTES', icon: 'family_restroom' },
   { state: 'Proyectos', type: 'link', name: 'PROYECTOS', icon: 'cases' },
   { state: 'Inmuebles', type: 'link', name: 'INMUEBLES', icon: 'maps_home_work' },

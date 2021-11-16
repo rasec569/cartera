@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Formulario aporte</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formAporte">
+    <mat-form-field>
+      <input matInput placeholder="numero" formControlName="numero">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Concepto</mat-label>
+      <mat-select formControlName="concepto">
+        <mat-option value="Pago">Pago</mat-option>
+        <mat-option value="Abono">Abono</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="adicional" formControlName="adicional"(keyup)="filter($event)" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clickseltec($event)" >
+        <mat-option *ngFor="let item of listaAdicionales" [value]="item.concepto" [id]="item">
+          {{item.concepto}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha</mat-label>
+      <input matInput placeholder="DD/MM/YYYY" [matDatepicker]="picker" formControlName="fecha">
+      <mat-datepicker-toggle matSuffix [for]="picker" matTooltip="Seleccione una fecha del aporte">
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="referencia" formControlName="referencia">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="destino" formControlName="destino">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="valor">
+    </mat-form-field>
+  </form>
+</div>
+<div style="text-align: center;">
+  <button mat-raised-button color="warn" (click)="close()" [mat-dialog-close]="false"
+    style="margin-right: 10px">Cancelar </button>
+  <button mat-raised-button color="primary" cdkFocusInitial (click)="SaveAporte()" [disabled]="formAporte.invalid"
+    [mat-dialog-close]="true">Guardar</button>
+</div>
+<pre>{{formAporte.value|json}}</pre>
