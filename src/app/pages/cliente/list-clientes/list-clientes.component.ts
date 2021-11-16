@@ -7,6 +7,7 @@ import { DeletevalidacionComponent } from 'src/app/shared/deletevalidacion/delet
 import { MatDialog } from '@angular/material/dialog';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { cliente } from 'src/app/Models/cliente.model';
+import { DetalleClienteComponent } from '../detalle-cliente/detalle-cliente.component';
 
 @Component({
   selector: 'app-list-clientes',
@@ -23,6 +24,7 @@ export class ListClientesComponent implements OnInit,AfterViewInit {
     "correo",
     "Acciones"
   ];
+  readonly width:string='900px';
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -67,6 +69,13 @@ export class ListClientesComponent implements OnInit,AfterViewInit {
         "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde! "+error
       );
     }
+  }
+  OpenDetalle(id: any){
+    const dialogoRef = this.dialog.open(DetalleClienteComponent, { width: this.width,
+      data: id, panelClass: 'my-dialog',});
+      dialogoRef.afterClosed().subscribe(res=>{
+        this.QueryClientes();
+      });
   }
   RemoveCliente(Cliente: cliente) {
     const dialogoRef = this.dialog.open(DeletevalidacionComponent, {

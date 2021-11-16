@@ -3,7 +3,7 @@
     <mat-card-title>Clientes</mat-card-title>
     <mat-card-subtitle>Lista de Clientes</mat-card-subtitle>
     <div class="mat-elevation-z8">
-      <table class="example-full-width" style="text-align:center;" cellspacing="15">
+      <table class="example-full-width" style="text-align:center;" cellspacing="5">
         <tr>
           <td>
             <mat-form-field appearance="standard">
@@ -46,6 +46,10 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu4="matMenu">
+              <button mat-menu-item (click)="OpenDetalle(item.id)">
+                <mat-icon>launch</mat-icon>
+                <span>Detalle</span>
+              </button>
               <button mat-menu-item [routerLink]="['/Clientes/Editar',item.id]">
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>

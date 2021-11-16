@@ -6,8 +6,12 @@ import { CommonModule } from "@angular/common";
 
 import { DemoMaterialModule } from "../demo-material-module";
 import { CdkTableModule } from "@angular/cdk/table";
-import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter} from "@angular/material-moment-adapter";
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from "@angular/material/core";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -18,48 +22,65 @@ import { AreaComponent } from "./panel/panel-components/area/area.component";
 import { RolComponent } from "./panel/panel-components/rol/rol.component";
 import { FormUserComponent } from "./panel/panel-components/form-user/form-user.component";
 import { UsersComponent } from "./panel/panel-components/users/users.component";
-import { InmuebleComponent } from './inmueble/inmueble.component';
-import { ListInmueblesComponent } from './inmueble/list-inmuebles/list-inmuebles.component';
-import { ProyectoComponent } from './proyecto/proyecto.component';
-import { ListProyetoComponent } from './proyecto/list-proyeto/list-proyeto.component';
-import { ClienenteComponent } from './clienente/clienente.component';
-import { ListClientesComponent } from './clienente/list-clientes/list-clientes.component';
-import { CarteraComponent } from './cartera/cartera.component';
-import { ArchivoComponent } from './archivo/archivo.component';
-import { ListAllFileComponent } from './archivo/list-all-file/list-all-file.component';
-import { ObligacionComponent } from './obligacion/obligacion.component';
-import { ListAcreedoresComponent } from './obligacion/list-acreedores/list-acreedores.component';
-import { ListCarteraComponent } from './cartera/list-cartera/list-cartera.component';
-import { FormProyectoComponent } from './proyecto/form-proyecto/form-proyecto.component';
-import { FormEditProyectoComponent } from './proyecto/form-edit-proyecto/form-edit-proyecto.component';
-import { DetalleProyectoComponent } from './proyecto/detalle-proyecto/detalle-proyecto.component';
-import { EtapaProyectoComponent } from './proyecto/etapa-proyecto/etapa-proyecto.component';
-import { InmuebleProyectoComponent } from './proyecto/inmueble-proyecto/inmueble-proyecto.component';
-import { FormEtapaComponent } from './proyecto/form-etapa/form-etapa.component';
-import { InmuenblesEtapaComponent } from './proyecto/inmuenbles-etapa/inmuenbles-etapa.component';
+import { InmuebleComponent } from "./inmueble/inmueble.component";
+import { ListInmueblesComponent } from "./inmueble/list-inmuebles/list-inmuebles.component";
+import { ProyectoComponent } from "./proyecto/proyecto.component";
+import { ListProyetoComponent } from "./proyecto/list-proyeto/list-proyeto.component";
+import { ClienteComponent } from "./cliente/cliente.component";
+import { ListClientesComponent } from "./cliente/list-clientes/list-clientes.component";
+import { CarteraComponent } from "./cartera/cartera.component";
+import { ArchivoComponent } from "./archivo/archivo.component";
+import { ListAllFileComponent } from "./archivo/list-all-file/list-all-file.component";
+import { ObligacionComponent } from "./obligacion/obligacion.component";
+import { ListAcreedoresComponent } from "./obligacion/list-acreedores/list-acreedores.component";
+import { ListCarteraComponent } from "./cartera/list-cartera/list-cartera.component";
+import { FormProyectoComponent } from "./proyecto/form-proyecto/form-proyecto.component";
+import { FormEditProyectoComponent } from "./proyecto/form-edit-proyecto/form-edit-proyecto.component";
+import { DetalleProyectoComponent } from "./proyecto/detalle-proyecto/detalle-proyecto.component";
+import { EtapaProyectoComponent } from "./proyecto/etapa-proyecto/etapa-proyecto.component";
+import { InmuebleProyectoComponent } from "./proyecto/inmueble-proyecto/inmueble-proyecto.component";
+import { FormEtapaComponent } from "./proyecto/form-etapa/form-etapa.component";
+import { InmuenblesEtapaComponent } from "./proyecto/inmuenbles-etapa/inmuenbles-etapa.component";
 import { FormInmuebleComponent } from "./inmueble/form-inmueble/form-inmueble.component";
-import { DetalleInmuebleComponent } from './inmueble/detalle-inmueble/detalle-inmueble.component';
+import { DetalleInmuebleComponent } from "./inmueble/detalle-inmueble/detalle-inmueble.component";
 import { CostosInmuebleComponent } from "./inmueble/costos-inmueble/costos-inmueble.component";
-import { FormCostoComponent } from './inmueble/form-costo/form-costo.component';
-import { FormClienteComponent } from './clienente/form-cliente/form-cliente.component';
-import { UploadFileComponent } from './archivo/upload-file/upload-file.component';
-import { FormAcreedorComponent } from './obligacion/form-acreedores/form-acreedor.component';
-import { ListObligacionesComponent } from './obligacion/list-obligaciones/list-obligaciones.component';
-import { FormObligacionComponent } from './obligacion/form-obligacion/form-obligacion.component';
-import { AcreedorObligacionComponent } from './obligacion/acreedor-obligacion/acreedor-obligacion.component';
+import { FormCostoComponent } from "./inmueble/form-costo/form-costo.component";
+import { FormClienteComponent } from "./cliente/form-cliente/form-cliente.component";
+import { UploadFileComponent } from "./archivo/upload-file/upload-file.component";
+import { FormAcreedorComponent } from "./obligacion/form-acreedores/form-acreedor.component";
+import { ListObligacionesComponent } from "./obligacion/list-obligaciones/list-obligaciones.component";
+import { FormObligacionComponent } from "./obligacion/form-obligacion/form-obligacion.component";
+import { AcreedorObligacionComponent } from "./obligacion/acreedor-obligacion/acreedor-obligacion.component";
 import { DatePipe } from "@angular/common";
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxMaskModule, IConfig } from "ngx-mask";
+import { ListContratosClienteComponent } from "./cliente/list-contratos-cliente/list-contratos-cliente.component";
+import { DetalleClienteComponent } from "./cliente/detalle-cliente/detalle-cliente.component";
+import { FormEgresoComponent } from "./obligacion/form-egreso/form-egreso.component";
+import { ListEgresosObligacionComponent } from "./obligacion/list-egresos-obligacion/list-egresos-obligacion.component";
+import { ListAdicionalesContratoComponent } from "./contrato/list-adicionales-contrato/list-adicionales-contrato.component";
+import { DetalleContratoComponent } from "./contrato/detalle-contrato/detalle-contrato.component";
+import { ListContratosComponent } from "./contrato/list-contratos/list-contratos.component";
+import { ListAcuerdoPagoContratoComponent } from "./contrato/list-acuerdo-pago-contrato/list-acuerdo-pago-contrato.component";
+import { ListCuotasComponent } from "./contrato/list-cuotas/list-cuotas.component";
+import { ContratoComponent } from "./contrato/contrato.component";
+import { FormCuotaComponent } from "./contrato/form-cuota/form-cuota.component";
+import { FormAdicionalComponent } from "./contrato/form-adicional/form-adicional.component";
+import { ListAportesAcuerdoComponent } from "./contrato/list-aportes-acuerdo/list-aportes-acuerdo.component";
+import { FormAporteComponent } from "./contrato/form-aporte/form-aporte.component";
+import { ListAportesAdicionalesComponent } from "./contrato/list-aportes-adicionales/list-aportes-adicionales.component";
+import { DetalleAporteComponent } from "./contrato/detalle-aporte/detalle-aporte.component";
+import { FormAporteAdicionalComponent } from './contrato/form-aporte-adicional/form-aporte-adicional.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 export const MY_FORMATS = {
   parse: {
-    dateInput: "DD/MM/YYYY"
+    dateInput: "DD/MM/YYYY",
   },
   display: {
     dateInput: "DD/MM/YYYY",
     monthYearLabel: "MMM YYYY",
     dateA11yLabel: "DD/MM/YYYY",
-    monthYearA11yLabel: "MMMM YYYY"
+    monthYearA11yLabel: "MMMM YYYY",
   },
 };
 @NgModule({
@@ -72,16 +93,16 @@ export const MY_FORMATS = {
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CdkTableModule
+    CdkTableModule,
   ],
   providers: [
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE]
+      deps: [MAT_DATE_LOCALE],
     },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
-    DatePipe
+    DatePipe,
   ],
   entryComponents: [],
   declarations: [
@@ -94,7 +115,7 @@ export const MY_FORMATS = {
     ListInmueblesComponent,
     ProyectoComponent,
     ListProyetoComponent,
-    ClienenteComponent,
+    ClienteComponent,
     ListClientesComponent,
     CarteraComponent,
     ArchivoComponent,
@@ -113,12 +134,29 @@ export const MY_FORMATS = {
     DetalleInmuebleComponent,
     CostosInmuebleComponent,
     FormCostoComponent,
-      FormClienteComponent,
-      UploadFileComponent,
-      FormAcreedorComponent,
-      ListObligacionesComponent,
-      FormObligacionComponent,
-      AcreedorObligacionComponent
+    FormClienteComponent,
+    UploadFileComponent,
+    FormAcreedorComponent,
+    ListObligacionesComponent,
+    FormObligacionComponent,
+    AcreedorObligacionComponent,
+    ListContratosClienteComponent,
+    DetalleClienteComponent,
+    FormEgresoComponent,
+    ListEgresosObligacionComponent,
+    ListAdicionalesContratoComponent,
+    DetalleContratoComponent,
+    ListContratosComponent,
+    ListAcuerdoPagoContratoComponent,
+    ListCuotasComponent,
+    ContratoComponent,
+    FormCuotaComponent,
+    FormAdicionalComponent,
+    ListAportesAcuerdoComponent,
+    FormAporteComponent,
+    ListAportesAdicionalesComponent,
+    DetalleAporteComponent,
+    FormAporteAdicionalComponent,
   ],
 })
 export class PagesModule {}

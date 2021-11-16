@@ -1,5 +1,5 @@
 export interface adicional {
-  id?: string;
+  id: string;
   concepto: string;
   valor: string;
   estado: string;
