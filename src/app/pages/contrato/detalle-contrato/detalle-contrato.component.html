@@ -1,0 +1,17 @@
+<button class="close" mat-icon-button color="warn" (click)="close()">X</button>
+<h1 mat-dialog-title>Detalle contrato</h1>
+<div mat-dialog-content>
+  <div class="mat-elevation-z8">
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Acuerdo">
+        <app-list-acuerdo-pago-contrato [contratoid]="contratoid"></app-list-acuerdo-pago-contrato>
+      </mat-tab>
+      <mat-tab label="Adicionales">
+        <app-list-adicionales-contrato [contratoid]="contratoid"></app-list-adicionales-contrato>
+      </mat-tab>
+      <mat-tab label="Aportes">
+        <app-detalle-aporte [contratoid]="contratoid"></app-detalle-aporte>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
