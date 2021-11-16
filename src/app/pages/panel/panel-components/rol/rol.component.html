@@ -4,7 +4,7 @@
       <mat-card-subtitle>{{(idOption==1)?'Lista de Roles':(idOption==2)?'Agregar Nuevo Rol':'Editar Rol'}}</mat-card-subtitle>
       <ng-container *ngIf="idOption==1 && dataSource.data.length>=1">
           <div class="mat-elevation-z8">
-            <table class="example-full-width" style="text-align:center;" cellspacing="15">
+            <table class="example-full-width" style="text-align:center;" cellspacing="5">
               <tr>
                 <td>
                   <mat-form-field appearance="standard">
@@ -69,7 +69,7 @@
       <mat-form-field>
         <input matInput placeholder="Descripción del rol" formControlName="descripcion">
       </mat-form-field>
-      <table style="text-align:center;" class="example-full-width" cellspacing="15">
+      <table style="text-align:center;" class="example-full-width" cellspacing="5">
         <tr>
           <td>
             <button type="submit"  mat-raised-button color="primary" matTooltip="Registrar nuevo rol"> Guardar </button>
@@ -89,7 +89,7 @@
       <mat-form-field>
         <input matInput placeholder="Descripción del rol" formControlName="descripcion">
       </mat-form-field>
-      <table style="text-align:center;" class="example-full-width" cellspacing="15">
+      <table style="text-align:center;" class="example-full-width" cellspacing="5">
         <tr>
           <td>
             <button type="submit" mat-raised-button color="primary"> Guardar </button>
