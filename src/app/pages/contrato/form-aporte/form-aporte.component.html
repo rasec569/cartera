@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <form [formGroup]="formAporte">
     <mat-form-field>
-      <input matInput placeholder="numero" formControlName="numero">
+      <input matInput placeholder="Numero" formControlName="numero">
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Concepto</mat-label>
@@ -12,7 +12,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="cuota" formControlName="cuota"(keyup)="filter($event)" [matAutocomplete]="auto">
+      <input matInput placeholder="Cuota" formControlName="cuota"(keyup)="filter($event)" [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clickseltec($event)" >
         <mat-option *ngFor="let item of listaCuotas" [value]="item.numero" [id]="item">
           {{item.numero}}
@@ -27,13 +27,19 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="referencia" formControlName="referencia">
+      <input matInput placeholder="Referencia" formControlName="referencia">
+      <mat-error *ngIf="formAporte.controls.referencia.hasError('required')">
+        Referencia de pago <strong>requerida</strong>
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="destino" formControlName="destino">
+      <input matInput placeholder="Destino" formControlName="destino">
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="valor">
+      <mat-error *ngIf="formAporte.controls.valor.hasError('valorValidador')">
+        mayor <strong>requerida</strong>
+      </mat-error>
     </mat-form-field>
   </form>
 </div>

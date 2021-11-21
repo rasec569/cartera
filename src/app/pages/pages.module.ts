@@ -70,6 +70,7 @@ import { FormAporteComponent } from "./contrato/form-aporte/form-aporte.componen
 import { ListAportesAdicionalesComponent } from "./contrato/list-aportes-adicionales/list-aportes-adicionales.component";
 import { DetalleAporteComponent } from "./contrato/detalle-aporte/detalle-aporte.component";
 import { FormAporteAdicionalComponent } from './contrato/form-aporte-adicional/form-aporte-adicional.component';
+import { ListAportesDetalleComponent } from './contrato/list-aportes-detalle/list-aportes-detalle.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 export const MY_FORMATS = {
@@ -157,6 +158,7 @@ export const MY_FORMATS = {
     ListAportesAdicionalesComponent,
     DetalleAporteComponent,
     FormAporteAdicionalComponent,
+    ListAportesDetalleComponent,
   ],
 })
 export class PagesModule {}

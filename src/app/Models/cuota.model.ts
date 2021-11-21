@@ -4,6 +4,7 @@ export interface cuota {
   valor: string;
   fecha: string;
   estado: string;
+  pagado: string;
   responsable: string;
   acuerdoid: string;
   //error vars

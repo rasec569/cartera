@@ -11,6 +11,7 @@ import { CuotaService } from 'src/app/services/cuota.service';
 import { cuota } from 'src/app/Models/cuota.model';
 import { FormCuotaComponent } from '../form-cuota/form-cuota.component';
 import { FormAporteComponent } from '../form-aporte/form-aporte.component';
+import { ListAportesDetalleComponent } from '../list-aportes-detalle/list-aportes-detalle.component';
 
 @Component({
   selector: 'app-list-cuotas',
@@ -23,6 +24,8 @@ acuerdoid!:string;
 public totalCliente:any;
 public totalCredito:any;
 public total:any;
+public pagocliente:any;
+public pagocredito:any;
 numcuota=0;
 cuotacreditoid="";
 fechacredito="";
@@ -30,20 +33,22 @@ valorfinancion="";
 dataSource = new MatTableDataSource<cuota>();
 dataSource2=new MatTableDataSource<cuota>();
 public displayedColumns: string[] = [
-  "numero",
   "fecha",
+  "numero",
   "valor",
+  "pagado",
   "estado",
   "Acciones",
 ];
 public displayedColumns2: string[] = [
-  "numero",
   "fecha",
+  "numero",
   "valor",
+  "pagado",
   "estado",
   "Acciones",
 ];
-readonly width:string='300px';
+readonly width:string='600px';
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -89,9 +94,10 @@ readonly width:string='300px';
     });
   }
   OpenAporteCuota(Cuota: any){
+    console.log("Cuota", Cuota)
     const dialogoRef = this.dialog.open(FormAporteComponent, {
       width: this.width,
-      data: {aporteid:"",numaporte:"" , acuerdo:Cuota.idcontrato}
+      data: {aporteid:"",numaporte:"",cuota:Cuota, acuerdo:this.acuerdoid}
     });
     dialogoRef.afterClosed().subscribe(res=>{
       this.loadCuotas(this.acuerdoid,this.valorfinancion);
@@ -103,6 +109,15 @@ readonly width:string='300px';
     this.QueryCuotas(this.acuerdoid);
     this.QueryCuotasCredito(idacuerdo);
   }
+  OpenAportes(id: any){
+    const dialogoRef = this.dialog.open(ListAportesDetalleComponent, {
+      width: this.width,
+      data: {cuotaid:id,adicionalid:"0"}
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.loadCuotas(this.acuerdoid,this.valorfinancion);
+    });
+  }
   QueryCuotas(idacuerdo:any){
     try{
       this.CuotaS.getCuotasAcuerdo(idacuerdo).subscribe((res:cuota[])=>{
@@ -110,6 +125,7 @@ readonly width:string='300px';
           this.dataSource.data = res;
           this.changeDetectorRefs.detectChanges();
           this.totalCliente=res.reduce((summ, v) => summ += parseInt(v.valor), 0);
+          this.pagocliente=res.reduce((summ, v) => summ += parseInt(v.pagado), 0);
           this.numcuota=this.dataSource.data.length;
         } else {
           this.notificacion(res[0].MENSAJE!);
@@ -137,6 +153,7 @@ readonly width:string='300px';
             this.cuotacreditoid=res[0].id;
             this.fechacredito=res[0].fecha;
             this.totalCredito=res.reduce((summ, v) => summ += parseInt(v.valor), 0);
+            this.pagocredito=res.reduce((summ, v) => summ += parseInt(v.pagado), 0);
             this.changeDetectorRefs.detectChanges();
           } else {
             this.notificacion(res[0].MENSAJE!);
@@ -167,7 +184,7 @@ readonly width:string='300px';
       if (this.cuotacreditoid == undefined ||this.cuotacreditoid == "") {
         var fecha = Date.now();
         this.fechacredito = moment(fecha).format( "YYYY-MM-DD");
-        let cuota = {id:'',numero:numberocuota.toString(), valor:credito,fecha:this.fechacredito, responsable:"CREDITO",estado:'', acuerdoid:this.acuerdoid};
+        let cuota = {id:'',numero:numberocuota.toString(), valor:credito,fecha:this.fechacredito, responsable:"CREDITO",estado:'',pagado:"", acuerdoid:this.acuerdoid};
         this.CuotaS.createCuota(cuota).subscribe(
           (res: cuota[]) => {
             console.log(res);
@@ -183,7 +200,7 @@ readonly width:string='300px';
         );
       } else {
         this.fechacredito = moment(this.fechacredito).format( "YYYY-MM-DD");
-        let cuota = {id:this.cuotacreditoid,numero:numberocuota.toString(), valor:credito,fecha:this.fechacredito, responsable:"",estado:'', acuerdoid:this.acuerdoid};
+        let cuota = {id:this.cuotacreditoid,numero:numberocuota.toString(), valor:credito,fecha:this.fechacredito, responsable:"",estado:'',pagado:"", acuerdoid:this.acuerdoid};
         this.CuotaS.updateCuota(cuota).subscribe(
           (res: cuota[]) => {
             if (res[0].TIPO == "3") {

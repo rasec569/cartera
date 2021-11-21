@@ -2,17 +2,20 @@
 <div mat-dialog-content>
   <form [formGroup]="formAdicional">
     <mat-form-field>
-      <textarea  matInput placeholder="concepto" formControlName="concepto"></textarea>
+      <textarea  matInput placeholder="Concepto" formControlName="concepto"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea  matInput placeholder="Descripción" formControlName="descripcion"></textarea>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Fecha</mat-label>
-      <input matInput placeholder="DD/MM/YYYY" [matDatepicker]="picker" formControlName="fecha">
+      <input matInput placeholder="DD/MM/YYYY" [matDatepicker]="picker" formControlName="Fecha">
       <mat-datepicker-toggle matSuffix [for]="picker" matTooltip="Seleccione una fecha del egreso">
       </mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="valor">
+      <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="Valor">
     </mat-form-field>
   </form>
 </div>

@@ -81,7 +81,7 @@ export class ListAportesAdicionalesComponent implements OnInit, AfterViewInit {
     OpenAdd(){
       const dialogoRef = this.dialog.open(FormAporteAdicionalComponent, {
         width: this.width,
-        data: {aporteid:"",numaporte:this.numaporte , adicional:this.contratoid}
+        data: {aporteid:"",numaporte:this.numaporte, adicional:{} , contratoid:this.contratoid}
       });
       dialogoRef.afterClosed().subscribe(res=>{
         this.QueryAportes(this.contratoid);

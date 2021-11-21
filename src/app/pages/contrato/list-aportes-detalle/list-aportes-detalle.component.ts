@@ -1,9 +1,9 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog,MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DeletevalidacionComponent } from "src/app/shared/deletevalidacion/deletevalidacion.component";
 
 import { AportesService } from 'src/app/services/aportes.service';
@@ -11,20 +11,20 @@ import { aporte } from 'src/app/Models/aporte.model';
 import { FormAporteComponent } from '../form-aporte/form-aporte.component';
 
 @Component({
-  selector: 'app-list-aportes-acuerdo',
-  templateUrl: './list-aportes-acuerdo.component.html',
-  styleUrls: ['./list-aportes-acuerdo.component.css']
+  selector: 'app-list-aportes-detalle',
+  templateUrl: './list-aportes-detalle.component.html',
+  styleUrls: ['./list-aportes-detalle.component.css']
 })
-export class ListAportesAcuerdoComponent implements OnInit {
-  @Input() contratoid!:string;
+export class ListAportesDetalleComponent implements OnInit {
   public total:any;
   dataSource = new MatTableDataSource<aporte>();
-  numaporte=0;
-  acuerdoid="";
+  /* numaporte=0;
+  acuerdoid=""; */
+  cuotaid="";
+  adicionalid="";
   public displayedColumns: string[] = [
     "numero",
     "concepto",
-    "cuota",
     "referencia",
     "fecha",
     "valor",
@@ -36,9 +36,17 @@ export class ListAportesAcuerdoComponent implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
   constructor(private _snackBar: MatSnackBar,
-    private changeDetectorRefs: ChangeDetectorRef,
+    public dialogoRef: MatDialogRef<ListAportesDetalleComponent>,
     private AportesS: AportesService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any
+    ) {
+      if (data != ""){
+        this.cuotaid=data.cuotaid;
+        this.adicionalid=data.adicionalid;
+        this.QueryAportes(this.cuotaid,this.adicionalid);
+      }
+     }
     ngAfterViewInit() {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -50,20 +58,20 @@ export class ListAportesAcuerdoComponent implements OnInit {
       this.total=filteredData.reduce((summ, v) => summ += parseInt(v.valor), 0);
     }
   ngOnInit(): void {
-    this.QueryAportes(this.contratoid)
   }
-  //lista los aportes del contrato
-  QueryAportes(contratoid:any){
+  close() {
+    this.dialogoRef.close();
+  }
+  QueryAportes(cuota:any,adicional:any){
     try{
-      this.AportesS.getAportesAcuerdo(contratoid).subscribe((res:aporte[])=>{
+      this.AportesS.getAportes(cuota, adicional).subscribe((res:aporte[])=>{
         if(res[0]!=undefined){
           if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
             this.dataSource.data = res;
-            this.changeDetectorRefs.detectChanges();
             this.total=res.reduce((summ, v) => summ += parseInt(v.valor), 0);
             this.dataSource.sort = this.sort;
-            this.acuerdoid=res[0].acuerdoid
-            this.numaporte=this.dataSource.data.length;
+            /* this.acuerdoid=res[0].acuerdoid
+            this.numaporte=this.dataSource.data.length; */
           }else {
             this.notificacion(res[0].MENSAJE!);
           }
@@ -82,7 +90,7 @@ export class ListAportesAcuerdoComponent implements OnInit {
       );
     }
   }
-  OpenAdd(){
+  /* OpenAdd(){
     const dialogoRef = this.dialog.open(FormAporteComponent, {
       width: this.width,
       data: {aporteid:"",numaporte:this.numaporte ,cuota:"", acuerdo:this.acuerdoid}
@@ -129,7 +137,7 @@ export class ListAportesAcuerdoComponent implements OnInit {
         }
       }
     });
-  }
+  } */
   notificacion(Mensaje: string) {
     this._snackBar.open(Mensaje, "", {
       duration: 5000,

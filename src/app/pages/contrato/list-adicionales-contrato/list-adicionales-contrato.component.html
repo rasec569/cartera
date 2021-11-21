@@ -18,7 +18,7 @@
     </table>
     <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length" matSort>
       <ng-container matColumnDef="concepto">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> concepto </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Concepto </th>
         <td mat-cell *matCellDef="let item"> {{item.concepto}} </td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
@@ -28,12 +28,17 @@
         <td mat-footer-cell *matFooterCellDef>Total</td>
       </ng-container>
       <ng-container matColumnDef="valor">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> valor </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
         <td mat-cell *matCellDef="let item"> {{item.valor|currency: 'USD':'symbol':'.0-0'}} </td>
         <td mat-footer-cell *matFooterCellDef> {{total |currency: 'USD':'symbol':'.0-0'}} </td>
       </ng-container>
+      <ng-container matColumnDef="pagado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Aportes </th>
+        <td mat-cell *matCellDef="let item"> {{item.pagado|currency: 'USD':'symbol':'.0-0'}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{pagos |currency: 'USD':'symbol':'.0-0'}} </td>
+      </ng-container>
       <ng-container matColumnDef="estado">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> estado </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
         <td mat-cell *matCellDef="let item"> {{item.estado}} </td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
@@ -44,7 +49,7 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu4="matMenu">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="OpenAporteAdicional(item)">
               <mat-icon>attach_money</mat-icon>
               <span>Pagar</span>
             </button>

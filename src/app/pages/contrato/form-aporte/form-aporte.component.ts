@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, ValidatorFn, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from "moment";
@@ -19,6 +19,7 @@ export class FormAporteComponent implements OnInit {
 formAporte: FormGroup;
 public listaCuotas:cuota[]=[];
 public CloneCuotas:cuota[]=[];
+saldo!:number;
 
   constructor(public _snackBar: MatSnackBar,
     private fb: FormBuilder,
@@ -35,14 +36,27 @@ public CloneCuotas:cuota[]=[];
         destino: [""],
         cuota:["", Validators.required],
         valor: ["", Validators.required],
+        pagado: [""],
         cuotaid: [""],
-      });
+      }/* ,{
+        Validators: [this.valorValidador()]
+    } */);
+
       console.log('data',data)
       if (this.data.aporteid === ""){
         if (this.data.numaporte != 0) {
           this.formAporte.controls["numero"].setValue(this.data.numaporte + 1);
         }else{
-          this.formAporte.controls["numero"].setValue(1);
+          this.QueryNumAporte(this.data.acuerdo);
+        }
+        if(this.data.cuota===""){
+          this.QueryCuotas(this.data.acuerdo);
+        }
+        else{
+          this.formAporte.controls['cuota'].setValue(this.data.cuota.numero);
+          this.formAporte.controls['cuotaid']. setValue(this.data.cuota.id);
+          this.formAporte.controls['valor'].setValue(this.data.cuota.valor-this.data.cuota.pagado);
+          this.formAporte.controls['pagado'].setValue(this.data.cuota.pagado);
         }
       }
       else{
@@ -51,14 +65,15 @@ public CloneCuotas:cuota[]=[];
      }
 
   ngOnInit(): void {
-    if(this.data.acuerdo!=""){
+    /* if(this.data.acuerdo!=""){
+      console.log("entro",this.data.acuerdo );
 
-      this.QueryCuotas(this.data.acuerdo);
-    }
+    } */
   }
   close() {
     this.dialogoRef.close();
   }
+
   filter(ev: any){
     const val = ev.target.value;
     console.log(val);
@@ -76,16 +91,16 @@ public CloneCuotas:cuota[]=[];
   clickseltec(event:any){
      this.formAporte.controls['cuota'].setValue(event.option.value);
     this.formAporte.controls['cuotaid']. setValue(event.option.id.id);
-    this.formAporte.controls['valor'].setValue(event.option.id.valor)
+    this.formAporte.controls['valor'].setValue(event.option.id.valor-event.option.id.pagado);
+    this.formAporte.controls['pagado'].setValue(event.option.id.pagado);
+    this.saldo=event.option.id.valor-event.option.id.pagado;
   }
   QueryCuotas(acuerdoid:any) {
     try {
       this.CuotaS.getCuotasPendientesAcuerdo(acuerdoid).subscribe(
         (res: cuota[]) => {
-          console.log(res);
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.listaCuotas = res;
-            console.log(res);
             this.CloneCuotas=res;
           } else {
             this.notificacion(res[0].MENSAJE!);
@@ -103,6 +118,42 @@ public CloneCuotas:cuota[]=[];
       );
     }
   }
+  QueryNumAporte(acuerdoid: any) {
+    console.log("se activo", acuerdoid)
+    try {
+      this.AportesS.getNumAporte(acuerdoid,"0").subscribe(
+        (res: aporte[]) => {
+          console.log(res);
+          if (res[0].numero != null){
+            console.log("entro",res[0]);
+            if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+              this.formAporte.controls["numero"].setValue(res[0].numero+1);
+            }
+          }
+          else {
+            console.log("else",res[0]);
+            this.formAporte.controls["numero"].setValue(1);
+          }
+        },
+        (err) => {
+          this.notificacion(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+          );
+        }
+      );
+    } catch (error) {
+      this.notificacion(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+      );
+    }
+  }
+  /* public valorValidador():ValidatorFn{
+    return (control:FormControl) => {
+      const entrada:number = this.formAporte.value.valor;
+      if(entrada>this.saldo) return {isValid:false};
+      return null;
+    };
+  } */
   SaveAporte() {
     try {
       this.formAporte.value.fecha = moment(this.formAporte.value.fecha).format("YYYY-MM-DD");

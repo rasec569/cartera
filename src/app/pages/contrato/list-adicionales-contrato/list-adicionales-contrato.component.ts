@@ -9,6 +9,7 @@ import { DeletevalidacionComponent } from "src/app/shared/deletevalidacion/delet
 import { AdicionalService } from 'src/app/services/adicional.service';
 import { adicional } from 'src/app/Models/adicional.model';
 import { FormAdicionalComponent } from '../form-adicional/form-adicional.component';
+import { FormAporteAdicionalComponent } from '../form-aporte-adicional/form-aporte-adicional.component';
 
 @Component({
   selector: 'app-list-adicionales-contrato',
@@ -19,10 +20,12 @@ export class ListAdicionalesContratoComponent implements OnInit {
   @Input() contratoid!:string;
   dataSource = new MatTableDataSource<adicional>();
   public total:any;
+  public pagos:any;
   public displayedColumns: string[] = [
-    "concepto",
     "fecha",
+    "concepto",
     "valor",
+    "pagado",
     "estado",
     "Acciones",
   ];
@@ -47,17 +50,20 @@ export class ListAdicionalesContratoComponent implements OnInit {
       this.dataSource.filter = filterValue.trim().toLowerCase();
       var filteredData = this.dataSource.filteredData;
       this.total=filteredData.reduce((summ, v) => summ += parseInt(v.valor), 0);
+      this.pagos=filteredData.reduce((summ, v) => summ += parseInt(v.pagado), 0);
     }
     QueryAdicionales(contratoid:any) {
       try {
         this.AdicionalS.getAdicionalesContrato(contratoid).subscribe(
           (res: adicional[]) => {
-            console.log(res);
+            console.log("adicionales",res);
             if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
               this.dataSource.data = res;
               this.changeDetectorRefs.detectChanges();
               this.dataSource.sort = this.sort;
               this.total=res.reduce((summ, v) => summ += parseInt(v.valor), 0);
+              this.pagos=res.reduce((summ, p) => summ += parseInt(p.pagado), 0);
+              console.log("suma pagos",this.pagos )
             } else {
               this.notificacion(res[0].MENSAJE!);
             }
@@ -74,6 +80,7 @@ export class ListAdicionalesContratoComponent implements OnInit {
         );
       }
     }
+    // crear nuevo adicional
      OpenAdd(){
       const dialogoRef = this.dialog.open(FormAdicionalComponent, {
         width: this.width,
@@ -83,10 +90,21 @@ export class ListAdicionalesContratoComponent implements OnInit {
         this.QueryAdicionales(this.contratoid);
       });
     }
+    //editar un adicional
     OpenEdit(id: any){
       const dialogoRef = this.dialog.open(FormAdicionalComponent, {
         width: this.width,
         data: {adicionalid:id,contratoid:this.contratoid }
+      });
+      dialogoRef.afterClosed().subscribe(res=>{
+        this.QueryAdicionales(this.contratoid);
+      });
+    }
+    // hacer aporte a un adicional
+    OpenAporteAdicional(Adicional: any){
+      const dialogoRef = this.dialog.open(FormAporteAdicionalComponent, {
+        width: this.width,
+        data: {aporteid:"",numaporte:"",adicional:Adicional,contratoid:""}
       });
       dialogoRef.afterClosed().subscribe(res=>{
         this.QueryAdicionales(this.contratoid);

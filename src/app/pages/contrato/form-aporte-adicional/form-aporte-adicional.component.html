@@ -13,7 +13,7 @@
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="adicional" formControlName="adicional"(keyup)="filter($event)" [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clickseltec($event)" >
+      <mat-autocomplete #auto="matAutocomplete"  (optionSelected)="clickseletec($event)">
         <mat-option *ngFor="let item of listaAdicionales" [value]="item.concepto" [id]="item">
           {{item.concepto}}
         </mat-option>

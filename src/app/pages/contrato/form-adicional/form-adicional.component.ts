@@ -22,6 +22,7 @@ formAdicional: FormGroup;
       this.formAdicional= this.fb.group({
         id: [""],
         concepto: ["", Validators.required],
+        descripcion: ["", Validators.required],
         valor: ["", Validators.required],
         fecha: ["", Validators.required],
         contratoid: [""],

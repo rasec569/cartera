@@ -18,7 +18,8 @@ const HttpOptionsBody = {
     'Content-Type': 'application/json',
     "Authorization": "Bearer "+localStorage.getItem("token")
   }),
-  body: {id: "",},
+  body: {id: "",cuota: "",adicional: "",},
+
 };
 
 @Injectable({
@@ -45,6 +46,28 @@ export class AportesService {
       catchError(this.handleError)
     );
   }
+  //listar Aportes Adicioneles
+  public getAportes(cuotaid: any, adicionalid: any): Observable<any> {
+    HttpOptionsBody.body.cuota=cuotaid;
+    HttpOptionsBody.body.adicional=adicionalid;
+    console.log("al servicio",HttpOptionsBody.body)
+    return this.http.get(`${environment.url}/aporte/detalle/${cuotaid}/${adicionalid}`,HttpOptionsBody).pipe(
+      tap((result: any) => {
+        console.log(result)
+      }),
+      catchError(this.handleError)
+    );
+  }
+  //ultimo aporte
+  public getNumAporte(acuerdoid: any, contratoid: any): Observable<any> {
+    HttpOptionsBody.body.cuota=acuerdoid;
+    HttpOptionsBody.body.adicional=contratoid;
+    return this.http.get(`${environment.url}/aporte/max/${acuerdoid}/${contratoid}`,HttpOptionsBody).pipe(
+      tap((result: any) => {
+      }),
+      catchError(this.handleError)
+    );
+  }
   //buscar
   public getAporte(id: any): Observable<any> {
     HttpOptionsBody.body.id=id;
@@ -54,6 +77,8 @@ export class AportesService {
       catchError(this.handleError)
     );
   }
+  //buscar
+
   //registrar Aporte Acuerdo
   public createAporteAcuerdo(Aporte:aporte): Observable<any> {
     return this.http

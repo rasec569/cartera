@@ -8,6 +8,7 @@ export interface aporte {
   valor: string;
   cuotaid: string;
   adicionalid: string;
+  acuerdoid: string;
   //error vars
   TIPO?: string;
   MENSAJE?: string;
