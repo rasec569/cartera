@@ -28,13 +28,57 @@ const HttpOptionsBody = {
 export class categoriaService {
   constructor(private http: HttpClient) {}
   //listar
-  public getcategorias(): Observable<any> {
+  public getCategorias(): Observable<any> {
     return this.http.get(`${environment.url}/categoria/`, httpOptions).pipe(
       tap((result: any) => {}),
       catchError(this.handleError)
     );
   }
-
+  //buscar
+  public getCategoria(id: any): Observable<any> {
+    HttpOptionsBody.body.id=id;
+    console.log("en service")
+    return this.http.get(`${environment.url}/categoria/${id}`,HttpOptionsBody).pipe(
+      tap((result: any) => {
+      }),
+      catchError(this.handleError)
+    );
+  }
+//registrar
+public createCategoria(Categoria:categoria): Observable<any> {
+  return this.http
+    .post(`${environment.url}/categoria/`, Categoria, httpOptions)
+    .pipe(
+      tap((result: any) => {
+        console.log(result);
+      }),
+      catchError(this.handleError)
+    );
+}
+//eliminar
+public deleteCategoria(Categoria: categoria): Observable<any> {
+  console.log(Categoria)
+  HttpOptionsBody.body.id!=Categoria.id;
+  return this.http
+    .delete(`${environment.url}/categoria/`,HttpOptionsBody)
+    .pipe(
+      tap((result: any) => {
+        console.log(result);
+      }),
+      catchError(this.handleError)
+    );;
+}
+//modificar
+public updateCategoria(Categoria: categoria): Observable<any> {
+  return this.http
+    .put(`${environment.url}/categoria/${Categoria.id}`, Categoria, httpOptions)
+    .pipe(
+      tap((result: any) => {
+        console.log(result);
+      }),
+      catchError(this.handleError)
+    );
+}
   handleError(error: HttpErrorResponse) {
     let errorMessage = "Unknown error!";
     if (error.error instanceof ErrorEvent) {

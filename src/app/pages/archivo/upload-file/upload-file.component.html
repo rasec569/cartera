@@ -2,23 +2,29 @@
   <mat-card-content>
     <mat-card-title>Archivo </mat-card-title>
     <mat-card-subtitle>Cargar nuevo archivo</mat-card-subtitle>
-    <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+    <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" >
       <mat-form-field appearance="fill">
         <mat-label>Area</mat-label>
-        <mat-select placeholder="Seleccione un area" [(ngModel)]="Files.idarea">
+        <mat-select matTooltip="Seleccione una area" [(ngModel)]="Files.idarea">
           <mat-option *ngFor="let area of DataAreas" [value]="area.id">
             {{area.Area}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Categoria</mat-label>
-        <mat-select [(ngModel)]="Files.idCategoria">
+      <mat-form-field appearance="fill" >
+        <mat-label >Categoria</mat-label >
+        <mat-select [(ngModel)]="Files.idCategoria" matTooltip="Seleccione una categoria">
           <mat-option *ngFor="let categoria of DataCategoria" [value]="categoria.id">
             {{categoria.Nombre}}
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <button mat-icon-button color="primary" matTooltip="Nueva categoria" (click)="OpenAddCat()">
+        <mat-icon>library_add</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" matTooltip="Todas las categoria" (click)="OpenListCat()">
+        <mat-icon>launch</mat-icon>
+      </button>
   </div>
     <form action="/api/upload" method="post" enctype="multipart/form-data">
       <input type="file" class="file-input" [accept]="requiredFileType" (change)="onFileSelected($event)" #fileUpload multiple>

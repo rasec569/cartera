@@ -35,6 +35,15 @@ export class AdicionalService {
       catchError(this.handleError)
     );
   }
+  //listar adiconales del contrato
+  public getAdicionalesPendientesContrato(contratoid: any): Observable<any> {
+    HttpOptionsBody.body.id=contratoid;
+    return this.http.get(`${environment.url}/adicional/pendientes/${contratoid}`,HttpOptionsBody).pipe(
+      tap((result: any) => {
+      }),
+      catchError(this.handleError)
+    );
+  }
   //buscar
   public getAdicional(id: any): Observable<any> {
     HttpOptionsBody.body.id=id;

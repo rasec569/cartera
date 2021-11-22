@@ -95,7 +95,7 @@ export class FormAporteAdicionalComponent implements OnInit {
   }
   QueryAdicionales(contratoid:any) {
     try {
-      this.AdicionalS.getAdicionalesContrato(contratoid).subscribe(
+      this.AdicionalS.getAdicionalesPendientesContrato(contratoid).subscribe(
         (res: adicional[]) => {
           console.log(res);
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {

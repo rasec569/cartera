@@ -11,6 +11,9 @@ import {area} from 'src/app/Models/area.model';
 import { AreasService } from 'src/app/services/areas.service';
 import { categoria } from 'src/app/Models/categoria.model';
 import { categoriaService } from 'src/app/services/categoria.service';
+import { FormCategoriaComponent } from '../form-categoria/form-categoria.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ListCategoriasComponent } from '../list-categorias/list-categorias.component';
 
 
 @Component({
@@ -46,7 +49,8 @@ export class UploadFileComponent implements OnInit {
     private FilesS:FilesService,
     private AreaS:AreasService,
     private CategoriaS: categoriaService,
-    private router: Router) { }
+    private router: Router,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.listarCategoria();
@@ -131,9 +135,26 @@ listarArea(){
     );
   }
 }
+OpenAddCat(){
+  const dialogoRef = this.dialog.open(FormCategoriaComponent, {
+    width: "300px",
+    data: {categoriaid:""}
+  });
+  dialogoRef.afterClosed().subscribe(res=>{
+    this.listarCategoria();
+  });
+}
+OpenListCat(){
+  const dialogoRef = this.dialog.open(ListCategoriasComponent, {
+    width: "750px"
+  });
+  dialogoRef.afterClosed().subscribe(res=>{
+    this.listarCategoria();
+  });
+}
 listarCategoria(){
   try {
-    this.CategoriaS.getcategorias().subscribe(
+    this.CategoriaS.getCategorias().subscribe(
       (res:categoria[])=> {
         if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
           console.log('Lista para select cat',res)
