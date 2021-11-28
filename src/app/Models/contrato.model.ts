@@ -8,8 +8,11 @@ export interface contrato {
   fecha: string;
   observacion: string;
   estado: string;
-  idcliente: string;
-  idinmueble: string;
+  clienteid: string;
+  inmuebleid: string;
+  idproyecto:string,
+  idetapa: string,
+  entidad: string;
   //error vars
   TIPO?: string;
   MENSAJE?: string;

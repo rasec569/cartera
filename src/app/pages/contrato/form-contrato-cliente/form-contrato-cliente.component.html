@@ -1,0 +1,146 @@
+<button class="close"mat-icon-button  color="warn"(click)="close()">X</button>
+<h1 mat-dialog-title>Nueva Venta</h1>
+<div mat-dialog-content>
+    <div class="mat-elevation-z8">
+      
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="formCliente" >
+            <ng-template matStepLabel>CLIENTE</ng-template>
+            <form [formGroup]="formCliente">
+            <mat-accordion class="example-headers-align" >
+              <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+                  <mat-expansion-panel-header>
+                      <mat-panel-title> Información Personal </mat-panel-title>
+                      <mat-panel-description> Datos basicos
+                          <mat-icon>person_outline</mat-icon>
+                      </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+                    <mat-form-field>
+                      <input matInput placeholder="Identificacion" formControlName="identificacion"  (keyup)="filter($event)" [matAutocomplete]="auto">
+                      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clickseltec($event)" >
+                        <mat-option *ngFor="let item of ListaClientes" [value]="item.identificacion" [id]="item">
+                          {{item.identificacion}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput placeholder="Nombres"formControlName="nombres">
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput placeholder="Apellidos" formControlName="apellidos"> </mat-form-field>
+                  </div>
+                  <mat-action-row>
+                      <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+                  </mat-action-row>
+              </mat-expansion-panel>
+              <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+                  <mat-expansion-panel-header>
+                      <mat-panel-title> Información contácto </mat-panel-title>
+                      <mat-panel-description> Medio para entablar comunicación o contacto
+                          <mat-icon>contact_mail</mat-icon>
+                      </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
+                    <mat-form-field>
+                      <input matInput placeholder="Email" formControlName="correo"> </mat-form-field>
+                    <mat-form-field>
+                      <input matInput placeholder="Telefono" formControlName="telefono"> </mat-form-field>
+                  </div>
+                  <mat-form-field>
+                    <input matInput placeholder="Dirección" formControlName="direccion"> </mat-form-field>
+                  <mat-action-row>
+                    <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+                    <button mat-button color="primary" (click)="nextStep()">Finalizar</button>
+                  </mat-action-row>
+              </mat-expansion-panel>
+          </mat-accordion>
+        </form>
+            <div style="text-align: right;">
+              <p>Click para actualizar o guardar cambios.</p>
+              <button mat-raised-button color="accent" matStepperNext (click)="SaveCliente()" [disabled]="formCliente.invalid">Siguiente </button>
+            </div>
+        </mat-step>
+        <mat-step [stepControl]="formContrato" label="CONTRATO">
+          <form [formGroup]="formContrato">
+            <mat-form-field appearance="fill">
+              <mat-label>Proyecto</mat-label>
+              <mat-select formControlName="idproyecto" (selectionChange)="onSelectProyecto($event)">
+                <mat-option *ngFor="let proyect of DataProyectos" [value]="proyect.id">
+                  {{proyect.nombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" >
+              <mat-form-field appearance="fill">
+                <mat-label>Numero</mat-label>
+                <input matInput placeholder="Contrato" formControlName="numero">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Fecha</mat-label>
+                <input matInput placeholder="DD/MM/YYYY" [matDatepicker]="picker" formControlName="fecha">
+                <mat-datepicker-toggle matSuffix [for]="picker" matTooltip="Seleccione una fecha de venta">
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Forma de pago</mat-label>
+                <mat-select formControlName="forma_pago">
+                  <mat-option value="Contado">Contado</mat-option>
+                  <mat-option value="Credito">Credito</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" >
+              <mat-form-field appearance="fill">
+                <mat-label>Etapa</mat-label>
+                <mat-select formControlName="idetapa" (selectionChange)="onSelectEtapa($event)" >
+                  <mat-option *ngFor="let etapa of DataEtapas" [value]="etapa.id">
+                    {{etapa.numero}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Inmueble</mat-label>
+                <mat-select formControlName="inmuebleid" (selectionChange)="onSelectInmueble($event)" >
+                  <mat-option *ngFor="let inmueble of DataInmuebles" [value]="inmueble.id">
+                    {{inmueble.Casa}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="valor">
+              </mat-form-field>
+            </div>
+            <mat-form-field>
+              <textarea  matInput placeholder="Observación" formControlName="observacion"></textarea>
+            </mat-form-field>
+          </form>
+          <div style="text-align: right;">
+            <p>Click para guardar cambios.</p>
+            <button mat-raised-button color="warn" matStepperPrevious>Atras</button>
+            <button mat-raised-button color="accent" matStepperNext >Siguiente</button>
+           <!--  <button mat-raised-button color="accent" matStepperNext (click)="SaveContrato()" [disabled]="formContrato.invalid" >Siguiente</button> -->
+          </div>
+      </mat-step>
+        <mat-step [stepControl]="formAcuerdo" label="ACUERDO PAGO">
+            <form [formGroup]="formAcuerdo">
+              <mat-form-field >
+                <input matInput placeholder="Aporte cliente" prefix="$" mask="separator" thousandSeparator="." formControlName="aporte_cliente">
+              </mat-form-field>
+              <mat-form-field >
+                <input matInput placeholder="Aporte entidad" prefix="$" mask="separator" thousandSeparator="." formControlName="valor_credito">
+              </mat-form-field>
+              <mat-form-field >
+                <mat-label>Entidad</mat-label>
+                <input matInput placeholder="Entidad financiera" formControlName="entidad">
+              </mat-form-field>
+          </form>
+            <div style="text-align: right;">
+              <button mat-raised-button color="warn" matStepperPrevious>Atras</button>
+              <button mat-raised-button color="warn" (click)="stepper.reset()">Limpiar</button>
+            </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+</div>

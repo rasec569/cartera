@@ -105,7 +105,8 @@ prevStep() {
         "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
       );
     }
-  }onSelect(seleccion:any){
+  }
+  onSelect(seleccion:any){
     this.listarEtapa(seleccion.value);
 
   }

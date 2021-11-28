@@ -95,6 +95,7 @@ formAdicional: FormGroup;
           console.log(res);
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.formAdicional.patchValue(res[0]);
+            console.log("buscar",res[0]);
           } else {
             this.notificacion(res[0].MENSAJE!);
           }

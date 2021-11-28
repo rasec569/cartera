@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { tap, catchError } from "rxjs/operators";
+import { tap, catchError, delay } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { file } from "../Models/file.model";
 

@@ -1,7 +1,7 @@
-<mat-card>
+<mat-card matSort *ngIf="dataSource.data.length">
   <mat-card-subtitle>Lista cuotas acuerdo de pago</mat-card-subtitle>
 <div class="mat-elevation-z8">
-  <table class="example-full-width" style="text-align:center;" cellspacing="5">
+  <table class="example-full-width" style="text-align:center;" cellspacing="5" >
     <tr>
       <td>
         <mat-form-field appearance="standard">
@@ -18,25 +18,25 @@
       </td>
     </tr>
   </table>
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table [dataSource]="dataSource" matSort *ngIf="dataSource.data.length">
     <ng-container matColumnDef="numero">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header width ="10%"> Cuota </th>
+      <th mat-header-cell *matHeaderCellDef width ="10%"> Cuota </th>
       <td mat-cell *matCellDef="let item"> {{item.numero}} </td>
     </ng-container>
     <ng-container matColumnDef="fecha">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header width ="14%"> Fecha </th>
+      <th mat-header-cell *matHeaderCellDef width ="14%"> Fecha </th>
       <td mat-cell *matCellDef="let item"> {{item.fecha| date: 'dd MMM yy'}} </td>
     </ng-container>
     <ng-container matColumnDef="valor">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header width ="23%"> Valor </th>
+      <th mat-header-cell *matHeaderCellDef width ="23%"> Valor </th>
       <td mat-cell *matCellDef="let item"> {{item.valor|  mask: 'separator':'.'}} </td>
     </ng-container>
     <ng-container matColumnDef="pagado">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header width ="23%"> Aportes </th>
+      <th mat-header-cell *matHeaderCellDef width ="23%"> Aportes </th>
       <td mat-cell *matCellDef="let item"> {{item.pagado|  mask: 'separator':'.'}} </td>
     </ng-container>
     <ng-container matColumnDef="estado">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header width ="20%"> Estado </th>
+      <th mat-header-cell *matHeaderCellDef width ="20%"> Estado </th>
       <td mat-cell *matCellDef="let item"> {{item.estado}} </td>
     </ng-container>
     <ng-container matColumnDef="Acciones">
@@ -73,29 +73,29 @@
       <td class="mat-cell" colspan="4">No hay datos que coincidan con el filtro "{{input.value}}"</td>
     </tr>
   </table>
-  <table mat-table [dataSource]="dataSource2" matSort>
+  <table mat-table [dataSource]="dataSource2" *ngIf="dataSource2.data.length">
     <ng-container matColumnDef="numero">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header > Cuota </th>
+      <th mat-header-cell *matHeaderCellDef > Cuota </th>
       <td mat-cell *matCellDef="let item" width ="10%"> {{item.numero}} </td>
       <td mat-footer-cell *matFooterCellDef>cliente</td>
     </ng-container>
     <ng-container matColumnDef="fecha">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+      <th mat-header-cell *matHeaderCellDef> Fecha </th>
       <td mat-cell *matCellDef="let item" width ="12%"> {{item.fecha| date: 'dd MMM yy'}} </td>
       <td mat-footer-cell *matFooterCellDef>Aportes del</td>
     </ng-container>
     <ng-container matColumnDef="valor">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
+      <th mat-header-cell *matHeaderCellDef> Valor </th>
       <td mat-cell *matCellDef="let item" width ="21%"> {{item.valor|  mask: 'separator':'.'}} </td>
       <td mat-footer-cell *matFooterCellDef> {{totalCliente |currency: 'USD':'symbol':'.0-0'}} </td>
     </ng-container>
     <ng-container matColumnDef="pagado">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header > Aportes </th>
+      <th mat-header-cell *matHeaderCellDef > Aportes </th>
       <td mat-cell *matCellDef="let item" width ="20%"> {{item.pagado|  mask: 'separator':'.'}} </td>
       <td mat-footer-cell *matFooterCellDef>{{(pagocliente) |currency: 'USD':'symbol':'.0-0'}}</td>
     </ng-container>
     <ng-container matColumnDef="estado">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
       <td mat-cell *matCellDef="let item" width ="17%"> {{item.estado}} </td>
       <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
@@ -170,6 +170,10 @@
   </table>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Seleccione una page of cuota">
   </mat-paginator>
-
+  <div *ngIf="!dataSource.data.length">
+    <mat-card>
+      <mat-card-title>Sin datos para mostrar</mat-card-title>
+    </mat-card>
+  </div>
 </div>
 </mat-card>

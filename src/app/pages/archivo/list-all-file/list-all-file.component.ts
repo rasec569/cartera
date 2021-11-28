@@ -139,7 +139,7 @@ export class ListAllFileComponent implements OnInit,AfterViewInit {
   }
   listarCategoria() {
     try {
-      this.CategoriaS.getcategorias().subscribe(
+      this.CategoriaS.getCategorias().subscribe(
         (res: categoria[]) => {
           console.log(res);
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {

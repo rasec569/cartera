@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ContratoService } from 'src/app/services/contrato.service';
 import { contrato } from 'src/app/Models/contrato.model';
 import { DetalleContratoComponent } from '../detalle-contrato/detalle-contrato.component';
+import { FormContratoClienteComponent } from '../form-contrato-cliente/form-contrato-cliente.component';
+import { FormContratoComponent } from '../form-contrato/form-contrato.component';
 
 
 @Component({
@@ -18,9 +20,10 @@ import { DetalleContratoComponent } from '../detalle-contrato/detalle-contrato.c
 export class ListContratosComponent implements OnInit {
   dataSource = new MatTableDataSource<contrato>();
   public displayedColumns: string[] = [
+    "fecha",
+    "Casa",
     "numero",
     "forma_pago",
-    "fecha",
     "valor",
     "valor_adicionales",
     "total",
@@ -80,24 +83,23 @@ export class ListContratosComponent implements OnInit {
         this.QueryContratos();
       });
     }
-    /* OpenAdd(){
-      const dialogoRef = this.dialog.open(FormEtapaComponent, {
-        width: this.width,
-        data: {etapaid:"",proyectoid:this.proyectoid }
+    OpenAdd(){
+      const dialogoRef = this.dialog.open(FormContratoClienteComponent, {
+        width: this.width
       });
       dialogoRef.afterClosed().subscribe(res=>{
-        this.QueryContratos(this.proyectoid);
+        this.QueryContratos();
       });
     }
     OpenEdit(id: any){
-      const dialogoRef = this.dialog.open(FormEtapaComponent, {
+      const dialogoRef = this.dialog.open(FormContratoComponent, {
         width: this.width,
-        data: {etapaid:id,proyectoid:this.proyectoid }
+        data: {Contratoid:id}
       });
       dialogoRef.afterClosed().subscribe(res=>{
-        this.QueryContratos(this.proyectoid);
+        this.QueryContratos();
       });
-    } */
+    }
     notificacion(Mensaje: string) {
       this._snackBar.open(Mensaje, "", {
         duration: 5000,

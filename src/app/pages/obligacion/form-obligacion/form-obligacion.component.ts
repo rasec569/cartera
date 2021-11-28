@@ -22,7 +22,7 @@ export class FormObligacionComponent implements OnInit {
   public listaAcreedores:acreedor[] = [];
   public CloneAcreedores:acreedor[]=[];
   readonly width:string='750px';
-  
+
   constructor(public ObligacionS: ObligacionesService,
     private AcreedorS:AcreedorService,
     public _snackBar: MatSnackBar,
@@ -86,7 +86,6 @@ export class FormObligacionComponent implements OnInit {
     this.formObligacion.controls['identificacion'].setValue(event.option.value);
     this.formObligacion.controls['nomacreedor'].setValue(event.option.id.nombres+' '+event.option.id.apellidos);
     this.formObligacion.controls['idacreedor']. setValue(event.option.id.idacreedor);
-
   }
   QueryAcreedores() {
     try {

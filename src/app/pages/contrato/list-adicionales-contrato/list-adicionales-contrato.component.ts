@@ -10,6 +10,7 @@ import { AdicionalService } from 'src/app/services/adicional.service';
 import { adicional } from 'src/app/Models/adicional.model';
 import { FormAdicionalComponent } from '../form-adicional/form-adicional.component';
 import { FormAporteAdicionalComponent } from '../form-aporte-adicional/form-aporte-adicional.component';
+import { ListAportesDetalleComponent } from '../list-aportes-detalle/list-aportes-detalle.component';
 
 @Component({
   selector: 'app-list-adicionales-contrato',
@@ -30,6 +31,7 @@ export class ListAdicionalesContratoComponent implements OnInit {
     "Acciones",
   ];
   readonly width:string='350px';
+  readonly MediunWidth:string='600px';
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -105,6 +107,15 @@ export class ListAdicionalesContratoComponent implements OnInit {
       const dialogoRef = this.dialog.open(FormAporteAdicionalComponent, {
         width: this.width,
         data: {aporteid:"",numaporte:"",adicional:Adicional,contratoid:""}
+      });
+      dialogoRef.afterClosed().subscribe(res=>{
+        this.QueryAdicionales(this.contratoid);
+      });
+    }
+    OpenAportes(id: any){
+      const dialogoRef = this.dialog.open(ListAportesDetalleComponent, {
+        width: this.MediunWidth,
+        data: {cuotaid:0,adicionalid:id}
       });
       dialogoRef.afterClosed().subscribe(res=>{
         this.QueryAdicionales(this.contratoid);

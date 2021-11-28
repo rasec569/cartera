@@ -26,7 +26,7 @@
         </div>
         <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
           <mat-form-field appearance="fill">
-            <mat-label>Proyecto al que pertence</mat-label>
+            <mat-label>Proyecto al que pertenecé</mat-label>
             <mat-select formControlName="idproyecto" (selectionChange)="onSelect($event)">
               <mat-option *ngFor="let proyect of DataProyectos" [value]="proyect.id">
                 {{proyect.nombre}}

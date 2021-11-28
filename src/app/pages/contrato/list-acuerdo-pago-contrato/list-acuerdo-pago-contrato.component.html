@@ -19,6 +19,24 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+  <div *ngIf="!dataSource.data.length">
+    <mat-card>
+      <table class="example-full-width" style="text-align:center;" cellspacing="5">
+        <tr>
+          <td>
+            <mat-form-field appearance="standard">
+              <h4>Sin acuerdo de pago, click en nuevo para crear uno.</h4>
+            </mat-form-field>
+          </td>
+          <td>
+            <button mat-raised-button color="primary" matTooltip="Registrar nuevo adicional" (click)="OpenAdd()">
+              nuevo
+            </button>
+          </td>
+        </tr>
+      </table>
+    </mat-card>
+  </div>
   <app-list-cuotas (messageEvent)="receiveMessage($event)"></app-list-cuotas>
 
 

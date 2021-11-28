@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-content>
-    <mat-card-title>Compra Ventas</mat-card-title>
+    <mat-card-title>Contratos de ventas</mat-card-title>
     <mat-card-subtitle>Lista de Contratos</mat-card-subtitle>
     <div class="mat-elevation-z8">
       <table class="example-full-width" style="text-align:center;" cellspacing="5">
@@ -13,13 +13,21 @@
             </mat-form-field>
           </td>
           <td>
-            <button mat-raised-button color="primary" matTooltip="Registrar nuevo contrato">
-              nuevo
+            <button mat-raised-button color="primary" matTooltip="Registrar nuevo contrato"(click)="OpenAdd()" >
+              nueva
             </button>
           </td>
         </tr>
       </table>
       <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length" matSort>
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+          <td mat-cell *matCellDef="let item"> {{item.fecha| date: 'dd MMM yy'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Casa">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Casa </th>
+          <td mat-cell *matCellDef="let item"> {{item.Casa}} </td>
+        </ng-container>
         <ng-container matColumnDef="numero">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Contrato </th>
           <td mat-cell *matCellDef="let item"> {{item.numero}} </td>
@@ -27,10 +35,6 @@
         <ng-container matColumnDef="forma_pago">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Forma pago </th>
           <td mat-cell *matCellDef="let item"> {{item.forma_pago}} </td>
-        </ng-container>
-        <ng-container matColumnDef="fecha">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
-          <td mat-cell *matCellDef="let item"> {{item.fecha| date: 'dd MMM yy'}} </td>
         </ng-container>
         <ng-container matColumnDef="valor">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
@@ -55,7 +59,7 @@
                 <mat-icon>launch</mat-icon>
                 <span>Detalle</span>
               </button>
-              <button mat-menu-item >
+              <button mat-menu-item (click)="OpenEdit(item.id)">
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>
               </button>

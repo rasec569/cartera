@@ -9,13 +9,13 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Fecha</mat-label>
-      <input matInput placeholder="DD/MM/YYYY" [matDatepicker]="picker" formControlName="Fecha">
+      <input matInput placeholder="DD/MM/YYYY" [matDatepicker]="picker" formControlName="fecha">
       <mat-datepicker-toggle matSuffix [for]="picker" matTooltip="Seleccione una fecha del egreso">
       </mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="Valor">
+      <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="valor">
     </mat-form-field>
   </form>
 </div>

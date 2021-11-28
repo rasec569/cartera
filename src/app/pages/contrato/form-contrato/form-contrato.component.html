@@ -1,0 +1,65 @@
+
+<h1 mat-dialog-title>Formulario contrato de venta</h1>
+<div mat-dialog-content>
+<form [formGroup]="formContrato">
+  <mat-form-field appearance="fill">
+    <mat-label>Proyecto</mat-label>
+    <mat-select formControlName="idproyecto" (selectionChange)="onSelectProyecto($event)">
+      <mat-option *ngFor="let proyect of DataProyectos" [value]="proyect.id">
+        {{proyect.nombre}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" >
+    <mat-form-field appearance="fill">
+      <mat-label>Numero</mat-label>
+      <input matInput placeholder="Contrato" formControlName="numero">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha</mat-label>
+      <input matInput placeholder="DD/MM/YYYY" [matDatepicker]="picker" formControlName="fecha">
+      <mat-datepicker-toggle matSuffix [for]="picker" matTooltip="Seleccione una fecha de venta">
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Forma de pago</mat-label>
+      <mat-select formControlName="forma_pago">
+        <mat-option value="Contado">Contado</mat-option>
+        <mat-option value="Cuotas">Cuotas</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" >
+    <mat-form-field appearance="fill">
+      <mat-label>Etapa</mat-label>
+      <mat-select formControlName="idetapa" (selectionChange)="onSelectEtapa($event)" >
+        <mat-option *ngFor="let etapa of DataEtapas" [value]="etapa.id">
+          {{etapa.numero}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Inmueble</mat-label>
+      <mat-select formControlName="inmuebleid" (selectionChange)="onSelectInmueble($event)" >
+        <mat-option *ngFor="let inmueble of DataInmuebles" [value]="inmueble.id">
+          {{inmueble.Casas}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="valor">
+    </mat-form-field>
+  </div>
+  <mat-form-field>
+    <textarea  matInput placeholder="Observación" formControlName="observacion"></textarea>
+  </mat-form-field>
+</form>
+</div>
+<div style="text-align: center;">
+  <button mat-raised-button color="warn" (click)="close()" [mat-dialog-close]="false"
+    style="margin-right: 10px">Cancelar </button>
+  <button mat-raised-button color="primary" cdkFocusInitial (click)="SaveContrato()" [disabled]="formContrato.invalid"
+    [mat-dialog-close]="true">Guardar</button>
+</div>
+<!-- <pre>{{formContrato.value|json}}</pre> -->

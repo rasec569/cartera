@@ -48,7 +48,8 @@ public displayedColumns2: string[] = [
   "estado",
   "Acciones",
 ];
-readonly width:string='600px';
+readonly SmallWidth:string='300px';
+readonly MediunWidth:string='600px';
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -66,15 +67,17 @@ readonly width:string='600px';
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+  //filtrar por el contenido del la tabla
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     var filteredData = this.dataSource.filteredData;
     this.totalCliente=filteredData.reduce((summ, v) => summ += parseInt(v.valor), 0);
   }
+  //Dialago form crear una cuota
   OpenAdd(){
     const dialogoRef = this.dialog.open(FormCuotaComponent, {
-      width: this.width,
+      width: this.SmallWidth,
       data: {cuotaid:"",acuerdo:this.acuerdoid, cuota:this.numcuota}
     });
     dialogoRef.afterClosed().subscribe(res=>{
@@ -83,9 +86,10 @@ readonly width:string='600px';
       this.messageEvent.emit();
     });
   }
+  //Dialago form editar una cuota
   OpenEdit(id: any){
     const dialogoRef = this.dialog.open(FormCuotaComponent, {
-      width: this.width,
+      width: this.SmallWidth,
       data: {cuotaid:id.toString(),acuerdo:this.acuerdoid, cuota:"" }
     });
     dialogoRef.afterClosed().subscribe(res=>{
@@ -93,31 +97,35 @@ readonly width:string='600px';
       this.messageEvent.emit();
     });
   }
+  //Dialago form Aportar a una cuota
   OpenAporteCuota(Cuota: any){
     console.log("Cuota", Cuota)
     const dialogoRef = this.dialog.open(FormAporteComponent, {
-      width: this.width,
+      width: this.SmallWidth,
       data: {aporteid:"",numaporte:"",cuota:Cuota, acuerdo:this.acuerdoid}
     });
     dialogoRef.afterClosed().subscribe(res=>{
       this.loadCuotas(this.acuerdoid,this.valorfinancion);
     });
   }
+  //carga las cuotas del acuerdo de pago
   loadCuotas(idacuerdo:any,valorCredito: any){
     this.acuerdoid=idacuerdo;
     this.valorfinancion=valorCredito;
     this.QueryCuotas(this.acuerdoid);
     this.QueryCuotasCredito(idacuerdo);
   }
+  //aportes a la cuota seleccionada
   OpenAportes(id: any){
     const dialogoRef = this.dialog.open(ListAportesDetalleComponent, {
-      width: this.width,
+      width: this.MediunWidth,
       data: {cuotaid:id,adicionalid:"0"}
     });
     dialogoRef.afterClosed().subscribe(res=>{
       this.loadCuotas(this.acuerdoid,this.valorfinancion);
     });
   }
+  //listar cuotas del cliente
   QueryCuotas(idacuerdo:any){
     try{
       this.CuotaS.getCuotasAcuerdo(idacuerdo).subscribe((res:cuota[])=>{
@@ -144,6 +152,7 @@ readonly width:string='600px';
       );
     }
   }
+  //Listar cuotas del credito
   QueryCuotasCredito(idacuerdo:any){
     try{
       this.CuotaS.getCuotasAcuerdoCredito(idacuerdo).subscribe((res:cuota[])=>{
@@ -176,6 +185,7 @@ readonly width:string='600px';
       );
     }
   }
+  //Crear y actualizar cuota
   SaveCuotaCredito(credito: any) {
     try {
       console.log("valido cuota",this.cuotacreditoid)
@@ -220,6 +230,7 @@ readonly width:string='600px';
       );
     }
   }
+  //eliminar cuota
   RemoveCuota(Cuota: cuota) {
     const dialogoRef = this.dialog.open(DeletevalidacionComponent, {
       width: "300px",
@@ -251,6 +262,7 @@ readonly width:string='600px';
       }
     });
   }
+  //Dialog Notificaciones
   notificacion(Mensaje: string) {
     this._snackBar.open(Mensaje, "", {
       duration: 5000,

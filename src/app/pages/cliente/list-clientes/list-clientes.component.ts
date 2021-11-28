@@ -17,7 +17,7 @@ import { DetalleClienteComponent } from '../detalle-cliente/detalle-cliente.comp
 export class ListClientesComponent implements OnInit,AfterViewInit {
   dataSource = new MatTableDataSource<cliente>();
   public displayedColumns: string[] = [
-    "identification",
+    "identificacion",
     "nombres",
     "apellidos",
     "telefono",
