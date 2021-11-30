@@ -2,7 +2,6 @@
 <h1 mat-dialog-title>Nueva Venta</h1>
 <div mat-dialog-content>
     <div class="mat-elevation-z8">
-      
       <mat-horizontal-stepper [linear]="isLinear" #stepper>
         <mat-step [stepControl]="formCliente" >
             <ng-template matStepLabel>CLIENTE</ng-template>
@@ -115,30 +114,33 @@
             <mat-form-field>
               <textarea  matInput placeholder="Observación" formControlName="observacion"></textarea>
             </mat-form-field>
-          </form>
           <div style="text-align: right;">
             <p>Click para guardar cambios.</p>
             <button mat-raised-button color="warn" matStepperPrevious>Atras</button>
-            <button mat-raised-button color="accent" matStepperNext >Siguiente</button>
-           <!--  <button mat-raised-button color="accent" matStepperNext (click)="SaveContrato()" [disabled]="formContrato.invalid" >Siguiente</button> -->
+            <!-- <button mat-raised-button color="accent" matStepperNext >Siguiente</button> -->
+            <button mat-raised-button color="accent" matStepperNext (click)="SaveContrato()" [disabled]="formContrato.invalid" >Siguiente</button>
           </div>
+        </form>
       </mat-step>
         <mat-step [stepControl]="formAcuerdo" label="ACUERDO PAGO">
             <form [formGroup]="formAcuerdo">
-              <mat-form-field >
-                <input matInput placeholder="Aporte cliente" prefix="$" mask="separator" thousandSeparator="." formControlName="aporte_cliente">
-              </mat-form-field>
-              <mat-form-field >
-                <input matInput placeholder="Aporte entidad" prefix="$" mask="separator" thousandSeparator="." formControlName="valor_credito">
-              </mat-form-field>
-              <mat-form-field >
-                <mat-label>Entidad</mat-label>
-                <input matInput placeholder="Entidad financiera" formControlName="entidad">
-              </mat-form-field>
+              <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" >
+                <mat-form-field >
+                  <input matInput placeholder="Aporte cliente" prefix="$" mask="separator" thousandSeparator="." formControlName="aporte_cliente">
+                </mat-form-field>
+                <mat-form-field >
+                  <input matInput placeholder="Aporte entidad" prefix="$" mask="separator" thousandSeparator="." formControlName="valor_credito">
+                </mat-form-field>
+                <mat-form-field >
+                  <mat-label>Entidad</mat-label>
+                  <input matInput placeholder="Entidad financiera" formControlName="entidad">
+                </mat-form-field>
+              </div>
+              <app-list-cuotas (messageEvent)="receiveMessage($event)"></app-list-cuotas>
           </form>
             <div style="text-align: right;">
-              <button mat-raised-button color="warn" matStepperPrevious>Atras</button>
-              <button mat-raised-button color="warn" (click)="stepper.reset()">Limpiar</button>
+              <!-- <button mat-raised-button color="warn" matStepperPrevious>Atras</button>
+              <button mat-raised-button color="warn" (click)="stepper.reset()">Limpiar</button> -->
             </div>
         </mat-step>
       </mat-horizontal-stepper>

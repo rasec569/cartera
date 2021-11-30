@@ -54,6 +54,50 @@ import { PortalModule } from '@angular/cdk/portal';
  * NgModule that includes all Material modules that are required to serve the demo-app.
  */
 @NgModule({
+  imports: [
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatBottomSheetModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatBadgeModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatStepperModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatNativeDateModule,
+    CdkTableModule,
+    A11yModule,
+    BidiModule,
+    CdkAccordionModule,
+    ObserversModule,
+    OverlayModule,
+    PlatformModule,
+    PortalModule
+],
     exports: [
         MatAutocompleteModule,
         MatButtonModule,
@@ -97,6 +141,9 @@ import { PortalModule } from '@angular/cdk/portal';
         OverlayModule,
         PlatformModule,
         PortalModule
+    ],
+    providers: [
+        MatDatepickerModule,
     ]
 })
 export class DemoMaterialModule { }

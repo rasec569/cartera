@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {ActivatedRoute ,Params} from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -17,6 +17,8 @@ import { ContratoService } from 'src/app/services/contrato.service';
 import { contrato } from 'src/app/Models/contrato.model';
 import { AcuerdoService } from 'src/app/services/acuerdo.service';
 import { acuerdo } from 'src/app/Models/acuerdo.model';
+
+import { ListCuotasComponent } from '../list-cuotas/list-cuotas.component';
 import * as moment from 'moment';
 @Component({
   selector: 'app-form-contrato-cliente',
@@ -27,7 +29,7 @@ export class FormContratoClienteComponent implements OnInit {
   isLinear = true;
   //formulario cliente
   clienteid='';
-  contratoid='';
+  contratoid='1';
   formCliente: FormGroup;
   public ListaClientes:cliente[]=[];
   public CloneClientes:cliente[]=[];
@@ -38,10 +40,10 @@ export class FormContratoClienteComponent implements OnInit {
   public DataInmuebles!: any[];
   // formulario acuerdo
   formAcuerdo: FormGroup;
+  @ViewChild(ListCuotasComponent) hijo!:ListCuotasComponent;
   // expacion
   panelOpenState = false;
   step = 0;
-
   setStep(index: number) {
     this.step = index;
   }
@@ -59,6 +61,7 @@ export class FormContratoClienteComponent implements OnInit {
     private ProyectoS: ProyectoService,
     private EtapaS: EtapaService,
     private InmuebleS: InmuebleService,
+    private AcuerdoS:AcuerdoService,
     public dialogoRef: MatDialogRef<FormContratoClienteComponent>) {
       this.formCliente= this.fb.group({
         id: [""],
@@ -71,21 +74,22 @@ export class FormContratoClienteComponent implements OnInit {
       });
       this.formContrato= this.fb.group({
         id: [""],
-        numero: [""],
-        fecha: [""],
-        forma_pago: [""],
-        valor: [""],
+        numero: ["", Validators.required],
+        fecha: ["", Validators.required],
+        forma_pago: ["", Validators.required],
+        valor: ["", Validators.required],
         observacion: [""],
         clienteid: [""],
-        inmuebleid: [""],
-        idproyecto:[""],
-        idetapa: [""],
+        inmuebleid: ["", Validators.required],
+        idproyecto:["", Validators.required],
+        idetapa: ["", Validators.required],
         entidad: [""],
       });
       this.formAcuerdo= this.fb.group({
         id: [""],
-        aporte_cliente: [""],
+        aporte_cliente: ["", Validators.required],
         valor_credito: [""],
+        valor_total: [""],
         entidad: [""],
         contratoid: [""],
       });
@@ -94,6 +98,8 @@ export class FormContratoClienteComponent implements OnInit {
   ngOnInit(): void {
     this.QuerClientes();
     this.listarProyecto();
+    this.hijo.loadCuotas(this.contratoid,this.contratoid);
+    this.hijo.QueryCuotasCredito(this.contratoid);
   }
   close() {
     this.dialogoRef.close();
@@ -124,6 +130,7 @@ export class FormContratoClienteComponent implements OnInit {
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
             this.ListaClientes = res;
             this.CloneClientes=res;
+            this.QueryOneAcuerdo(this.contratoid);
           } else {
             this.notificacion(res[0].MENSAJE!);
           }
@@ -173,8 +180,6 @@ export class FormContratoClienteComponent implements OnInit {
             if (res[0].TIPO == "3") {
               this.notificacion(res[0].MENSAJE!);
               this.clienteid=res[0].id;
-
-              console.log("clienteid", this.clienteid);
             } else {
               this.notificacion(res[0].MENSAJE!);
             }
@@ -188,7 +193,6 @@ export class FormContratoClienteComponent implements OnInit {
       }else{
         this.ClienteS.updateCliente(this.formCliente.value).subscribe(
           (res: cliente[]) => {
-            console.log('entro a editar');
             if (res[0].TIPO == "3") {
               this.notificacion(res[0].MENSAJE!);
               this.clienteid=res[0].id;
@@ -204,7 +208,6 @@ export class FormContratoClienteComponent implements OnInit {
           }
         );
       }
-      this.formCliente.reset();
     } catch (error) {
       this.notificacion(
         "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
@@ -258,7 +261,7 @@ export class FormContratoClienteComponent implements OnInit {
   }
   listarInmuebles(id: any){
     try {
-      this.InmuebleS.getInmuebleVenta(id).subscribe(
+      this.InmuebleS.getInmuebleEtapa(id).subscribe(
         (res:inmueble[])=> {
           if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
             this.DataInmuebles=res;
@@ -339,6 +342,37 @@ export class FormContratoClienteComponent implements OnInit {
   onSelectInmueble(seleccion:any){
     this.QueryOneInmueble(seleccion.value)
     //this.formContrato.controls['valor'].setValue(seleccion.id.valor);
+  }
+  // formAcuerdo
+  QueryOneAcuerdo(contratoid:any) {
+    try {
+      this.AcuerdoS.getAcuerdosContrato(contratoid).subscribe(
+        (res: acuerdo[]) => {
+          console.log(res[0]);
+          if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+            this.formAcuerdo.setValue(res[0]);
+            console.log("en metodo")
+
+          } else {
+            this.notificacion(res[0].MENSAJE!);
+
+          }
+        },
+        (err) => {
+          this.notificacion(
+            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+          );
+        }
+      );
+    } catch (error) {
+      this.notificacion(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+      );
+    }
+  }
+  receiveMessage($event: any) {
+    console.log($event);
+    this.QueryOneAcuerdo(this.contratoid);
   }
   notificacion(Mensaje: string) {
     this._snackBar.open(Mensaje, "", {
