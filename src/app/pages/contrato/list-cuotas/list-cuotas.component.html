@@ -1,4 +1,4 @@
-<mat-card matSort *ngIf="dataSource.data.length">
+<mat-card matSort>
   <mat-card-subtitle>Lista cuotas acuerdo de pago</mat-card-subtitle>
 <div class="mat-elevation-z8">
   <table class="example-full-width" style="text-align:center;" cellspacing="5" >
@@ -73,7 +73,7 @@
       <td class="mat-cell" colspan="4">No hay datos que coincidan con el filtro "{{input.value}}"</td>
     </tr>
   </table>
-  <table mat-table [dataSource]="dataSource2" *ngIf="dataSource2.data.length">
+  <table mat-table [dataSource]="dataSource2" *ngIf="dataSource.data.length">
     <ng-container matColumnDef="numero">
       <th mat-header-cell *matHeaderCellDef > Cuota </th>
       <td mat-cell *matCellDef="let item" width ="10%"> {{item.numero}} </td>
@@ -156,7 +156,7 @@
     </ng-container>
     <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr> -->
     <tr mat-row *matRowDef="let row; columns: displayedColumns2" style="font-weight: bold; "></tr>
-    <tr mat-footer-row *matFooterRowDef="displayedColumns2"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns2" ></tr>
     <tr mat-footer-row *matFooterRowDef="['text','space','valorCuotas','valorAporte','space','space']"></tr>
     <tr mat-footer-row *matFooterRowDef="['observacion','space']"></tr>
 

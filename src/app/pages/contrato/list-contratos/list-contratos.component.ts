@@ -54,14 +54,16 @@ export class ListContratosComponent implements OnInit {
         this.ContratoS.getContratos().subscribe(
           (res: contrato[]) => {
             console.log(res);
-            if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
-              this.dataSource.data = res;
-              this.changeDetectorRefs.detectChanges();
-              this.dataSource.sort = this.sort;
-            } else {
-              this.notificacion(res[0].MENSAJE!);
+            if(res[0] != undefined ){
+              if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+                this.dataSource.data = res;
+                this.changeDetectorRefs.detectChanges();
+                this.dataSource.sort = this.sort;
+              } else {
+                this.notificacion(res[0].MENSAJE!);
+              }
             }
-          },
+            },
           (err) => {
             this.notificacion(
               "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"+err

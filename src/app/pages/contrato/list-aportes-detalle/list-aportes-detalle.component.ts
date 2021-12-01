@@ -23,10 +23,10 @@ export class ListAportesDetalleComponent implements OnInit {
   cuotaid="";
   adicionalid="";
   public displayedColumns: string[] = [
+    "fecha",
     "numero",
     "concepto",
     "referencia",
-    "fecha",
     "valor",
     "Acciones",
   ];

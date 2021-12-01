@@ -19,7 +19,8 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-  <app-list-cuotas (messageEvent)="receiveMessage($event)"></app-list-cuotas>
+  <app-list-cuota  [acuerdoid]="idacuerdo" *ngIf="(formapago === 'Contado')"></app-list-cuota>
+  <app-list-cuotas [idacuerdo]="idacuerdo" [valorCredito]="valorCredito" (messageEvent)="receiveMessage($event)" *ngIf="(formapago === 'Cuotas')"></app-list-cuotas>
   <div *ngIf="!dataSource.data.length">
     <mat-card>
       <table class="example-full-width" style="text-align:center;" cellspacing="5">

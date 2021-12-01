@@ -86,7 +86,7 @@
                 <mat-label>Forma de pago</mat-label>
                 <mat-select formControlName="forma_pago">
                   <mat-option value="Contado">Contado</mat-option>
-                  <mat-option value="Credito">Credito</mat-option>
+                  <mat-option value="Cuotas">Cuotas</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -117,14 +117,16 @@
           <div style="text-align: right;">
             <p>Click para guardar cambios.</p>
             <button mat-raised-button color="warn" matStepperPrevious>Atras</button>
-            <!-- <button mat-raised-button color="accent" matStepperNext >Siguiente</button> -->
             <button mat-raised-button color="accent" matStepperNext (click)="SaveContrato()" [disabled]="formContrato.invalid" >Siguiente</button>
           </div>
         </form>
+        <pre>
+          {{formContrato.value|json}}
+        </pre>
       </mat-step>
         <mat-step [stepControl]="formAcuerdo" label="ACUERDO PAGO">
             <form [formGroup]="formAcuerdo">
-              <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" >
+              <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" *ngIf="(formContrato.value.forma_pago != 'Contado')">
                 <mat-form-field >
                   <input matInput placeholder="Aporte cliente" prefix="$" mask="separator" thousandSeparator="." formControlName="aporte_cliente">
                 </mat-form-field>
@@ -136,12 +138,17 @@
                   <input matInput placeholder="Entidad financiera" formControlName="entidad">
                 </mat-form-field>
               </div>
-              <app-list-cuotas (messageEvent)="receiveMessage($event)"></app-list-cuotas>
+
           </form>
+          <app-list-cuota  [acuerdoid]="acuerdoid " *ngIf="(formapago === 'Contado')"></app-list-cuota>
+          <app-list-cuotas [idacuerdo]="acuerdoid" [valorCredito]="valorCredito" (messageEvent)="receiveMessage($event)"  *ngIf="(formapago === 'Cuotas')"></app-list-cuotas>
             <div style="text-align: right;">
-              <!-- <button mat-raised-button color="warn" matStepperPrevious>Atras</button>
-              <button mat-raised-button color="warn" (click)="stepper.reset()">Limpiar</button> -->
+              <button mat-raised-button color="warn" matStepperPrevious>Atras</button>
+              <button mat-raised-button color="warn" (click)="stepper.reset()">Limpiar</button>
             </div>
+            <pre>
+              {{formAcuerdo.value|json}}
+            </pre>
         </mat-step>
       </mat-horizontal-stepper>
     </div>

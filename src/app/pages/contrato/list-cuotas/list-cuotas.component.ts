@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter,Input, OnChanges, SimpleChanges , OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -18,8 +18,10 @@ import { ListAportesDetalleComponent } from '../list-aportes-detalle/list-aporte
   templateUrl: './list-cuotas.component.html',
   styleUrls: ['./list-cuotas.component.css']
 })
-export class ListCuotasComponent implements OnInit {
+export class ListCuotasComponent implements OnInit,OnChanges {
 @Output() messageEvent = new EventEmitter<string>();
+@Input() idacuerdo!:string;
+@Input() valorCredito!:string;
 acuerdoid!:string;
 public totalCliente:any;
 public totalCredito:any;
@@ -62,11 +64,22 @@ readonly MediunWidth:string='600px';
   ngOnInit(): void {
     /* console.log('componente hijo',this.acuerdoid)
     this.QueryCuotas(this.acuerdoid); */
+    console.log('LLega a listar cuotas')
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    if(this.idacuerdo!=undefined && this.valorCredito!=undefined){
+      this.loadCuotas(this.idacuerdo,this.valorCredito);
+    }
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    /* console.log("cambio", changes); */
+    console.log("cambio", changes.valorCredito.currentValue);
+    this.valorfinancion=changes.valorCredito.currentValue;
+    this.SaveCuotaCredito(this.valorfinancion);
+  }
+
   //filtrar por el contenido del la tabla
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -81,7 +94,7 @@ readonly MediunWidth:string='600px';
       data: {cuotaid:"",acuerdo:this.acuerdoid, cuota:this.numcuota}
     });
     dialogoRef.afterClosed().subscribe(res=>{
-      console.log('luego de cerrar',this.acuerdoid)
+      console.log('luego de cerrar',this.acuerdoid,this.valorfinancion)
       this.loadCuotas(this.acuerdoid,this.valorfinancion);
       this.messageEvent.emit();
     });
@@ -110,9 +123,10 @@ readonly MediunWidth:string='600px';
   }
   //carga las cuotas del acuerdo de pago
   loadCuotas(idacuerdo:any,valorCredito: any){
+    console.log("en el metodo de list cuota",idacuerdo,valorCredito)
     this.acuerdoid=idacuerdo;
     this.valorfinancion=valorCredito;
-    this.QueryCuotas(this.acuerdoid);
+    this.QueryCuotas(idacuerdo);
     this.QueryCuotasCredito(idacuerdo);
   }
   //aportes a la cuota seleccionada
@@ -129,14 +143,16 @@ readonly MediunWidth:string='600px';
   QueryCuotas(idacuerdo:any){
     try{
       this.CuotaS.getCuotasAcuerdo(idacuerdo).subscribe((res:cuota[])=>{
-        if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
-          this.dataSource.data = res;
-          this.changeDetectorRefs.detectChanges();
-          this.totalCliente=res.reduce((summ, v) => summ += parseInt(v.valor), 0);
-          this.pagocliente=res.reduce((summ, v) => summ += parseInt(v.pagado), 0);
-          this.numcuota=this.dataSource.data.length;
-        } else {
-          this.notificacion(res[0].MENSAJE!);
+        if( res[0] != undefined){
+          if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
+            this.dataSource.data = res;
+            /* this.changeDetectorRefs.detectChanges(); */
+            this.totalCliente=res.reduce((summ, v) => summ += parseInt(v.valor), 0);
+            this.pagocliente=res.reduce((summ, v) => summ += parseInt(v.pagado), 0);
+            this.numcuota=this.dataSource.data.length;
+          } else {
+            this.notificacion(res[0].MENSAJE!);
+          }
         }
       },(err) => {
         this.notificacion(
@@ -157,7 +173,7 @@ readonly MediunWidth:string='600px';
     try{
       this.CuotaS.getCuotasAcuerdoCredito(idacuerdo).subscribe((res:cuota[])=>{
         if(res[0] != undefined){
-          if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
+          if (res[0]!= undefined && res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
             this.dataSource2.data = res;
             this.cuotacreditoid=res[0].id;
             this.fechacredito=res[0].fecha;
@@ -167,9 +183,11 @@ readonly MediunWidth:string='600px';
           } else {
             this.notificacion(res[0].MENSAJE!);
           }
-        }else{
+        }
+        if(this.dataSource.data.length<0){
           this.SaveCuotaCredito(this.valorfinancion);
         }
+
         this.total=this.totalCliente+this.totalCredito;
       },(err) => {
         this.notificacion(
@@ -188,17 +206,24 @@ readonly MediunWidth:string='600px';
   //Crear y actualizar cuota
   SaveCuotaCredito(credito: any) {
     try {
-      console.log("valido cuota",this.cuotacreditoid)
+      console.log("valido cuota",this.cuotacreditoid.toString(),this.valorfinancion.toString());
+      let numberocuota;
+      console.log("numcuota",this.numcuota);
+      if(this.numcuota==0){
+        numberocuota=1;
+      }else{
+        numberocuota=this.numcuota+1;
 
-      let numberocuota=this.numcuota+1;
-      if (this.cuotacreditoid == undefined ||this.cuotacreditoid == "") {
+      }
+      if (this.cuotacreditoid.toString() == undefined ||this.cuotacreditoid.toString() == "") {
         var fecha = Date.now();
         this.fechacredito = moment(fecha).format( "YYYY-MM-DD");
         let cuota = {id:'',numero:numberocuota.toString(), valor:credito,fecha:this.fechacredito, responsable:"CREDITO",estado:'',pagado:"", acuerdoid:this.acuerdoid};
         this.CuotaS.createCuota(cuota).subscribe(
           (res: cuota[]) => {
-            console.log(res);
+            console.log("crea cuota",res);
             if (res[0].TIPO == "3") {
+              this.QueryCuotasCredito(this.acuerdoid);
             } else {
             }
           },
@@ -214,6 +239,7 @@ readonly MediunWidth:string='600px';
         this.CuotaS.updateCuota(cuota).subscribe(
           (res: cuota[]) => {
             if (res[0].TIPO == "3") {
+              this.QueryCuotasCredito(this.acuerdoid);
             } else {
             }
           },

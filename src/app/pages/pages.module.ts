@@ -75,6 +75,8 @@ import { FormCategoriaComponent } from './archivo/form-categoria/form-categoria.
 import { ListCategoriasComponent } from './archivo/list-categorias/list-categorias.component';
 import { FormContratoClienteComponent } from './contrato/form-contrato-cliente/form-contrato-cliente.component';
 import { FormContratoComponent } from './contrato/form-contrato/form-contrato.component';
+import { ListCuotaComponent } from './contrato/list-cuota/list-cuota.component';
+import { ListCuotasAcuerdoComponent } from './contrato/list-cuotas-acuerdo/list-cuotas-acuerdo.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 export const MY_FORMATS = {
@@ -167,6 +169,8 @@ export const MY_FORMATS = {
     ListCategoriasComponent,
     FormContratoClienteComponent,
     FormContratoComponent,
+    ListCuotaComponent,
+    ListCuotasAcuerdoComponent,
   ],
 })
 export class PagesModule {}

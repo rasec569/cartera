@@ -17,6 +17,7 @@ export class ListAcuerdoPagoContratoComponent implements OnInit {
   dataSource = new MatTableDataSource<acuerdo>();
   public idacuerdo="";
   public valorCredito="";
+  public formapago="";
 
   public displayedColumns: string[] = [
     "aporte_cliente",
@@ -24,7 +25,7 @@ export class ListAcuerdoPagoContratoComponent implements OnInit {
     "valor_total",
     "entidad",
   ];
-@ViewChild(ListCuotasComponent) hijo!:ListCuotasComponent;
+/* @ViewChild(ListCuotasComponent) hijo!:ListCuotasComponent; */
 
   constructor(private _snackBar: MatSnackBar,
     private changeDetectorRefs: ChangeDetectorRef,
@@ -38,11 +39,11 @@ export class ListAcuerdoPagoContratoComponent implements OnInit {
       console.log($event);
       this.QueryAcuerdos(this.contratoid);
     }
-    SaveCuotaCredito(){
+    /* SaveCuotaCredito(){
       console.log('llamo');
       this.hijo.SaveCuotaCredito(this.valorCredito);
       this.hijo.QueryCuotasCredito(this.idacuerdo);
-    }
+    } */
 
     QueryAcuerdos(contratoid:any) {
       try {
@@ -54,7 +55,9 @@ export class ListAcuerdoPagoContratoComponent implements OnInit {
               this.changeDetectorRefs.detectChanges();
               this.idacuerdo=res[0].id;
               this.valorCredito=res[0].valor_credito;
-              this.hijo.loadCuotas(this.idacuerdo,this.valorCredito);
+              this.formapago=res[0].forma_pago;
+              console.log("en el metoodo",this.idacuerdo,this.valorCredito)
+              /* this.hijo.loadCuotas(this.idacuerdo,this.valorCredito); */
             } else {
               this.notificacion(res[0].MENSAJE!);
             }
