@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { DeletevalidacionComponent } from "src/app/shared/deletevalidacion/deletevalidacion.component";
 
 import { ContratoService } from 'src/app/services/contrato.service';
 import { contrato } from 'src/app/Models/contrato.model';
@@ -25,6 +26,7 @@ export class ListContratosComponent implements OnInit {
     "numero",
     "forma_pago",
     "valor",
+    "estado",
     "valor_adicionales",
     "total",
     "Acciones",
@@ -100,6 +102,36 @@ export class ListContratosComponent implements OnInit {
       });
       dialogoRef.afterClosed().subscribe(res=>{
         this.QueryContratos();
+      });
+    }
+    RemoveContrato(Contrato: contrato) {
+      const dialogoRef = this.dialog.open(DeletevalidacionComponent, {
+        width: "300px",
+      });
+      dialogoRef.afterClosed().subscribe((res) => {
+        if (res) {
+          try {
+            this.ContratoS.deleteContrato(Contrato).subscribe(
+              (res: contrato[]) => {
+                if (res[0].TIPO == "3") {
+                  this.notificacion(res[0].MENSAJE!);
+                  this.QueryContratos();
+                } else {
+                  this.notificacion(res[0].MENSAJE!);
+                }
+              },
+              (err) => {
+                this.notificacion(
+                  "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+                );
+              }
+            );
+          } catch (notificacion) {
+            this.notificacion(
+              "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+            );
+          }
+        }
       });
     }
     notificacion(Mensaje: string) {

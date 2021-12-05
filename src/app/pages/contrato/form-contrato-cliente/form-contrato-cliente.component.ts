@@ -103,6 +103,8 @@ export class FormContratoClienteComponent implements OnInit {
       valor_credito: [""],
       forma_pago: [""],
       valor_total: [""],
+      aportes:[""],
+      estado: [""],
       entidad: [""],
       contratoid: [""],
     });

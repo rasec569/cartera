@@ -43,7 +43,7 @@
       <mat-label>Inmueble</mat-label>
       <mat-select formControlName="inmuebleid" (selectionChange)="onSelectInmueble($event)" >
         <mat-option *ngFor="let inmueble of DataInmuebles" [value]="inmueble.id">
-          {{inmueble.Casas}}
+          {{inmueble.Casa}}
         </mat-option>
       </mat-select>
     </mat-form-field>

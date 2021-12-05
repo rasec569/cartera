@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -9,14 +9,17 @@ import { DeletevalidacionComponent } from "src/app/shared/deletevalidacion/delet
 import { AportesService } from 'src/app/services/aportes.service';
 import { aporte } from 'src/app/Models/aporte.model';
 import { FormAporteComponent } from '../form-aporte/form-aporte.component';
+import { ComunicacionService } from 'src/app/services/comunicacion.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-aportes-acuerdo',
   templateUrl: './list-aportes-acuerdo.component.html',
   styleUrls: ['./list-aportes-acuerdo.component.css']
 })
-export class ListAportesAcuerdoComponent implements OnInit {
+export class ListAportesAcuerdoComponent implements OnInit, OnDestroy {
   @Input() contratoid!:string;
+  Actualizar!:Subscription;
   public total:any;
   dataSource = new MatTableDataSource<aporte>();
   numaporte=0;
@@ -38,7 +41,8 @@ export class ListAportesAcuerdoComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar,
     private changeDetectorRefs: ChangeDetectorRef,
     private AportesS: AportesService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private ComunicacionS:ComunicacionService) { }
     ngAfterViewInit() {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -50,7 +54,13 @@ export class ListAportesAcuerdoComponent implements OnInit {
       this.total=filteredData.reduce((summ, v) => summ += parseInt(v.valor), 0);
     }
   ngOnInit(): void {
-    this.QueryAportes(this.contratoid)
+    this.QueryAportes(this.contratoid);
+    this.Actualizar= this.ComunicacionS.CargarAportes$.subscribe(aportes=>{
+      this.QueryAportes(this.contratoid);
+    })
+  }
+  ngOnDestroy(){
+    this.Actualizar.unsubscribe();
   }
   //lista los aportes del contrato
   QueryAportes(contratoid:any){

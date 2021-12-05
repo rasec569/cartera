@@ -1,23 +1,57 @@
 
-  <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length" matSort>
+  <table mat-table [dataSource]="dataSource" *ngIf="formapago === 'Cuotas' " matSort>
     <ng-container matColumnDef="aporte_cliente">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Aportes Propios </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header width ="13%"> Aportes Propios </th>
       <td mat-cell *matCellDef="let item"> {{item.aporte_cliente|currency: 'USD':'symbol':'.0-0'}} </td>
     </ng-container>
     <ng-container matColumnDef="valor_credito">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Aportes Credito </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header width ="12%"> Aportes Credito </th>
       <td mat-cell *matCellDef="let item"> {{item.valor_credito|currency: 'USD':'symbol':'.0-0'}} </td>
     </ng-container>
+    <ng-container matColumnDef="valor_total">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header width ="12%"> Total </th>
+      <td mat-cell *matCellDef="let item"> {{item.valor_total|currency: 'USD':'symbol':'.0-0'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="aportes">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header width ="12%"> Aportado </th>
+      <td mat-cell *matCellDef="let item"> {{item.aportes|currency: 'USD':'symbol':'.0-0'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header width ="12%"> Estado </th>
+      <td mat-cell *matCellDef="let item"> {{item.estado}} </td>
+    </ng-container>
+    <ng-container matColumnDef="entidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header width ="25%"> Entidad </th>
+      <td mat-cell *matCellDef="let item"> {{item.entidad}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Acciones">
+      <th mat-header-cell *matHeaderCellDef width ="2%"></th>
+      <td mat-cell *matCellDef="let item">
+        <button mat-menu-item (click)="OpenEdit(item.id)" matTooltip="Click para editar">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <!--  -->
+  <table mat-table [dataSource]="dataSource" *ngIf="formapago === 'Contado' " matSort>
     <ng-container matColumnDef="valor_total">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
       <td mat-cell *matCellDef="let item"> {{item.valor_total|currency: 'USD':'symbol':'.0-0'}} </td>
     </ng-container>
-    <ng-container matColumnDef="entidad">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Entidad </th>
-      <td mat-cell *matCellDef="let item"> {{item.entidad}} </td>
+    <ng-container matColumnDef="aportes">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Aportado </th>
+      <td mat-cell *matCellDef="let item"> {{item.aportes|currency: 'USD':'symbol':'.0-0'}} </td>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+      <td mat-cell *matCellDef="let item"> {{item.estado}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsContado"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsContado"></tr>
   </table>
   <app-list-cuota  [acuerdoid]="idacuerdo" *ngIf="(formapago === 'Contado')"></app-list-cuota>
   <app-list-cuotas [idacuerdo]="idacuerdo" [valorCredito]="valorCredito" (messageEvent)="receiveMessage($event)" *ngIf="(formapago === 'Cuotas')"></app-list-cuotas>

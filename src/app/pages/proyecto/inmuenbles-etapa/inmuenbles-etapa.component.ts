@@ -59,12 +59,14 @@ export class InmuenblesEtapaComponent implements OnInit {
     try {
       this.InmuebleS.getInmuebleEtapa(proyectoid).subscribe(
         (res: inmueble[]) => {
-          if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
-            this.dataSource.data = res;
-            this.dataSource.sort = this.sort;
-            this.dataSource.paginator = this.paginator;
-          } else {
-            this.notificacion(res[0].MENSAJE!);
+          if (res[0] != undefined){
+            if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+              this.dataSource.data = res;
+              this.dataSource.sort = this.sort;
+              this.dataSource.paginator = this.paginator;
+            } else {
+              this.notificacion(res[0].MENSAJE!);
+            }
           }
         },
         (err) => {

@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { CarteraService } from 'src/app/services/cartera.service';
 import { cartera } from 'src/app/Models/cartera.model';
+import { DetalleCarteraComponent } from '../detalle-cartera/detalle-cartera.component';
 
 @Component({
   selector: 'app-list-cartera',
@@ -20,15 +21,17 @@ export class ListCarteraComponent implements OnInit, AfterViewInit {
   public Total:any;
   dataSource = new MatTableDataSource<cartera>();
   public displayedColumns: string[] = [
-    "cedula",
-    "nombres",
-    "apellidos",
-    "estado",
-    "recaudado",
-    "saldo",
+    // "identificacion",
+    "cliente",
+    "valor_contrato",
+    "aportes_contrato",
+    "valor_adicionales",
+    "aportes_adicionales",
     "total",
+    "estado",
     "Acciones",
   ];
+  readonly width:string='900px';
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -49,9 +52,9 @@ export class ListCarteraComponent implements OnInit, AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     var filteredData = this.dataSource.filteredData;
-    this.Total=filteredData.reduce((summ, v) => summ += parseInt(v.total), 0);
+    /* this.Total=filteredData.reduce((summ, v) => summ += parseInt(v.total), 0);
     this.TotalSaldo=filteredData.reduce((summ, v) => summ += parseInt(v.saldo), 0);
-    this.TotalRecaudado=filteredData.reduce((summ, v) => summ += parseInt(v.recaudado), 0);
+    this.TotalRecaudado=filteredData.reduce((summ, v) => summ += parseInt(v.recaudado), 0); */
   }
   QueryCartera() {
     try {
@@ -62,9 +65,10 @@ export class ListCarteraComponent implements OnInit, AfterViewInit {
             console.log('Datos res',res[0].TIPO,res[0].MENSAJE);
             this.dataSource.data = res;
             this.changeDetectorRefs.detectChanges();
-            this.Total=res.reduce((summ, v) => summ += parseInt(v.total), 0);
+            /* this.Total=res.reduce((summ, v) => summ += parseInt(v.total), 0);
             this.TotalSaldo=res.reduce((summ, v) => summ += parseInt(v.saldo), 0);
-            this.TotalRecaudado=res.reduce((summ, v) => summ += parseInt(v.recaudado), 0);
+            this.TotalRecaudado=res.reduce((summ, v) => summ += parseInt(v.recaudado), 0); */
+            this.dataSource.sort = this.sort;
           } else {
             this.notificacion(res[0].MENSAJE!);
             console.log('Datos res',res[0].TIPO,res[0].MENSAJE);
@@ -81,6 +85,13 @@ export class ListCarteraComponent implements OnInit, AfterViewInit {
         "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde! "+error
       );
     }
+  }
+  OpenDetalle(id: any){
+    const dialogoRef = this.dialog.open(DetalleCarteraComponent, { width: this.width,
+      data: id, panelClass: 'my-dialog',});
+      dialogoRef.afterClosed().subscribe(res=>{
+        this.QueryCartera();
+      });
   }
   notificacion(Mensaje: string) {
     this._snackBar.open(Mensaje, "", {

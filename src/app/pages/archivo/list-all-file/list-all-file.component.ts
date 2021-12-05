@@ -47,8 +47,8 @@ export class ListAllFileComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
     this.QueryFiles();
     this.serverPath = environment.url + "/";
-    this.listarArea();
-    this.listarCategoria();
+    // this.listarArea();
+    // this.listarCategoria();
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -113,54 +113,54 @@ export class ListAllFileComponent implements OnInit,AfterViewInit {
     });
 
   }
-  listarArea() {
-    try {
-      this.AreaS.getAreas().subscribe(
-        (res: area[]) => {
-          console.log(res);
-          if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
-            this.listArea = res;
-            this.changeDetectorRefs.detectChanges();
-          } else {
-            this.notificacion(res[0].MENSAJE!);
-          }
-        },
-        (err) => {
-          this.notificacion(
-            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"+err
-          );
-        }
-      );
-    } catch (error) {
-      this.notificacion(
-        "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde! "+error
-      );
-    }
-  }
-  listarCategoria() {
-    try {
-      this.CategoriaS.getCategorias().subscribe(
-        (res: categoria[]) => {
-          console.log(res);
-          if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
-            this.listCategoria = res;
-            this.changeDetectorRefs.detectChanges();
-          } else {
-            this.notificacion(res[0].MENSAJE!);
-          }
-        },
-        (err) => {
-          this.notificacion(
-            "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"+err
-          );
-        }
-      );
-    } catch (error) {
-      this.notificacion(
-        "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde! "+error
-      );
-    }
-  }
+  // listarArea() {
+  //   try {
+  //     this.AreaS.getAreas().subscribe(
+  //       (res: area[]) => {
+  //         console.log(res);
+  //         if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+  //           this.listArea = res;
+  //           this.changeDetectorRefs.detectChanges();
+  //         } else {
+  //           this.notificacion(res[0].MENSAJE!);
+  //         }
+  //       },
+  //       (err) => {
+  //         this.notificacion(
+  //           "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"+err
+  //         );
+  //       }
+  //     );
+  //   } catch (error) {
+  //     this.notificacion(
+  //       "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde! "+error
+  //     );
+  //   }
+  // }
+  // listarCategoria() {
+  //   try {
+  //     this.CategoriaS.getCategorias().subscribe(
+  //       (res: categoria[]) => {
+  //         console.log(res);
+  //         if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+  //           this.listCategoria = res;
+  //           this.changeDetectorRefs.detectChanges();
+  //         } else {
+  //           this.notificacion(res[0].MENSAJE!);
+  //         }
+  //       },
+  //       (err) => {
+  //         this.notificacion(
+  //           "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"+err
+  //         );
+  //       }
+  //     );
+  //   } catch (error) {
+  //     this.notificacion(
+  //       "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde! "+error
+  //     );
+  //   }
+  // }
   notificacion(Mensaje: string) {
     this._snackBar.open(Mensaje, "", {
       duration: 5000,

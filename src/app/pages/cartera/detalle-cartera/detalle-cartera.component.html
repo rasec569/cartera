@@ -1,0 +1,14 @@
+<button class="close" mat-icon-button color="warn" (click)="close()">X</button>
+<h1 mat-dialog-title>Detalle cartera</h1>
+<div mat-dialog-content>
+  <div class="mat-elevation-z8">
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Contratos">
+        <app-list-contratos-cliente [clienteid]="clienteid" ></app-list-contratos-cliente>
+      </mat-tab>
+      <mat-tab label="Archivos">
+        <app-list-all-file></app-list-all-file>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -12,6 +12,7 @@ import { cuota } from 'src/app/Models/cuota.model';
 import { FormCuotaComponent } from '../form-cuota/form-cuota.component';
 import { FormAporteComponent } from '../form-aporte/form-aporte.component';
 import { ListAportesDetalleComponent } from '../list-aportes-detalle/list-aportes-detalle.component';
+import { ComunicacionService } from 'src/app/services/comunicacion.service';
 
 @Component({
   selector: 'app-list-cuotas',
@@ -59,7 +60,8 @@ readonly MediunWidth:string='600px';
   constructor(private _snackBar: MatSnackBar,
     private changeDetectorRefs: ChangeDetectorRef,
     private CuotaS: CuotaService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private ComunicacionS:ComunicacionService) {
      }
   ngOnInit(): void {
     /* console.log('componente hijo',this.acuerdoid)
@@ -74,10 +76,12 @@ readonly MediunWidth:string='600px';
     }
   }
   ngOnChanges(changes: SimpleChanges): void {
-    /* console.log("cambio", changes); */
+    console.log("cambio", changes);
     console.log("cambio", changes.valorCredito.currentValue);
-    this.valorfinancion=changes.valorCredito.currentValue;
-    this.SaveCuotaCredito(this.valorfinancion);
+    if(changes.valorCredito.previousValue!=undefined){
+      this.valorfinancion=changes.valorCredito.currentValue;
+      this.SaveCuotaCredito(this.valorfinancion);
+    }
   }
 
   //filtrar por el contenido del la tabla
@@ -119,6 +123,7 @@ readonly MediunWidth:string='600px';
     });
     dialogoRef.afterClosed().subscribe(res=>{
       this.loadCuotas(this.acuerdoid,this.valorfinancion);
+      this.ComunicacionS.CargarAportes$.emit();
     });
   }
   //carga las cuotas del acuerdo de pago
@@ -143,6 +148,7 @@ readonly MediunWidth:string='600px';
   QueryCuotas(idacuerdo:any){
     try{
       this.CuotaS.getCuotasAcuerdo(idacuerdo).subscribe((res:cuota[])=>{
+        console.log("esto trajo",res)
         if( res[0] != undefined){
           if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
             this.dataSource.data = res;

@@ -11,6 +11,7 @@ import { adicional } from 'src/app/Models/adicional.model';
 import { FormAdicionalComponent } from '../form-adicional/form-adicional.component';
 import { FormAporteAdicionalComponent } from '../form-aporte-adicional/form-aporte-adicional.component';
 import { ListAportesDetalleComponent } from '../list-aportes-detalle/list-aportes-detalle.component';
+import { ComunicacionService } from 'src/app/services/comunicacion.service';
 
 @Component({
   selector: 'app-list-adicionales-contrato',
@@ -39,7 +40,8 @@ export class ListAdicionalesContratoComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar,
     private changeDetectorRefs: ChangeDetectorRef,
     private AdicionalS: AdicionalService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private ComunicacionS:ComunicacionService) { }
 
     ngOnInit(): void {
       this.QueryAdicionales(this.contratoid);
@@ -58,16 +60,17 @@ export class ListAdicionalesContratoComponent implements OnInit {
       try {
         this.AdicionalS.getAdicionalesContrato(contratoid).subscribe(
           (res: adicional[]) => {
-            console.log("adicionales",res);
-            if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
-              this.dataSource.data = res;
-              this.changeDetectorRefs.detectChanges();
-              this.dataSource.sort = this.sort;
-              this.total=res.reduce((summ, v) => summ += parseInt(v.valor), 0);
-              this.pagos=res.reduce((summ, p) => summ += parseInt(p.pagado), 0);
-              console.log("suma pagos",this.pagos )
-            } else {
-              this.notificacion(res[0].MENSAJE!);
+            if (res[0] != undefined){
+              if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+                this.dataSource.data = res;
+                this.changeDetectorRefs.detectChanges();
+                this.dataSource.sort = this.sort;
+                this.total=res.reduce((summ, v) => summ += parseInt(v.valor), 0);
+                this.pagos=res.reduce((summ, p) => summ += parseInt(p.pagado), 0);
+                console.log("suma pagos",this.pagos )
+              } else {
+                this.notificacion(res[0].MENSAJE!);
+              }
             }
           },
           (err) => {
@@ -110,6 +113,7 @@ export class ListAdicionalesContratoComponent implements OnInit {
       });
       dialogoRef.afterClosed().subscribe(res=>{
         this.QueryAdicionales(this.contratoid);
+        this.ComunicacionS.CargarAportesAdicional$.emit();
       });
     }
     OpenAportes(id: any){

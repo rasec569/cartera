@@ -40,6 +40,10 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
           <td mat-cell *matCellDef="let item"> {{item.valor| mask: 'separator':'.'}} </td>
         </ng-container>
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+          <td mat-cell *matCellDef="let item"> {{item.estado}} </td>
+        </ng-container>
         <ng-container matColumnDef="valor_adicionales">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Adicionales </th>
           <td mat-cell *matCellDef="let item"> {{item.valor_adicionales| mask: 'separator':'.'}} </td>
@@ -63,7 +67,7 @@
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>
               </button>
-              <button mat-menu-item color="warn">
+              <button mat-menu-item (click)="RemoveContrato(item)" color="warn">
                 <mat-icon>delete</mat-icon>
                 <span>Eliminar</span>
               </button>

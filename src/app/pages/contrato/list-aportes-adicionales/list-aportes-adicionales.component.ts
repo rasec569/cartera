@@ -9,7 +9,8 @@ import { DeletevalidacionComponent } from "src/app/shared/deletevalidacion/delet
 import { AportesService } from 'src/app/services/aportes.service';
 import { aporte } from 'src/app/Models/aporte.model';
 import { FormAporteAdicionalComponent } from '../form-aporte-adicional/form-aporte-adicional.component';
-
+import { ComunicacionService } from 'src/app/services/comunicacion.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-list-aportes-adicionales',
   templateUrl: './list-aportes-adicionales.component.html',
@@ -18,6 +19,7 @@ import { FormAporteAdicionalComponent } from '../form-aporte-adicional/form-apor
 export class ListAportesAdicionalesComponent implements OnInit, AfterViewInit {
   @Input() contratoid!:string;
   public total:any;
+  Actualizar!:Subscription;
   numaporte=0;
   dataSource = new MatTableDataSource<aporte>();
   public displayedColumns: string[] = [
@@ -37,7 +39,8 @@ export class ListAportesAdicionalesComponent implements OnInit, AfterViewInit {
   constructor(private _snackBar: MatSnackBar,
     private changeDetectorRefs: ChangeDetectorRef,
     private AportesS: AportesService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private ComunicacionS:ComunicacionService) { }
 
     ngAfterViewInit() {
       this.dataSource.paginator = this.paginator;
@@ -50,19 +53,27 @@ export class ListAportesAdicionalesComponent implements OnInit, AfterViewInit {
       this.total=filteredData.reduce((summ, v) => summ += parseInt(v.valor), 0);
     }
     ngOnInit(): void {
-      this.QueryAportes(this.contratoid)
+      this.QueryAportes(this.contratoid);
+      this.Actualizar= this.ComunicacionS.CargarAportesAdicional$.subscribe(aportes=>{
+        this.QueryAportes(this.contratoid);
+      })
+    }
+    ngOnDestroy(){
+      this.Actualizar.unsubscribe();
     }
     QueryAportes(contratoid:any){
       try{
         this.AportesS.getAportesAdicioneles(contratoid).subscribe((res:aporte[])=>{
-          if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
-            this.dataSource.data = res;
-            this.changeDetectorRefs.detectChanges();
-            this.total=res.reduce((summ, v) => summ += parseInt(v.valor), 0);
-            this.dataSource.sort = this.sort;
-            this.numaporte=this.dataSource.data.length;
-          } else {
-            this.notificacion(res[0].MENSAJE!);
+          if (res[0] != undefined){
+            if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
+              this.dataSource.data = res;
+              this.changeDetectorRefs.detectChanges();
+              this.total=res.reduce((summ, v) => summ += parseInt(v.valor), 0);
+              this.dataSource.sort = this.sort;
+              this.numaporte=this.dataSource.data.length;
+            } else {
+              this.notificacion(res[0].MENSAJE!);
+            }
           }
         },(err) => {
           this.notificacion(

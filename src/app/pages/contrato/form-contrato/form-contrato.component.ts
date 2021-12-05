@@ -194,6 +194,7 @@ export class FormContratoComponent implements OnInit,AfterViewInit {
         (res:inmueble[])=> {
           if(res[0].TIPO==undefined && res[0].MENSAJE==undefined){
             this.DataInmuebles=res;
+            console.log(res);
           }else{
             this.notificacion(res[0].MENSAJE!);
           }

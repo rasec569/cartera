@@ -8,6 +8,7 @@ import { cuota } from 'src/app/Models/cuota.model';
 import { FormCuotaComponent } from '../form-cuota/form-cuota.component';
 import { FormAporteComponent } from '../form-aporte/form-aporte.component';
 import { ListAportesDetalleComponent } from '../list-aportes-detalle/list-aportes-detalle.component';
+import { ComunicacionService } from 'src/app/services/comunicacion.service';
 
 @Component({
   selector: 'app-list-cuota',
@@ -29,7 +30,8 @@ export class ListCuotaComponent implements OnInit, AfterViewInit {
   readonly MediunWidth:string='600px';
   constructor(private _snackBar: MatSnackBar,
     private CuotaS: CuotaService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private ComunicacionS:ComunicacionService) { }
 
   ngOnInit(): void {
 
@@ -55,6 +57,7 @@ export class ListCuotaComponent implements OnInit, AfterViewInit {
     });
     dialogoRef.afterClosed().subscribe(res=>{
       this.QueryCuotas(this.acuerdoid);
+      this.ComunicacionS.CargarAportes$.emit();
     });
   }
   //aportes a la cuota seleccionada

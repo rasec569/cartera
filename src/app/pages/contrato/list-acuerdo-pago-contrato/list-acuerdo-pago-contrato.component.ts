@@ -23,7 +23,15 @@ export class ListAcuerdoPagoContratoComponent implements OnInit {
     "aporte_cliente",
     "valor_credito",
     "valor_total",
+    "aportes",
+    "estado",
     "entidad",
+    "Acciones",
+  ];
+  public displayedColumnsContado: string[] = [
+    "valor_total",
+    "aportes",
+    "estado",
   ];
 /* @ViewChild(ListCuotasComponent) hijo!:ListCuotasComponent; */
 
