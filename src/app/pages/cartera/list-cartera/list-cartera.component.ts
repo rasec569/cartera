@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { CarteraService } from 'src/app/services/cartera.service';
 import { cartera } from 'src/app/Models/cartera.model';
 import { DetalleCarteraComponent } from '../detalle-cartera/detalle-cartera.component';
+import { ProyectoService } from 'src/app/services/proyecto.service';
+import { proyecto } from 'src/app/Models/proyecto.model';
 
 @Component({
   selector: 'app-list-cartera',
@@ -20,6 +22,7 @@ export class ListCarteraComponent implements OnInit, AfterViewInit {
   public TotalSaldo:any;
   public Total:any;
   dataSource = new MatTableDataSource<cartera>();
+  public DataProyectos!: any[];
   public displayedColumns: string[] = [
     // "identificacion",
     "cliente",
@@ -38,11 +41,13 @@ export class ListCarteraComponent implements OnInit, AfterViewInit {
   sort!: MatSort;
   constructor(private _snackBar: MatSnackBar,
     private CarteraS: CarteraService,
+    private ProyectoS: ProyectoService,
     private changeDetectorRefs: ChangeDetectorRef,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.QueryCartera();
+    this.listarProyecto();
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -85,6 +90,31 @@ export class ListCarteraComponent implements OnInit, AfterViewInit {
         "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde! "+error
       );
     }
+  }
+  listarProyecto() {
+    try {
+      this.ProyectoS.getProyectos().subscribe(
+        (res: proyecto[]) => {
+          if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
+            this.DataProyectos = res;
+          } else {
+            this.notificacion(res[0].MENSAJE!);
+          }
+        },
+        (err) => {
+          this.notificacion(
+            "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+          );
+        }
+      );
+    } catch (error) {
+      this.notificacion(
+        "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+      );
+    }
+  }
+  onSelectProyecto(seleccion: any) {
+    //buscar por proyecto
   }
   OpenDetalle(id: any){
     const dialogoRef = this.dialog.open(DetalleCarteraComponent, { width: this.width,

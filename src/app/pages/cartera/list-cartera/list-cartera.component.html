@@ -13,8 +13,16 @@
             </mat-form-field>
           </td>
           <td>
-            <button mat-raised-button color="primary" matTooltip="Registrar nuevo rol" [routerLink]="['/newuser']"> listar por proyectos
-            </button>
+            <mat-form-field appearance="fill">
+              <mat-label>Proyecto</mat-label>
+              <mat-select formControlName="idproyecto" (selectionChange)="onSelectProyecto($event)">
+                <mat-option *ngFor="let proyect of DataProyectos" [value]="proyect.id">
+                  {{proyect.nombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- <button mat-raised-button color="primary" matTooltip="Registrar nuevo rol" [routerLink]="['/newuser']"> listar por proyectos
+            </button> -->
           </td>
         </tr>
       </table>
