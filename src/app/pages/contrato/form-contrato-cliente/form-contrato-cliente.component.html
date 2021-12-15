@@ -1,5 +1,5 @@
 <button class="close"mat-icon-button  color="warn"(click)="close()">X</button>
-<h1 mat-dialog-title>Nueva Venta</h1>
+<h1 mat-dialog-title>Nueva compra venta</h1>
 <div mat-dialog-content>
     <div class="mat-elevation-z8">
       <mat-horizontal-stepper [linear]="isLinear" #stepper>
@@ -120,9 +120,9 @@
             <button mat-raised-button color="accent" matStepperNext (click)="SaveContrato()" [disabled]="formContrato.invalid" >Siguiente</button>
           </div>
         </form>
-        <pre>
+        <!-- <pre>
           {{formContrato.value|json}}
-        </pre>
+        </pre> -->
       </mat-step>
         <mat-step [stepControl]="formAcuerdo" label="ACUERDO PAGO">
             <form [formGroup]="formAcuerdo">
@@ -149,9 +149,9 @@
               <button mat-raised-button color="warn" matStepperPrevious>Atras</button>
               <button mat-raised-button color="warn" (click)="stepper.reset()">Limpiar</button>
             </div>
-            <pre>
+            <!-- <pre>
               {{formAcuerdo.value|json}}
-            </pre>
+            </pre> -->
         </mat-step>
       </mat-horizontal-stepper>
     </div>

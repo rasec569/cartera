@@ -30,7 +30,7 @@ export class ListAllFileComponent implements OnInit,AfterViewInit {
     "nombreCategoria",
     "nombreArea",
     "fechaCreacion",
-    "fechaModificacion",
+    /* "fechaModificacion", */
     "Acciones"
   ];
   @ViewChild(MatPaginator)

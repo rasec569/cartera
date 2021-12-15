@@ -15,7 +15,7 @@
         <mat-label >Categoria</mat-label >
         <mat-select [(ngModel)]="Files.idCategoria" matTooltip="Seleccione una categoria">
           <mat-option *ngFor="let categoria of DataCategoria" [value]="categoria.id">
-            {{categoria.Nombre}}
+            {{categoria.nombre}}
           </mat-option>
         </mat-select>
       </mat-form-field>
