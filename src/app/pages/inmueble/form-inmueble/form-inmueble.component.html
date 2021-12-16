@@ -10,16 +10,16 @@
         </mat-expansion-panel-header>
         <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
           <mat-form-field>
-            <input matInput placeholder="Manzana de ubicacion" formControlName="manzana">
+            <input matInput type="number" placeholder="Manzana de ubicacion" formControlName="manzana">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Numero de casa" formControlName="casa">
+            <input matInput type="number" mask="dot_separator" placeholder="Numero de casa" formControlName="casa">
           </mat-form-field>
           <mat-form-field>
-            <input appFormtInputMoney matInput  type="text" placeholder="Valor neto" formControlName="Valor_Inicial" (blur)="onValueChange()">
+            <input prefix="$" mask="separator" thousandSeparator="." matInput  type="text" placeholder="Valor neto" formControlName="Valor_Inicial" (blur)="onValueChange()">
           </mat-form-field>
           <mat-form-field>
-            <input appFormtInputMoney matInput placeholder="Valor Final" formControlName="Valor_Final">
+            <input prefix="$" mask="separator" thousandSeparator="." matInput placeholder="Valor Final" formControlName="Valor_Final">
           </mat-form-field>
         </div>
         <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
@@ -40,7 +40,7 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="fill">
-            <mat-label>Estado de la etapa</mat-label>
+            <mat-label>Estado del Inmueble</mat-label>
             <mat-select formControlName="estado">
               <mat-option value="Lote">Lote</mat-option>
               <mat-option value="En Venta">En Venta</mat-option>

@@ -12,11 +12,27 @@
           </mat-expansion-panel-header>
           <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
             <mat-form-field>
-              <input matInput placeholder="Cedula" formControlName="identificacion"> </mat-form-field>
+              <input matInput placeholder="Cedula" formControlName="identificacion"  #identificacion pattern="[1-9]\d{6,10}">
+              <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+              <mat-error *ngIf="formUser.controls['identificacion'].hasError('pattern')&& !formUser.controls['identificacion'].hasError('required')">
+                Por favor, introduce solo numeros
+              </mat-error>
+              <mat-error *ngIf="formUser.controls['identificacion'].hasError('required')">
+                Identificación es obligatoria
+              </mat-error>
+            </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Nombres"formControlName="nombres" > </mat-form-field>
+              <input matInput placeholder="Nombres"formControlName="nombres" >
+              <mat-error *ngIf="formUser.controls['nombres'].hasError('required')">
+                Nombres es obligatorio
+              </mat-error>
+             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Apellidos" formControlName="apellidos"> </mat-form-field>
+              <input matInput placeholder="Apellidos" formControlName="apellidos">
+              <mat-error *ngIf="formUser.controls['apellidos'].hasError('required')">
+                Apellidos es obligatorio
+              </mat-error>
+             </mat-form-field>
           </div>
           <mat-action-row>
               <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
@@ -51,12 +67,27 @@
           </mat-expansion-panel-header>
           <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
             <mat-form-field>
-              <input matInput placeholder="Email" formControlName="correo"> </mat-form-field>
+              <input matInput placeholder="Email" formControlName="correo">
+              <mat-error *ngIf="formUser.controls['correo'].hasError('email') && !formUser.controls['correo'].hasError('required')">
+                Por favor, introduce una dirección de correo electrónico válida
+              </mat-error>
+              <mat-error *ngIf="formUser.controls['correo'].hasError('required')">
+                Correo es obligatorio
+              </mat-error>
+            </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Telefono" formControlName="telefono"> </mat-form-field>
+              <input matInput placeholder="Telefono" mask="(000) 000 00 00" formControlName="telefono">
+              <mat-error *ngIf="formUser.controls['telefono'].hasError('required')">
+                Telefono es obligatorio
+              </mat-error>
+            </mat-form-field>
           </div>
           <mat-form-field>
-            <input matInput placeholder="Dirección" formControlName="direccion"> </mat-form-field>
+            <input matInput placeholder="Dirección" formControlName="direccion">
+            <mat-error *ngIf="formUser.controls['direccion'].hasError('required')">
+              dirección es obligatorio
+            </mat-error>
+           </mat-form-field>
           <mat-action-row>
             <button mat-button color="warn" (click)="prevStep()">Anterior</button>
             <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
@@ -77,6 +108,9 @@
                   {{area.Area}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="formUser.controls['IdArea'].hasError('required')">
+                Area es obligatorio
+              </mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill">
               <mat-label>Seleccione una rol</mat-label>
@@ -85,6 +119,9 @@
                   {{rol.nombre}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="formUser.controls['IdRol'].hasError('required')">
+                Rol es obligatorio
+              </mat-error>
             </mat-form-field>
         </div>
         <mat-action-row>

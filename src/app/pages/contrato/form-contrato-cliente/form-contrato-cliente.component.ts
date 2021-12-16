@@ -80,7 +80,7 @@ export class FormContratoClienteComponent implements OnInit {
       identificacion: ["", Validators.required],
       nombres: ["", Validators.required],
       apellidos: ["", Validators.required],
-      correo: [""],
+      correo: ["", Validators.email],
       telefono: ["", Validators.required],
       direccion: ["", Validators.required],
     });

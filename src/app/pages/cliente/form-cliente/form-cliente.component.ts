@@ -36,10 +36,10 @@ export class FormClienteComponent implements OnInit {
     private ClienteS:ClientesService) {
       this.formCliente= this.fb.group({
         id: [""],
-        identificacion: ["", Validators.required],
+        identificacion: ["", Validators.required, Validators.pattern('/^[1-9]\d{6,10}$/')],
         nombres: ["", Validators.required],
         apellidos: ["", Validators.required],
-        correo: ["", Validators.required],
+        correo: ["", Validators.email],
         telefono: ["", Validators.required],
         direccion: ["", Validators.required],
       })

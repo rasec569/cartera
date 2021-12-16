@@ -43,12 +43,13 @@ export class FormUserComponent implements OnInit {
     ) {
       this.formUser = this.fb.group({
         iduser: [""],
-        identificacion: ["", Validators.required],
+        identificacion: ["", Validators.required,
+        Validators.pattern('/^[1-9]\d{6,10}$/')],
         nombres: ["", Validators.required],
         apellidos: ["", Validators.required],
         nick: ["", Validators.required],
         password: ["", Validators.required],
-        correo: ["", Validators.required],
+        correo: ["", Validators.required, Validators.email],
         telefono: ["", Validators.required],
         direccion: ["", Validators.required],
         IdArea: ["", Validators.required],

@@ -22,12 +22,22 @@
                           {{item.identificacion}}
                         </mat-option>
                       </mat-autocomplete>
+                      <mat-error *ngIf="formCliente.controls['identificacion'].hasError('required')">
+                        Identificación es obligatoria
+                      </mat-error>
                     </mat-form-field>
                     <mat-form-field>
                       <input matInput placeholder="Nombres"formControlName="nombres">
+                      <mat-error *ngIf="formCliente.controls['nombres'].hasError('required')">
+                        Nombres es obligatorio
+                      </mat-error>
                     </mat-form-field>
                     <mat-form-field>
-                      <input matInput placeholder="Apellidos" formControlName="apellidos"> </mat-form-field>
+                      <input matInput placeholder="Apellidos" formControlName="apellidos">
+                      <mat-error *ngIf="formCliente.controls['apellidos'].hasError('required')">
+                        Apellidos es obligatorio
+                      </mat-error>
+                     </mat-form-field>
                   </div>
                   <mat-action-row>
                       <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
@@ -42,12 +52,24 @@
                   </mat-expansion-panel-header>
                   <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
                     <mat-form-field>
-                      <input matInput placeholder="Email" formControlName="correo"> </mat-form-field>
+                      <input matInput placeholder="Email" formControlName="correo">
+                      <mat-error *ngIf="formCliente.controls['correo'].hasError('email')">
+                        Por favor, introduce una dirección de correo electrónico válida
+                      </mat-error>
+                     </mat-form-field>
                     <mat-form-field>
-                      <input matInput placeholder="Telefono" formControlName="telefono"> </mat-form-field>
+                      <input matInput placeholder="Telefono" formControlName="telefono" mask="(000) 000 00 00">
+                      <mat-error *ngIf="formCliente.controls['telefono'].hasError('required')">
+                        Telefono es obligatorio
+                      </mat-error>
+                     </mat-form-field>
                   </div>
                   <mat-form-field>
-                    <input matInput placeholder="Dirección" formControlName="direccion"> </mat-form-field>
+                    <input matInput placeholder="Dirección" formControlName="direccion">
+                    <mat-error *ngIf="formCliente.controls['direccion'].hasError('required')">
+                      dirección es obligatorio
+                    </mat-error>
+                  </mat-form-field>
                   <mat-action-row>
                     <button mat-button color="warn" (click)="prevStep()">Anterior</button>
                     <button mat-button color="primary" (click)="nextStep()">Finalizar</button>
@@ -69,11 +91,17 @@
                   {{proyect.nombre}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="formContrato.controls['idproyecto'].hasError('required')">
+                Proyecto es obligatorio
+              </mat-error>
             </mat-form-field>
             <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" >
               <mat-form-field appearance="fill">
                 <mat-label>Numero</mat-label>
                 <input matInput placeholder="Contrato" formControlName="numero">
+                <mat-error *ngIf="formContrato.controls['numero'].hasError('required')">
+                  Numero de contrato es obligatorio
+                </mat-error>
               </mat-form-field>
               <mat-form-field appearance="fill">
                 <mat-label>Fecha</mat-label>
@@ -81,6 +109,9 @@
                 <mat-datepicker-toggle matSuffix [for]="picker" matTooltip="Seleccione una fecha de venta">
                 </mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="formContrato.controls['fecha'].hasError('required')">
+                  Fecha del contrato es obligatoria
+                </mat-error>
               </mat-form-field>
               <mat-form-field appearance="fill">
                 <mat-label>Forma de pago</mat-label>
@@ -88,6 +119,9 @@
                   <mat-option value="Contado">Contado</mat-option>
                   <mat-option value="Cuotas">Cuotas</mat-option>
                 </mat-select>
+                <mat-error *ngIf="formContrato.controls['forma_pago'].hasError('required')">
+                  Forma pago es obligatoria
+                </mat-error>
               </mat-form-field>
             </div>
             <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" >
@@ -98,6 +132,9 @@
                     {{etapa.numero}}
                   </mat-option>
                 </mat-select>
+                <mat-error *ngIf="formContrato.controls['idetapa'].hasError('required')">
+                  Etapa es obligatorio
+                </mat-error>
               </mat-form-field>
               <mat-form-field appearance="fill">
                 <mat-label>Inmueble</mat-label>
@@ -106,6 +143,9 @@
                     {{inmueble.Casa}}
                   </mat-option>
                 </mat-select>
+                <mat-error *ngIf="formContrato.controls['inmuebleid'].hasError('required')">
+                  Inmueble es obligatorio
+                </mat-error>
               </mat-form-field>
               <mat-form-field appearance="fill">
                 <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="valor">

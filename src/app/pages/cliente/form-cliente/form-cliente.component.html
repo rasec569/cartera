@@ -12,16 +12,26 @@
           </mat-expansion-panel-header>
           <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
             <mat-form-field>
-              <input matInput placeholder="Cedula" formControlName="identificacion"  > </mat-form-field>
+              <input matInput placeholder="Cedula" formControlName="identificacion" #identificacion pattern="[1-9]\d{6,10}">
+              <mat-error *ngIf="formCliente.controls['identificacion'].hasError('pattern')&& !formCliente.controls['identificacion'].hasError('required')">
+                Por favor, introduce solo numeros
+              </mat-error>
+              <mat-error *ngIf="formCliente.controls['identificacion'].hasError('required')">
+                Identificación es obligatoria
+              </mat-error>
+             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Nombres"formControlName="nombres" (keyup)="getItems($event)" [matAutocomplete]="auto">
-              <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let item of ListaClientes" [value]="item">
-                  {{item.nombres}}
-                </mat-option>
-              </mat-autocomplete> </mat-form-field>
+              <input matInput placeholder="Nombres"formControlName="nombres">
+              <mat-error *ngIf="formCliente.controls['nombres'].hasError('required')">
+                Nombres es obligatorio
+              </mat-error>
+            </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Apellidos" formControlName="apellidos"> </mat-form-field>
+              <input matInput placeholder="Apellidos" formControlName="apellidos">
+              <mat-error *ngIf="formCliente.controls['apellidos'].hasError('required')">
+                Apellidos es obligatorio
+              </mat-error>
+             </mat-form-field>
           </div>
           <mat-action-row>
               <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
@@ -36,12 +46,24 @@
           </mat-expansion-panel-header>
           <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
             <mat-form-field>
-              <input matInput placeholder="Email" formControlName="correo"> </mat-form-field>
+              <input matInput placeholder="Email" formControlName="correo">
+              <mat-error *ngIf="formCliente.controls['correo'].hasError('email')">
+                Por favor, introduce una dirección de correo electrónico válida
+              </mat-error>
+            </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Telefono" formControlName="telefono"> </mat-form-field>
+              <input matInput placeholder="Telefono" formControlName="telefono" mask="(000) 000 00 00">
+              <mat-error *ngIf="formCliente.controls['telefono'].hasError('required')">
+                Telefono es obligatorio
+              </mat-error>
+            </mat-form-field>
           </div>
           <mat-form-field>
-            <input matInput placeholder="Dirección" formControlName="direccion"> </mat-form-field>
+            <input matInput placeholder="Dirección" formControlName="direccion">
+            <mat-error *ngIf="formCliente.controls['direccion'].hasError('required')">
+              dirección es obligatorio
+            </mat-error>
+          </mat-form-field>
           <mat-action-row>
             <button mat-button color="warn" (click)="prevStep()">Anterior</button>
             <button mat-button color="primary" (click)="nextStep()">Finalizar</button>
@@ -59,8 +81,8 @@
       </td>
     </tr>
   </table>
-  <pre>
+ <!--  <pre>
     {{formCliente.value|json}}
-  </pre>
+  </pre> -->
   </mat-card-content>
 </mat-card>
