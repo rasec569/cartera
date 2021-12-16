@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute ,Params } from "@angular/router";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 import { InmuebleService } from 'src/app/services/inmueble.service';
 import { inmueble } from 'src/app/Models/inmueble.model';
@@ -43,7 +44,9 @@ prevStep() {
     private route: ActivatedRoute,
     private InmuebleS: InmuebleService,
     private ProyectoS: ProyectoService,
-    private EtapaS: EtapaService) {
+    private EtapaS: EtapaService,
+    public dialogoRef: MatDialogRef<FormInmuebleComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
       this.formInmueble= this.fb.group({
         id: [""],
         manzana: ["", Validators.required],
@@ -56,19 +59,22 @@ prevStep() {
         catastral: [""],
         escritura: [""],
         matricula: [""],
-
-      })
+      });
+      if(data.inmuebleid != ""){
+        this.inmuebleid= data.inmuebleid;
+        this.QueryOneInmueble(data.inmuebleid);
+      }
     }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
+    /* this.route.params.subscribe((params: Params) => {
       this.inmuebleid = params.id;
-    });
-    if(this.inmuebleid != ""){
-      this.QueryOneInmueble(this.inmuebleid);
+    }); */
 
-    }
     this.listarProyecto();
+  }
+  close() {
+    this.dialogoRef.close();
   }
   onValueChange() {
     if(this.inmuebleid === undefined|| this.inmuebleid ==''){

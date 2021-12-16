@@ -18,7 +18,10 @@ import { proyecto } from 'src/app/Models/proyecto.model';
   styleUrls: ['./list-cartera.component.css']
 })
 export class ListCarteraComponent implements OnInit, AfterViewInit {
+  public TotalContrato:any;
   public TotalRecaudado:any;
+  public TotalAdicionales:any;
+  public TotalRecaudadoAdicionales:any;
   public TotalSaldo:any;
   public Total:any;
   dataSource = new MatTableDataSource<cartera>();
@@ -48,10 +51,12 @@ export class ListCarteraComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.QueryCartera();
     this.listarProyecto();
+
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -67,16 +72,19 @@ export class ListCarteraComponent implements OnInit, AfterViewInit {
         (res: cartera[]) => {
           console.log(res);
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
-            console.log('Datos res',res[0].TIPO,res[0].MENSAJE);
             this.dataSource.data = res;
             this.changeDetectorRefs.detectChanges();
-            /* this.Total=res.reduce((summ, v) => summ += parseInt(v.total), 0);
-            this.TotalSaldo=res.reduce((summ, v) => summ += parseInt(v.saldo), 0);
-            this.TotalRecaudado=res.reduce((summ, v) => summ += parseInt(v.recaudado), 0); */
+            this.TotalContrato=res.reduce((summ, v) => summ += parseInt(v.valor_contrato), 0);
+            this.TotalRecaudado=res.reduce((summ, v) => summ += parseInt(v.aportes_contrato), 0);
+            this.TotalAdicionales=res.reduce((summ, v) => summ += parseInt(v.valor_adicionales), 0);
+            this.TotalRecaudadoAdicionales=res.reduce((summ, v) => summ += parseInt(v.aportes_adicionales), 0);
+            this.Total=res.reduce((summ, v) => summ += parseInt(v.total), 0);
+            console.log( 'Recaudo adicionales',this.TotalRecaudadoAdicionales)
+            // this.TotalSaldo=res.reduce((summ, v) => summ += parseInt(v.saldo), 0);
+
             this.dataSource.sort = this.sort;
           } else {
             this.notificacion(res[0].MENSAJE!);
-            console.log('Datos res',res[0].TIPO,res[0].MENSAJE);
           }
         },
         (err) => {
@@ -88,6 +96,42 @@ export class ListCarteraComponent implements OnInit, AfterViewInit {
     } catch (error) {
       this.notificacion(
         "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde! "+error
+      );
+    }
+  }
+  QueryCarteraProyecto(idacuerdo:any){
+    try{
+      this.CarteraS.getCarteraProyecto(idacuerdo).subscribe((res:cartera[])=>{
+        if(res[0]!=undefined){
+          if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
+            this.dataSource.data = res;
+            this.changeDetectorRefs.detectChanges();
+            this.TotalContrato=res.reduce((summ, v) => summ += parseInt(v.valor_contrato), 0);
+            this.TotalRecaudado=res.reduce((summ, v) => summ += parseInt(v.aportes_contrato), 0);
+            this.TotalAdicionales=res.reduce((summ, v) => summ += parseInt(v.valor_adicionales), 0);
+            this.TotalRecaudadoAdicionales=res.reduce((summ, v) => summ += parseInt(v.aportes_adicionales), 0);
+            this.Total=res.reduce((summ, v) => summ += parseInt(v.total), 0);
+            this.dataSource.sort = this.sort;
+          } else {
+            this.notificacion(res[0].MENSAJE!);
+          }
+        }
+        else{
+          this.dataSource.data = [];
+          this.changeDetectorRefs.detectChanges();
+          console.log("",this.dataSource.data.length);
+        }
+      },(err) => {
+        this.notificacion(
+          "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!" +
+            err
+        );
+      }
+      );
+    }catch (error){
+      this.notificacion(
+        "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde! " +
+          error
       );
     }
   }
@@ -114,7 +158,12 @@ export class ListCarteraComponent implements OnInit, AfterViewInit {
     }
   }
   onSelectProyecto(seleccion: any) {
-    //buscar por proyecto
+    if(seleccion.value=== undefined){
+      this.QueryCartera();
+    }
+    else{
+      this.QueryCarteraProyecto(seleccion.value);
+    }
   }
   OpenDetalle(id: any){
     const dialogoRef = this.dialog.open(DetalleCarteraComponent, { width: this.width,

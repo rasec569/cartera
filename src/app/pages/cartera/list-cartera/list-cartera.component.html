@@ -15,7 +15,8 @@
           <td>
             <mat-form-field appearance="fill">
               <mat-label>Proyecto</mat-label>
-              <mat-select formControlName="idproyecto" (selectionChange)="onSelectProyecto($event)">
+              <mat-select (selectionChange)="onSelectProyecto($event)">
+                <mat-option>Todos</mat-option>
                 <mat-option *ngFor="let proyect of DataProyectos" [value]="proyect.id">
                   {{proyect.nombre}}
                 </mat-option>
@@ -35,27 +36,27 @@
         <ng-container matColumnDef="cliente">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </th>
           <td mat-cell *matCellDef="let item"> {{item.cliente}} </td>
-          <td mat-footer-cell *matFooterCellDef></td>
+          <td mat-footer-cell *matFooterCellDef>Total</td>
         </ng-container>
         <ng-container matColumnDef="valor_contrato">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor Contratos </th>
           <td mat-cell *matCellDef="let item"> {{item.valor_contrato|  mask: 'separator':'.'}} </td>
-          <td mat-footer-cell *matFooterCellDef></td>
+          <td mat-footer-cell *matFooterCellDef> {{TotalContrato |currency: 'USD':'symbol':'.0-0'}} </td>
         </ng-container>
         <ng-container matColumnDef="aportes_contrato">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Aportes Contratos </th>
           <td mat-cell *matCellDef="let item"> {{item.aportes_contrato|  mask: 'separator':'.'}} </td>
-          <td mat-footer-cell *matFooterCellDef>Total</td>
+          <td mat-footer-cell *matFooterCellDef> {{TotalRecaudado |currency: 'USD':'symbol':'.0-0'}} </td>
         </ng-container>
         <ng-container matColumnDef="valor_adicionales">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor Adicionales </th>
           <td mat-cell *matCellDef="let item"> {{item.valor_adicionales|  mask: 'separator':'.'}} </td>
-          <td mat-footer-cell *matFooterCellDef> {{TotalRecaudado |currency: 'USD':'symbol':'.0-0'}} </td>
+          <td mat-footer-cell *matFooterCellDef> {{TotalAdicionales |currency: 'USD':'symbol':'.0-0'}} </td>
         </ng-container>
         <ng-container matColumnDef="aportes_adicionales">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Aportes Adicionales </th>
           <td mat-cell *matCellDef="let item"> {{item.aportes_adicionales|  mask: 'separator':'.'}} </td>
-          <td mat-footer-cell *matFooterCellDef> {{TotalSaldo |currency: 'USD':'symbol':'.0-0'}} </td>
+          <td mat-footer-cell *matFooterCellDef> {{TotalRecaudadoAdicionales |currency: 'USD':'symbol':'.0-0'}} </td>
         </ng-container>
         <ng-container matColumnDef="total">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
@@ -65,7 +66,7 @@
         <ng-container matColumnDef="estado">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
           <td mat-cell *matCellDef="let item"> {{item.estado}} </td>
-          <td mat-footer-cell *matFooterCellDef> {{Total |currency: 'USD':'symbol':'.0-0'}} </td>
+          <td mat-footer-cell *matFooterCellDef></td>
         </ng-container>
         <ng-container matColumnDef="Acciones">
           <th mat-header-cell *matHeaderCellDef></th>

@@ -1,7 +1,5 @@
-<mat-card>
-  <mat-card-content>
-    <mat-card-title>Inmueble</mat-card-title>
-    <mat-card-subtitle>Formulario</mat-card-subtitle>
+<h1 mat-dialog-title>Formulario inmueble</h1>
+<div mat-dialog-content>
     <mat-accordion class="example-headers-align" [formGroup]="formInmueble">
       <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
         <mat-expansion-panel-header>
@@ -82,17 +80,15 @@
     <table style="text-align:center;" class="example-full-width" cellspacing="5">
       <tr>
         <td>
-          <button mat-raised-button color="warn" [routerLink]="['/Inmuebles']"> Cancelar </button>
+          <button mat-raised-button color="warn" (click)="close()" [mat-dialog-close]="false" style="margin-right: 10px" > Cancelar </button>
 
         </td>
         <td>
-          <button (click)="SaveInmueble()" mat-raised-button color="primary" [disabled]="formInmueble.invalid"> Guardar
+          <button (click)="SaveInmueble()" mat-raised-button color="primary" [disabled]="formInmueble.invalid" [mat-dialog-close]="true"> Guardar
           </button>
         </td>
       </tr>
     </table>
-    <pre>
+    <!-- <pre>
     {{formInmueble.value|json}}
-  </pre>
-  </mat-card-content>
-</mat-card>
+  </pre> -->

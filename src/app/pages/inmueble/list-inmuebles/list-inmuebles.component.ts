@@ -10,6 +10,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { InmuebleService } from "src/app/services/inmueble.service";
 import { inmueble } from "src/app/Models/inmueble.model";
 import{DetalleInmuebleComponent} from "../detalle-inmueble/detalle-inmueble.component"
+import { FormInmuebleComponent } from "../form-inmueble/form-inmueble.component";
 
 @Component({
   selector: "app-list-inmuebles",
@@ -87,6 +88,24 @@ export class ListInmueblesComponent implements OnInit {
       dialogoRef.afterClosed().subscribe(res=>{
         this.QueryInmuebles();
       });
+  }
+  OpenAdd(){
+    const dialogoRef = this.dialog.open(FormInmuebleComponent, {
+      width: this.width,
+      data: {inmuebleid:""}
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryInmuebles();
+    });
+  }
+  OpenEdit(id: any){
+    const dialogoRef = this.dialog.open(FormInmuebleComponent, {
+      width: this.width,
+      data: {inmuebleid:id }
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryInmuebles();
+    });
   }
   RemoveInmueble(Inmueble: inmueble) {
     const dialogoRef = this.dialog.open(DeletevalidacionComponent, {

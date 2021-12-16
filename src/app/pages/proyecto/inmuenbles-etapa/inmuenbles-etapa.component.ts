@@ -7,6 +7,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dial
 import { InmuebleService } from 'src/app/services/inmueble.service';
 import { inmueble } from 'src/app/Models/inmueble.model';
 import { DetalleInmuebleComponent } from '../../inmueble/detalle-inmueble/detalle-inmueble.component';
+import { DeletevalidacionComponent } from 'src/app/shared/deletevalidacion/deletevalidacion.component';
+import { FormInmuebleComponent } from '../../inmueble/form-inmueble/form-inmueble.component';
 
 @Component({
   selector: 'app-inmuenbles-etapa',
@@ -54,6 +56,53 @@ export class InmuenblesEtapaComponent implements OnInit {
       dialogoRef.afterClosed().subscribe(res=>{
         this.QueryInmuebles(this.data);
       });
+  }OpenAdd(){
+    const dialogoRef = this.dialog.open(FormInmuebleComponent, {
+      width: this.width,
+      data: {inmuebleid:""}
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryInmuebles(this.data);
+    });
+  }
+  OpenEdit(id: any){
+    const dialogoRef = this.dialog.open(FormInmuebleComponent, {
+      width: this.width,
+      data: {inmuebleid:id }
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryInmuebles(this.data);
+    });
+  }
+  RemoveInmueble(Inmueble: inmueble) {
+    const dialogoRef = this.dialog.open(DeletevalidacionComponent, {
+      width: "300px",
+    });
+    dialogoRef.afterClosed().subscribe((res) => {
+      if (res) {
+        try {
+          this.InmuebleS.deleteInmueble(Inmueble).subscribe(
+            (res: inmueble[]) => {
+              if (res[0].TIPO == "3") {
+                this.notificacion(res[0].MENSAJE!);
+                this.QueryInmuebles(this.data);
+              } else {
+                this.notificacion(res[0].MENSAJE!);
+              }
+            },
+            (err) => {
+              this.notificacion(
+                "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+              );
+            }
+          );
+        } catch (notificacion) {
+          this.notificacion(
+            "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+          );
+        }
+      }
+    });
   }
   QueryInmuebles(proyectoid:any) {
     try {

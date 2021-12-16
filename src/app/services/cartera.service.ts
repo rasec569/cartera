@@ -33,6 +33,15 @@ export class CarteraService {
       catchError(this.handleError)
     );
   }
+  //listar Por proyecto
+  public getCarteraProyecto(idproyecto: any): Observable<any> {
+    HttpOptionsBody.body.id=idproyecto;
+    return this.http.get(`${environment.url}/cartera/proyecto/${idproyecto}`,HttpOptionsBody).pipe(
+      tap((result: any) => {
+      }),
+      catchError(this.handleError)
+    );
+  }
   handleError(error: HttpErrorResponse) {
     let errorMessage = "Unknown error!";
     if (error.error instanceof ErrorEvent) {

@@ -5,6 +5,7 @@ export interface cartera {
   valor_contrato: string;
   aportes_contrato: string;
   valor_adicionales:string;
+  aportes_adicionales: string;
   clienaportes_adicionalesteid: string;
   total: string;
   estado: string;

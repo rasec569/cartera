@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { InmuebleService } from 'src/app/services/inmueble.service';
 import { inmueble } from 'src/app/Models/inmueble.model';
 import { DetalleInmuebleComponent } from '../../inmueble/detalle-inmueble/detalle-inmueble.component';
+import { FormInmuebleComponent } from '../../inmueble/form-inmueble/form-inmueble.component';
 
 
 @Component({
@@ -54,6 +55,54 @@ export class InmuebleProyectoComponent implements OnInit, AfterViewInit {
       dialogoRef.afterClosed().subscribe(res=>{
         this.QueryInmuebles(this.proyectoid);
       });
+  }
+  OpenAdd(){
+    const dialogoRef = this.dialog.open(FormInmuebleComponent, {
+      width: this.width,
+      data: {inmuebleid:""}
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryInmuebles(this.proyectoid);
+    });
+  }
+  OpenEdit(id: any){
+    const dialogoRef = this.dialog.open(FormInmuebleComponent, {
+      width: this.width,
+      data: {inmuebleid:id }
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryInmuebles(this.proyectoid);
+    });
+  }
+  RemoveInmueble(Inmueble: inmueble) {
+    const dialogoRef = this.dialog.open(DeletevalidacionComponent, {
+      width: "300px",
+    });
+    dialogoRef.afterClosed().subscribe((res) => {
+      if (res) {
+        try {
+          this.InmuebleS.deleteInmueble(Inmueble).subscribe(
+            (res: inmueble[]) => {
+              if (res[0].TIPO == "3") {
+                this.notificacion(res[0].MENSAJE!);
+                this.QueryInmuebles(this.proyectoid);
+              } else {
+                this.notificacion(res[0].MENSAJE!);
+              }
+            },
+            (err) => {
+              this.notificacion(
+                "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+              );
+            }
+          );
+        } catch (notificacion) {
+          this.notificacion(
+            "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+          );
+        }
+      }
+    });
   }
   QueryInmuebles(proyectoid:any) {
     try {
