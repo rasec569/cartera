@@ -3,15 +3,24 @@
   <form [formGroup]="formCosto">
     <mat-form-field>
       <input matInput placeholder="Concepto del costo" formControlName="concepto">
+      <mat-error *ngIf="formCosto.controls['concepto'].hasError('required')">
+        Concepto es obligatorio
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <input matInput appFormtInputMoney placeholder="Valor del costo" formControlName="valor">
+      <mat-error *ngIf="formCosto.controls['valor'].hasError('required')">
+        Valor es obligatorio
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Fecha del costo</mat-label>
       <input matInput placeholder="DD/MM/YYYY"  [matDatepicker]="picker" (dateChange)="dateChange($event.value)" formControlName="fecha">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="formCosto.controls['fecha'].hasError('required')">
+        Fecha es obligatorio
+      </mat-error>
     </mat-form-field>
   </form>
 </div>
@@ -21,6 +30,6 @@
   <button mat-raised-button color="primary" cdkFocusInitial (click)="SaveCosto()"
     [mat-dialog-close]="true">Guardar</button>
 </div>
-<pre>
+<!-- <pre>
   {{formCosto.value|json}}
-</pre>
+</pre> -->

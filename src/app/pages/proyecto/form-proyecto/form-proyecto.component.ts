@@ -1,7 +1,8 @@
-import { Component, OnInit} from "@angular/core";
+import { Component, Inject, OnInit} from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 import { ProyectoService } from "src/app/services/proyecto.service";
 import { proyecto } from "src/app/Models/proyecto.model";
@@ -31,6 +32,8 @@ prevStep() {
     private route: ActivatedRoute,
     private router: Router,
     private ProyectoS:ProyectoService,
+    public dialogoRef: MatDialogRef<FormProyectoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.formProyecto = this.fb.group({
       id: [""],
@@ -42,10 +45,16 @@ prevStep() {
       manzanas: ["", Validators.required],
       estado_etapa: ["", Validators.required],
     });
+    if (data.proyectoid !== "") {
+    // this.QueryOneEtapa(this.data.etapaid);
+    }
   }
 
   ngOnInit(): void {
 
+  }
+  close() {
+    this.dialogoRef.close();
   }
   SaveProyecto() {
     console.log("entro id",this.formProyecto.value.id);

@@ -93,6 +93,7 @@ export class ListAportesAcuerdoComponent implements OnInit, OnDestroy {
     }
   }
   OpenAdd(){
+    console.log("al abrir", this.acuerdoid)
     const dialogoRef = this.dialog.open(FormAporteComponent, {
       width: this.width,
       data: {aporteid:"",numaporte:this.numaporte ,cuota:"", acuerdo:this.acuerdoid}

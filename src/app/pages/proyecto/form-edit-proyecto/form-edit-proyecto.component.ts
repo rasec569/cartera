@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { Component, OnInit, ViewChild, AfterViewInit, Inject } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { UserService } from "src/app/services/user.service";
 import { usuario } from "src/app/Models/usuario.model";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute, Params } from "@angular/router";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 import { ProyectoService } from "src/app/services/proyecto.service";
 import { proyecto } from "src/app/Models/proyecto.model";
@@ -22,6 +23,8 @@ export class FormEditProyectoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private ProyectoS:ProyectoService,
+    public dialogoRef: MatDialogRef<FormEditProyectoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.formProyecto = this.fb.group({
       id: [""],
@@ -29,15 +32,21 @@ export class FormEditProyectoComponent implements OnInit {
       ubicacion: ["", Validators.required],
       estado: ["", Validators.required],
     });
+    if (data.proyectoid !== "") {
+      this.QueryOneProyecto(data.proyectoid);
+      }
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
+   /*  this.route.params.subscribe((params: Params) => {
       this.proyectoid = params.id;
     });
     if(this.proyectoid != ""){
       this.QueryOneProyecto(this.proyectoid);
-    }
+    } */
+  }
+  close() {
+    this.dialogoRef.close();
   }
   QueryOneProyecto(proyectoid:any) {
     try {

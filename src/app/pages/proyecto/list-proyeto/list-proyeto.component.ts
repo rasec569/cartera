@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProyectoService } from 'src/app/services/proyecto.service';
 import { proyecto } from 'src/app/Models/proyecto.model';
 import { DetalleProyectoComponent } from '../detalle-proyecto/detalle-proyecto.component';
+import { FormProyectoComponent } from '../form-proyecto/form-proyecto.component';
+import { FormEditProyectoComponent } from '../form-edit-proyecto/form-edit-proyecto.component';
 
 @Component({
   selector: 'app-list-proyeto',
@@ -75,6 +77,24 @@ export class ListProyetoComponent implements OnInit,AfterViewInit {
       dialogoRef.afterClosed().subscribe(res=>{
         this.QueryProyectos();
       });
+  }
+  OpenAdd(){
+    const dialogoRef = this.dialog.open(FormProyectoComponent, {
+      width: this.width,
+      data: {proyectoid:"" }
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryProyectos();
+    });
+  }
+  OpenEdit(id: any){
+    const dialogoRef = this.dialog.open(FormEditProyectoComponent, {
+      width: this.width,
+      data: {proyectoid:id }
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryProyectos();
+    });
   }
   RemoveProyecto(Proyecto:proyecto){
     const dialogoRef = this.dialog.open(DeletevalidacionComponent, {

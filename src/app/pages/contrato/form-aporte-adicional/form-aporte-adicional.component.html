@@ -1,8 +1,11 @@
 <h1 mat-dialog-title>Formulario aporte</h1>
 <div mat-dialog-content>
   <form [formGroup]="formAporte">
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <input matInput placeholder="numero" formControlName="numero">
+      <mat-error *ngIf="formAporte.controls['numero'].hasError('required')">
+        Numero es obligatorio
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Concepto</mat-label>
@@ -10,14 +13,20 @@
         <mat-option value="Pago">Pago</mat-option>
         <mat-option value="Abono">Abono</mat-option>
       </mat-select>
+      <mat-error *ngIf="formAporte.controls['concepto'].hasError('required')">
+        Concepto es obligatorio
+      </mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="adicional" formControlName="adicional"(keyup)="filter($event)" [matAutocomplete]="auto">
+    <mat-form-field appearance="fill">
+      <input matInput placeholder="Adicional" formControlName="adicional"(keyup)="filter($event)" [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete"  (optionSelected)="clickseletec($event)">
         <mat-option *ngFor="let item of listaAdicionales" [value]="item.concepto" [id]="item">
           {{item.concepto}}
         </mat-option>
       </mat-autocomplete>
+      <mat-error *ngIf="formAporte.controls['adicional'].hasError('required')">
+        Adicional es obligatorio
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Fecha</mat-label>
@@ -25,15 +34,24 @@
       <mat-datepicker-toggle matSuffix [for]="picker" matTooltip="Seleccione una fecha del aporte">
       </mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="formAporte.controls['fecha'].hasError('required')">
+        Fecha es obligatorio
+      </mat-error>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <input matInput placeholder="referencia" formControlName="referencia">
+      <mat-error *ngIf="formAporte.controls.referencia.hasError('required')">
+        Referencia de pago <strong>requerida</strong>
+      </mat-error>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <input matInput placeholder="destino" formControlName="destino">
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="valor">
+      <mat-error *ngIf="formAporte.controls.valor.hasError('valorValidador')">
+        mayor <strong>requerida</strong>
+      </mat-error>
     </mat-form-field>
   </form>
 </div>

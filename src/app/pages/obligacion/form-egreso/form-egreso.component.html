@@ -2,7 +2,10 @@
 <div mat-dialog-content>
   <form [formGroup]="formEgreso">
     <mat-form-field>
-      <input matInput placeholder="numero" formControlName="numero">
+      <input matInput placeholder="Numero" formControlName="numero">
+      <mat-error *ngIf="formEgreso.controls['numero'].hasError('required')">
+        Numero es obligatorio
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Fecha egreso</mat-label>
@@ -10,12 +13,21 @@
       <mat-datepicker-toggle matSuffix [for]="picker" matTooltip="Seleccione una fecha del egreso">
       </mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="formEgreso.controls['fecha'].hasError('required')">
+        Fecha es obligatoria
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Referencia egreso" formControlName="referencia">
+      <mat-error *ngIf="formEgreso.controls['referencia'].hasError('required')">
+        Referencia es obligatoria
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="valor">
+      <mat-error *ngIf="formEgreso.controls['valor'].hasError('required')">
+        Valor es obligatorio
+      </mat-error>
     </mat-form-field>
     <div style="text-align: center;">
       <button mat-raised-button color="warn" (click)="close()" [mat-dialog-close]="false"

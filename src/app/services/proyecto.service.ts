@@ -75,11 +75,12 @@ export class ProyectoService {
   }
   //modificar
   public updateProyecto(Proyecto: proyecto): Observable<any> {
+    console.log("servicio editar");
     return this.http
       .put(`${environment.url}/proyecto/${Proyecto.id}`, Proyecto, httpOptions)
       .pipe(
         tap((result: any) => {
-          console.log(result);
+          console.log("servicio",result);
         }),
         catchError(this.handleError)
       );

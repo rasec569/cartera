@@ -16,9 +16,16 @@
       <mat-option value="Novena">Novena</mat-option>
       <mat-option value="Decima">Decima</mat-option>
       </mat-select>
+      <mat-error *ngIf="formEtapa.controls['numero'].hasError('required')">
+        Nombre etapa es obligatorio
+      </mat-error>
+    </mat-form-field >
+    <mat-form-field appearance="fill">
+      <input matInput placeholder="N° Manzanas" formControlName="manzanas">
+      <mat-error *ngIf="formEtapa.controls['manzanas'].hasError('required')">
+        N° Manzanas es obligatorio
+      </mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="N° Manzanas" formControlName="manzanas"> </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Estado de la etapa</mat-label>
         <mat-select formControlName="estado">
@@ -26,6 +33,9 @@
         <mat-option value="En Ejecución">En Ejecución</mat-option>
         <mat-option value="Finalizada">Finalizada</mat-option>
         </mat-select>
+        <mat-error *ngIf="formEtapa.controls['estado'].hasError('required')">
+          Estado es obligatorio
+        </mat-error>
       </mat-form-field>
   </form>
 </div>

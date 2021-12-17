@@ -10,6 +10,9 @@
               {{item.identificacion}}
             </mat-option>
           </mat-autocomplete>
+          <mat-error *ngIf="formObligacion.controls['identificacion'].hasError('required')">
+            Identificación es obligatoria
+          </mat-error>
         </mat-form-field>
       </div>
       <div fxFlex.gt-lg="66" fxFlex.gt-md="66" fxFlex.gt-xs="100" fxFlex="100">
@@ -18,35 +21,56 @@
           <button matSuffix mat-icon-button (click)="OpenFormacreedor()"matTooltip="Nuevo acreedor">
             <mat-icon>add</mat-icon>
           </button>
+          <mat-error *ngIf="formObligacion.controls['nomacreedor'].hasError('required')">
+            Acreedor es obligatorio
+          </mat-error>
         </mat-form-field>
       </div>
     </div>
     <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
       <mat-form-field appearance="fill">
-        <mat-label>Fecha pago</mat-label>
+        <mat-label>Fecha</mat-label>
         <input matInput placeholder="DD/MM/YYYY" [matDatepicker]="picker"formControlName="fecha">
         <mat-datepicker-toggle matSuffix [for]="picker" matTooltip="Seleccione una fecha de obligación"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="formObligacion.controls['fecha'].hasError('required')">
+          Fecha es obligatoria
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Fecha pago</mat-label>
         <input matInput placeholder="DD/MM/YYYY" [matDatepicker]="picker2"  formControlName="fecha_pago">
         <mat-datepicker-toggle matSuffix [for]="picker2" matTooltip="Seleccione una fecha de pago"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
+        <mat-error *ngIf="formObligacion.controls['fecha_pago'].hasError('required')">
+          Fecha pago es obligatoria
+        </mat-error>
       </mat-form-field>
     </div>
     <mat-form-field>
       <input matInput placeholder="Concepto" formControlName="concepto">
+      <mat-error *ngIf="formObligacion.controls['concepto'].hasError('required')">
+        Concepto es obligatorio
+      </mat-error>
     </mat-form-field>
     <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
       <mat-form-field>
         <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="valor">
+        <mat-error *ngIf="formObligacion.controls['valor'].hasError('required')">
+          Valor es obligatorio
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Interes mensual" prefix="$" mask="separator" thousandSeparator="." formControlName="interes">
+        <input matInput placeholder="Interes" prefix="$" mask="separator" thousandSeparator="." formControlName="interes">
+        <mat-error *ngIf="formObligacion.controls['interes'].hasError('required')">
+          Interes es obligatorio
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Total" prefix="$" mask="separator" thousandSeparator="." formControlName="total">
+        <mat-error *ngIf="formObligacion.controls['total'].hasError('required')">
+          Total es obligatorio
+        </mat-error>
       </mat-form-field>
     </div>
   </form>

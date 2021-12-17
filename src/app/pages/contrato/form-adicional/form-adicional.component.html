@@ -3,9 +3,15 @@
   <form [formGroup]="formAdicional">
     <mat-form-field>
       <textarea  matInput placeholder="Concepto" formControlName="concepto"></textarea>
+      <mat-error *ngIf="formAdicional.controls['concepto'].hasError('required')">
+        Concepto es obligatorio
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <textarea  matInput placeholder="Descripción" formControlName="descripcion"></textarea>
+      <mat-error *ngIf="formAdicional.controls['descripcion'].hasError('required')">
+        Descripción es obligatorio
+      </mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Fecha</mat-label>
@@ -13,9 +19,15 @@
       <mat-datepicker-toggle matSuffix [for]="picker" matTooltip="Seleccione una fecha del egreso">
       </mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="formAdicional.controls['fecha'].hasError('required')">
+        Fecha es obligatorio
+      </mat-error>
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="valor">
+      <mat-error *ngIf="formAdicional.controls['valor'].hasError('required')">
+        Valor es obligatorio
+      </mat-error>
     </mat-form-field>
   </form>
 </div>
@@ -25,4 +37,4 @@
   <button mat-raised-button color="primary" cdkFocusInitial (click)="SaveAdicional()" [disabled]="formAdicional.invalid"
     [mat-dialog-close]="true">Guardar</button>
 </div>
-<pre>{{formAdicional.value|json}}</pre>
+<!-- <pre>{{formAdicional.value|json}}</pre> -->

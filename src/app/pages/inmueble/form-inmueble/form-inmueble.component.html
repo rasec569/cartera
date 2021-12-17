@@ -9,16 +9,25 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <input matInput type="number" placeholder="Manzana de ubicacion" formControlName="manzana">
+            <mat-error *ngIf="formInmueble.controls['manzana'].hasError('required')">
+              Manzana es obligatorio
+            </mat-error>
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <input matInput type="number" mask="dot_separator" placeholder="Numero de casa" formControlName="casa">
+            <mat-error *ngIf="formInmueble.controls['casa'].hasError('required')">
+              Numero casa es obligatorio
+            </mat-error>
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <input prefix="$" mask="separator" thousandSeparator="." matInput  type="text" placeholder="Valor neto" formControlName="Valor_Inicial" (blur)="onValueChange()">
+            <mat-error *ngIf="formInmueble.controls['Valor_Inicial'].hasError('required')">
+              Valor neto es obligatorio
+            </mat-error>
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <input prefix="$" mask="separator" thousandSeparator="." matInput placeholder="Valor Final" formControlName="Valor_Final">
           </mat-form-field>
         </div>
@@ -30,6 +39,9 @@
                 {{proyect.nombre}}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="formInmueble.controls['idproyecto'].hasError('required')">
+              Proyecto es obligatorio
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Etapa del Proyecto</mat-label>
@@ -38,6 +50,9 @@
                 {{etapa.numero}}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="formInmueble.controls['idetapa'].hasError('required')">
+              Etapa es obligatorio
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Estado del Inmueble</mat-label>
@@ -47,6 +62,9 @@
               <mat-option value="Vendido">Vendido</mat-option>
               <mat-option value="Pagado">Pagado</mat-option>
             </mat-select>
+            <mat-error *ngIf="formInmueble.controls['estado'].hasError('required')">
+              Etapa es obligatorio
+            </mat-error>
           </mat-form-field>
         </div>
         <mat-action-row>
@@ -61,13 +79,13 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <input matInput placeholder="Ficha Catastral Numero" formControlName="catastral">
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <input matInput placeholder="Escritura Numero" formControlName="escritura">
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <input matInput placeholder="Matricula Inmobiliaria" formControlName="matricula">
           </mat-form-field>
         </div>
