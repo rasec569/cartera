@@ -78,6 +78,9 @@ export class ListAportesAcuerdoComponent implements OnInit, OnDestroy {
             this.notificacion(res[0].MENSAJE!);
           }
         }
+        else{
+          this.dataSource.data =[];
+        }
       },(err) => {
         this.notificacion(
           "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!" +
