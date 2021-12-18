@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ContratoService } from 'src/app/services/contrato.service';
 import { contrato } from 'src/app/Models/contrato.model';
 import { DetalleContratoComponent } from '../../contrato/detalle-contrato/detalle-contrato.component';
+import { FormContratoClienteComponent } from '../../contrato/form-contrato-cliente/form-contrato-cliente.component';
 
 @Component({
   selector: 'app-list-contratos-cliente',
@@ -83,16 +84,16 @@ export class ListContratosClienteComponent implements OnInit {
         this.QueryContratos(this.clienteid);
       });
     }
-    /* OpenAdd(){
-      const dialogoRef = this.dialog.open(FormEtapaComponent, {
+     OpenAdd(){
+      const dialogoRef = this.dialog.open(FormContratoClienteComponent, {
         width: this.width,
-        data: {etapaid:"",proyectoid:this.proyectoid }
+        data: {clienteid:this.clienteid}
       });
       dialogoRef.afterClosed().subscribe(res=>{
-        this.QueryContratos(this.proyectoid);
+        this.QueryContratos(this.clienteid);
       });
     }
-    OpenEdit(id: any){
+    /*OpenEdit(id: any){
       const dialogoRef = this.dialog.open(FormEtapaComponent, {
         width: this.width,
         data: {etapaid:id,proyectoid:this.proyectoid }

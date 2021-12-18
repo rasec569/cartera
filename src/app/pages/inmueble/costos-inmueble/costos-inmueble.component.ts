@@ -77,7 +77,7 @@ export class CostosInmuebleComponent implements OnInit {
     OpenAdd(){
       const dialogoRef = this.dialog.open(FormCostoComponent, {
         width: "300px",
-        data: {etapaid:"",inmuebleid:this.inmuebleid }
+        data: {costoid:"",inmuebleid:this.inmuebleid }
       });
       dialogoRef.afterClosed().subscribe(res=>{
         this.QueryCostos(this.inmuebleid);

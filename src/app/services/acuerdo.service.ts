@@ -35,9 +35,9 @@ export class AcuerdoService {
     );
   }
   //buscar
-  public getAcuerdo(Acuerdo: acuerdo): Observable<any> {
-    HttpOptionsBody.body.id=Acuerdo.id;
-    return this.http.get(`${environment.url}/acuerdo/${Acuerdo.id}`,HttpOptionsBody).pipe(
+  public getAcuerdo(id: any): Observable<any> {
+    HttpOptionsBody.body.id=id;
+    return this.http.get(`${environment.url}/acuerdo/${id}`,HttpOptionsBody).pipe(
       tap((result: any) => {
       }),
       catchError(this.handleError)

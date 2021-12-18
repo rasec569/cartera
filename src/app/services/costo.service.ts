@@ -65,6 +65,16 @@ export class CostoService {
         catchError(this.handleError)
       );
   }
+  public asociarCosto(Costo:costo): Observable<any> {
+    return this.http
+      .post(`${environment.url}/costo/asociar/`, Costo, httpOptions)
+      .pipe(
+        tap((result: any) => {
+          console.log(result);
+        }),
+        catchError(this.handleError)
+      );
+  }
   //eliminar
   public deleteCosto(Costo: costo): Observable<any> {
     HttpOptionsBody.body.id=Costo.id;

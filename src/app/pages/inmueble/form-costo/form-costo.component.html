@@ -2,13 +2,18 @@
 <div mat-dialog-content>
   <form [formGroup]="formCosto">
     <mat-form-field>
-      <input matInput placeholder="Concepto del costo" formControlName="concepto">
+      <input matInput placeholder="Concepto del costo" formControlName="concepto" (keyup)="filter($event)" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="clickseltec($event)" >
+        <mat-option *ngFor="let item of ListaCostos" [value]="item.concepto" [id]="item">
+          {{item.concepto}}
+        </mat-option>
+      </mat-autocomplete>
       <mat-error *ngIf="formCosto.controls['concepto'].hasError('required')">
         Concepto es obligatorio
       </mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput appFormtInputMoney placeholder="Valor del costo" formControlName="valor">
+      <input matInput mask="separator" thousandSeparator="." placeholder="Valor del costo" formControlName="valor" >
       <mat-error *ngIf="formCosto.controls['valor'].hasError('required')">
         Valor es obligatorio
       </mat-error>

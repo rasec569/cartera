@@ -1,7 +1,5 @@
-<mat-card>
-  <mat-card-content>
-    <mat-card-title>Cliente </mat-card-title>
-    <mat-card-subtitle>Formulario</mat-card-subtitle>
+<h1 mat-dialog-title>Formulario cliente</h1>
+<div mat-dialog-content>
     <mat-accordion class="example-headers-align" [formGroup]="formCliente">
       <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
           <mat-expansion-panel-header>
@@ -70,19 +68,13 @@
           </mat-action-row>
       </mat-expansion-panel>
   </mat-accordion>
-  <table style="text-align:center;" class="example-full-width" cellspacing="5">
-    <tr>
-      <td>
-        <button mat-raised-button color="warn" [routerLink]="['/Clientes']"> Cancelar </button>
-
-      </td>
-      <td>
-        <button (click)="SaveCliente()" mat-raised-button color="primary" [disabled]="formCliente.invalid"> Guardar </button>
-      </td>
-    </tr>
-  </table>
+</div>
+<div style="text-align: center;">
+  <button mat-raised-button color="warn" (click)="close()" [mat-dialog-close]="false"
+    style="margin-right: 10px">Cancelar </button>
+  <button mat-raised-button color="primary" cdkFocusInitial (click)="SaveCliente()" [disabled]="formCliente.invalid"
+    [mat-dialog-close]="true">Guardar</button>
+</div>
  <!--  <pre>
     {{formCliente.value|json}}
   </pre> -->
-  </mat-card-content>
-</mat-card>

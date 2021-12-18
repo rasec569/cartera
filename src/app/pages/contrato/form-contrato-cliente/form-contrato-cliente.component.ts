@@ -119,7 +119,7 @@ export class FormContratoClienteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.QuerClientes();
+    this.QueryClientes();
     this.listarProyecto();
     /* this.hijo.loadCuotas(this.contratoid, this.contratoid);
     this.hijo.QueryCuotasCredito(this.contratoid); */
@@ -147,7 +147,7 @@ export class FormContratoClienteComponent implements OnInit {
   clickseltec(event: any) {
     this.QueryOneCliente(event.option.id.id);
   }
-  QuerClientes() {
+  QueryClientes() {
     try {
       this.ClienteS.getClientes().subscribe(
         (res: cliente[]) => {

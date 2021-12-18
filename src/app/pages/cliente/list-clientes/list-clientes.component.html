@@ -13,7 +13,7 @@
             </mat-form-field>
           </td>
           <td>
-            <button mat-raised-button color="primary" matTooltip="Registrar nuevo cliente" [routerLink]="['/Clientes/Nuevo']"> Nuevo
+            <button mat-raised-button color="primary" matTooltip="Registrar nuevo cliente" (click)="OpenAdd()"> Nuevo
             </button>
           </td>
         </tr>
@@ -50,7 +50,7 @@
                 <mat-icon>launch</mat-icon>
                 <span>Detalle</span>
               </button>
-              <button mat-menu-item [routerLink]="['/Clientes/Editar',item.id]">
+              <button mat-menu-item (click)="OpenEdit(item.id)">
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>
               </button>

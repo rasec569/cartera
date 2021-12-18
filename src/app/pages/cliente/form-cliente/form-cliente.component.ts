@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router ,ActivatedRoute ,Params} from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { ClientesService } from 'src/app/services/clientes.service';
 import { cliente } from 'src/app/Models/cliente.model';
@@ -33,37 +34,46 @@ export class FormClienteComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    public dialogoRef: MatDialogRef<FormClienteComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private ClienteS:ClientesService) {
       this.formCliente= this.fb.group({
         id: [""],
-        identificacion: ["", Validators.required, Validators.pattern('/^[1-9]\d{6,10}$/')],
+        identificacion: ["", Validators.required],
         nombres: ["", Validators.required],
         apellidos: ["", Validators.required],
         correo: ["", Validators.email],
         telefono: ["", Validators.required],
         direccion: ["", Validators.required],
-      })
+      });
+      if(data.clienteid!=""||data.clienteid==undefined){
+        this.clienteid = data.clienteid;
+        this.QueryOneCliente(data.clienteid);
+      }
     }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
+    /* this.route.params.subscribe((params: Params) => {
       this.clienteid = params.id;
-    });
+    }); */
 
-    if(this.clienteid != ""){
-      this.QueryOneCliente(this.clienteid);
-    }
-     if (this.clienteid === undefined){
-      this.QuerClientes();
-      /* this.formCliente.get('nombres')?.valueChanges.subscribe(res=>{
-        this.filter(res);
-      }) */
-    }
+    // if(this.clienteid != ""){
+    //   this.QueryOneCliente(this.clienteid);
+    // }
+    //  if (this.clienteid === undefined){
+    //   this.QuerClientes();
+    //   /* this.formCliente.get('nombres')?.valueChanges.subscribe(res=>{
+    //     this.filter(res);
+    //   }) */
+    // }
   }
   mostrar(subject: { nombres: any; }){
     return subject ? subject.nombres: undefined;
   }
-  filter(value: string){
+  close() {
+    this.dialogoRef.close();
+  }
+  /* filter(value: string){
     const val = value;
     if (val !== "") {
       this.ListaClientes=this.ListaClientes.filter(cliente =>{
@@ -79,8 +89,8 @@ export class FormClienteComponent implements OnInit {
       this.ListaClientes = this.CloneClientes;
     }
 
-  }
-  getItems(ev: any){
+  } */
+  /* getItems(ev: any){
     const val = ev.target.value;
     console.log(val);
     if (val && val.trim() !== "") {
@@ -94,13 +104,13 @@ export class FormClienteComponent implements OnInit {
     } else {
       this.ListaClientes = this.CloneClientes;
     }
-  }
-  filter2(value: string):cliente[]{
+  } */
+  /* filter2(value: string):cliente[]{
     const filterValue=value.toLowerCase();
     console.log('valor',filterValue);
     return this.ListaClientes.filter(cliente => cliente.nombres.toLowerCase().indexOf(filterValue.toLowerCase()) >-1);
-  }
-  QuerClientes() {
+  } */
+  /* QuerClientes() {
     try {
       this.ClienteS.getClientes().subscribe(
         (res: cliente[]) => {
@@ -123,7 +133,7 @@ export class FormClienteComponent implements OnInit {
         "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde! "+error
       );
     }
-  }
+  } */
   QueryOneCliente(id:any) {
     try {
       console.log('entro a buscar');
@@ -131,7 +141,7 @@ export class FormClienteComponent implements OnInit {
         (res: cliente[]) => {
           console.log(res[0]);
           if (res[0].TIPO == undefined && res[0].MENSAJE == undefined) {
-            this.formCliente.setValue(res[0]);
+            this.formCliente.patchValue(res[0]);
           } else {
             this.notificacion(res[0].MENSAJE!);
           }
@@ -157,8 +167,9 @@ export class FormClienteComponent implements OnInit {
             console.log('entro a nuevo');
             if (res[0].TIPO == "3") {
               this.notificacion(res[0].MENSAJE!);
+              this.dialogoRef.close();
               this.formCliente.reset();
-              this.router.navigate(['Clientes']);
+
             } else {
               this.notificacion(res[0].MENSAJE!);
             }
@@ -176,7 +187,7 @@ export class FormClienteComponent implements OnInit {
             if (res[0].TIPO == "3") {
               this.notificacion(res[0].MENSAJE!);
               this.formCliente.reset();
-              this.router.navigate(['Clientes']);
+              this.dialogoRef.close();
             } else {
               this.notificacion(res[0].MENSAJE!);
             }

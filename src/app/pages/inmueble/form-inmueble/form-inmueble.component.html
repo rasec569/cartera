@@ -10,24 +10,28 @@
         </mat-expansion-panel-header>
         <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
           <mat-form-field appearance="fill">
+            <mat-label>Manzana de ubicacion</mat-label>
             <input matInput type="number" placeholder="Manzana de ubicacion" formControlName="manzana">
             <mat-error *ngIf="formInmueble.controls['manzana'].hasError('required')">
               Manzana es obligatorio
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
+            <mat-label>Numero de casa</mat-label>
             <input matInput type="number" mask="dot_separator" placeholder="Numero de casa" formControlName="casa">
             <mat-error *ngIf="formInmueble.controls['casa'].hasError('required')">
               Numero casa es obligatorio
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
+            <mat-label>Valor neto</mat-label>
             <input prefix="$" mask="separator" thousandSeparator="." matInput  type="text" placeholder="Valor neto" formControlName="Valor_Inicial" (blur)="onValueChange()">
             <mat-error *ngIf="formInmueble.controls['Valor_Inicial'].hasError('required')">
               Valor neto es obligatorio
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill">
+            <mat-label>Valor Final</mat-label>
             <input prefix="$" mask="separator" thousandSeparator="." matInput placeholder="Valor Final" formControlName="Valor_Final">
           </mat-form-field>
         </div>
@@ -80,12 +84,15 @@
         </mat-expansion-panel-header>
         <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
           <mat-form-field appearance="fill">
+            <mat-label>Ficha Catastral Numero</mat-label>
             <input matInput placeholder="Ficha Catastral Numero" formControlName="catastral">
           </mat-form-field>
           <mat-form-field appearance="fill">
+            <mat-label>Escritura Numero</mat-label>
             <input matInput placeholder="Escritura Numero" formControlName="escritura">
           </mat-form-field>
           <mat-form-field appearance="fill">
+            <mat-label>Matricula Inmobiliaria</mat-label>
             <input matInput placeholder="Matricula Inmobiliaria" formControlName="matricula">
           </mat-form-field>
         </div>

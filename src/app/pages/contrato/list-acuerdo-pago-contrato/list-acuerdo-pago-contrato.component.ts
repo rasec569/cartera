@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AcuerdoService } from 'src/app/services/acuerdo.service';
 import { acuerdo } from 'src/app/Models/acuerdo.model';
 import { ListCuotasComponent } from '../list-cuotas/list-cuotas.component';
+import { FromAcuerdoComponent } from '../from-acuerdo/from-acuerdo.component';
 
 @Component({
   selector: 'app-list-acuerdo-pago-contrato',
@@ -33,6 +34,7 @@ export class ListAcuerdoPagoContratoComponent implements OnInit {
     "aportes",
     "estado",
   ];
+  readonly width:string='300px';
 /* @ViewChild(ListCuotasComponent) hijo!:ListCuotasComponent; */
 
   constructor(private _snackBar: MatSnackBar,
@@ -90,16 +92,16 @@ export class ListAcuerdoPagoContratoComponent implements OnInit {
       dialogoRef.afterClosed().subscribe(res=>{
         this.QueryContratos(this.proyectoid);
       });
-    }
+    }*/
     OpenEdit(id: any){
-      const dialogoRef = this.dialog.open(FormEtapaComponent, {
+      const dialogoRef = this.dialog.open(FromAcuerdoComponent, {
         width: this.width,
-        data: {etapaid:id,proyectoid:this.proyectoid }
+        data: {acuerdoid:id }
       });
       dialogoRef.afterClosed().subscribe(res=>{
-        this.QueryContratos(this.proyectoid);
+        this.QueryAcuerdos(this.contratoid);
       });
-    } */
+    }
     notificacion(Mensaje: string) {
       this._snackBar.open(Mensaje, "", {
         duration: 5000,

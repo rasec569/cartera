@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { cliente } from 'src/app/Models/cliente.model';
 import { DetalleClienteComponent } from '../detalle-cliente/detalle-cliente.component';
+import { FormClienteComponent } from '../form-cliente/form-cliente.component';
 
 @Component({
   selector: 'app-list-clientes',
@@ -69,6 +70,24 @@ export class ListClientesComponent implements OnInit,AfterViewInit {
         "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde! "+error
       );
     }
+  }
+  OpenAdd(){
+    const dialogoRef = this.dialog.open(FormClienteComponent, {
+      width: this.width,
+      data: {clienteid:""}
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryClientes();
+    });
+  }
+  OpenEdit(id: any){
+    const dialogoRef = this.dialog.open(FormClienteComponent, {
+      width: this.width,
+      data: {clienteid:id}
+    });
+    dialogoRef.afterClosed().subscribe(res=>{
+      this.QueryClientes();
+    });
   }
   OpenDetalle(id: any){
     const dialogoRef = this.dialog.open(DetalleClienteComponent, { width: this.width,
