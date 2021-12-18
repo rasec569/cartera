@@ -17,7 +17,7 @@ import { FormEgresoComponent } from "../form-egreso/form-egreso.component";
   templateUrl: "./list-obligaciones.component.html",
   styleUrls: ["./list-obligaciones.component.css"],
 })
-export class ListObligacionesComponent implements OnInit {
+export class ListObligacionesComponent implements OnInit,AfterViewInit {
   public total:any;
   acreedorid="";
   dataSource = new MatTableDataSource<obligacion>();

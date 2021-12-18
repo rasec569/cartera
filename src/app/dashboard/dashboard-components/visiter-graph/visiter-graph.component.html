@@ -1,7 +1,7 @@
 <mat-card>
     <mat-card-content>
         <mat-card-title>Ventas</mat-card-title>
-        <mat-card-subtitle>Numero de ventas por etapas</mat-card-subtitle>
+        <mat-card-subtitle>Numero de ventas por tipo</mat-card-subtitle>
         <div class="piechart">
             <x-chartist class="" [data]="donuteChart1.data" [type]="donuteChart1.type"
                 [options]="donuteChart1.options" [responsiveOptions]="donuteChart1.responsiveOptions"
@@ -13,15 +13,11 @@
         <ul class="list-inline text-center">
             <li>
                 <h6 class="text-success m-0">
-                    <i class="mdi mdi-checkbox-blank-circle font-10 m-r-10 "></i>Mobile</h6>
+                    <i class="mdi mdi-checkbox-blank-circle font-10 m-r-10 "></i>Cuotas</h6>
             </li>
             <li>
                 <h6 class=" text-info  m-0">
-                    <i class="mdi mdi-checkbox-blank-circle font-10 m-r-10"></i>Desktop</h6>
-            </li>
-            <li>
-                <h6 class=" text-purple  m-0">
-                    <i class="mdi mdi-checkbox-blank-circle font-10 m-r-10"></i>Tablet</h6>
+                    <i class="mdi mdi-checkbox-blank-circle font-10 m-r-10"></i>Contado</h6>
             </li>
         </ul>
     </mat-card-content>

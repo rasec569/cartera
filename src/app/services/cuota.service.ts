@@ -27,6 +27,22 @@ export class CuotaService {
 
   constructor(private http:HttpClient) { }
   //listar
+  public getCuotasVencidas(): Observable<any> {
+    return this.http.get(`${environment.url}/cuota/vencidas/`,HttpOptionsBody).pipe(
+      tap((result: any) => {
+      }),
+      catchError(this.handleError)
+    );
+  }
+  //listar
+  public getCuotasPorPagar(): Observable<any> {
+    return this.http.get(`${environment.url}/cuota/pagar/`,httpOptions).pipe(
+      tap((result: any) => {
+      }),
+      catchError(this.handleError)
+    );
+  }
+  //listar
   public getCuotasAcuerdo(acuerdoid: any): Observable<any> {
     HttpOptionsBody.body.id=acuerdoid;
     return this.http.get(`${environment.url}/cuota/cliente/${acuerdoid}`,HttpOptionsBody).pipe(

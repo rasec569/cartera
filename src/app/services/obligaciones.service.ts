@@ -28,6 +28,22 @@ const HttpOptionsBody = {
 export class ObligacionesService {
 
   constructor(private http:HttpClient) { }
+  //listar
+  public getObligacionesVencidas(): Observable<any> {
+    return this.http.get(`${environment.url}/obligacion/vencidas/`,HttpOptionsBody).pipe(
+      tap((result: any) => {
+      }),
+      catchError(this.handleError)
+    );
+  }
+  //listar
+  public getObligacionesPorPagar(): Observable<any> {
+    return this.http.get(`${environment.url}/obligacion/pagar/`,httpOptions).pipe(
+      tap((result: any) => {
+      }),
+      catchError(this.handleError)
+    );
+  }
 //listar Obligaciones
   public getObligaciones(): Observable<any> {
     return this.http.get(`${environment.url}/obligacion/`,httpOptions).pipe(

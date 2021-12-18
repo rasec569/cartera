@@ -1,83 +1,135 @@
 <mat-card>
+  <mat-card-title style="text-align:center;">Cuotas</mat-card-title>
     <mat-tab-group>
         <!-- Tab 1 -->
-        <mat-tab label="Activity">
+        <mat-tab label="Mora">
             <mat-card-content>
+              <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSourceVencidas" matSort *ngIf="dataSourceVencidas.data.length">
+                  <ng-container matColumnDef="numero">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header width ="10%"> Cuota </th>
+                    <td mat-cell *matCellDef="let item"> {{item.numero}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header width ="14%"> Fecha </th>
+                    <td mat-cell *matCellDef="let item"> {{item.fecha| date: 'dd/MM/yy'}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="valor">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header width ="23%"> Valor </th>
+                    <td mat-cell *matCellDef="let item"> {{item.valor|  mask: 'separator':'.'}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="casa">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header width ="20%"> Inmueble </th>
+                    <td mat-cell *matCellDef="let item"> {{item.casa}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="responsable">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header width ="23%"> Responsable </th>
+                    <td mat-cell *matCellDef="let item"> {{item.responsable}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Acciones">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let item">
+                      <button mat-icon-button [matMenuTriggerFor]="menu4" matTooltip="Acciones de la cuota">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu4="matMenu">
+                        <button mat-menu-item (click)="OpenAporteCuota(item)">
+                          <mat-icon>attach_money</mat-icon>
+                          <span>Pagar</span>
+                        </button>
+                        <button mat-menu-item (click)="OpenAportes(item.id)">
+                          <mat-icon>launch</mat-icon>
+                          <span>Aportes</span>
+                        </button>
+                        <button mat-menu-item (click)="OpenEdit(item.id)">
+                          <mat-icon>edit</mat-icon>
+                          <span>Editar</span>
+                        </button>
+                      </mat-menu>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsVencidas"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsVencidas"></tr>
 
-
-                <div class="d-flex no-blcok" *ngFor='let activity of activityData'>
-                    <div class="m-r-20">
-                        <img class="img-circle" width="50" [src]=activity.image alt="Image"> </div>
-                    <div class="p-b-20 b-b m-b-30">
-                        <h4 class="m-0">{{activity.name}}
-                            <small class="text-muted">({{activity.commentTime}})</small>
-                        </h4>
-                        <p class="text-muted">{{activity.comment}}</p>
-
-                        <div fxLayout="row wrap" *ngIf="activity.bottomImage !==''">
-                            <div fxFlex.gt-sm="20" fxFlex="100">
-                                <img class="img-responsive rounded" [src]=activity.bottomImage  alt="Image">
-                            </div>
-                        </div>
-
-                        <button  *ngIf="activity.bottomImage ===''" mat-raised-button color="{{activity.buttonColor}}">Check Now</button>
-
-                    </div>
+                  <!-- Row shown when there is no matching data. -->
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No hay datos que coincidan con el filtro "{{input.value}}"</td>
+                  </tr>
+                </table>
+                <div *ngIf="!dataSourceVencidas.data.length">
+                  <mat-card>
+                    <mat-card-title>Sin datos para mostrar</mat-card-title>
+                  </mat-card>
                 </div>
+                <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+                </mat-paginator>
+              </div>
             </mat-card-content>
         </mat-tab>
         <!-- End Tab 1 -->
         <!-- Tab 2 -->
-        <mat-tab label="Profile">
+        <mat-tab label="Por vencer">
             <mat-card-content>
-                <mat-card-title>Form Basic Layouts</mat-card-title>
-                <!-- ============================================================== -->
-                <!-- column -->
-                <!-- ============================================================== -->
-                <form class="basic-form">
-                    <div fxLayout="row wrap">
-                        <!-- column -->
-                        <div fxFlex.gt-sm="100" fxFlex="100">
-                            <mat-form-field>
-                                <input matInput placeholder="Some text value">
-                            </mat-form-field>
-                        </div>
-                        <!-- column -->
-                        <div fxFlex.gt-sm="100" fxFlex="100">
-                            <mat-form-field>
-                                <input matInput placeholder="EmailId" type="email">
-                            </mat-form-field>
-                        </div>
-                        <!-- column -->
-                        <div fxFlex.gt-sm="100" fxFlex="100">
-                            <mat-form-field>
-                                <input matInput placeholder="Password" type="password">
-                            </mat-form-field>
-                        </div>
+              <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSourcePagar" matSort *ngIf="dataSourcePagar.data.length">
+                  <ng-container matColumnDef="numero">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header width ="10%"> Cuota </th>
+                    <td mat-cell *matCellDef="let item"> {{item.numero}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header width ="14%"> Fecha </th>
+                    <td mat-cell *matCellDef="let item"> {{item.fecha| date: 'dd/MM/yy'}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="valor">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header width ="23%"> Valor </th>
+                    <td mat-cell *matCellDef="let item"> {{item.valor|  mask: 'separator':'.'}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="casa">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header width ="20%"> Inmueble </th>
+                    <td mat-cell *matCellDef="let item"> {{item.casa}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="responsable">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header width ="23%"> Responsable </th>
+                    <td mat-cell *matCellDef="let item"> {{item.responsable}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Acciones">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let item">
+                      <button mat-icon-button [matMenuTriggerFor]="menu4" matTooltip="Acciones de la cuota">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu4="matMenu">
+                        <button mat-menu-item (click)="OpenAporteCuota(item)">
+                          <mat-icon>attach_money</mat-icon>
+                          <span>Pagar</span>
+                        </button>
+                        <button mat-menu-item (click)="OpenAportes(item.id)">
+                          <mat-icon>launch</mat-icon>
+                          <span>Aportes</span>
+                        </button>
+                        <button mat-menu-item (click)="OpenEdit(item.id)">
+                          <mat-icon>edit</mat-icon>
+                          <span>Editar</span>
+                        </button>
+                      </mat-menu>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsVencidas"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsVencidas"></tr>
 
-                        <!-- column -->
-                        <div fxFlex.gt-sm="100" fxFlex="100">
-                            <mat-form-field>
-                                <mat-select placeholder="Select">
-                                    <mat-option value="option">Option</mat-option>
-                                    <mat-option value="option">Option2</mat-option>
-                                    <mat-option value="option">Option3</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-
-                        <!-- column -->
-                        <div fxFlex.gt-sm="100" fxFlex="100">
-                            <mat-form-field>
-                                <textarea matInput placeholder="Textarea"></textarea>
-                            </mat-form-field>
-                        </div>
-                        <!-- column -->
-                        <div fxFlex.gt-sm="100" fxFlex="100">
-                            <button mat-raised-button color="primary">Update Profile</button>
-                        </div>
-                    </div>
-                </form>
+                  <!-- Row shown when there is no matching data. -->
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No hay datos que coincidan con el filtro "{{input.value}}"</td>
+                  </tr>
+                </table>
+                <div *ngIf="!dataSourcePagar.data.length">
+                  <mat-card>
+                    <mat-card-title>Sin datos para mostrar</mat-card-title>
+                  </mat-card>
+                </div>
+                <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+                </mat-paginator>
+              </div>
             </mat-card-content>
         </mat-tab>
     </mat-tab-group>
