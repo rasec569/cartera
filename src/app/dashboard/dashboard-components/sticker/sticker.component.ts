@@ -37,13 +37,18 @@ export class StickerComponent implements OnInit, AfterViewInit {
   QueryObligacionesVencidas(){
     try{
       this.ObligacionesS.getObligacionesVencidas().subscribe((res:obligacion[])=>{
-        if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
-          this.dataSourceVencidas.data = res;
-          this.dataSourceVencidas.paginator = this.paginator;
-          this.dataSourceVencidas.sort = this.sort;
-        } else {
-          this.notificacion(res[0].MENSAJE!);
+        if (res[0]!=undefined){
+          if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
+            this.dataSourceVencidas.data = res;
+            this.dataSourceVencidas.paginator = this.paginator;
+            this.dataSourceVencidas.sort = this.sort;
+          } else {
+            this.notificacion(res[0].MENSAJE!);
+          }
         }
+        else{
+          this.dataSourceVencidas.data=[];
+       }
       },(err) => {
         this.notificacion(
           "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!" +
@@ -61,12 +66,17 @@ export class StickerComponent implements OnInit, AfterViewInit {
   QueryObligacionesPagar(){
     try{
       this.ObligacionesS.getObligacionesPorPagar().subscribe((res:obligacion[])=>{
-        if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
-          this.dataSourcePagar.data = res;
-          this.dataSourcePagar.paginator = this.paginator;
-          this.dataSourcePagar.sort = this.sort;
-        } else {
-          this.notificacion(res[0].MENSAJE!);
+        if (res[0]!=undefined){
+          console.log("ENTRA");
+          if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
+            this.dataSourcePagar.data = res;
+            this.dataSourcePagar.paginator = this.paginator;
+            this.dataSourcePagar.sort = this.sort;
+          } else {
+            this.notificacion(res[0].MENSAJE!);
+          }
+        }else{
+           this.dataSourcePagar.data=[];
         }
       },(err) => {
         this.notificacion(

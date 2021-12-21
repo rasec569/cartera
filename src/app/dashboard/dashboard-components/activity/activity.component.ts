@@ -22,7 +22,7 @@ export class ActivityComponent implements OnInit,AfterViewInit {
     "numero",
     "valor",
     "responsable",
-    "casa",
+    "Casa",
     "Acciones",
   ];
   public displayedColumnsPagar: string[] = [
@@ -57,12 +57,16 @@ export class ActivityComponent implements OnInit,AfterViewInit {
   QueryCuotasVencidas(){
     try{
       this.CuotaS.getCuotasVencidas().subscribe((res:cuota[])=>{
-        if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
-          this.dataSourceVencidas.data = res;
-          console.log("trajo vencidas",res)
-        } else {
-          this.notificacion(res[0].MENSAJE!);
+        if (res[0]!=undefined){
+          if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
+            this.dataSourceVencidas.data = res;
+          } else {
+            this.notificacion(res[0].MENSAJE!);
+          }
         }
+        else{
+          this.dataSourceVencidas.data=[];
+       }
       },(err) => {
         this.notificacion(
           "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!" +
@@ -80,12 +84,17 @@ export class ActivityComponent implements OnInit,AfterViewInit {
   QueryCuotasPagar(){
     try{
       this.CuotaS.getCuotasPorPagar().subscribe((res:cuota[])=>{
-        if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
-          this.dataSourcePagar.data = res;
-          console.log("trajo por pagar",res)
-        } else {
-          this.notificacion(res[0].MENSAJE!);
+        if (res[0]!=undefined){
+          if (res[0].TIPO ==undefined && res[0].MENSAJE == undefined){
+            this.dataSourcePagar.data = res;
+            console.log("trajo por pagar",res)
+          } else {
+            this.notificacion(res[0].MENSAJE!);
+          }
         }
+        else{
+          this.dataSourcePagar.data=[];
+       }
       },(err) => {
         this.notificacion(
           "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!" +
