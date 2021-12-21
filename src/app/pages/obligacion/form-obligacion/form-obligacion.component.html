@@ -53,25 +53,40 @@
         Concepto es obligatorio
       </mat-error>
     </mat-form-field>
-    <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" >
-      <mat-form-field>
-        <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="valor">
-        <mat-error *ngIf="formObligacion.controls['valor'].hasError('required')">
-          Valor es obligatorio
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Interes" prefix="$" mask="separator" thousandSeparator="." formControlName="interes">
-        <mat-error *ngIf="formObligacion.controls['interes'].hasError('required')">
-          Interes es obligatorio
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Total" prefix="$" mask="separator" thousandSeparator="." formControlName="total">
-        <mat-error *ngIf="formObligacion.controls['total'].hasError('required')">
-          Total es obligatorio
-        </mat-error>
-      </mat-form-field>
+    <div fxLayout="row wrap" fxLayoutGap="20px" >
+      <div fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-form-field>
+          <input matInput placeholder="Valor" prefix="$" mask="separator" thousandSeparator="." formControlName="valor">
+          <mat-error *ngIf="formObligacion.controls['valor'].hasError('required')">
+            Valor es obligatorio
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex.gt-lg="10" fxFlex.gt-md="10" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-form-field>
+          <mat-label>Interes</mat-label>
+          <input matInput placeholder="Interes"formControlName="interes" (blur)="onValueChange()">
+          <mat-error *ngIf="formObligacion.controls['interes'].hasError('required')">
+            Interes es obligatorio
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex.gt-lg="20" fxFlex.gt-md="20" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-form-field>
+          <input matInput placeholder="Valor interes" prefix="$" mask="separator" thousandSeparator="." formControlName="valor_interes">
+          <mat-error *ngIf="formObligacion.controls['valor_interes'].hasError('required')">
+            Interes es obligatorio
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex.gt-lg="30" fxFlex.gt-md="30" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-form-field>
+          <input matInput placeholder="Total" prefix="$" mask="separator" thousandSeparator="." formControlName="total">
+          <mat-error *ngIf="formObligacion.controls['total'].hasError('required')">
+            Total es obligatorio
+          </mat-error>
+        </mat-form-field>
+      </div>
     </div>
   </form>
 </div>

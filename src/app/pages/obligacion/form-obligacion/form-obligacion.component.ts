@@ -36,6 +36,7 @@ export class FormObligacionComponent implements OnInit {
         concepto:["", Validators.required],
         valor:["", Validators.required],
         interes:["", Validators.required],
+        valor_interes:["", Validators.required],
         total:["", Validators.required],
         fecha_pago:["", Validators.required],
         idacreedor:[""],
@@ -65,6 +66,12 @@ export class FormObligacionComponent implements OnInit {
   }
   close() {
     this.dialogoRef.close();
+  }
+  onValueChange() {
+    let CalValorFinal= (this.formObligacion.controls['valor'].value* (this.formObligacion.controls['interes'].value)/100);
+      this.formObligacion.controls['valor_interes'].setValue(CalValorFinal);
+    let total=(parseInt(this.formObligacion.controls['valor_interes'].value)+parseInt(this.formObligacion.controls['valor'].value));
+      this.formObligacion.controls['total'].setValue(total);
   }
   filter(ev: any){
     const val = ev.target.value;

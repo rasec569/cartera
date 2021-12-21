@@ -52,11 +52,11 @@
               <mat-icon>launch</mat-icon>
               <span>Detalle</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="OpenEdit(item.id)">
               <mat-icon>edit</mat-icon>
               <span>Editar</span>
             </button>
-            <button mat-menu-item color="warn">
+            <button mat-menu-item (click)="RemoveContrato(item)" color="warn">
               <mat-icon>delete</mat-icon>
               <span>Eliminar</span>
             </button>

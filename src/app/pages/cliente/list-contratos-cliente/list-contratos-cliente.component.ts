@@ -11,6 +11,7 @@ import { ContratoService } from 'src/app/services/contrato.service';
 import { contrato } from 'src/app/Models/contrato.model';
 import { DetalleContratoComponent } from '../../contrato/detalle-contrato/detalle-contrato.component';
 import { FormContratoClienteComponent } from '../../contrato/form-contrato-cliente/form-contrato-cliente.component';
+import { FormContratoComponent } from '../../contrato/form-contrato/form-contrato.component';
 
 @Component({
   selector: 'app-list-contratos-cliente',
@@ -93,15 +94,45 @@ export class ListContratosClienteComponent implements OnInit {
         this.QueryContratos(this.clienteid);
       });
     }
-    /*OpenEdit(id: any){
-      const dialogoRef = this.dialog.open(FormEtapaComponent, {
+    OpenEdit(id: any){
+      const dialogoRef = this.dialog.open(FormContratoComponent, {
         width: this.width,
-        data: {etapaid:id,proyectoid:this.proyectoid }
+        data: {Contratoid:id}
       });
       dialogoRef.afterClosed().subscribe(res=>{
-        this.QueryContratos(this.proyectoid);
+        this.QueryContratos(this.clienteid);
       });
-    } */
+    }
+    RemoveContrato(Contrato: contrato) {
+      const dialogoRef = this.dialog.open(DeletevalidacionComponent, {
+        width: "300px",
+      });
+      dialogoRef.afterClosed().subscribe((res) => {
+        if (res) {
+          try {
+            this.ContratoS.deleteContrato(Contrato).subscribe(
+              (res: contrato[]) => {
+                if (res[0].TIPO == "3") {
+                  this.notificacion(res[0].MENSAJE!);
+                  this.QueryContratos(this.clienteid);
+                } else {
+                  this.notificacion(res[0].MENSAJE!);
+                }
+              },
+              (err) => {
+                this.notificacion(
+                  "Error de conexión, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+                );
+              }
+            );
+          } catch (notificacion) {
+            this.notificacion(
+              "Error de aplicación, trabajamos para habilitar el servicio en el menor tiempo posible, intentelo más tarde!"
+            );
+          }
+        }
+      });
+    }
     notificacion(Mensaje: string) {
       this._snackBar.open(Mensaje, "", {
         duration: 5000,

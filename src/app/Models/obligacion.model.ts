@@ -5,6 +5,7 @@ export interface obligacion{
    concepto:string;
    valor:string;
    interes:string;
+   valor_interes:string;
    total:string;
    fecha_pago:Date;
    idacreedor:string;

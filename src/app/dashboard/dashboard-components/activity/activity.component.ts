@@ -1,12 +1,14 @@
-import { Component,ViewChild,AfterViewInit, OnInit } from '@angular/core';
+import { Component,ViewChild,AfterViewInit, OnInit} from '@angular/core';
 import { Activity, activities } from './activity-data';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from "@angular/material/sort";
 import { MatPaginator } from "@angular/material/paginator";
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
 
 import { CuotaService } from 'src/app/services/cuota.service';
 import { cuota } from 'src/app/Models/cuota.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-activity',
@@ -17,14 +19,9 @@ export class ActivityComponent implements OnInit,AfterViewInit {
   dataSourceVencidas = new MatTableDataSource<cuota>();
   dataSourcePagar = new MatTableDataSource<cuota>();
 
-  public displayedColumnsVencidas: string[] = [
-    "fecha",
-    "numero",
-    "valor",
-    "responsable",
-    "Casa",
-    "Acciones",
-  ];
+  currentScreenWidth: string = '';
+  flexMediaWatcher!: Subscription;
+  public displayedColumns!: string[];
   public displayedColumnsPagar: string[] = [
     "fecha",
     "numero",
@@ -38,13 +35,32 @@ export class ActivityComponent implements OnInit,AfterViewInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  activityData: Activity[];
+  // activityData: Activity[];
 
   constructor(private CuotaS: CuotaService,
-    private _snackBar: MatSnackBar,) {
-
-    this.activityData = activities;
+    private _snackBar: MatSnackBar,
+    private mediaObserver: MediaObserver) {
+      this.flexMediaWatcher = mediaObserver.media$.subscribe((change: MediaChange) => {
+        if (change.mqAlias !== this.currentScreenWidth) {
+            this.currentScreenWidth = change.mqAlias;
+            this.setupTable();
+        }
+    }); // Be sure to unsubscribe from this in onDestroy()!
+    // this.activityData = activities;
   }
+  setupTable() {
+    this.displayedColumns = [
+      "fecha",
+      "numero",
+      "valor",
+      "responsable",
+      "Casa",
+      "Acciones",
+    ];
+    if (this.currentScreenWidth === 'xs') { // only display internalId on larger screens
+        this.displayedColumns.shift(); // remove
+    }
+};
   ngAfterViewInit() {
     this.dataSourceVencidas.paginator = this.paginator;
     this.dataSourceVencidas.sort = this.sort;
